@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nome": "Vista Principale",
+      "principale": true,
+      "id_utente": 0,
+      "nome_utente": "Eddy",
+      "livelli": 1,
+      "mese": "2021-10",
+      "altezza": "auto",
+      "larghezza": "auto",
+      "orientamento": "verticale",
+      "punti": "pv_mensile"
+    },
+    {
+      "id": 2,
+      "nome": "Vista di Eddy",
+      "principale": false,
+      "id_utente": 3,
+      "nome_utente": "Pinco",
+      "livelli": 2,
+      "mese": "2021-09",
+      "altezza": "auto",
+      "larghezza": "auto",
+      "orientamento": "orizzontale",
+      "punti": "pv_trimestrale"
+    }
+  ]
+}

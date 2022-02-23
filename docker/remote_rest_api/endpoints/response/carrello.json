@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nome_articolo": "Articolo_1",
+      "foto": "../assets/images/product/1.png",
+      "prezzo": 250.00,
+      "punti": 50.00,
+      "quantita": 1,
+      "totale_prezzo": 250.00,
+      "totale_punti": 250.00,
+      "valuta": "EUR"
+    },
+    {
+      "id": 2,
+      "nome_articolo": "Articolo_2",
+      "foto": "../assets/images/product/1.png",
+      "prezzo": 50.00,
+      "punti": 50.00,
+      "quantita": 5,
+      "totale_prezzo": 250.00,
+      "totale_punti": 250.00,
+      "valuta": "EUR"
+    },
+    {
+      "id": 3,
+      "nome_articolo": "Articolo_3",
+      "foto": "../assets/images/product/1.png",
+      "prezzo": 50.00,
+      "punti": 50.00,
+      "quantita": 5,
+      "totale_prezzo": 250.00,
+      "totale_punti": 250.00,
+      "valuta": "EUR"
+    }
+  ]
+}

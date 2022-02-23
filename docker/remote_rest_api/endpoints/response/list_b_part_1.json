@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": "2aba472a-5d0f-4a61-83e6-51a972d6400f",
+      "name": "First user"
+    },
+    {
+      "id": "ce6523e3-b8d9-4c82-8399-d6d9e0428545",
+      "name": "Second user"
+    },
+    {
+      "id": "7fc17e5c-509c-47f7-ade0-9ae528389c0c",
+      "name": "Third user"
+    },
+    {
+      "id": "19d3b57f-5b5e-47c5-a26f-a2fc16223b7e",
+      "name": "Fourth user"
+    },
+    {
+      "id": "e851aa6d-78dd-455f-9f5f-3f7a293c89b1",
+      "name": "Fifth user"
+    }
+  ]
+}

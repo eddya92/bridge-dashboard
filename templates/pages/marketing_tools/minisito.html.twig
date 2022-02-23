@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <title>Minisito</title>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+</head>
+<body>
+<!-- login page start-->
+<div class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <div class="login-card">
+                <div>
+                    <div>
+                        <a class="logo" href="index.html"><img class="img-fluid" src="/assets/images/logo/logo.png" alt="logo"></a>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="blog-single">
+                                    <div class="blog-box blog-details">
+                                        <img class="img-fluid w-100" src="
+                                        {% if sito.fotoSfondo == '' %}
+                                            {{ asset('assets/images/foto_sfondo_base_minisito.jpg') }}
+                                         {% else %}
+                                            {{ sito.fotoSfondo }}
+                                        {% endif %}
+                                            " alt="landing page">
+                                        <div class="img_circle_centered"><img class="rounded-circle" src="
+
+                                        {% if sito.fotoProfilo == '' %}
+                                            {{ asset('assets/images/foto_profilobase_minisito.jpg') }}
+                                        {% else %}
+                                            {{ sito.fotoProfilo }}
+                                        {% endif %}
+                                            " alt=""></div>
+                                        <div class="blog-details">
+                                            <ul class="blog-social">
+                                                <li>{{ sito.qualifica }}</li>
+                                                <li> {{ sito.collaboratori }} {{ sito.collaboratori == 0 or sito.collaboratori > 1 ? 'Collaboratori' :  'Collaboratore' }}</li>
+                                            </ul>
+                                            <div class="col-sm-6 float-start">
+                                                <div class="single-blog-content-top">
+                                                    <h4>{{ sito.titolo }}</h4>
+                                                    <div class="m-b-20"></div>
+                                                    {{ sito.descrizione }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 float-start"></div>
+                                            <div class="col-sm-5 float-end">
+                                                <div class="m-b-40"></div>
+                                                <table class="width_100">
+                                                    {% if sito.email  != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-envelope"></i>   Email</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.email }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                    {% if sito.telefono  != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-phone"></i>   Telefono</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.telefono }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+
+                                                    {% if sito.facebook != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-facebook"></i>   Facebook</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.facebook }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                    {% if sito.instagram != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-instagram"></i>   Instagram</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.instagram }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                    {% if sito.twitter != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-twitter"></i>   Twitter</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.twitter }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                    {% if sito.youtube != '' %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <h6 style="display: inline; margin-right: 10px;">
+                                                                        <i class="fa fa-youtube"></i>   Youtube</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ttl-info text-start">
+                                                                    <span>{{ sito.youtube }}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <hr/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                </table>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="m-b-40"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js" integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/script.js"></script>
+</div>
+</body>
+</html>

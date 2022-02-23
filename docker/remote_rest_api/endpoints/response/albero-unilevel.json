@@ -1,0 +1,98 @@
+{
+  "data": {
+    "icona_guida": "1",
+    "name": "Ricci",
+    "punti": 0,
+    "livello": 0,
+    "colore": "B0a999",
+    "icona": "OMINIPMK2020-01.png",
+    "qualificato": "1",
+    "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/06\/francesco.jpg>&nbsp;<b>Ricci Francesco<\/b> (000002)<br>Email: <a class='email'>assistenza@2rstudio.it<\/a><br>Telefono: <a class='phone'>333 0000000<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 05\/12\/2014",
+    "children": [
+      {
+        "icona_guida": "1",
+        "name": "Renzoni",
+        "punti": 0,
+        "livello": 1,
+        "colore": "B0a999",
+        "icona": "OMINIPMK2020-01.png",
+        "qualificato": "1",
+        "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/06\/marco.jpg>&nbsp;<b>Renzoni Marco<\/b> (000003)<br>Email: <a class='email'>assistenza@2rstudio.it<\/a><br>Telefono: <a class='phone'>3929275342<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 10\/12\/2014",
+        "children": [
+          {
+            "icona_guida": "",
+            "name": "rossi",
+            "punti": 0,
+            "livello": 2,
+            "colore": "B0a999",
+            "icona": "OMINIPMK2020-01.png",
+            "qualificato": "0",
+            "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/07\/logo_mlm-1.png>&nbsp;<b>rossi mario<\/b> (000009)<br>Email: <a class='email'>ordini@2rstudio.it<\/a><br>Telefono: <a class='phone'>3404631146<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 06\/02\/2015"
+          },
+          {
+            "icona_guida": "",
+            "name": "test",
+            "punti": 0,
+            "livello": 2,
+            "colore": "B0a999",
+            "icona": "OMINIPMK2020-01.png",
+            "qualificato": "0",
+            "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/07\/logo_mlm-1.png>&nbsp;<b>test test<\/b> (015722)<br>Email: <a class='email'>prove285@lospunto.it<\/a><br>Telefono: <a class='phone'>333654949449<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 25\/02\/2020"
+          },
+          {
+            "icona_guida": "1",
+            "name": "renzoni",
+            "punti": 0,
+            "livello": 2,
+            "colore": "B0a999",
+            "icona": "OMINIPMK2020-01.png",
+            "qualificato": "0",
+            "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/07\/logo_mlm-1.png>&nbsp;<b>renzoni marco<\/b> (024621)<br>Email: <a class='email'>marketing@2rstudio.it<\/a><br>Telefono: <a class='phone'>3926555645<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 13\/05\/2021"
+          }
+        ]
+      },
+      {
+        "icona_guida": "",
+        "name": "Ricoveri",
+        "punti": 0,
+        "livello": 1,
+        "colore": "B0a999",
+        "icona": "OMINIPMK2020-01.png",
+        "qualificato": "0",
+        "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/06\/alessandro.jpg>&nbsp;<b>Ricoveri Alessandro<\/b> (000005)<br>Email: <a class='email'>alessandro@2rstudio.it<\/a><br>Telefono: <a class='phone'><\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 05\/01\/2015",
+        "children": [
+          {
+            "icona_guida": "",
+            "name": "Gatto",
+            "punti": 0,
+            "livello": 2,
+            "colore": "B0a999",
+            "icona": "OMINIPMK2020-01.png",
+            "qualificato": "0",
+            "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/06\/davide.jpg>&nbsp;<b>Gatto Davide<\/b> (000006)<br>Email: <a class='email'>davide.gatto2@2rstudio.it<\/a><br>Telefono: <a class='phone'><\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 10\/01\/2015"
+          },
+          {
+            "icona_guida": "",
+            "name": "Romeo",
+            "punti": 0,
+            "livello": 2,
+            "colore": "B0a999",
+            "icona": "OMINIPMK2020-01.png",
+            "qualificato": "0",
+            "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/06\/maria.jpg>&nbsp;<b>Romeo Maria<\/b> (000007)<br>Email: <a class='email'>maria@2rstudio.it<\/a><br>Telefono: <a class='phone'><\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 15\/01\/2015"
+          }
+        ]
+      },
+      {
+        "icona_guida": "",
+        "name": "Gatten",
+        "punti": 0,
+        "livello": 1,
+        "colore": "B0a999",
+        "icona": "OMINIPMK2020-01.png",
+        "qualificato": "0",
+        "tooltip": "<img height=50px src=https:\/\/www.multilevelitalia.it\/wp-content\/uploads\/2018\/07\/logo_mlm-1.png>&nbsp;<b>Gatten Daviden<\/b> (000015)<br>Email: <a class='email'>gattod@alice.it<\/a><br>Telefono: <a class='phone'>3291234567<\/a><br>Qualifica: <b>Manager<\/b><br>PV: <b>0<\/b> (<font color=#000066>PVP: 0<\/font> - <font color=#006600>PVG: 0<\/font>)<br>Data iscrizione: 13\/02\/2015"
+      }
+    ]
+  }
+}

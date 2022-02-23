@@ -1,0 +1,38 @@
+<li class="cart-nav onhover-dropdown">
+    <div class="cart-box">
+        <i data-feather="shopping-cart"></i><span class="badge rounded-pill badge-primary">{% if carrello | length > 0 %}{{ carrello.0.quantitaTotale }}{% endif %}</span>
+    </div>
+    <ul class="cart-dropdown onhover-show-div">
+        <li><h6 class="mb-0 f-20">Il tuo Carrello</h6><i data-feather="shopping-cart"></i></li>
+        {% if carrello | length > 0 %}
+            {% for articolo in carrello.0.articoli | slice(0,3) %}
+                <li class="mt-0">
+                    <div class="media">
+                        <img class="img-fluid rounded-circle me-3 img-60" src="" alt="">
+                        <div class="media-body"><span>{{ articolo.nome | raw }}</span>
+                            <p>Quantità: {{ articolo.quantita }}</p>
+                            <h6 class="text-end text-muted">{{ articolo.prezzo }}</h6>
+                        </div>
+                        <div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
+                    </div>
+                </li>
+            {% endfor %}
+            {% if carrello.0.articoli | length > 3 %}
+                altri e {{ carrello.0.articoli | length - 3 }} articoli
+            {% endif %}
+            <li>
+                <div class="total">
+                    <h6 class="mb-2 mt-0 text-muted">Totale: <span class="f-right f-20">{{ carrello.0.totale }}</span>
+                    </h6>
+                </div>
+            </li>
+            <li>
+                <a class="btn btn-block w-100 mb-2 btn-primary view-cart" href="{{ path('carrello') }}">Vai al carrello</a><a class="btn btn-block w-100 btn-secondary view-cart" href="{{ path('checkout') }}">Checkout</a>
+            </li>
+
+        {% else %}
+            <li>non ci sono articoli nel carrello</li>
+        {% endif %}
+
+    </ul>
+</li>

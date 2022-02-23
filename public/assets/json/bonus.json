@@ -1,0 +1,137 @@
+{
+	"draw": 1,
+	"recordsTotal": 12,
+	"recordsFiltered": 12,
+	"data": [
+	[
+		"<span class='text-gray-light'>Dicembre</span>",
+		"<span class='text-gray-light'>Manager</span>",
+		"<span class='text-gray-light'>SI</span>",
+		"<span class='text-gray-light'>EUR 500,00</span>",
+		"<span class='text-gray-light'>EUR 600,00</span>",
+		"<span class='text-gray-light'>EUR 700,00</span>",
+		"<span class='text-gray-light'>EUR 700,00</span>",
+		12
+	],
+	[
+		"Novembre",
+		"<span class='span_qualifica_2'>Manager</span>",
+		"<span style='color:#33b18a;'>SI</span>",
+		"EUR 500,00",
+		"EUR 600,00",
+		"EUR 700,00",
+		"EUR 1.800,00",
+		11
+	]
+	,
+		[
+			"Ottobre",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			10
+		]
+	,
+		[
+			"Settembre",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			9
+		]
+	,
+		[
+			"Agosto",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			8
+		]
+	,
+		[
+			"Luglio",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			7
+		]
+	,
+		[
+			"Giugno",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			6
+		]
+	,
+		[
+			"Maggio",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			5
+		]
+	,
+		[
+			"Aprile",
+			"<span class='span_qualifica_1'>Advisor</span>",
+			"<span style='color:#922043;'>NO</span>",
+			"EUR 0,00",
+			"EUR 0,00",
+			"EUR 700,00",
+			"EUR 700,00",
+			4
+		]
+	,
+		[
+			"Marzo",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			3
+		]
+	,
+		[
+			"Febbraio",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			2
+		]
+	,
+		[
+			"Gennaio",
+			"<span class='span_qualifica_2'>Manager</span>",
+			"<span style='color:#33b18a;'>SI</span>",
+			"EUR 500,00",
+			"EUR 600,00",
+			"EUR 700,00",
+			"EUR 1.800,00",
+			1
+		]
+]
+}

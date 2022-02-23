@@ -1,0 +1,41 @@
+{
+  "data": {
+    "top_vendite": [
+      {
+        "nome": "Franco",
+        "cognome": "De Carolis",
+        "nominativo": "Franco De Carolis",
+        "codice": "252545",
+        "foto": "../assets/images/user/3.jpg",
+        "data_iscrizione": "2021-11-30",
+        "n_collaboratori": 13,
+        "ordini": 75
+
+      }
+    ],
+    "topReclutatori": [
+      {
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "foto": "../assets/images/user/3.jpg",
+        "codice": "252545",
+        "data_iscrizione": "2021-11-30",
+        "n_collaboratori": 31,
+        "ordini": 14,
+        "fatturato": 21.044
+      }
+    ],
+    "topUltimiIscritti": [
+      {
+        "nome": "Federico",
+        "cognome": "Bizzarri",
+        "foto": "../assets/images/user/5.jpg",
+        "codice": "465468",
+        "data_iscrizione": "2021-11-30",
+        "n_collaboratori": 13,
+        "ordini": 14,
+        "fatturato": 21.044
+      }
+    ]
+  }
+}

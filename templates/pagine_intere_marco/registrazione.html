@@ -1,0 +1,130 @@
+<!--
+Importante!
+È stato previsto il login con gli account social ma è da verificare se è fattibile in base alle caratteristiche tecniche delle nuove procedure di login e di registrazione
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+	<meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+	<meta name="author" content="pixelstrap">
+	<link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+	<title>Ordini</title>
+	<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollable.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+	<link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+</head>
+<body>
+<!-- login page start-->
+<div class="container-fluid p-0">
+	<div class="row m-0">
+		<div class="col-12 p-0">
+			<div class="login-card">
+				<div>
+					<div><a class="logo" href="index.html"><img class="img-fluid" src="/assets/images/logo/logo.png" alt="logo"></a></div>
+					<div class="login-main div_registrazione">
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">Dati errati, preesistenti o qualsiasi altro messaggio di errore.
+							<button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button>
+						</div>
+						<form class="theme-form">
+							<div class="row">
+								<div class="col-lg-6 col-xl-6 col-xxl-6 float-start">
+									<h4>Crea il tuo account</h4>
+									<p>Compila il modulo sottostante per iscriverti</p>
+									<div class="form-group">
+										<label class="col-form-label">Codice Sponsor</label>
+										<input class="form-control" type="text" required="" placeholder="Scrivi il codice del tuo sponsor">
+									</div>
+									<div class="form-group">
+										<label class="col-form-label">Specifica la nazione di residenza</label>
+										<select class="form-select" name="ID_nazione">
+											<option value="104">Italia</option>
+											<option value="654">United Kingdom</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label class="col-form-label pt-0">Nominativo</label>
+										<div class="row g-2">
+											<div class="col-6">
+												<input class="form-control" type="text" required="" placeholder="Nome">
+											</div>
+											<div class="col-6">
+												<input class="form-control" type="text" required="" placeholder="Cognome">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-form-label">E-mail</label>
+										<input class="form-control" type="email" required="" placeholder="Scrivi il tuo indirizzo e-mail">
+									</div>
+									<div class="form-group">
+										<label class="col-form-label">Password</label>
+										<div class="form-input position-relative">
+											<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+											<div class="show-hide"><span class="show"></span></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-xl-6 col-xxl-6 float-end">
+									<div class="m-t-40 d-block d-sm-none d-md-none d-lg-none d-xl-none d-xxl-none"></div>
+									<h6>Privacy Policy</h6>
+									<div class="overflow_agreement vertical-scroll scroll-demo">
+										<p class="m-b-0">I dati personali da lei comunicati verranno trattati nel rispetto del Regolamento UE 2016/679. - <a target="_blank" href="#">Privacy Policy</a></p>
+									</div>
+									<div class="form-group m-t-10">
+										<label for="privacy-agree"><input id="privacy-agree" title="Accetto" required="" type="radio" name="Accetto" value="1">&nbsp;Accetto</label> &nbsp;&nbsp;<label for="privacy-disagree"><input id="privacy-disagree" class="required" type="radio" name="Accetto" value="0">&nbsp;Non accetto</label></div>
+									<h6>Newsletter</h6>
+									<div class="overflow_agreement vertical-scroll scroll-demo">
+										<p class="m-b-0">Acconsento all'invio di materiale informativo, pubblicitario e promozionale anche attraverso società specializzate che operano per conto di 2R Studio Srl e con l'utilizzo dei mezzi di contatto (indirizzo, email, telefono) da me forniti.</p>
+									</div>
+									<div class="form-group m-t-10">
+										<label for="newsletter-agree"><input id="newsletter-agree" required="" type="radio" name="Accetto_newsletter" value="1">&nbsp;Accetto</label> &nbsp;&nbsp;<label for="newsletter-disagree"><input id="newsletter-disagree" class="required" type="radio" name="Accetto_newsletter" value="0">&nbsp;Non accetto</label></div>
+									<h6>Profilazione</h6>
+									<div class="overflow_agreement vertical-scroll scroll-demo">
+										<p class="m-b-0">Acconsento allo svolgimento di attività di profilazione individuale o aggregata e di ricerche di mercato volte, ad esempio, all'analisi delle mie abitudini e scelte di consumo.</p>
+									</div>
+									<div class="form-group m-t-10">
+										<label for="profilazione-agree"><input id="profilazione-agree" required="" type="radio" name="Accetto_profilazione" value="1">&nbsp;Accetto</label> &nbsp;&nbsp;<label for="profilazione-disagree"><input id="profilazione-disagree" class="required" type="radio" name="Accetto_profilazione" value="0">&nbsp;Non accetto</label>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="m-t-20"></div>
+							<div class="m-auto text-center">
+								<div class="form-group mb-0">
+									<button class="btn btn-primary btn-block w-auto" type="submit">Crea account</button>
+								</div>
+								<p class="mt-4 mb-0">Hai già un account?<a class="ms-2" href="login.html">Vai al login</a></p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../assets/js/icons/feather-icon/feather.min.js"></script>
+	<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js" integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../assets/js/scrollable/perfect-scrollbar.min.js"></script>
+	<script src="../assets/js/scrollable/scrollable-custom.js"></script>
+	<script src="../assets/js/config.js"></script>
+	<script src="../assets/js/script.js"></script>
+</div>
+</body>
+</html>

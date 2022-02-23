@@ -1,0 +1,120 @@
+{% for article in articles %}
+    <div class="col-xl-3 col-sm-6 xl-4" id="creazioneCard">
+        <div class="card">
+            <div class="product-box">
+                {% if (article.sconto > 0) %}
+                    <div class="ribbon ribbon-success ribbon-right"> {{ article.sconto }}%</div>
+                {% endif %}
+                <div class="product-img"><img class="img-fluid" src="../assets/images/ecommerce_product_1.jpg" alt="">
+                    <div class="product-hover">
+                        <ul>
+                            <li>
+                                <button class="btn" type="button"><i class="icon-shopping-cart"></i></button>
+                            </li>
+                            <li>
+                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#{{ article.id }}">
+                                    <i class="icon-eye"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ article.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="product-box row">
+                                    <div class="product-img col-lg-6">
+                                        <img class="img-fluid" src="../assets/images/ecommerce_product_1.jpg" alt="">
+                                    </div>
+                                    <div class="product-details col-lg-6 text-start">
+                                        <h4>{{ article.nome }}</h4>
+                                        <table class="width_100">
+                                            <tr>
+                                                <td>
+                                                    <div class="product-price">
+                                                        {% if (article.sconto > 0) %}
+                                                            &euro; {# {{ article.prezzoScontato }} #}
+                                                            <del>&euro; {{ article.prezzo }}</del>
+                                                        {% else %}
+                                                            &euro; {{ article.prezzo }}
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                                <td class="text-gray-light text-end">26 PC</td>
+                                            </tr>
+                                        </table>
+                                        <div class="product-view">
+                                            <h6 class="f-w-600">Dettagli del prodotto</h6>
+                                            <p class="mb-0">{{ article.descrizione }}</p>
+                                        </div>
+                                        <div class="product-size">
+                                            {% if (article.tipo == "solido") %}
+                                                <ul>
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button">50 g</button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button">100 g</button>
+                                                    </li>
+                                                </ul>
+                                            {% else %}
+                                                <ul>
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button">20 ml</button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button">50 ml</button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button">100 ml</button>
+                                                    </li>
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                        <div class="product-qnty">
+                                            <h6 class="f-w-600">Quantità</h6>
+                                            <fieldset>
+                                                <div class="input-group">
+                                                    <input class="touchspin text-center" type="number" value="5">
+                                                </div>
+                                            </fieldset>
+                                            <div class="addcart-btn">
+                                                <button class="btn btn-primary" type="button">Acquista</button>
+                                                <button class="btn btn-secondary" type="button">Vedi dettagli</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <div class="rating">
+                        {% for i in 1..article.rating %}
+                            <i class="fa fa-star"></i>
+                        {% endfor %}
+                    </div>
+                    <h4>{{ article.nome }}</h4>
+                    <p>Cod. {{ article.codice }}</p>
+                    <table class="width_100">
+                        <tr>
+                            <td>
+                                <div class="product-price">
+                                    {% if (article.sconto > 0) %}
+                                        &euro; {# article.prezzoScontato #}
+                                        <del>&euro; {{ article.prezzo }}</del>
+                                    {% else %}
+                                        &euro; {{ article.prezzo }}
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="text-gray-light text-end">{{ article.pc }} PC</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

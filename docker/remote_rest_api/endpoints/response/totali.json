@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "titolo": "Guadagno Attuale",
+      "valore": "EUR 2500,00",
+      "dettaglio": "Indica quanto stai guadagnando dall'ultimo accredito provvigionale ad oggi sulla base degli ordini della tua rete",
+      "link": "",
+      "button": "dettaglio"
+    },
+    {
+      "id": "2",
+      "titolo": "Clienti Sponsorizzati",
+      "valore": "",
+      "dettaglio": "Indica quanti clienti hai sponsorizzato",
+      "link": "",
+      "button": "sponsorizza clienti"
+    },
+    {
+      "id": "3",
+      "titolo": "Collaboratori Diretti",
+      "valore": "10",
+      "dettaglio": "",
+      "link": "",
+      "button": "mostra collaboratori"
+    },
+    {
+      "id": "4",
+      "titolo": "Collaboratori Downline",
+      "valore": "100",
+      "dettaglio": "",
+      "link": "",
+      "button": "mostra collaboratori"
+    },
+    {
+      "id": "5",
+      "titolo": "Pc Mese Corrente",
+      "valore": "100",
+      "dettaglio": "",
+      "link": "",
+      "button": "dettaglio"
+    },
+    {
+      "id": "6",
+      "titolo": "Pcp Mese Corrente",
+      "valore": "100",
+      "dettaglio": "",
+      "link": "",
+      "button": "dettaglio"
+    }
+  ]
+}

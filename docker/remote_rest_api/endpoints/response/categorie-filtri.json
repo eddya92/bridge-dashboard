@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "id": 111,
+      "tipo": "link",
+      "nome": "Prodotti in evidenza",
+      "sotto_categorie": []
+    },
+    {
+      "id": 1,
+      "tipo": "link",
+      "nome": "alimentare",
+      "sotto_categorie": [
+        {
+          "id": 11,
+          "nome": "cioccolato",
+          "sotto_categorie": []
+        },
+        {
+          "id": 12,
+          "nome": "frutta",
+          "sotto_categorie": []
+        },
+        {
+          "id": 13,
+          "nome": "verdura",
+          "sotto_categorie": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tipo": "link",
+      "nome": "salute e benessere",
+      "sotto_categorie": [
+        {
+          "id": 21,
+          "nome": "makeup",
+          "sotto_categorie": []
+        },
+        {
+          "id": 22,
+          "nome": "rossetti",
+          "sotto_categorie": []
+        },
+        {
+          "id": 23,
+          "nome": "trucchi",
+          "sotto_categorie": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "tipo": "link",
+      "nome": "vestiti",
+      "sotto_categorie": [
+        {
+          "id": 31,
+          "nome": "maglie",
+          "sotto_categorie": []
+        },
+        {
+          "id": 32,
+          "nome": "felpe",
+          "sotto_categorie": []
+        },
+        {
+          "id": 33,
+          "nome": "jeans",
+          "sotto_categorie": []
+        }
+      ]
+    },
+    {
+      "id": 45141,
+      "tipo": "range",
+      "nome": "prezzo",
+      "prefix": "€",
+      "min": 0.00,
+      "max": 1000.00
+    },
+    {
+      "id": 1235,
+      "tipo": "checkbox",
+      "nome": "Ultime Novità",
+      "valore": 1
+    }
+  ]
+}

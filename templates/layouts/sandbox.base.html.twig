@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+{% include 'layouts/partials/head.html.twig' %}
+<body>
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				{% include 'layouts/partials/sandbox.sidebar.html.twig' %}
+			</div>
+			<div class="col-8">
+				{% block home %}
+				{% endblock %}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
+</body>
+</html>

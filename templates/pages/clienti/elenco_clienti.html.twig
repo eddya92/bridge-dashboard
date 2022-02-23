@@ -1,0 +1,437 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}Elenco clienti{% endblock %}
+
+{% block css_page %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords"
+          content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+          integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+{% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">Virtual Office</li>
+                            <li class="breadcrumb-item active">Clienti</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>Clienti</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Consulta l'elenco dei tuoi clienti.</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="datatable_responsive_customers_container"
+                             class="dt-ext table-responsive overflow_x_hidden">
+                            <div id="filters_datatable" class="visually-hidden">
+                                <div class="row">
+                                    <div class="col-sm-8 p-t-10">
+                                        Ricerca generica
+                                        <div class="input-group">
+                                            <input id="ricercaGenerica" class="form-control" type="text" placeholder="Cerca per codice, nominativo, e-mail o telefono" aria-label="scegli"><span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+                                        Iscritti dal
+                                        <div class="input-group">
+                                            <input id="Data_contratto_dal" class="datepicker-here form-control digits"
+                                                   data-language="it" type="text" placeholder=""
+                                                   aria-label="scegli"><span class="input-group-text"><i
+                                                        class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+                                        al
+                                        <div class="input-group">
+                                            <input id="Data_contratto_al" class="datepicker-here form-control digits"
+                                                   data-language="it" type="text" placeholder=""
+                                                   aria-label="scegli"><span class="input-group-text"><i
+                                                        class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="m-b-20"></div>
+                                    <div class="col-sm-12">
+                                        <button id="buttonFiltra" type="button" class="btn btn-primary text-uppercase"
+                                                onclick="filter();">filtra
+                                        </button>
+                                        <button type="button" class="btn btn-light text-uppercase"
+                                                onclick="close_filters();">chiudi
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="table_filters">
+                                <tr>
+                                    <td>
+                                        <div id="filter_button_datatable" onclick="open_filters()">
+                                            Filtri <i class="fa fa-sliders"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="applied_filters_datatable" class="visually-hidden">
+                                            <div id="applied_filters_datatable_container">
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <div class="m-b-20"></div>
+                            <table class="row-border hover" id="datatable_responsive_orders">
+                                <thead>
+                                <tr>
+                                    <th>Iscritto il</th>
+                                    <th>Codice</th>
+                                    <th>Nominativo</th>
+                                    <th>PC</th>
+                                    <th>Telefono</th>
+                                    <th>Email</th>
+                                    <th>Numero ordini</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		var table = null;
+
+		//region impostazioni datatable
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: "precedente",
+				next: "successivo",
+			},
+			decimal: "",
+			emptyTable: "nessun dato disponibile",
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: "_TOTAL_ clienti | ",
+			infoEmpty: "visualizzati 0 a 0 di 0 elementi",
+			infoFiltered: "(filtrati da _MAX_ elementi totali)",
+			infoPostFix: "",
+			thousands: ",",
+			lengthMenu: "mostra _MENU_ per pagina",
+			loadingRecords: "caricamento...",
+			processing: "elaborazione...",
+			search: "Cerca:",
+			zeroRecords: "nessun_risultato",
+			aria: {
+				"sortAscending": ": attiva_per_ordine_ascendente",
+				"sortDescending": ": attiva_per_ordine_discendente"
+			}
+		};
+		//endregion
+
+		var requestData;
+		$(document).ready(function(){
+			//region datatable elenco-clienti
+			var table = $('#datatable_responsive_orders').DataTable({
+				responsive: true,
+				processing: true,
+				ajax: {
+					method: "GET",
+					url: "{{ path('clienti-ajax') }}",
+					data: function(){
+						return requestData;
+					}
+				},
+				language: DueRDataTableLaguages,
+				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+				columnDefs: [
+					{responsivePriority: 1, targets: 0},
+					{responsivePriority: 2, targets: 2}
+				]
+			});
+			//endregion
+
+			//region al click del bottone "filtra" prende i dati nei vari campi dei filtri ed aggiorna il datatable
+			$("#buttonFiltra").click(function(){
+				var ricerca_generica = $('#ricercaGenerica').val();
+				var data_dal = modificaData($("#Data_contratto_dal").val());
+				var data_al = modificaData($("#Data_contratto_al").val());
+
+				requestData = {
+					"ricerca_generica": ricerca_generica,
+					"data_dal": data_dal,
+					"data_al": data_al,
+				};
+
+				table.ajax.url("{{ path('clienti-ajax') }}").load();
+			});
+			//endregion
+		});
+
+		//region prendo data dal datepicker e la modifico nel formato utile per API "YYYY-MM-DD"
+		function modificaData(data){
+			giorno = data.substr(0, 2);
+			mese = data.substr(3, 2);
+			anno = data.substr(6, 4);
+			return anno + "-" + mese + "-" + giorno;
+		}
+		//endregion
+
+		$("select[name=datatable_responsive_customers_length]").removeClass("form-control");
+		$.fn.datepicker.language['it'] = {
+			days: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+			daysShort: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+			daysMin: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+			months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+			monthsShort: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
+			today: 'Oggi',
+			clear: 'Cancella',
+			dateFormat: 'dd/mm/yyyy',
+			timeFormat: 'hh:ii aa',
+			firstDay: 0
+		};
+
+		//region impostazione grafica per la visualizzazione dei filtri
+		function close_filters(){
+			$("#filters_datatable").addClass("visually-hidden");
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+		}
+		//endregion
+
+
+		//region impostazione grafica al click del button "filtra",prendo il contenuto nei campi dei filtri per creazione grafica "filtri attivi"
+		function filter(){
+			close_filters();
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+
+			var contenuto = $('#ricercaGenerica').val();
+			var dataDal = $("#Data_contratto_dal").val();
+			var dataAl = $("#Data_contratto_al").val();
+
+			if(dataDal && dataAl){
+				creaFiltroData()
+			}
+
+			if(contenuto){
+				creaFiltroUtente()
+			}
+		}
+		//endregion
+
+		//region impostazione grafica
+		function open_filters(){
+			$("#filters_datatable").removeClass("visually-hidden");
+			$("#filter_button_datatable").addClass("visually-hidden");
+			$("#applied_filters_datatable").addClass("visually-hidden");
+		}
+		//endregion
+
+    </script>
+
+    <script>
+		var objectNames = [];
+		var count = 0;
+
+		function creaFiltroData(){
+			var container = document.getElementById('applied_filters_datatable_container');
+			var filtroUtente = document.createElement('span');
+			filtroUtente.setAttribute('class', 'btn btn-outline-light btn-sm txt-dark');
+			filtroUtente.setAttribute('id', 'idFiltroAggiuntoData');
+			filtroUtente.setAttribute('onclick', 'rimuoviFiltro(this.id)');
+			filtroUtente.innerHTML = "Periodo" + " " +
+				'<i class="fa fa-times"> </i>'
+			var filtroAttivo = document.getElementById('idFiltroAggiuntoData');
+			if(filtroAttivo){
+
+			} else{
+				count = count + 1;
+				if(count === 0){
+					document.getElementById('filter_button_datatable').innerHTML = "Filtri" + " " + '<i class="fa fa-sliders"></i>';
+				} else{
+					document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+				}
+				container.appendChild(filtroUtente);
+			}
+		}
+
+		function creaFiltroUtente(){
+			var container = document.getElementById('applied_filters_datatable_container');
+			var filtroUtente = document.createElement('span');
+			filtroUtente.setAttribute('class', 'btn btn-outline-light btn-sm txt-dark');
+			filtroUtente.setAttribute('id', 'idFiltroAggiunto');
+			filtroUtente.setAttribute('onclick', 'rimuoviFiltro(this.id)');
+			filtroUtente.innerHTML = "Ricerca generica" + " " +
+				'<i class="fa fa-times"> </i>'
+			var filtroAttivo = document.getElementById('idFiltroAggiunto');
+			if(filtroAttivo){
+
+			} else{
+				count = count + 1;
+				if(count === 0){
+					document.getElementById('filter_button_datatable').innerHTML = "Filtri" + " " + '<i class="fa fa-sliders"></i>';
+
+				} else{
+					document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+				}
+				container.appendChild(filtroUtente);
+			}
+		}
+
+		function rimuoviFiltro(id){
+			document.getElementById(id).remove();
+			document.getElementById('ricercaGenerica').value = "";
+			count = count - 1;
+			if(count === 0){
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + " " + '<i class="fa fa-sliders"></i>';
+
+			} else{
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+			}
+		}
+
+		var users = [];
+		//endregion
+
+		$(function(){
+			$("#Data_contratto_dal").datepicker({
+				onSelect: function(dateText, inst){
+					giorno = dateText.substring(0, 2);
+					mese = dateText.substring(3, 5);
+					anno = dateText.substring(6, 10);
+					var data = mese + "/" + giorno + "/" + anno;
+
+					minData(data);
+				}
+			});
+		})
+
+		function minData(data){
+			$('#Data_contratto_al').datepicker({
+				minDate: new Date(data) // Now can select only dates, which goes after today
+			})
+
+			//Disable Days of week
+			var disabledDays = [0, 6];
+
+			$('#Data_contratto_al').datepicker({
+				onRenderCell: function(date, cellType){
+					if(cellType == 'day'){
+						var day = date.getDay(),
+							isDisabled = disabledDays.indexOf(day) != -1;
+						return {
+							disabled: isDisabled
+						}
+					}
+				}
+			})
+		}
+
+    </script>
+
+
+{% endblock javascript_page %}

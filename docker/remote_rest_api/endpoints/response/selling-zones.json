@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "codice": "EC-IT",
+      "insegna": "E-commerce IT",
+      "listino": "EC-IT-P",
+      "selling-zone": "Italia",
+      "foto": "http://localhost:5300/public/Stores/1.png",
+      "logo": "http://localhost:5300/public/Stores/1.png",
+      "tipi_ordine": []
+    },
+    {
+      "id": 3,
+      "codice": "EC-UK",
+      "insegna": "E-commerce UK",
+      "listino": "EC-UK-PA",
+      "selling-zone": "Italia",
+      "foto": "http://localhost:5300/public/Stores/3.png",
+      "logo": "http://localhost:5300/public/Stores/3.png",
+      "tipi_ordine": []
+    },
+    {
+      "id": 6,
+      "codice": "Roma",
+      "insegna": "Roma - E-commerce a domicilio",
+      "listino": "DOM",
+      "selling-zone": "Italia",
+      "foto": "http://localhost:5300/public/Stores/6.png",
+      "logo": "http://localhost:5300/public/Stores/6.png",
+      "tipi_ordine": []
+    }
+  ]
+}

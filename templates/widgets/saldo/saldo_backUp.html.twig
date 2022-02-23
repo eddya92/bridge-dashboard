@@ -1,0 +1,161 @@
+{% for saldo in saldi %}
+    <!-- region Saldo crediti -->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Saldo crediti attuale</h5>
+                </div>
+                <div class="card-body">
+                    <div class="m-b-20"></div>
+                    {% if saldo.accrediti == true %}
+                        <h1 class="text-gray-light">&euro; <span id="saldo">{{ saldo.saldo }}</span></h1>
+                    {% else %}
+                        <h1 class="text-primary">&euro; {{ saldo.saldo }}</h1>
+                    {% endif %}
+                    <div class="m-b-20"></div>
+
+                    {% if saldo.accrediti == true %}
+                        <p>Ultimo accredito provvigionale il {{ saldo.dataUltimoAccredito | date('d F Y ') }}</p>
+                    {% else %}
+                        <p>Aggiornato a: {{ saldo.ultimoAggiornamento | date('D') }},{{ saldo.ultimoAggiornamento | date('d F Y ') }}</p>
+                        <p>Ancora nessuna provvigione accreditata</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endregion Saldo crediti -->
+    <!-- region Cashout -->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Richiesta di pagamento</h5>
+                </div>
+                <div class="card-body">
+                    <div class="m-b-20"></div>
+                    <table class="width_100">
+                        <tr>
+                            <td>Pagamento di &euro;</td>
+                            {% if (saldo.saldo > saldo.saldoMinimo) %}
+                                <td>
+                                    <div class="mb-3">
+                                        <input id="valueSaldo" class="form-control " type="number" name="importo" value="{{ saldo.saldo }}">
+                                        <div class="invalid-feedback" id="erroriSaldo"></div>
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input class="form-control" type="text" name="Importo" value="{{ saldo.saldo }}" readonly>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr class="hr_light"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>su documento fiscale numero</td>
+                            <td>
+                                <input class="form-control" type="text" name="numero_documento" readonly value="{{ saldo.numeroFattura }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr class="hr_light"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>avente data</td>
+                            <td>
+                                <input class="form-control" type="text" name="data_documento" readonly value="{{ saldo.dataFattura | date('d - m - yy') }}">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="m-b-40"></div>
+                    <div class="text-center m-auto w-auto">
+                        {% if (saldo.saldo > saldo.saldoMinimo) and (saldo.iban == 1) and (saldo.documentiCaricati == 1) %}
+                            <input id="btn_submit" class="btn btn-primary m-auto" type="submit" value="Richiedi Cashout">
+                        {% else %}
+                            <button class="btn btn-primary m-auto" value="" disabled title="Cashout non disponibile">Richiedi Cashout</button>
+                        {% endif %}
+                    </div>
+                    <div class="m-b-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endregion Cashout -->
+    <!-- region Requisiti -->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Requisiti per il cashout</h5>
+                </div>
+                <div class="card-body" data-intro="Non puoi richiedere il cashout a causa di uno più motivi che puoi vedere qui.">
+                    <div class="m-b-20"></div>
+                    <ul>
+                        <li>
+                            <table id="table_documents_uploaded">
+
+                                {% if saldo.iban == 1 %}
+                                    <tr>
+                                        <td valign="top" class="text-primary"><i data-feather="check"></i></td>
+                                        <td><span class="text-primary">Ok, hai specificato il tuo IBAN</span></td>
+                                    </tr>
+                                {% elseif saldo.iban == 0 %}
+                                    <tr>
+                                        <td valign="top" class="text-danger"><i data-feather="x"></i></td>
+                                        <td>
+                                            <span class="text-danger">Non hai specificato l'IBAN sul quale accreditare le provvigioni.</span>
+                                            <br/>
+                                            <a href="#" class="text-danger text-underline">Clicca qui per accedere alla sezione 'Pagamenti'.</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if saldo.saldo > saldo.saldoMinimo %}
+                                    <tr>
+                                        <td valign="top" class="text-primary"><i data-feather="check"></i></td>
+                                        <td><span class="text-primary">Il tuo saldo è superiore al minimo richiedibile (&euro; <span id="cifraMinimaConsenita">{{ saldo.saldoMinimo }})</span></span>
+                                        </td>
+                                    </tr>
+                                {% elseif saldo.saldo < saldo.saldoMinimo %}
+                                    <tr>
+                                        <td valign="top" class="text-danger"><i data-feather="x"></i></td>
+                                        <td>
+                                            <span class="text-danger">Per poter richiedere le provvigioni occorre avere l'importo minimo di &euro; {{ saldo.saldoMinimo }})</span>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if saldo.documentiCaricati == 1 %}
+                                    <tr>
+                                        <td valign="top" class="text-primary"><i data-feather="check"></i></td>
+                                        <td>
+                                            <span class="text-primary">Ok, hai caricato tutta la documentazione richiesta.</span>
+                                        </td>
+                                    </tr>
+                                {% elseif saldo.documentiCaricati == 0 %}
+                                    <tr>
+                                        <td valign="top" class="text-danger"><i data-feather="x"></i></td>
+                                        <td>
+                                            <span class="text-danger">Non hai caricato tutti i documenti necessari per poter procedere con il cashout.</span>
+                                            <br/>
+                                            <a href="#" class="text-danger text-underline">Clicca qui per accedere alla sezione 'Documenti'.</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </li>
+                    </ul>
+                    <div class="m-b-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endregion Requisiti -->
+{% endfor %}
+

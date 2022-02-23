@@ -1,0 +1,369 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Bonus{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+          integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="/assets/c/vendors/date-picker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/chartist.css">
+{% endblock css_page %}
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Bonus{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <table>
+                                <tr>
+                                    <td><h3>{% trans %}Bonus dell'anno{% endtrans %}</h3></td>
+                                    <td>
+                                        <select class="form-select" name="Anno" id="anno" onchange="changePage(this)">
+                                            {% for anno in anni %}
+                                                <option value="{{ anno }}"
+                                                        {% if anno == annoSelezionato %}
+                                                            selected
+                                                        {% endif %}
+                                                >{{ anno }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row" id="row_graphs">
+                <div class="col-sm-12">
+                    <div class=" card">
+                        <div class="card-header">
+                            {% trans %}Nel{% endtrans %} {{ annoSelezionato }} {% trans %}hai totalizzato Bonus per un totale di{% endtrans %}
+                            <strong>&euro; {{ totaleDeiBonus|number_format(2, ',', '.') }}</strong>.
+                        </div>
+                        <div class="card-body">
+                            <table class="d-block d-sm-none d-md-none d-lg-none d-xl-none d-xxl-none">
+
+                                {% for totale in arrayTotali %}
+                                    <tr>
+                                        <td>{{ totale.name }}</td>
+                                        <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', '.') }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </table>
+                            <div class="col-sm-8 float-start d-none d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block">
+                                <div id="area-spaline"></div>
+                            </div>
+                            <div class="col-sm-4 float-end d-none d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block">
+                                <div id="piechart"></div>
+                                <hr/>
+                                <table class="m-auto">
+                                    {% for totale in arrayTotali %}
+                                        <tr>
+                                            <td>{{ totale.name }}</td>
+                                            <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', '.') }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-b-20"></div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>{% trans %}Consulta lo storico di tutti i bonus accumulati nel{% endtrans %} {{ annoSelezionato }} {% trans %}mese per mese{% endtrans %}.<br/>{% trans %}I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni{% endtrans %}.</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="datatable_responsive_bonus_container"
+                             class="dt-ext table-responsive overflow_x_hidden">
+                            <table class="row-border hover" id="datatable_responsive_bonus">
+                                <thead>
+                                <tr>
+                                    <th>{% trans %}Periodo{% endtrans %}</th>
+                                    <th>{% trans %}Qualifica raggiunta{% endtrans %}</th>
+                                    <th>{% trans %}Attivo{% endtrans %}</th>
+                                    {% for totale in arrayTotali %}
+                                        <th>{{ totale.name }}</th>
+                                    {% endfor %}
+                                    <th>{% trans %}Totale{% endtrans %}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    {% for totale in arrayTotali %}
+                                        <th>EUR {{ totale.totale|number_format(2, ',', '.') }}</th>
+                                    {% endfor %}
+
+                                    <th>EUR {{ totaleDeiBonus|number_format(2, ',', '.') }}</th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_body %}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="/assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="/assets/js/scrollbar/custom.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/sidebar-menu.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/js/chart/chartist/chartist.js"></script>
+<script src="/assets/js/chart/chartist/chartist-plugin-tooltip.js"></script>
+<script src="/assets/js/chart/knob/knob.min.js"></script>
+<script src="/assets/js/chart/knob/knob-chart.js"></script>
+<script src="/assets/js/chart/apex-chart/apex-chart.js"></script>
+<script src="/assets/js/chart/apex-chart/stock-prices.js"></script>
+<script src="/assets/js/tooltip-init.js"></script>
+<script src="/assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="/assets/js/notify/index.js"></script>
+<script src="/assets/js/dashboard/default.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+
+		//region al cambio del parametro "anno" ricarico la pagina con il èarametro anno
+		function changePage(anno){
+			cconsole.log
+
+			let url = "{{ path('bonus', { anno : ':anno'}) }}";
+			url = url.replace(':anno', anno.value);
+			document.location.href = url;
+		}
+		//endregion
+
+		//region impostazioni datatable datatable
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: "precedente",
+				next: "successivo",
+			},
+			decimal: "",
+			emptyTable: "nessun dato disponibile",
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: "_TOTAL_ ordini | ",
+			infoEmpty: "visualizzati 0 a 0 di 0 elementi",
+			infoFiltered: "(filtrati da _MAX_ elementi totali)",
+			infoPostFix: "",
+			thousands: ",",
+			lengthMenu: "mostra _MENU_ per pagina",
+			loadingRecords: "caricamento...",
+			processing: "elaborazione...",
+			search: "Cerca:",
+			zeroRecords: "nessun_risultato",
+			aria: {
+				"sortAscending": ": attiva_per_ordine_ascendente",
+				"sortDescending": ": attiva_per_ordine_discendente"
+			}
+		};
+		//endregion
+
+		//region creazione del datatable
+		$(document).ready(function(){
+			$('#datatable_responsive_bonus').DataTable({
+				responsive: true,
+				ajax: "{{ path('bonus-ajax') }}/{{ annoSelezionato }}",
+				language: DueRDataTableLaguages,
+				dom: '<"top"<"clear">>rt<"bottom"<"clear">>',
+				order: [7, 'desc'],
+				pageLength: 25,
+				columnDefs: [
+					{
+						targets: 3,
+						className: 'dt-right'
+					},
+					{
+						targets: 4,
+						className: 'dt-right'
+					},
+					{
+						targets: 5,
+						className: 'dt-right'
+					},
+					{
+						targets: 6,
+						className: 'dt-right'
+					},
+					{
+						targets: 7,
+						visible: false,
+						searchable: false
+					},
+					{responsivePriority: 1, targets: 0},
+					{responsivePriority: 2, targets: 6},
+					{responsivePriority: 3, targets: 1}
+				]
+			});
+			//endregion
+
+			$("select[name=datatable_responsive_bonus_length]").removeClass("form-control");
+
+			var nomiBonus = [];
+
+            {% for totale in arrayTotali %}
+			nomiBonus.push('{{ totale.name }}');
+            {% endfor %}
+
+			// pie chart
+			var options8 = {
+				chart: {
+					width: 380,
+					type: 'pie',
+				},
+				labels: nomiBonus,
+				series: [
+                    {% for totale in arrayTotali %}
+                    {{ totale.totale }},
+                    {% endfor %}
+				],
+				responsive: [{
+					breakpoint: 480,
+					options: {
+						chart: {
+							width: 200
+						},
+						legend: {
+							position: 'bottom'
+						}
+					}
+				}],
+				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
+			}
+
+			var chart8 = new ApexCharts(
+				document.querySelector("#piechart"),
+				options8
+			);
+
+			chart8.render();
+
+			// area spaline chart
+			var options1 = {
+				chart: {
+					height: 350,
+					type: 'area',
+					toolbar: {
+						show: false
+					}
+				},
+				dataLabels: {
+					enabled: false
+				},
+				stroke: {
+					curve: 'smooth'
+				},
+
+				series: [
+
+                    {% for bonusMensile in bonusMensili %}
+					{
+						name: "{{ bonusMensile.name }}",
+						data: [{{ bonusMensile.bonusMensile|join(',') }}]
+					},
+                    {% endfor %}
+
+				],
+
+				xaxis: {
+					type: 'string',
+					categories: ["{% trans %}Gen{% endtrans %}", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+				},
+				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
+			}
+
+			var chart1 = new ApexCharts(
+				document.querySelector("#area-spaline"),
+				options1
+			);
+
+			chart1.render();
+
+			setTimeout(same_heights, 1000);
+		});
+    </script>
+{% endblock javascript_page %}
+

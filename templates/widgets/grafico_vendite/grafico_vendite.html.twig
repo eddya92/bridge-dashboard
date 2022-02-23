@@ -1,0 +1,303 @@
+<div class="card earning-card " id="grafico_vendite" >
+    <div class="card-body p-0"  >
+        <div class="row m-0" >
+            <div id="div_chart_filters" >
+                <div class="col-md-6">
+                    {% trans %}Tipologia filtro{% endtrans %}
+                    <div class="clearfix"></div>
+                    <div class="col-5 float-start">
+                        <select title="Scegli il periodo" class="form-select" name="Grafico_periodo" id="Grafico_periodo">
+                            <option value="spec_mese" selected>{% trans %}Specifico mese{% endtrans %}</option>
+                            <option value="spec_anno">{% trans %}Specifico Anno{% endtrans %}</option>
+                            <option value="ultimi_12">{% trans %}Ultimi 12 mesi{% endtrans %}</option>
+                        </select>
+                    </div>
+                    <div class="col-4 float-start">
+                        <select title="Scegli il mese" class="form-select" name="Grafico_mese" id="mesechart">
+                            {% for key,value in mesi %}
+                                <option value="{{ key }}" id="{{ key }}" class="forselectGrafico"
+                                        {% if key == meseAttuale %}
+                                            selected
+                                        {% endif %}
+                                >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-3 float-start">
+                        <select title="Scegli l'anno" class="form-select" name="Grafico_anno" id="annochart">
+                            {% for anno in anni %}
+                                <option value="{{ anno }}"
+                                        {% if anno == annoAttuale %}
+                                            selected
+                                        {% endif %}
+                                >{{ anno }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-6">
+                    {% trans %}Mostra{% endtrans %}
+                    <select title="Scegli il dato da mostrare nel grafico" class="form-select" name="Grafico_dato" id="datochart">
+                        <option value="pc" selected>{% trans %}Punti Carriera{% endtrans %}</option>
+                        <option value="pv">{% trans %}Punti Volume{% endtrans %}</option>
+                        <option value="ordini">{% trans %}Numero ordini{% endtrans %}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xl-3 earning-content p-0">
+                <div class="row m-0 chart-left">
+                    <div class="col-xl-12 p-0 left_side_earning" id="totaliP">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-9 p-0">
+                <div class="chart-right">
+                    <div class="m-30"></div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card-body p-0">
+                                <div class="current-sale-container">
+                                    <div id="chart-currently">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-30"></div>
+                </div>
+                <div class="row border-top m-0">
+                    <div class="inner-top-right">
+                        <ul class="d-flex list-unstyled" id="legenda">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+	$(document).ready(function(){
+		//region filtri
+		//se atttivo "specifico anno",DISABILITO i mesi
+		//se attivo ultimi 12 mesi,DISABILITO mese e anno
+		//se attivo specifico mese,ATTIVO mese e anno
+		$('#Grafico_periodo').on('change', function(){
+			if($(this).val() === 'ultimi_12'){
+				$('#annochart').attr('disabled', true);
+				$('#mesechart').attr('disabled', true);
+				$('#annochart').trigger('change');
+			} else if($(this).val() === 'spec_anno'){
+				$('#annochart').attr('disabled', false);
+				$('#mesechart').attr('disabled', true);
+				$('#annochart').trigger('change');
+			} else{
+				$('#annochart').attr('disabled', false);
+				$('#mesechart').attr('disabled', false);
+				$('#annochart').trigger('change');
+
+			}
+		});
+		//endregion
+
+		//region al cambio di un filitro mese,anno o ultimi 12 mesi
+		//chiamo la funzione chartdata che fa la chiamata all api in base al dato che abbiamo deciso di mostrare
+		//al cambio del filtro dato,chiamo la funzione chartdata che mi mostra i dati in base al perioso scelto
+		$('#annochart').on('change', function(){
+			if($(this).val() == {{ annoAttuale }}){
+				$('.forselectGrafico').each(function(index){
+					if($(this).val() > {{ meseAttuale }}){
+						$(this).addClass('d-none')
+					}
+				});
+			} else{
+				document.querySelectorAll('.d-none').forEach(el => el.classList.remove('d-none'));
+			}
+
+			var Periodo = $('#Grafico_periodo').val();
+			if($('#mesechart').prop('disabled')){
+				chartData((Periodo == 'ultimi_12' ? 'last' : $('#annochart').val()), $('#datochart').val());
+			} else{
+				chartData((Periodo == 'ultimi_12' ? 'last' : $('#annochart').val()), $('#datochart').val(), $('#mesechart').val());
+			}
+		});
+
+		$('#mesechart').on('change', function(){
+			chartData($('#annochart').val(), $('#datochart').val(), $('#mesechart').val());
+		});
+
+		$('#annochart').trigger('change');
+
+		$('#datochart').on('change', function(){
+			var Periodo = $('#Grafico_periodo').val();
+
+			if(Periodo == 'ultimi_12'){
+				chartData('last', $('#datochart').val());
+			} else if(Periodo == 'spec_anno'){
+				chartData($('#annochart').val(), $('#datochart').val());
+			} else{
+				chartData($('#annochart').val(), $('#datochart').val(), $('#mesechart').val());
+			}
+		});
+		//endregion
+	});
+
+
+	//region chiamata api aggiornamento grafico
+	function chartData(anno, dato, mese = ''){
+		//region1. cancello il contenuto del grafico
+		$('#legenda').empty();
+		//endregion
+
+		let andamento = "{{ path('andamento-grafico', {anno:':anno',mese:':mese', dato:':dato'}) }}";
+		andamento = andamento.replace(':anno', anno);
+		andamento = andamento.replace(':mese', mese);
+		andamento = andamento.replace(':dato', dato);
+		if(andamento.substr(-1) === '/'){
+			andamento = andamento.substr(0, andamento.length - 1);
+		}
+
+		//region2. cancello contenuto di informativi stampati alla sinistra del grafico
+		document.getElementById('totaliP').innerHTML = '';
+		//endregion
+
+		//region3. prendo il json che mi arriva come risposta dall api
+		$.getJSON(andamento, {})
+			.done(function(data){
+				//region3.1 ciclo sui dati e mostro i totali sulla parte sinistra del grafico
+				$.each(data[0].totali, function(i, item){
+					$('#totaliP').append('<h5>' + i.replace('_', ' ').charAt(0).toUpperCase() + i.replace('_', ' ').slice(1) + '</h5>' + '<p class="font-roboto">' + item + '</p>');
+				})
+				//endregion
+				var categories = [];
+				var series = [];
+
+				//region3.2 ciclo sui totali per realizzare il grafico dettagliato
+				$.each(data[0].andamento, function(i, andamento){
+
+					var serie = [];
+
+					//region3.2.1 creo gli array dei dati da mostrare
+					$.each(andamento, function(t, dato){
+						serie.push(dato);
+						categories.push(t);
+					})
+					//endregion
+
+					//region3.2.2 metto sotto il grafico le categorie che sto mostrando,con i rispettivi colori
+					$('#legenda').append('<li>' + i.replace('_', ' ').charAt(0).toUpperCase() + i.replace('_', ' ').slice(1) + '</li>')
+					//endregion
+
+					//region3.2.3 pusho formattato come vuole la chart per mostrare il grafico
+					series.push({
+						name: i.replace('_', ' ').charAt(0).toUpperCase() + i.replace('_', ' ').slice(1),
+						data: serie
+					});
+					//endregion
+				});
+				//endregion
+
+				//region3.3 impostazioni chart
+				var options = {
+					series: series,
+					chart: {
+						height: 240,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth'
+					},
+					xaxis: {
+						type: 'category',
+						low: 0,
+						offsetX: 0,
+						offsetY: 0,
+						show: false,
+						categories: categories,
+						labels: {
+							low: 0,
+							offsetX: 0,
+							show: false,
+						},
+						axisBorder: {
+							low: 0,
+							offsetX: 0,
+							show: false,
+						},
+					},
+					markers: {
+						strokeWidth: 3,
+						colors: "#ffffff",
+						strokeColors: [CubaAdminConfig.primary, CubaAdminConfig.secondary],
+						hover: {
+							size: 6,
+						}
+					},
+					yaxis: {
+						low: 0,
+						offsetX: 0,
+						offsetY: 0,
+						show: false,
+						labels: {
+							low: 0,
+							offsetX: 0,
+							show: false,
+						},
+						axisBorder: {
+							low: 0,
+							offsetX: 0,
+							show: false,
+						},
+					},
+					grid: {
+						show: false,
+						padding: {
+							left: 0,
+							right: 0,
+							bottom: -15,
+							top: -40
+						}
+					},
+					colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary],
+					fill: {
+						type: 'gradient',
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.7,
+							opacityTo: 0.5,
+							stops: [0, 80, 100]
+						}
+					},
+					legend: {
+						show: false,
+					},
+					tooltip: {
+						x: {
+							format: 'MM'
+						},
+					},
+				};
+				//endregion
+
+				$('#chart-currently').html(' ');
+				var chart = new ApexCharts(document.querySelector('#chart-currently'), options);
+				chart.render()
+			})
+		//endregion
+	}
+	//endregion
+</script>

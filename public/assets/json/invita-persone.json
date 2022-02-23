@@ -1,0 +1,19 @@
+{
+  "draw": 1,
+  "recordsTotal": 2,
+  "recordsFiltered": 2,
+  "data": [
+    [
+      "<span>23/08/2021</span>",
+      "<span>Mario Rossi</span>",
+      "<span>mario.rossi@libero.it</span>",
+      "<button type='button' class='btn btn-light color-black'>invia di nuovo</button>"
+    ],
+    [
+      "<span>24/08/2021</span>",
+      "<span>Mario Rossi</span>",
+      "<span>mario.rossi@libero.it</span>",
+      "<button type='button' class='btn btn-light color-black'>invia di nuovo</button>"
+    ]
+  ]
+}

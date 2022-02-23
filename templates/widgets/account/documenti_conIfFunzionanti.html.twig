@@ -1,0 +1,268 @@
+<div class="container-fluid">
+	<div class="page-title">
+		<div class="row">
+			<div class="col-sm-6 order-sm-1">
+				<div class="mb-3 d-block d-sm-none"></div>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
+					<li class="breadcrumb-item">Virtual Office</li>
+					<li class="breadcrumb-item active">Profilo / Documenti</li>
+				</ol>
+				<div class="mb-2 d-block d-sm-none"></div>
+			</div>
+			<div class="col-sm-6 order-sm-0">
+				<div class="float-sm-start">
+					<h3>Profilo / Documenti</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- endregion Titolo e breadcrumb -->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+	<div class="alert alert-success alert-dismissible fade show" role="alert">I dati del tuo account sono stati salvati correttamente! <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button></div>
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">Attenzione! I dati non sono stati salvati a causa del seguente errore: messaggio di errore.<button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button></div>
+	<div class="edit-profile">
+		<div class="row" id="row_data">
+			<div class="col-xl-4">
+				<!-- region Riepilogo con grafico -->
+				<div class=" news">
+					<div id="div_sponsor" class="card custom-card p-b-0 resize_equal_height resize_equal_height_xl resize_equal_height_xxl total-users">
+						<div class="apex-chart-container goal-status text-center row">
+							<div class="rate-card col-xl-12">
+								<div class="goal-chart">
+									<div id="riskfactorchart"></div>
+								</div>
+								<div class="m-b-25"></div>
+								<div class="goal-end-point">
+
+									<ul>
+										<li>
+											<table id="table_documents_uploaded" class="m-auto">
+
+												<tr>
+													{% if documento.adesione[0].caricato == 1 %}
+														<td class="text-primary"><i data-feather="check"></i></td>
+														<td class="text-primary">Modulo di adesione firmato</td>
+													{% else %}
+
+														<td class="text-danger"><i data-feather="x"></i></td>
+														<td class="text-danger">Modulo di adesione firmato</td>
+													{% endif %}
+												</tr>
+												<tr>
+													{% if documento.documento[0].caricato == 1 %}
+														<td class="text-primary"><i data-feather="check"></i></td>
+														<td class="text-primary">Carta di identità</td>
+													{% else %}
+
+														<td class="text-danger"><i data-feather="x"></i></td>
+														<td class="text-danger">Carta di identità</td>
+													{% endif %}
+												</tr>
+												<tr>
+													{% if documento.tesserino[0].caricato == 1 %}
+														<td class="text-primary"><i data-feather="check"></i></td>
+														<td class="text-primary">Tesserino personale</td>
+													{% else %}
+														{% set count = count + 1 %}
+														<td class="text-danger"><i data-feather="x"></i></td>
+														<td class="text-danger">Tesserino personale</td>
+													{% endif %}
+												</tr>
+												<tr>
+													{% if documento.trattamentoDati[0].caricato == 1 %}
+														<td class="text-primary"><i data-feather="check"></i></td>
+														<td class="text-primary">Modulo trattamento dati personali</td>
+													{% else %}
+
+														<td class="text-danger"><i data-feather="x"></i></td>
+														<td class="text-danger">Modulo trattamento dati personali</td>
+													{% endif %}
+												</tr>
+											</table>
+										</li>
+										{% if count == 0 %}
+										<li class="mt-0 pt-0">
+											<h6 class="font-primary">&nbsp;<!--As From--></h6>
+											<h6 class="f-w-400">Puoi richiedere le provvigioni </h6>
+										</li>
+										{% elseif count == 1 %}
+										<li class="mt-0 pt-0">
+											<h6 class="font-primary">&nbsp;<!--As From--></h6>
+											<h6 class="f-w-400">Ti manca {{ count }} solo documento</h6>
+										</li>
+										<li class="mt-0 pt-0">
+											<div class="m-b-25"></div>
+											<h6 class="f-w-400">Ti ricordiamo che è necessario caricare tutti i documenti obbligatori per poter richiedere le provvigioni dall'eWallet</h6>
+											<div class="m-b-50"></div>
+										</li>
+										{% else  %}
+										<li class="mt-0 pt-0">
+											<h6 class="font-primary">&nbsp;<!--As From--></h6>
+											<h6 class="f-w-400">Ti mancano {{ count }} documenti</h6>
+										</li>
+										<li class="mt-0 pt-0">
+											<div class="m-b-25"></div>
+											<h6 class="f-w-400">Ti ricordiamo che è necessario caricare tutti i documenti obbligatori per poter richiedere le provvigioni dall'eWallet</h6>
+											<div class="m-b-50"></div>
+										</li>
+										{% endif  %}
+									</ul>
+								</div>
+								<div class="d-none" id="countcount">{{ count }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- endregion Dati generali -->
+			</div>
+			<div class="col-xl-8">
+				<!-- region Elenco documenti -->
+
+				<!--
+                IMPORTANTE!!!
+                i pulsanti dei documenti facolativi e di quelli obbligatori già caricati devono avere classe btn-light
+                i pulsanti dei documenti obbligatori ancora da caricare devono avere classe btn-primary
+                se un documento non è ancora caricato il testo del pulsante deve essere ' carica file'
+                se un documento è già caricato il testo del pulsante deve diventare ' sostituisci file'
+                il tesserino ha un comportamento a sé ed i testi sono 'crea tesserino' e 'aggiorna tesserino'
+                per ogni documento è previsto sia il testo descrittivo per quando non è ancora stato caricato, sia il testo descrittivo a seguito del caricamento
+                -->
+
+				<div class="card form_upload_documents">
+					<div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Documenti obbligatori</h5>
+							<div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-500 m-b-0"> Modulo di adesione firmato</p>
+											<!-- <p class="f-w-400 m-t-0">Scarica il modulo che hai ricevuto via e-mail a seguito dell'iscrizione, firmalo e caricarlo qui.</p> -->
+											<p class="f-w-400 m-t-0"><i class="fa fa-link"></i> Hai caricato il file il 08/08/2021.  <br class="d-md-none"><u>Scarica il file</u>.</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<div class="m-b-10"></div>
+										<button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-light float-start">sostituisci file</button>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-500 m-b-0">Carta di identità</p>
+											<!-- <p class="f-w-400 m-t-0">Carica la copia della tua carta di identità mostrando entrambi i lati (fronte - retro).</p> -->
+											<p class="f-w-400 m-t-0"><i class="fa fa-link"></i> Hai caricato il file il 08/08/2021.  <br class="d-md-none"><u>Scarica il file</u>.</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<div class="m-b-10"></div>
+										<button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-light float-start">sostituisci file</button>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-500 m-b-0">Tesserino personale</p>
+											<p class="f-w-400 m-t-0"><i class="fa fa-link"></i> Ultimo aggiornamento: 06/08/2021.  <br class="d-md-none"><u>Scarica il tesserino</u></p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<button class="btn btn-light float-start">aggiorna tesserino</button>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-500 m-b-0">Modulo trattamento dati personali</p>
+											<p class="f-w-400 m-t-0">Carica il modulo con i consensi al trattamenti dei dati personali firmato.</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<div class="m-b-10"></div>
+										<button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-primary float-start">carica file</button>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+							<div class="m-b-20"></div>
+						</div>
+						<div class="card-header" style="border-top: 1px solid #ecf3fa;">
+							<h5 class="card-title mb-0">Altri documenti (facoltativi)</h5>
+							<div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-400 m-b-0">Modulo trattamento dati personali</p>
+											<p class="f-w-400 m-t-0">Carica il modulo con i consensi al trattamenti dei dati personali firmato.</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<div class="m-b-10"></div>
+										<button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-light float-start">carica file</button>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-8 col-md-8 col-xl-9">
+									<div class="mb-3">
+										<div class="pull-left p-l-10">
+											<p class="f-w-400 m-b-0">Modulo trattamento dati personali</p>
+											<p class="f-w-400 m-t-0">Carica il modulo con i consensi al trattamenti dei dati personali firmato.</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-xl-3">
+									<div class="mb-3">
+										<div class="m-b-10"></div>
+										<button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-light float-start">carica file</button>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+							<div class="m-b-20"></div>
+						</div>
+						<div class="card-footer">
+						</div>
+					</div>
+				</div>
+			<!-- endregion -->
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,179 @@
+{% extends 'layouts/interno.html.twig' %}
+   {% block title %}{% trans %}Dettaglio Ordine{% endtrans %}{% endblock title %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    {% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>{% trans %}Dettaglio Ordine{% endtrans %}</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}">
+                                    <i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">{% trans %}Ordini{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Dettaglio Ordine{% endtrans %}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- region titolo e breadcrumb -->
+        {{ dettaglioOrdini('0' , id) }}
+        <!-- Container-fluid Ends-->
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/print.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+
+    <script>
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: "precedente",
+				next: "successivo",
+			},
+			decimal: "",
+			emptyTable: "nessun dato disponibile",
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: "_TOTAL_ ordini | ",
+			infoEmpty: "visualizzati 0 a 0 di 0 elementi",
+			infoFiltered: "(filtrati da _MAX_ elementi totali)",
+			infoPostFix: "",
+			thousands: ",",
+			lengthMenu: "mostra _MENU_ per pagina",
+			loadingRecords: "caricamento...",
+			processing: "elaborazione...",
+			search: "Cerca:",
+			zeroRecords: "nessun_risultato",
+			aria: {
+				"sortAscending": ": attiva_per_ordine_ascendente",
+				"sortDescending": ": attiva_per_ordine_discendente"
+			}
+		};
+		$('#datatable_responsive_orders').DataTable({
+			responsive: true,
+			ajax: "../assets/json/ordini.json",
+			language: DueRDataTableLaguages,
+			dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+			columnDefs: [
+				{orderable: false, targets: 7},
+				{
+					targets: 5,
+					className: 'dt-right'
+				},
+				{
+					targets: 3,
+					className: 'dt-right'
+				},
+				{
+					targets: 5,
+					className: 'dt-right'
+				},
+				{responsivePriority: 1, targets: 0},
+				{responsivePriority: 1, targets: 4},
+				{responsivePriority: 1, targets: 5}
+			]
+		});
+		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
+
+		$("#ID_esito").select2({
+			placeholder: "Scegli..."
+		});
+		$("#Tipologia_ordine").select2({
+			placeholder: "Tutte le tipologie"
+		});
+
+		$.fn.datepicker.language['it'] = {
+			days: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+			daysShort: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+			daysMin: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+			months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+			monthsShort: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
+			today: 'Oggi',
+			clear: 'Cancella',
+			dateFormat: 'dd/mm/yyyy',
+			timeFormat: 'hh:ii aa',
+			firstDay: 0
+		};
+
+		function close_filters(){
+			$("#filters_datatable").addClass("visually-hidden");
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+		}
+
+		function filter(){
+			close_filters();
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+
+		}
+
+		function open_filters(){
+			$("#filters_datatable").removeClass("visually-hidden");
+			$("#filter_button_datatable").addClass("visually-hidden");
+			$("#applied_filters_datatable").addClass("visually-hidden");
+		}
+    </script>
+
+{% endblock javascript_page %}
+
+

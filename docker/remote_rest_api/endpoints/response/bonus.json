@@ -1,0 +1,73 @@
+{
+  "data": [
+    {
+      "mese": "Gennaio",
+      "qualifica": "Manager",
+      "attivo": true,
+      "bonus": [
+        {
+          "nome": "Infinity Bonus",
+          "totale": 909.21,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Unilevel Bonus",
+          "totale": 455.25,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Direct Bonus",
+          "totale": 797.29,
+          "valuta": "EUR"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "mese": "Febbraio",
+      "qualifica": "Manager",
+      "attivo": true,
+      "bonus": [
+        {
+          "nome": "Infinity Bonus",
+          "totale": 332.45,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Unilevel Bonus",
+          "totale": 101.82,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Direct Bonus",
+          "totale": 102.85,
+          "valuta": "EUR"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "mese": "Marzo",
+      "qualifica": "Manager",
+      "attivo": true,
+      "bonus": [
+        {
+          "nome": "Infinity Bonus",
+          "totale": 704.45,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Unilevel Bonus",
+          "totale": 797.55,
+          "valuta": "EUR"
+        },
+        {
+          "nome": "Direct Bonus",
+          "totale": 887.99,
+          "valuta": "EUR"
+        }
+      ],
+      "id": 3
+    }
+  ]
+}

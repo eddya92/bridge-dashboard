@@ -1,0 +1,56 @@
+{
+  "data": {
+    "id": 2,
+    "nome": "tipo verdura 2",
+    "rating": 2,
+    "categoria": "creme",
+    "prezzo": 10.00,
+    "sconto": 0.00,
+    "prezzo_scontato": 10.00,
+    "codice": "SCRB-CRM01",
+    "PC": 10.00,
+    "descrizione": "ed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
+    "foto": [
+      {
+        "url": "../assets/images/dashboard-2/product-1.png",
+        "principale": true
+      },
+      {
+        "url": "../assets/images/dashboard-2/product-1.png",
+        "principale": false
+      },
+      {
+        "url": "../assets/images/dashboard-2/product-1.png",
+        "principale": false
+      }
+    ],
+    "varianti": [
+      {
+        "id_variante": 1,
+        "nome": "tipo verdura 2",
+        "tipo_variante": "50g",
+        "rating": 2,
+        "prezzo": 10.00,
+        "sconto": 10.00,
+        "prezzo_scontato": 10.00,
+        "codice": "SCRB-CRM01",
+        "PC": 10.00,
+        "descrizione": "ed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
+        "foto": []
+      },
+      {
+        "id_variante": 2,
+        "nome": "tipo verdura 2",
+        "tipo_variante": "50g",
+        "rating": 2,
+        "prezzo": 10,
+        "sconto": 0,
+        "prezzo_scontato": 10,
+        "codice": "SCRB-CRM01",
+        "PC": 10,
+        "descrizione": "ed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
+        "foto": []
+      }
+    ]
+  }
+}

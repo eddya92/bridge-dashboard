@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "data_operazione": "2021-07-21",
+      "operazione": "Pagamento Richiesta #95\n Rif. fattura N. 4 del 05/08/2021",
+      "dettaglio": "",
+      "link": "",
+      "tipo_operazione": "accredito",
+      "colore": "#33b18a",
+      "visibile": "1",
+      "costo_operazione": "200,00"
+    },
+    {
+      "data_operazione": "2021-07-27",
+      "operazione": "Accredito Provvigioni #331 Mese Solare di Luglio 2021\n Rif. fattura N. 4 del 05/08/2021",
+      "dettaglio": "",
+      "link": "",
+      "tipo_operazione": "addebito",
+      "colore": "#922043",
+      "visibile": "1",
+      "costo_operazione": "200,00"
+    }
+  ]
+}

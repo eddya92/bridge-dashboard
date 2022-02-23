@@ -1,0 +1,198 @@
+<!-- Container-fluid starts-->
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" id="widgetDettaglioOrdine">
+                <div class="card-body">
+                    <div class="invoice">
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div id="div_header_print">
+                                        <table>
+                                            {% if ordine.azienda|length > 0 %}
+                                                <tr>
+                                                    <td><img src="{{ ordine.azienda.foto }}" alt="logo"></td>
+                                                    <td width="60%" class="text-sm-end">{{ ordine.azienda.nome }}
+                                                        <br/>{{ ordine.azienda.indirizzo }}
+                                                        <br/>{{ ordine.azienda.email }} - {{ ordine.azienda.telefono }}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        </table>
+                                        <hr/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="media-body m-l-20 m-t-10">
+                                            <h4>{% trans %}Ordine Cod.{% endtrans %} {{ ordine.codice }}</h4>
+                                        </div>
+                                        <!-- End Info-->
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="text-sm-end text-xs-center">
+                                            <p>{% trans %}Creato il{% endtrans %}: <span>{{ ordine.data }}</span>
+                                                <br>
+                                                {% trans %}Stato{% endtrans %}: {{ ordine.esito.esito }}</p>
+                                        </div>
+
+                                        <!-- End Title-->
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- End InvoiceTop-->
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object rounded-circle img-60" src="../assets/images/user/1.jpg" alt="">
+                                        </div>
+                                        <div class="media-body m-l-20" id="user">
+                                            <h6 class="media-heading">{{ ordine.intestatario.qualifica }}</h6>
+                                            <p id="utente">{{ ordine.intestatario.nominativo }}
+                                                <br>
+                                                <span id="codice">{% trans %}Cod.{% endtrans %} {{ ordine.intestatario.codice }} </span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="text-sm-end" id="project">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Invoice Mid-->
+                            <div>
+                                <div class="table-responsive invoice-table" id="table">
+                                    <table class="table table-bordered table-striped">
+                                        <tbody id="orders">
+                                        <tr>
+                                            <td class="item">
+                                                <h6 class="p-2 mb-0">{% trans %}Articolo{% endtrans %}</h6>
+                                            </td>
+                                            <td class="Hours text-center">
+                                                <h6 class="p-2 mb-0">{% trans %}Quantità{% endtrans %}</h6>
+                                            </td>
+                                            <td class="Rate">
+                                                <h6 class="p-2 mb-0 pull-right">{% trans %}PC{% endtrans %}</h6>
+                                            </td>
+                                            <td class="subtotal">
+                                                <h6 class="p-2 mb-0 pull-right">{% trans %}Prezzo{% endtrans %}</h6>
+                                            </td>
+                                        </tr>
+                                        {% for articolo in ordine.articoli %}
+                                            <tr>
+                                                <td>
+                                                    <p class="m-0">{% trans %}Cod.{% endtrans %} {{ articolo.codice }} - {{ articolo.nome }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="itemtext text-center">{{ articolo.quantita }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="itemtext pull-right">{{ articolo.punti }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="itemtext pull-right">EUR {{ articolo.prezzo }}</p>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        <tr>
+                                            <td colspan="3">{% trans %}Spese modalità di pagamento{% endtrans %}:</td>
+                                            <td>
+                                                <p class="itemtext pull-right">{{ ordine.modalitaPagamento.prezzo }}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">{% trans %}Spese di spedizione{% endtrans %}:</td>
+                                            <td>
+                                                <p class="itemtext pull-right">{{ ordine.modalitaSpedizione.prezzo }}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="Rate">
+                                                <h6 class="mb-0 p-2 pull-right">{% trans %}Totale{% endtrans %}</h6>
+                                            </td>
+                                            <td class="payment">
+                                                <h6 class="mb-0 p-2 pull-right">{{ ordine.totale }}</h6>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- End Table-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p><strong>{% trans %}Spedizione{% endtrans %}</strong>
+                                            <br/>
+                                            {% trans %}Modalità di spedizione{% endtrans %}: {{ ordine.modalitaSpedizione.nome }}
+                                            <br/>
+                                            {% trans %}Spedire presso{% endtrans %}: {{ ordine.spedizione.nominativo }}, {{ ordine.spedizione.indirizzo }}
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="text-start">
+                                            <p><strong>{% trans %}Pagamento{% endtrans %}</strong>
+                                                <br/>
+                                                {% trans %}Modalità di pagamento{% endtrans %}: {{ ordine.modalitaPagamento.nome }}
+                                                <br/>
+                                                {% if ordine.esito.pagabile and pagina == '0' %}
+                                                    {% trans %}Questo ordine risulta pagato{% endtrans %}.
+                                                {% elseif ordine.esito.pagabile == false and pagina == '0' %}
+                                                    {% trans %}Questo ordine non risulta ancora pagato{% endtrans %}.
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="text-end">
+                                            {% if  pagina == '0' and ordine.esito.pagabile %}
+                                                {{ ordine.pagamento.pulsante }}
+                                            {% else %}
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End InvoiceBot-->
+                        </div>
+                        <hr>
+                        {% if ordine.note != '' %}
+                            <!-- region Note -->
+                            {{ ordine.note }}
+                            <hr>
+                        {% endif %}
+                        <!-- endregion -->
+                        {% if pagina == '0' %}
+                            <div id="buttons_print_back" class="col-sm-12 text-center mt-3">
+                                <button class="btn btn btn-primary me-2" type="button" onclick="myFunction()">{% trans %}Stampa{% endtrans %}</button>
+                                <a href="{{ path('elenco-ordini') }}">
+                                    <button class="btn btn-light" type="button">{% trans %}Torna indietro{% trans %}</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                        <!-- End Invoice-->
+                        <!-- End Invoice Holder-->
+                        <!-- Container-fluid Ends-->
+                    </div>
+
+                </div>
+            </div>
+            {% if pagina == '1' %}
+                <a href="{{ path('crea-nuovo-ordine') }}">
+                    <button class="btn btn-primary mb-2" type="button">{% trans %}Torna allo shop{% endtrans %}</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+</script>

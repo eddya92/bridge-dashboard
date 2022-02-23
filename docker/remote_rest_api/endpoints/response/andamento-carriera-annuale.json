@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "id": 7769,
+      "mese": "NOVEMBRE 2021",
+      "qualifica": "START UP",
+      "style": "color: #C8E3DC",
+      "attivo": true,
+      "condizioni": [],
+      "punti": [
+        {
+          "nome": "PC",
+          "punti": 0
+        },
+        {
+          "nome": "PCP",
+          "punti": 0
+        },
+        {
+          "nome": "PCG",
+          "punti": 0
+        }
+      ]
+    },
+    {
+      "id": 7769,
+      "mese": "OTTOBRE 2021",
+      "qualifica": "CONSULENTE 40%",
+      "style": "color: #DBB844",
+      "attivo": true,
+      "condizioni": [],
+      "punti": [
+        {
+          "nome": "PC",
+          "punti": 1150.678
+        },
+        {
+          "nome": "PCP",
+          "punti": 150.452
+        },
+        {
+          "nome": "PCG",
+          "punti": 1000.226
+        }
+      ]
+    },
+    {
+      "id": 7769,
+      "mese": "SETTEMBRE 2021",
+      "qualifica": "START UP",
+      "style": "color: #C8E3DC",
+      "attivo": true,
+      "condizioni": [],
+      "punti": [
+        {
+          "nome": "PC",
+          "punti": 0
+        },
+        {
+          "nome": "PCP",
+          "punti": 0
+        },
+        {
+          "nome": "PCG",
+          "punti": 0
+        }
+      ]
+    }
+  ]
+}

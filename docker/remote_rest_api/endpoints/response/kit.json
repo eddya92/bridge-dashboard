@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nome": "kit 1",
+      "costo": 0.00,
+      "valuta": "€",
+      "formato_valuta": "0,00",
+      "benefits": [
+        "Accesso al Virtual Office",
+        "Pagina personale"
+      ],
+      "colore": "primary"
+    },
+    {
+      "id": 2,
+      "nome": "kit 2",
+      "costo": 37.50,
+      "valuta": "€",
+      "formato_valuta": "20,00",
+      "benefits": [
+        "Accesso al Virtual Office",
+        "Pagina personale",
+        "50 Punti Carriera",
+        "Starter pack con 1 Aloe Vera, 1 Promo Pack, un campionario"
+      ],
+      "colore": "primary"
+    },
+    {
+      "id": 3,
+      "nome": "kit 3",
+      "costo": 37.50,
+      "valuta": "€",
+      "formato_valuta": "50,00",
+      "benefits": [
+        "Accesso al Virtual Office",
+        "Pagina personale",
+        "50 Punti Carriera",
+        "Starter pack con 1 Aloe Vera, 1 Promo Pack, un campionario"
+      ],
+      "colore": "primary"
+    },
+    {
+      "id": 4,
+      "nome": "kit 4",
+      "costo": 20.00,
+      "valuta": "€",
+      "formato_valuta": "75,35",
+      "benefits": [
+        "Accesso al Virtual Office",
+        "Pagina personale",
+        "50 Punti Carriera",
+        "Starter pack con 1 Aloe Vera, 1 Promo Pack, un campionario"
+      ],
+      "colore": "primary"
+    }
+  ]
+}

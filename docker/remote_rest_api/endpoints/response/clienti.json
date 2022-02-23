@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000001",
+      "cliente": "Marco Renzoni",
+      "punti_pc": 20,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 10
+    },
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000002",
+      "cliente": "Marco Renzoni",
+      "punti_pc": 52,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 76
+    },
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000002",
+      "cliente": "Franco Rossi",
+      "punti_pc": 52,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 76
+    },
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000001",
+      "cliente": "Marco Renzoni",
+      "punti_pc": 20,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 10
+    },
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000002",
+      "cliente": "Marco Renzoni",
+      "punti_pc": 52,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 76
+    },
+    {
+      "data_iscrizione": "2021-07-20",
+      "codice_cliente": "CL000002",
+      "cliente": "Franco Rossi",
+      "punti_pc": 52,
+      "numero_telefono": "+39 329962655656",
+      "email": "marco@2rstudio.it",
+      "numero_ordini": 76
+    }
+  ]
+}

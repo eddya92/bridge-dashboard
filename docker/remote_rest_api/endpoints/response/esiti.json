@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "filtro": "Pagato",
+      "tipologia": "positivo"
+    },
+    {
+      "id": 2,
+      "filtro": "Pagato e spedito",
+      "tipologia": "positivo"
+    },
+    {
+      "id": 3,
+      "filtro": "In lavorazione",
+      "tipologia": "lavorazione"
+    },
+    {
+      "id": 4,
+      "filtro": "Annullato",
+      "tipologia": "negativo"
+    },
+    {
+      "id": 5,
+      "filtro": "Recesso",
+      "tipologia": "negativo"
+    },
+    {
+      "id": 7,
+      "filtro": "Non assegnato",
+      "tipologia": ""
+    }
+  ]
+}

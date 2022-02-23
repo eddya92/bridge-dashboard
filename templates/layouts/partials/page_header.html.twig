@@ -1,0 +1,203 @@
+<div class="page-header">
+    <div class="header-wrapper row m-0">
+        <form class="form-inline search-full col" action="#" method="get">
+            <div class="form-group w-100">
+                <div class="Typeahead Typeahead--twitterUsers">
+                    <div class="u-posRelative">
+                        <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
+                        <div class="spinner-border Typeahead-spinner" role="status">
+                            <span class="sr-only">Loading...</span></div>
+                        <i class="close-search" data-feather="x"></i>
+                    </div>
+                    <div class="Typeahead-menu"></div>
+                </div>
+            </div>
+        </form>
+        <!-- region Logo and Toggle Sidebar -->
+        <div class="header-logo-wrapper col-auto p-0">
+            <div class="logo-wrapper">
+                <a href="{{ path('ingresso') }}"><img class="img-fluid" src="{{ asset('assets/images/logo/logo.png') }}" alt=""></a>
+            </div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+            </div>
+        </div>
+        <!-- endregion Logo and Toggle Sidebar -->
+        <!-- region Header Menu -->
+        <!-- region Azione rapida Nuovo ordine -->
+        <div class="left-header col horizontal-wrapper ps-0 d-none d-sm-block">
+            <ul class="horizontal-menu">
+                <li class="level-menu outside">
+                    <a id="creaNuovoOrdine" onclick="return triggerMe()" class="nav-link" href="{{ path('crea-nuovo-ordine') }}"><!-- #! -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span>Nuovo ordine</span>
+                    </a>
+                    <!--ul class="header-level-menu menu-to-be-close">
+                        <li><a href="#" data-original-title="" title="Nuovo ordine personale"><i data-feather="user"></i><span>Ordine personale</span></a></li>
+                        <li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="users"></i><span>Ordine conto terzi</span></a></li>
+                        <li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="package"></i><span>Ordine cumulativo</span></a></li>
+                    </ul-->
+                </li>
+                <li class="level-menu outside">
+                    <a class="nav-link" href="{{ path('carrello') }}"><!-- #! -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span>Carrello</span><span class="badge rounded-pill badge-secondary"></span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- endregion Azione rapida Nuovo ordine -->
+        <div class="nav-right col-8 pull-right right-header p-0">
+            <ul class="nav-menus">
+                <!-- region Select cambio lingua -->
+                {{ lingue() }}
+                <!-- endregion Select cambio lingua -->
+                <!-- region Searchbar -->
+                <!--li><span class="header-search"><i data-feather="search"></i></span></li-->
+                <!-- endregion Searchbar -->
+                <!-- region Notifiche -->
+                <!--li class="onhover-dropdown">
+                    <div class="notification-box">
+                        <i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary"></span></div>
+                    <ul class="notification-dropdown onhover-show-div">
+                        <li><i data-feather="bell"></i><h6 class="f-18 mb-0">Notitiche</h6></li>
+                        <li>
+                            <p>non ci sono notifiche al momento</p>
+                            <p>
+                                <i class="fa fa-circle-o me-3 font-primary"> </i>3 clienti non acquistano da oltre 30 giorni
+                                <span class="pull-right">1 ora fa</span></--p>
+                        </li>
+                        <li><a class="btn btn-primary" href="#">Vai ai promemoria</a></li>
+                    </ul>
+                </li-->
+                <!-- endregion Notifiche -->
+                <!-- region Dark Mode -->
+                <!--li>
+                    <div class="mode"><i class="fa fa-moon-o"></i></div>
+                </li-->
+                <!-- endregion Dark Mode -->
+                <!-- region Carrello -->
+                <!--li class="cart-nav onhover-dropdown">
+                    <div class="cart-box">
+                        <i data-feather="shopping-cart"></i><span class="badge rounded-pill badge-primary"></span>
+                    </div>
+                    <ul class="cart-dropdown onhover-show-div">
+                        <li><h6 class="mb-0 f-20">Il tuo Carrello</h6><i data-feather="shopping-cart"></i></li>
+                        <li>non ci sono articoli nel carrello</li>
+                        <li class="mt-0">
+                            <div class="media">
+                                <img class="img-fluid rounded-circle me-3 img-60" src="" alt="">
+                                <div class="media-body"><span>T-shirt da donna</span>
+                                    <p>Taglia M</p>
+                                    <p>Quantità: 1</p>
+                                    <h6 class="text-end text-muted">EUR 50,00</h6>
+                                </div>
+                                <div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
+                            </div>
+                        </li>
+                        <li class="mt-0">
+                            <div class="media">
+                                <img class="img-fluid rounded-circle me-3 img-60" src="" alt="">
+                                <div class="media-body"><span>Pantaloni da donna</span>
+                                    <p>Taglia M</p>
+                                    <p>Quantità: 1</p>
+                                    <h6 class="text-end text-muted">EUR 80,00</h6>
+                                </div>
+                                <div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="total">
+                                <h6 class="mb-2 mt-0 text-muted">Totale: <span class="f-right f-20">EUR 130,00</span>
+                                </h6>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="btn btn-block w-100 mb-2 btn-primary view-cart" href="cart.html">Vai al carrello</a><a class="btn btn-block w-100 btn-secondary view-cart" href="{{ path('checkout') }}">Checkout</a>
+                        </li>
+                    </ul>
+                </li-->
+                <!-- endregion Carrello -->
+                {{ carrello(app.request.locale) }}
+                <!-- region Messaggi -->
+                <!--li class="onhover-dropdown"><i data-feather="message-square"></i>
+                    <ul class="chat-dropdown onhover-show-div">
+                        <li><i data-feather="message-square"></i>
+                            <h6 class="f-18 mb-0">Messaggi</h6>
+                        </li>
+                        <li>
+                            <div class="media">
+                                <p>Lorem Ipsum is simply dummy...</p>
+                                <p class="f-12">1 giorno fa</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="media">
+                                <p>Lorem Ipsum is simply dummy...</p>
+                                <p class="f-12">5 giorni fa</p>
+                            </div>
+                        </li>
+                        <li class="text-center"><a class="btn btn-primary" href="{{ path('messaggi') }}">Leggi tutti i messaggi</a></li>
+                    </ul>
+                </li-->
+                <!-- endregion Messaggi -->
+                <!-- region Fullscreen -->
+                <!--li class="maximize">
+                    <a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a>
+                </li-->
+                <!-- endregion Fullscreen -->
+                <!-- region Profilo -->
+                <li class="profile-nav onhover-dropdown p-0 me-0">
+                    <div class="media profile-media">
+
+                        <img class="b-r-10" src="{% if app.user.foto == '' %}
+                                                    {{ asset('assets/images/dashboard/profile.jpg') }}
+                                                {% else %}
+                                                       {{ app.user.foto }}
+                                                  {% endif %}  " alt="">
+
+                        <div class="media-body"><span>{{ app.user.nominativo }}</span>
+                            <p class="mb-0 font-roboto">
+                                {{ app.user.qualifica }} <i class="middle fa fa-angle-down"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <ul class="profile-dropdown onhover-show-div">
+                        <li><a href="{{ path('account') }}"><i data-feather="user"></i><span>Account</span></a></li>
+                        <li><a href="{{ path('elenco-ordini') }}"><i data-feather="shopping-bag"></i><span>Ordini</span></a>
+                        </li>
+                        <li><a href="{{ path('documenti') }}"><i data-feather="file-text"></i><span>Documenti</span></a>
+                        </li>
+                        <li><a href="{{ path('logout') }}"><i data-feather="log-out"></i><span>Logout</span></a></li>
+                    </ul>
+                </li>
+                <!-- endregion Profilo -->
+            </ul>
+        </div>
+        <script class="result-template" type="text/x-handlebars-template">
+            <div class="ProfileCard u-cf">
+                <div class="ProfileCard-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg>
+                </div>
+                <div class="ProfileCard-details">
+                    <div class="ProfileCard-realName">name</div>
+                </div>
+            </div>
+        </script>
+        <!--script class="empty-template" type="text/x-handlebars-template">
+            <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
+        < endregion Header Menu -->
+
+        <button id="buttonModal" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" hidden>Large modal</button>
+
+    </div>
+</div>

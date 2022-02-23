@@ -1,0 +1,30 @@
+<div class="m-t-40 d-block d-sm-none d-md-none d-lg-none d-xl-none d-xxl-none"></div>
+{% if agreements | length > 0 %}
+    {% for agreement in agreements %}
+        <h6>{{ agreement.nome }}</h6>
+        <div class="overflow_agreement vertical-scroll scroll-demo">
+            <p class="m-b-0">{{ agreement.descrizione }} -
+                {% if agreement.link != '' %}
+                    <a target="_blank" href="{{ agreement.link }}">Dettagli</a>
+                {% endif %}
+            </p>
+        </div>
+        <div class="form-group m-t-10">
+            <!--label for="input_agree_{{ agreement.id }}"><input id="input_agree_{{ agreement.id }}" title="Accetto" {% if agreement.required %}required="" {% else %}checked=""{% endif %} type="radio" name="Accetto{{ agreement.id }}" value="1">&nbsp;Accetto</label> &nbsp;&nbsp;<label for="input_disagree_{{ agreement.id }}"><input id="input_disagree_{{ agreement.id }}" {% if agreement.required %}class="required"{% endif %} type="radio" name="Accetto{{ agreement.id }}" value="0">&nbsp;Non accetto</label-->
+            <label for="input_agree_{{ agreement.id }}-1">
+                <input id="input_agree_{{ agreement.id }}-1" title="Accetto" {% if agreement.required %}required=""{% endif %} type="radio" name="input_agree_{{ agreement.id }}" value="1">&nbsp;Accetto
+            </label>
+            <label for="input_agree_{{ agreement.id }}-0" class="m-l-20">
+                <input id="input_agree_{{ agreement.id }}-0" title="Accetto" {% if agreement.required %}required=""{% endif %} type="radio" name="input_agree_{{ agreement.id }}" value="1">&nbsp;Non accetto
+            </label>
+        </div>
+    {% endfor %}
+{% else %}
+    <h6>Informazioni aggiuntive</h6>
+    <div class="">
+        <p>Non ci sono informazioni aggiuntive da indicare.
+            <br>
+            Procedi con la registrazione.
+        </p>
+    </div>
+{% endif %}

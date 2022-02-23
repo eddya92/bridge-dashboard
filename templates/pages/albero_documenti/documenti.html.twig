@@ -1,0 +1,224 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Documenti{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+          integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/tour.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+{% endblock css_page %}
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Documenti{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Documenti{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="row" id="documents">
+                <div class="col-xl-3 box-col-6 pe-0">
+                    <div class="file-sidebar">
+                        <div class="card resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                            <div class="card-body">
+                                <ul>
+                                    {% set i = 0 %}
+                                    {% for documento in documenti %}
+                                        {% if i == 0 %}
+                                            <li>
+                                                <div class="btn btn-primary classeSelezione " id="{{ documento.id }}"
+                                                     onclick="aggiornaCartelle(this.id,true)"><i
+                                                            data-feather="folder"></i>{{ documento.nome }} </div>
+                                            </li>
+                                        {% elseif i > 0 %}
+                                            <li>
+                                                <div class="btn btn-light classeSelezione " id="{{ documento.id }}"
+                                                     onclick="aggiornaCartelle(this.id,true)"><i
+                                                            data-feather="folder"></i>{{ documento.nome }} </div>
+                                            </li>
+                                        {% endif %}
+                                        {% set i = i + 1 %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-md-12 box-col-12" id="alberoDocumenti">
+                    {{ AlberoDocumentiAjax(idPrimo) }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock page_body %}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/tour/intro.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+
+{% block javascript_page %}
+    <script>
+
+		function aggiornaCartelle(clicked_id){
+			openMenu(clicked_id)
+			dimensioneFolders();
+		}
+    </script>
+
+    <script>
+
+		function createElement(clicked_id){
+			let url = "{{ path('albero-documenti-ajax',{ id_cartella : ':id'}) }}";
+			url = url.replace(':id', clicked_id);
+			$('.loader-wrapper').fadeIn('slow');
+			$.ajax({
+				'url': url,
+				'method': 'GET',
+				'success': function(risposta){
+					document.getElementById('appendiamoQui').innerHTML = "";
+					document.getElementById('appendiamoQuicartelle').innerHTML = "";
+					$('#alberoDocumenti').html(risposta);
+					dimensioneFolders();
+					$('.loader-wrapper').fadeOut('slow');
+				},
+				error: function(risposta){
+					$('.loader-wrapper').fadeOut('slow');
+				}
+			});
+
+		}
+		$('.loader-wrapper').fadeOut('slow');
+
+		function openMenu(clicked_id){
+			evidenzia_directory_cliccata(clicked_id)
+			createElement(clicked_id);
+		}
+
+		function evidenzia_directory_cliccata(clicked_id){
+			var elements = document.querySelectorAll(".classeSelezione")
+
+			elements.forEach((element) => {
+				if(element.classList.contains("btn-primary")){
+					element.classList.remove("btn-primary");
+					element.classList.add("btn-light")
+				}
+			});
+			var element = document.getElementById(clicked_id);
+			if(element.classList.contains("btn-light")){
+				element.classList.remove("btn-light");
+				element.classList.add("btn-primary");
+			}
+		}
+
+		function lascioDirectoryEvidenziata(clicked_id, aggiorna){
+
+			dimensioneFolders();
+			createElement(clicked_id)
+			//openMenu(clicked_id);
+		}
+
+		function dimensioneFolders(){
+			let window_width = $(window).width();
+			if(window_width >= 576){
+				let max_height = 0;
+				$(".folder-box").each(function(index){
+					let cur_height = $(this).height();
+					if(cur_height > max_height){
+						max_height = cur_height;
+					}
+				});
+				$(".folder-box").each(function(index){
+					$(this).height(max_height);
+				});
+				max_height = 0;
+				$(".file-bottom").each(function(index){
+					let cur_height = $(this).height();
+					if(cur_height > max_height){
+						max_height = cur_height;
+					}
+				});
+				$(".file-bottom").each(function(index){
+					$(this).height(max_height);
+				});
+			}
+		}
+		$(document).ready(function(){
+			$('#' + {{ idPrimo }} ).trigger('change');
+			dimensioneFolders()
+		});
+
+		//document.addEventListener("DOMContentLoaded", function() {
+		//	createElement({{ idPrimo }});
+		//});
+    </script>
+{% endblock javascript_page %}
+

@@ -1,0 +1,62 @@
+security:
+  # https://symfony.com/doc/current/security/experimental_authenticators.html
+  enable_authenticator_manager: true
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    # used to reload user from session & other features (e.g. switch_user)
+    rest_user_provider:
+      id: App\Repository\RestApi\RestV1\Security\UserProvider
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      lazy: true
+      provider: rest_user_provider
+      custom_authenticator: App\Security\CustomFormLoginAuthenticator
+      logout:
+        path: logout
+        # where to redirect after logout
+        target: login
+
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+      # https://symfony.com/doc/current/security/impersonating_user.html
+      # switch_user: true
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    # allow unauthenticated users to access the login form
+    - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/forgot-password, roles: PUBLIC_ACCESS }
+    - { path: ^/forgot-password-sent, roles: PUBLIC_ACCESS }
+    - { path: ^/registrazione, roles: PUBLIC_ACCESS }
+    - { path: ^/minisito/, roles: PUBLIC_ACCESS }
+    - { path: ^/ajax-agreements, roles: PUBLIC_ACCESS }
+    - { path: ^/esegui-registrazione, roles: PUBLIC_ACCESS }
+    #  - { path: ^login, allow_if: "not has_role('ROLE_USER')" }
+
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }
+
+    #rotte ibo
+    - { path: ^/pagamenti, roles: ROLE_USER_ibo }
+    - { path: ^/albero-unilevel, roles: ROLE_USER_ibo }
+    - { path: ^/struttura-unilevel, roles: ROLE_USER_ibo }
+    - { path: ^/nuovo-cliente, roles: ROLE_USER_ibo }
+    - { path: ^/carriera, roles: ROLE_USER_ibo }
+    - { path: ^/invita-persone, roles: ROLE_USER_ibo }
+    - { path: ^/sito-personale, roles: ROLE_USER_ibo }
+    - { path: ^/bonus, roles: ROLE_USER_ibo }
+    - { path: ^/ewallet, roles: ROLE_USER_ibo }
+    - { path: ^/documenti-personali, roles: ROLE_USER_ibo }
+    - { path: ^/andamento-grafico/, roles: ROLE_USER_ibo }
+    - { path: ^/top5-ajax/, roles: ROLE_USER_ibo }
+
+    #rotte customer
+    - { path: ^/registrazione-ibo, roles: ROLE_USER_customer }
+
+    #rotte tutti gli user
+    - { path: ^/, roles: ROLE_USER }

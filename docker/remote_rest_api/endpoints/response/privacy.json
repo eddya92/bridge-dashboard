@@ -1,0 +1,49 @@
+{
+  "data": {
+    "permessi": [
+      {
+        "id": 1,
+        "nome": "Profilazione",
+        "descrizione": "Acconsento allo svolgimento di attività di profilazione individuale o aggregata e di ricerche di mercato volte, ad esempio, all'analisi delle mie abitudini e scelte di consumo. ",
+        "link": "",
+        "consenso": true
+      }
+    ],
+    "privacy_policy": [
+      {
+        "id": 1,
+        "nome": "Dati personali",
+        "descrizione": "I dati personali da lei comunicati verranno trattati nel rispetto del Regolamento UE 2016/679. Privacy policy.",
+        "dati_in_possesso": [
+          "Marco Renzoni",
+          "Sesso: M ",
+          "Nato il 1981-10-20 a Pisa (PI) ",
+          "Codice fiscale: (RNZMRC81R28G702N)",
+          "Dati di residenza: (via dei test,1) - (PI)",
+          "Cellulare: (3330000000)",
+          "Email: (marco@2rstudio.it) ",
+          "IBAN: (IT0001122334465456) "
+        ],
+        "consenso": true
+      },
+      {
+        "id": 2,
+        "nome": "Newsletter",
+        "descrizione": "Acconsento all'invio di materiale informativo, pubblicitario e promozionale anche attraverso società specializzate che operano per conto di DNA Solutions Srl e con l'utilizzo dei mezzi di contatto (indirizzo, email, telefono) da me forniti. ",
+        "dati_in_possesso": [
+          "marco@2rstudio.it"
+        ],
+        "consenso": true
+      },
+      {
+        "id": 3,
+        "nome": "Profilazione",
+        "descrizione": "Acconsento allo svolgimento di attività di profilazione individuale o aggregata e di ricerche di mercato volte, ad esempio, all'analisi delle mie abitudini e scelte di consumo. ",
+        "datiInPossesso": [
+          "marco@2rstudio.it "
+        ],
+        "consenso": true
+      }
+    ]
+  }
+}

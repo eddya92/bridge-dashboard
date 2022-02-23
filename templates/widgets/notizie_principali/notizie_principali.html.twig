@@ -1,0 +1,31 @@
+<div class="card" id="notizie_principali">
+    <div class="calender-widget" id="box_news">
+        {% if messaggio is iterable %}
+            <div class="cal-img img-main-news" style="background-image: url('/assets/images/sponsor_background_test.jpg');"></div>
+            <div class="cal-date">
+                <h5>{{ 'now' | date('d') }}
+                    <br>
+                    {{ 'now' | date('M') }}
+                </h5>
+            </div>
+            <div class="cal-desc text-center card-body cal-desc-main-news">
+                <h6 class="f-w-600"></h6>
+                <p class="text-muted mt-3 mb-0">Nessuna novità per adesso.</p>
+            </div>
+        {% else %}
+            <div class="cal-img img-main-news" style="background-image: url('{{ messaggio.foto }}');"></div>
+            <div class="cal-date">
+                <h5>{{ messaggio.data | date('d') }}
+                    <br>{{ messaggio.data | date('M') }}</h5>
+            </div>
+            <div class="cal-desc text-center card-body cal-desc-main-news">
+                <h6 class="f-w-600">{{ messaggio.titolo }}</h6>
+                <p class="text-muted mt-3 mb-0">{{ messaggio.testo|striptags|slice(0,200)|raw }}...</p>
+            </div>
+            <div class="text-center cal-desc-main-news-more">
+                <a href="{{ path('messaggio',{id: messaggio.id }) }}">continua a leggere...</a></div>
+        {% endif %}
+    </div>
+</div>
+
+

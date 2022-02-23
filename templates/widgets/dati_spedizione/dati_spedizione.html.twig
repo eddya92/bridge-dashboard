@@ -1,0 +1,276 @@
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6 order-sm-1">
+                <div class="mb-3 d-block d-sm-none"></div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item">Virtual Office</li>
+                    <li class="breadcrumb-item active">Profilo / Dati di spedizione</li>
+                </ol>
+                <div class="mb-2 d-block d-sm-none"></div>
+            </div>
+            <div class="col-sm-6 order-sm-0">
+                <div class="float-sm-start">
+                    <h3>Profilo / Dati di spedizione</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- endregion Titolo e breadcrumb -->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    {% include 'layouts/partials/session_message.html.twig' %}
+
+    <div class="">
+        <div class="edit-profile">
+            <form class="form needs-validation" novalidate="" method="POST" action="{{ path('aggiorna-dati-spedizione') }}">
+                <input type="hidden" name="id" value="{{ indirizzoPrincipale != null ? indirizzoPrincipale.id : 0 }}">
+
+                <div class="row" id="row_current_address">
+                    <div class="col-xl-4">
+                        <!-- region Dati generali -->
+                        <div class=" news">
+                            <div id="div_sponsor" class="card custom-card p-b-0 resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                <div id="div_profile_overview" class="p-15">
+                                    <div class="card-header d-none d-md-none d-sm-non d-lg-none d-xl-block p-t-0 p-b-0">
+                                        <img class="img-fluid" src="/assets/images/bg_world.jpg" alt=""></div>
+                                    <div id="div_profile_general_data">
+                                        <div class="card-profile">
+                                            <img class="rounded-circle flag_pin" src="/assets/images/flags_pin/it.png" alt="">
+                                        </div>
+                                        <div class="text-center profile-details">
+                                            {% if indirizzoPrincipale != null %}
+                                                <h4>{{ indirizzoPrincipale.nazione }}</h4>
+                                                <h6>{{ indirizzoPrincipale.comune }} ({{ indirizzoPrincipale.provincia }})</h6>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <hr class="d-sm-none d-md-none"/>
+                                    <div class="m-b-20"></div>
+                                    <div class="text-center">
+                                        {% if indirizzoPrincipale != null %}
+                                            La nazione di spedizione indicata è
+                                            <strong>{{ indirizzoPrincipale.nazione }}</strong>.
+                                        {% endif %}
+                                        <br/>
+                                        La modifica della nazione di spedizione potrebbe comportare variazioni sulla fiscalità e sui prezzi esposti nell'e-commerce.
+                                        <hr/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- endregion Dati generali -->
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="card">
+                            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                <div class="card-header">
+                                    {% if  indirizzoPrincipale != null %}
+                                        <h5 class="card-title mb-0">Modifica i dati di spedizione</h5>
+                                    {% else %}
+                                        <h5 class="card-title mb-0">Aggiungi i dati di spedizione</h5>
+                                    {% endif %}
+                                    <div class="card-options">
+                                        <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Nome</label>
+                                                <input class="form-control" id="Nome" type="text" name="nome" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.nome }}{% endif %}">
+                                                <div class="invalid-feedback">Specificare il nome.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Cognome</label>
+                                                <input class="form-control" id="Cognome" type="text" name="cognome" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.cognome }}{% endif %}">
+                                                <div class="invalid-feedback">Specificare il cognome.</div>
+                                            </div>
+                                        </div>
+                                        <div class="clearflix"></div>
+                                        <div class="row" id="div_address">
+                                            <div class="col-sm-9 col-md-9">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Indirizzo</label>
+                                                    <input class="form-control" id="Indirizzo" type="text" name="indirizzo" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.indirizzo }}{% endif %}">
+                                                    <div class="invalid-feedback">Specificare l'indirizzo.</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Numero civico</label>
+                                                    <input class="form-control" id="Numero_civico" type="text" name="numero_civico" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.civico }}{% endif %}">
+                                                    <div class="invalid-feedback">Specificare il numero civico.</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nazione</label>
+                                                    <select class="form-control w-100" name="nazione" id="ID_nazione" required>
+                                                        <option value="1">Albania</option>
+                                                        <option value="2">Austria</option>
+                                                        <option selected value="104">Italia</option>
+                                                        <option value="3">Zimbawe</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">CAP</label>
+                                                    <input class="form-control" id="CAP" maxlength="5" type="text" name="cap" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.cap }}{% endif %}">
+                                                    <div class="invalid-feedback">Specificare il CAP.</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Comune</label>
+                                                    <input class="form-control" id="Comune" type="text" name="comune" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.comune }}{% endif %}">
+                                                    <div class="invalid-feedback">Specificare il comune.</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Provincia</label>
+                                                    <input class="form-control text-uppercase" id="Provincia" maxlength="2" type="text" name="provincia" required="" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.provincia }}{% endif %}">
+                                                    <div class="invalid-feedback">Specificare la provincia.</div>
+                                                </div>
+                                            </div>
+                                            <div class="clearflix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer p-t-20 p-b-20">
+                                    Informazioni utili per la consegna
+                                    <div class="m-b-20"></div>
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Numero di telefono</label>
+                                                <input class="form-control" id="telefono" name="numero_telefono" type="tel"  value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.numeroTelefono }}{% endif %}">
+                                                <div class="invalid-feedback">Specificare il numero di telefono.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">E-mail di notifica spedizione</label>
+                                                <input class="form-control" id="Email_spedizione" name="email" type="email" value="{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.email }}{% endif %}">
+                                                <div class="invalid-feedback">Specificare un indirizzo email valido.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"></label>
+                                                <div class="form-check checkbox mb-0">
+                                                    <input class="form-check-input "
+                                                            {% if  indirizzoPrincipale != null and indirizzoPrincipale.consegnaSabato == true %}
+                                                                checked
+                                                            {% endif %}
+                                                           id="checkbox-sabato" type="checkbox" name="consegna_sabato">
+                                                    <label class="form-check-label" for="checkbox-sabato">Consegna anche di sabato</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9 col-md-9">
+                                            <div class="mb-3">
+                                                <label class="form-label">Note</label>
+                                                <textarea class="form-control" placeholder="es: consegna al secondo piano" name="note">{% if indirizzoPrincipale != null %}{{ indirizzoPrincipale.nota }}{% endif %}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"></label>
+                                                <div class="form-check checkbox mb-0">
+                                                    <input class="form-check-input"
+                                                            {% if  indirizzoPrincipale != null and indirizzoPrincipale.isPrincipale == true %}
+                                                                checked
+                                                            {% endif %} id="checkbox-predefinito" type="checkbox" name="isPrincipale">
+                                                    <label class="form-check-label" for="checkbox-predefinito">Indirizzo predefinito</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    {% if  indirizzoPrincipale != null %}
+                                        <div class="float-start">
+                                            <input id="btn_submit" class="btn btn-primary" type="submit" value="Aggiorna dati">
+                                        </div>
+                                        <div class="float-end"><a class="text-danger" href="#">Rimuovi indirizzo</a>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="m-b-10">&nbsp;</div>
+                                    {% else %}
+                                        <div class="float-start">
+                                            <input id="btn_submit" class="btn btn-primary" type="submit" value="Aggiungi nuovo indirizzo">
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="m-b-10">&nbsp;</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row" id="row_other_address">
+                <div class="col-xl-12">
+                    <div class="card" style="background-color: #fbfbfb !important;">
+                        <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                            <div class="card-header" style="background-color: #fbfbfb !important;">
+                                <h5 class="card-title mb-0">Altri indirizzi salvati</h5>
+                                <div class="card-options">
+                                    <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-9">
+                                        <table class="table width_100">
+                                            {% for indirizzo in indirizzi %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="txt-dark" href="{{ path('modifica-indirizzo-spedizione',{id:indirizzo.id}) }}"> {{ indirizzo.comune }}({{ indirizzo.provincia }}) - {{ indirizzo.indirizzo }}, {{ indirizzo.civico }} . Consegna a {{ indirizzo.nominativo }} </a>
+                                                    </td>
+                                                    <td class="w-auto text-center">
+                                                        <form action="{{ path('modifica-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
+                                                            <input type="hidden" name="id" value="{{ indirizzo.id }}">
+
+                                                            <button class=" btn btn-link" type="submit">
+                                                                <i class="fa fa-pencil"></i> Modifica
+                                                            </button>
+                                                        </form>
+                                                        <form action="{{ path('elimina-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
+                                                            <input type="hidden" name="id" value="{{ indirizzo.id }}">
+
+                                                            <button class=" btn btn-warning-outline" type="submit">
+                                                                <i class="fa fa-remove"></i> Elimina
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    <div class="col-xl-3 text-center">
+                                        <div class="m-b-30"></div>
+                                        <a href="{{ path('modifica-indirizzo-spedizione') }}" class="m-auto btn btn-light">aggiungi un nuovo indirizzo</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="m-b-20"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

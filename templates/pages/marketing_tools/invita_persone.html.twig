@@ -1,0 +1,332 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Invita Persone{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+          integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/owlcarousel.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+
+{% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item">{% trans %}Marketing Tools{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Invita Persone{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Invita Persone{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="row" id="row_list">
+                <div class="col-sm-12">
+                    <div class=" card">
+                        <div class="card-header">
+                            {% trans %}Scegli un modello di e-mail da inviare{% endtrans %}.
+                        </div>
+                        <div class="card-body">
+                            <div class="owl-carousel owl-theme" id="owl-carousel-2">
+                                {% for template in templates %}
+                                    <div class="item">
+                                        <div class="pricingtable p-t-0">
+                                            <div class="pricingtable-header text-center">
+                                                <img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}">
+                                                <img class="rounded-circle" style="width:100px; border:2px solid white; margin-top:-50px; display: inline-block;" src="{% if template.foto != '' %}{{ template.foto }}{% else %}/{{ asset('assets/images/dashboard/profile.jpg') }}{% endif %}" alt="">
+                                            </div>
+                                            <div class="p-15 text-start">
+                                                {{ template.email | raw }}
+                                            </div>
+                                            <div class="item_footer">
+                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ template.id }}" data-bs-target="#modalSend" style="">Scegli questo modello ed invia</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-b-20"></div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>{% trans %}Consulta lo storico degli inviti che hai inviato{% endtrans %}.</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="datatable_responsive_bonus_container"
+                             class="dt-ext table-responsive overflow_x_hidden">
+                            <table class="row-border hover" id="datatable_responsive_bonus">
+                                <thead>
+                                <tr>
+                                    <th>{% trans %}Data di invio{% endtrans %}</th>
+                                    <th>{% trans %}Nominativo{% endtrans %}</th>
+                                    <th>{% trans %}E-mail{% endtrans %}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+        <!-- region Modal caricamento file con dropzone -->
+        <div class="modal fade" id="modalSend" tabindex="-1" role="dialog" aria-labelledby="modalSend" aria-hidden="true">
+            <form class="form needs-validation" novalidate="" method="post" action="{{ path('invia-invito') }}">
+                <input type="hidden" id="id_email" name="id_email" value="">
+
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{% trans %}Invia il tuo invito{% endtrans %}</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">{% trans %}Nominativo{% endtrans %}</label>
+                                        <input class="form-control" id="Nome" name="nome"
+                                               placeholder="Nome e cognome del destinatario" type="text" required="">
+                                        <div class="invalid-feedback">{% trans %}Specificare il nome del destinatario{% endtrans %}.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">{% trans %}E-mail{% endtrans %}</label>
+                                        <input class="form-control" id="Email" name="email"
+                                               placeholder="Indirizzo e-mail del destinatario" type="email" required="">
+                                        <div class="invalid-feedback">{% trans %}Specificare l'indirizzo e-mail del destinatario{% endtrans %}.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <table id="table_counter_mail">
+                                <tr>
+                                    <td>{% trans %}Ultima ora{% endtrans %}</td>
+                                    <td>{{ email.email_1h }}/{{ email.email_1h_totali }}</td>
+                                    <td>{% trans %}Hai ancora{% endtrans %}
+                                        <b>{{ email.email_1h_totali - email.email_1h }}</b>
+                                        {% trans %}inviti{% endtrans %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans %}Ultime 24 ore{% endtrans %}</td>
+                                    <td>{{ email.email_1d }}/{{ email.email_1d_totali }}</td>
+                                    <td>{% trans %}Hai ancora{% endtrans %}
+                                        <b>{{ email.email_1d_totali - email.email_1d }}</b>
+                                        {% trans %}inviti{% endtrans %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans %}Ultima settimana{% endtrans %}</td>
+                                    <td>{{ email.email_1w }}/{{ email.email_1w_totali }}</td>
+                                    <td>{% trans %}Hai ancora{% endtrans %}
+                                        <b>{{ email.email_1w_totali - email.email_1w }}</b>
+                                        {% trans %}inviti{% endtrans %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans %}Ultimo mese{% endtrans %}</td>
+                                    <td>{{ email.email_1m }}/{{ email.email_1m_totali }}</td>
+                                    <td>{% trans %}Hai ancora{% endtrans %}
+                                        <b>{{ email.email_1m_totali - email.email_1m }}</b>
+                                        {% trans %}inviti{% endtrans %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-light" type="button" data-bs-dismiss="modal">{% trans %}Chiudi{% endtrans %}</button>
+                            <button id="submit-btn" class="btn btn-primary" type="submit">{% trans %}Spedisci invito{% endtrans %}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- endregion -->
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/owlcarousel/owl.carousel.js"></script>
+<script src="../assets/js/owlcarousel/owl-invita-persone.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		var exampleModal = document.getElementById('modalSend')
+		exampleModal.addEventListener('show.bs.modal', function(event){
+			var button = event.relatedTarget
+			var id = button.getAttribute('data-bs-id');
+			var modalButton = exampleModal.querySelector('#id_email');
+		})
+
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: 'precedente',
+				next: 'successivo',
+			},
+			decimal: '',
+			emptyTable: 'nessun dato disponibile',
+			info: '_TOTAL_ risultati | ',
+			infoEmpty: 'visualizzati 0 a 0 di 0 elementi',
+			infoFiltered: '(filtrati da _MAX_ elementi totali)',
+			infoPostFix: '',
+			thousands: ',',
+			lengthMenu: 'mostra _MENU_ per pagina',
+			loadingRecords: 'caricamento...',
+			processing: 'elaborazione...',
+			search: 'Cerca:',
+			zeroRecords: 'nessun_risultato',
+			aria: {
+				'sortAscending': ': attiva_per_ordine_ascendente',
+				'sortDescending': ': attiva_per_ordine_discendente'
+			}
+		};
+
+		$('#datatable_responsive_bonus').DataTable({
+			responsive: true,
+			ajax: '{{ path('email-ajax') }}',
+			language: DueRDataTableLaguages,
+			dom: '<"top"f<"clear">>rt<"bottom"ilp<"clear">>',
+			order: [0, 'desc'],
+			pageLength: 25,
+			columnDefs: [
+				{
+					targets: 3,
+					className: 'dt-right'
+				},
+				{responsivePriority: 1, targets: 0},
+				{responsivePriority: 2, targets: 1},
+				{responsivePriority: 3, targets: 2}
+			]
+		});
+
+		$('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');
+
+		$(document).ready(function(){
+			var maxheight = 0;
+			$('.item').each(function(index){
+				var cur_height = $(this).height();
+				if(cur_height > maxheight){
+					maxheight = cur_height;
+				}
+			});
+			$('.item').each(function(index){
+				$(this).height(maxheight);
+			});
+			$('.pricingtable').trigger('to.owl.carousel', 2);
+			$('.dataTables_filter').addClass('float-start');
+		});
+
+		//Controlli del validatore standard
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = true;
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+    </script>
+{% endblock javascript_page %}

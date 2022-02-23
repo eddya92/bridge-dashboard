@@ -1,0 +1,481 @@
+{% extends 'layouts/interno.html.twig' %}
+
+{% block title %}{% trans %}Documenti{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+{% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Profilo{% endtrans %} / {% trans %}Documenti{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Profilo{% endtrans %} / {% trans %}Documenti{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+            <div class="edit-profile">
+                <div class="row" id="row_data">
+                    <div class="col-xl-4">
+                        <!-- region Riepilogo con grafico -->
+                        <div class=" news">
+                            <div id="div_sponsor"
+                                 class="card custom-card p-b-0 resize_equal_height resize_equal_height_xl resize_equal_height_xxl total-users">
+                                <div class="apex-chart-container goal-status text-center row">
+                                    <div class="rate-card col-xl-12">
+                                        <div class="goal-chart">
+                                            <div id="riskfactorchart"></div>
+                                        </div>
+                                        <div class="m-b-25"></div>
+                                        <div class="goal-end-point">
+                                            <ul>
+                                                <li>
+                                                    <table id="table_documents_uploaded" class="m-auto">
+                                                        {% for documento in documenti %}
+                                                            {% if documento.obbligatorio == true %}
+                                                                <tr>
+                                                                    {% if documento.caricato == true %}
+                                                                        <td class="text-primary">
+                                                                            <i data-feather="check"></i>
+                                                                        </td>
+                                                                        <td class="text-primary">
+                                                                            {{ documento.documento }}
+                                                                        </td>
+                                                                    {% else %}
+                                                                        <td class="text-danger">
+                                                                            <i data-feather="x"></i>
+                                                                        </td>
+                                                                        <td class="text-danger">
+                                                                            {{ documento.documento }}
+                                                                        </td>
+                                                                    {% endif %}
+                                                                </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </table>
+                                                </li>
+
+                                                {% if (count - documentiObbligatoriCaricati)  == 0 %}
+                                                    <li class="mt-0 pt-0">
+                                                        <h6 class="font-primary">&nbsp;</h6>
+                                                        <h6 class="f-w-400">{% trans %}Puoi richiedere le provvigioni{% endtrans %}</h6>
+                                                    </li>
+                                                {% elseif (count - documentiObbligatoriCaricati) == 1 %}
+                                                    <li class="mt-0 pt-0">
+                                                        <h6 class="font-primary">&nbsp;</h6>
+                                                        <h6 class="f-w-400">Ti manca {{ count }} solo {% if count == 1 %}documento{% else %}documenti{% endif %}</h6>
+                                                    </li>
+                                                    <li class="mt-0 pt-0">
+                                                        <div class="m-b-25"></div>
+                                                        <h6 class="f-w-400">{% trans %}Reminder documenti obbligatori provvigioni{% endtrans %}</h6>
+                                                        <div class="m-b-50"></div>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="mt-0 pt-0">
+                                                        <h6 class="font-primary">&nbsp;</h6>
+                                                        <h6 class="f-w-400">
+                                                            Ti mancano {{ (count - documentiObbligatoriCaricati) }} documenti</h6>
+                                                    </li>
+                                                    <li class="mt-0 pt-0">
+                                                        <div class="m-b-25"></div>
+                                                        <h6 class="f-w-400">{% trans %}Reminder documenti obbligatori provvigioni{% endtrans %}</h6>
+                                                        <div class="m-b-50"></div>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- endregion Dati generali -->
+                    </div>
+                    <div class="col-xl-8">
+                        <!-- region Elenco documenti -->
+
+                        <div class="card form_upload_documents">
+                            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{% trans %}Documenti obbligatori{% endtrans %}</h5>
+                                    <div class="card-options">
+                                        <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
+                                            <i class="fe fe-chevron-up"></i>
+                                        </a>
+                                        <a class="card-options-remove" href="#" data-bs-toggle="card-remove">
+                                            <i class="fe fe-x"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    {% for documentoObbligatorio in documentiObbligatori %}
+                                        <div class="row">
+                                            <div class="col-sm-8 col-md-8 col-xl-9">
+                                                <div class="mb-3">
+                                                    <div class="pull-left p-l-10">
+                                                        <p class="f-w-500 m-b-0">{{ documentoObbligatorio.documento }}</p>
+                                                        {% if documentoObbligatorio.descrizione != "" %}
+                                                            <p class="f-w-400 m-t-0">{{ documentoObbligatorio.descrizione }}</p>
+                                                        {% endif %}
+                                                        {% if documentoObbligatorio.caricato == true %}
+                                                            <p class="f-w-400 m-t-0"><i class="fa fa-link"></i>
+                                                                {% trans %}Hai caricato il file il{% endtrans %} {{ documentoObbligatorio.dataCaricamento | date('d/m/Y') }}
+                                                                <br class="d-md-none">
+                                                                {% if documentoObbligatorio.link != "" %}
+                                                                    <a href="{{ documentoObbligatorio.link }}" target="_blank">{% trans %}Hai caricato il file il{% endtrans %}</a>.
+                                                                {% endif %}
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-xl-3">
+                                                <div class="mb-3">
+                                                    <div class="m-b-10"></div>
+                                                    <button data-bs-toggle="modal" data-bs-target="#caricaDocumentoPersonaleModal" data-bs-id="{{ toString(documentoObbligatorio.id) }}" class="btn
+                                                    {% if documentoObbligatorio.caricato == false %}
+                                                       btn-primary
+                                                    {% else %}
+                                                        btn-light
+                                                    {% endif %}
+                                                     float-start">
+                                                        {% if documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
+                                                            {% trans %}crea tesserino{% endtrans %}
+                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
+                                                            {% trans %}aggiorna tesserino{% endtrans %}
+                                                        {% elseif documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
+                                                            {% trans %}carica file{% endtrans %}
+                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
+                                                            {% trans %}sostituisci file{% endtrans %}
+                                                        {% endif %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                    {% endfor %}
+                                    <div class="clear"></div>
+                                    <div class="m-b-20"></div>
+                                </div>
+                                <div class="card-header" style="border-top: 1px solid #ecf3fa;">
+                                    <h5 class="card-title mb-0">{% trans %}Altri documenti facoltativi{% endtrans %}</h5>
+                                    <div class="card-options">
+                                        <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
+                                            <i class="fe fe-chevron-up"></i>
+                                        </a>
+                                        <a class="card-options-remove" href="#" data-bs-toggle="card-remove">
+                                            <i class="fe fe-x"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    {% for documentoFacoltativo in documentiFacoltativi %}
+                                        <div class="row">
+                                            <div class="col-sm-8 col-md-8 col-xl-9">
+                                                <div class="mb-3">
+                                                    <div class="pull-left p-l-10">
+                                                        <p class="f-w-500 m-b-0">{{ documentoFacoltativo.documento }}</p>
+                                                        {% if documentoFacoltativo.descrizione != "" %}
+                                                            <p class="f-w-400 m-t-0">{{ documentoFacoltativo.descrizione }}</p>
+                                                        {% endif %}
+                                                        {% if documentoFacoltativo.caricato == true %}
+                                                            <p class="f-w-400 m-t-0">
+                                                                <i class="fa fa-link"></i> {% trans %}Hai caricato il file il{% endtrans %} {{ documentoFacoltativo.dataCaricamento | date('d/m/Y') }}
+                                                                <br class="d-md-none">
+                                                                {% if documentoFacoltativo.link != "" %}
+                                                                    <a href="{{ documentoFacoltativo.link }}" target="_blank">{% trans %}Scarica il file{% endtrans %}</a>.
+                                                                {% endif %}
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-xl-3">
+                                                <div class="mb-3">
+                                                    <div class="m-b-10"></div>
+                                                    <button data-bs-toggle="modal" data-bs-target="#caricaDocumentoPersonaleModal" data-bs-id="{{ toString(documentoFacoltativo.id) }}" class="btn
+                                                    {% if documentoFacoltativo.caricato == false %}
+                                                       btn-primary
+                                                    {% else %}
+                                                        btn-light
+                                                    {% endif %}
+                                                     float-start">
+                                                        {% if documentoFacoltativo.caricato == false and documentoFacoltativo.tesserino == true and documentoFacoltativo.caricabile == true %}
+                                                            {% trans %}crea tesserino{% endtrans %}
+                                                        {% elseif documentoFacoltativo.caricato == true and documentoFacoltativo.tesserino == true and documentoFacoltativo.caricabile == true %}
+                                                            {% trans %}aggiorna tesserino{% endtrans %}
+                                                        {% elseif documentoFacoltativo.caricato == false and documentoFacoltativo.tesserino == false and documentoFacoltativo.caricabile == true %}
+                                                            {% trans %}carica file{% endtrans %}
+                                                        {% elseif documentoFacoltativo.caricato == true and documentoFacoltativo.tesserino == false and documentoFacoltativo.caricabile == true %}
+                                                            {% trans %}sostituisci file{% endtrans %}
+                                                        {% endif %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                    {% endfor %}
+                                    <div class="clear"></div>
+                                    <div class="m-b-20"></div>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="caricaDocumentoPersonaleModal" tabindex="-1" role="dialog" aria-labelledby="caricaDocumentoPersonaleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Carica il file</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="dropzone dropzone-info" id="caricaDocumentoPersonaleForm" name="caricaDocumentoPersonaleForm" action="{{ path('carica-documento-personale') }}" method="post">
+                        <input id="iddoc" type="hidden" name="iddoc" value="">
+                        <input id="base64doc" type="hidden" name="base64doc" value="">
+                        <input id="namedoc" type="hidden" name="namedoc" value="">
+
+                        <div class="dz-message needsclick"><i class="icon-cloud-up"></i>
+                            <h6>Trascina qui il file o clicca per caricarlo manualmente.</h6>
+                            <span class="note needsclick">(Questa è un'anteprima del caricamento. I file mostrati qui <strong>non</strong> sono ancora caricati.)</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-bs-dismiss="modal">chiudi</button>
+                    <button id="submit-btn" class="btn btn-primary" type="button" onclick="caricaDocumentoPersonaleForm.submit();">Carica file</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/dropzone/dropzone.js"></script>
+<script src="../assets/js/dropzone/dropzone-script.js"></script>
+<script src="../assets/js/chart/apex-chart/apex-chart.js"></script>
+<script src="../assets/js/chart/apex-chart/stock-prices.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		var caricaDocumentoPersonaleModal = document.getElementById('caricaDocumentoPersonaleModal')
+		caricaDocumentoPersonaleModal.addEventListener('show.bs.modal', function(event){
+			var button = event.relatedTarget
+			var id = button.getAttribute('data-bs-id');
+			document.caricaDocumentoPersonaleForm.iddoc.value = id;
+			document.caricaDocumentoPersonaleForm.base64doc.value = '';
+			document.caricaDocumentoPersonaleForm.namedoc.value = '';
+		})
+
+		Dropzone.autoDiscover = false;
+		Dropzone.prototype.defaultOptions.dictDefaultMessage = 'Trascina qui i file per caricarli';
+		Dropzone.prototype.defaultOptions.dictFallbackMessage = 'Il tuo browser non supporta la funzionalità drag and drop';
+		Dropzone.prototype.defaultOptions.dictFallbackText = 'Please use the fallback form below to upload your files like in the olden days.';
+		Dropzone.prototype.defaultOptions.dictInvalidFileType = 'Non puoi caricare file con questa estensione.';
+		Dropzone.prototype.defaultOptions.dictCancelUpload = 'Cancella upload';
+		Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = 'Sei sicuro di voler cancellare questo upload?';
+		Dropzone.prototype.defaultOptions.dictRemoveFile = 'Rimuovi file';
+		Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = 'You can not upload any more files.';
+
+		if($('#caricaDocumentoPersonaleForm').length > 0){
+			var myyDropzone = new Dropzone('#caricaDocumentoPersonaleForm', {
+				url: '{{ path('carica-documento-personale') }}',
+				autoProcessQueue: false,
+				method: 'post',
+				addRemoveLinks: true,
+				maxFilesize: 256 * 4 * 10,
+				maxFiles: 1,
+				uploadMultiple: false,
+				parallelUploads: 10,
+				init: function(){
+					this.on('maxfilesexceeded', function(file){
+						this.removeAllFiles();
+						this.addFile(file);
+					});
+
+					this.on('addedfile', function(file){
+						var reader = new FileReader();
+						reader.onload = function(event){
+							// event.target.result contains base64 encoded image
+							var base64String = event.target.result;
+							var fileName = file.name
+
+							document.caricaDocumentoPersonaleForm.base64doc.value = base64String;
+							document.caricaDocumentoPersonaleForm.namedoc.value = fileName;
+						};
+						reader.readAsDataURL(file);
+					});
+
+					var myDropzone = this;
+				}
+			});
+		}
+
+		var totaleDocumenti = {{ count }};
+		var totaleDocumentiObbligatoriCaricati = {{ documentiObbligatoriCaricati }};
+
+		function calcoloPercentuale(totaleDocumenti, totaleDocumentiObbligatoriCaricati){
+			percentualeCaricati = (totaleDocumentiObbligatoriCaricati * 100) / totaleDocumenti;
+			return percentualeCaricati;
+		}
+
+		if(totaleDocumenti > 0){
+			calcoloPercentuale(totaleDocumenti, totaleDocumentiObbligatoriCaricati)
+		}
+
+		var options4 = {
+			series: [percentualeCaricati],
+			chart: {
+				height: 350,
+				type: 'radialBar',
+				offsetY: -10,
+			},
+
+			plotOptions: {
+				radialBar: {
+					startAngle: -135,
+					endAngle: 135,
+					inverseOrder: true,
+					hollow: {
+						margin: 5,
+						size: '60%',
+						image: '../assets/images/dashboard-2/radial-image.png',
+						imageWidth: 140,
+						imageHeight: 140,
+						imageClipped: false,
+					},
+					track: {
+						opacity: 0.4,
+						colors: CubaAdminConfig.primary
+					},
+					dataLabels: {
+						enabled: false,
+						enabledOnSeries: undefined,
+						formatter: function(val, opts){
+							return (val / 100) * 4 + '/4';//val + "%"
+						},
+						textAnchor: 'middle',
+						distributed: false,
+						offsetX: 0,
+						offsetY: 0,
+						style: {
+							fontSize: '14px',
+							fontFamily: 'Helvetica, Arial, sans-serif',
+							fill: ['#2b2b2b'],
+						},
+					},
+				}
+			},
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shade: 'light',
+					shadeIntensity: 0.15,
+					inverseColors: false,
+					opacityFrom: 1,
+					opacityTo: 1,
+					stops: [0, 100],
+					gradientToColors: ['#489165'],
+					type: 'horizontal'
+				},
+			},
+			stroke: {
+				dashArray: 15,
+				strokecolor: ['#ffffff']
+			},
+			labels: ['Documenti'],
+			colors: [CubaAdminConfig.primary],
+		};
+		var chart4 = new ApexCharts(document.querySelector("#riskfactorchart"),
+			options4
+		);
+
+		chart4.render();
+
+		function replace_graph_data(){
+			$('.apexcharts-datalabel-value').html('1/4');
+			$('.apexcharts-datalabel-value').css('font-size', '16px');
+		}
+    </script>
+{% endblock javascript_page %}
+
+

@@ -1,0 +1,19 @@
+{
+  "draw": 1,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+  "data": [
+    [
+      "22/07/2021",
+      "Pagamento Richiesta #95\n Rif. fattura N. 4 del 05/08/2021",
+      "<span style='color:#922043;'>- 200,00</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "Accredito Provvigioni #331 Mese Solare di Luglio 2021\n Rif. fattura N. 4 del 05/08/2021",
+      "<span style='color:#33b18a;'>+ 200,00</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ]
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "credito": {
+    "saldo_attuale": 199.45,
+    "saldo_minimo": 178.00,
+    "requisiti": [
+      {
+        "nome": "Iban",
+        "requisito_soddisfatto": true,
+        "messaggio_successo": "Ok, hai specificato il tuo IBAN",
+        "messaggio_errore": "Non hai specificato l'IBAN sul quale accreditare le provvigioni."
+      },
+      {
+        "nome": "Documenti Caricati",
+        "requisito_soddisfatto": true,
+        "messaggio_successo": "Ok, hai caricato tutta la documentazione richiesta.",
+        "messaggio_errore": "Non hai caricato tutti i documenti necessari per poter procedere con il cashout.",
+        "ulteriore_messaggio_errore": "<br/><a href=\"#\" class=\"text-danger text-underline\">Clicca qui per accedere alla sezione 'Pagamenti'.</a>"
+      },
+      {
+        "nome": "Saldo Superiore al minimo richiesto",
+        "requisito_soddisfatto": true,
+        "messaggio_successo": "Il tuo saldo è superiore al minimo richiedibile € 178,00",
+        "messaggio_errore": "Per poter richiedere le provvigioni occorre avere l'importo minimo di €178,00"
+      }
+    ],
+    "numero_fattura": "am458",
+    "accrediti": true,
+    "data_ultimo_accredito": "2021-01-15",
+    "ultimo_aggiornamento": "2021-01-15",
+    "data_fattura": "2020-01-20",
+    "autorizzazione_richiesta_cashout": true,
+    "messaggio_autorizzazione": "le richieste cashout possono essere effettuate dal 21 al 29",
+    "requisiti_soddisfatti": true
+  }
+}

@@ -1,0 +1,40 @@
+<div class="card height_100" id="carriera">
+    <div id="carriera_header" class="card-header">
+        <div class="header-top">
+            <h5 class="m-0">La tua Carriera</h5>
+        </div>
+    </div>
+
+    <div id="carriera_container" class="card-body p-0">
+        <div class="news-update">
+            La tua qualifica è <span class="span_qualifica_1">{{ carriera.qualifica }}</span>
+        </div>
+        <div class="news-update">
+            <p>La tua qualifica <span class="span_qualifica_2">{{ carriera.qualifica }}</span> si ottiene con:</p>
+            <p>&bull; <strong>{{ carriera.qualifica }} PC</strong> nel mese</p>
+            <div class="indent_15">
+                <div class="progress">
+                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ carriera.qualifica }}%" aria-valuenow=" {{ carriera.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small>Hai {{ carriera.qualifica }} PC, te ne mancano {{ carriera.qualifica }}.</small>
+                <hr />
+            </div>
+
+            <p>&bull; <strong>{{ carriera.qualifica }} incaricati</strong> direttamente sponsorizzati con qualifica Team Leader</p>
+            <div class="indent_15">
+                <div>
+                    {% for i in 1..carriera.qualifica %}
+                        <i data-feather="user"></i>
+                    {% endfor %}
+                    {% for i in 1..carriera.qualifica %}
+                        <i class="opacity-50" data-feather="user"></i>
+                    {% endfor %}
+                </div>
+                <small>Ne hai {{ carriera.qualifica }} , te ne mancano {{  carriera.qualifica }}.</small>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer txt-success">
+        Questo mese hai ottenuto {{ carriera.qualifica }} PC personali, quindi sei attivo e puoi percepire le provvigioni indirette.
+    </div>
+</div>

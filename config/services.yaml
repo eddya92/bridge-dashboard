@@ -1,0 +1,271 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  app.listener.redirect_404_to_homepage:
+    class: App\EventListener\Redirect404ToHomepageListener
+    arguments:
+      - "@router"
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+      - '../src/Tests/'
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+
+  #region Cache & Session
+  Redis:
+    class: Redis
+    calls:
+      - connect:
+          - '%env(REDIS_HOST)%'
+          - '%env(int:REDIS_PORT)%'
+      - setOption:
+          - !php/const Redis::OPT_PREFIX
+          - '%env(REDIS_PREFIX)%'
+
+  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+    arguments:
+      - '@Redis'
+      - { prefix: ':SESSION:' }
+  #endregion
+
+  # region REST API
+  App\Repository\RestApi\RestApiConnection:
+    factory: [ App\Repository\RestApi\RestV1\RestApiV1Connection, create ]
+    arguments:
+      - { base_uri: '%env(BRIDGE_REST_API_BASE_URL)%', timeout: '%env(float:BRIDGE_REST_API_TIMEOUT)%' }
+
+  App\Repository\RestApi\AppKey:
+    arguments:
+      - '%env(BRIDGE_REST_API_APP_KEY)%'
+
+  App\Repository\RestApi\AuthenticatedRepository:
+    calls:
+      - setTokenStorage: [ '@security.token_storage' ]
+      - setAppKey: [ '@App\Repository\RestApi\AppKey' ]
+      - setConnection: [ '@App\Repository\RestApi\RestApiConnection' ]
+  # endregion
+
+  # region Login form
+  CustomAuthenticationSuccessHandler:
+    class: Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler
+    arguments:
+      $options: { always_use_default_target_path: false, default_target_path: /it/ingresso, login_path: /login, target_path_parameter: goTo, use_referer: true }
+
+  CustomAuthenticationFailureHandler:
+    class: Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler
+    arguments:
+      $options: { failure_path: null, failure_forward: true, login_path: /login, failure_path_parameter: backTo }
+
+  App\Security\CustomFormLoginAuthenticator:
+    arguments:
+      $userProvider: '@App\Repository\RestApi\RestV1\Security\UserProvider'
+      $successHandler: '@CustomAuthenticationSuccessHandler'
+      $failureHandler: '@CustomAuthenticationFailureHandler'
+      $hostName: '%env(HOST_NAME)%'
+      $secretKey: '%env(RECAPTCHA_SECRET_KEY)%'
+      $options: { username_parameter: username, password_parameter: password, login_path: /login, check_path: /login, post_only: true, enable_csrf: true, csrf_parameter: _csrf_token, csrf_token_id: authenticate, use_forward: true }
+    calls:
+      - setHttpKernel: [ '@http_kernel' ]
+  # endregion
+
+  #region TTL
+  App\Repository\RestApi\RestV1\Security\UserProvider:
+    arguments:
+      $authRefreshTtl: '%env(int:AUTH_REFRESH_TTL)%'
+
+  App\Repository\OneRepository:
+    class: App\Repository\RestApi\RestV1\RestOneRepository
+    arguments:
+      $ttlForOneList: '%env(int:TTL_PIPPO)%'
+
+  App\Repository\PrivacyRepository:
+    class: App\Repository\RestApi\RestV1\RestPrivacyRepository
+    arguments:
+      $ttlForPrivacy: '%env(int:TTL_REPO_PRIVACY)%'
+
+  App\Repository\AccountRepository:
+    class: App\Repository\RestApi\RestV1\RestAccountRepository
+    arguments:
+      $ttlForAccount: '%env(int:TTL_REPO_ACCOUNT)%'
+      $locales: '%env(string:LOCALES)%'
+
+  App\Repository\DatiFiscaliRepository:
+    class: App\Repository\RestApi\RestV1\RestDatiFiscaliRepository
+    arguments:
+      $ttlForDatiFiscali: '%env(int:TTL_REPO_DATIFISCALI)%'
+
+
+  App\Repository\ArticoliRepository:
+    class: App\Repository\RestApi\RestV1\RestArticoliRepository
+    arguments:
+      $ttlForArticle: '%env(int:TTL_REPO_ARTICLE)%'
+
+  App\Repository\BonusRepository:
+    class: App\Repository\RestApi\RestV1\RestBonusRepository
+    arguments:
+      $ttlForBonus: '%env(int:TTL_REPO_BONUS)%'
+
+  App\Repository\CarrelloRepository:
+    class: App\Repository\RestApi\RestV1\RestCarrelloRepository
+    arguments:
+      $ttlForCarrello: '%env(int:TTL_REPO_CARRELLO)%'
+
+  App\Repository\CarrieraPersonaleRepository:
+    class: App\Repository\RestApi\RestV1\RestCarrieraPersonaleRepository
+    arguments:
+      $ttlForCarrieraPersonale: '%env(int:TTL_REPO_CARRIERAPERSONALE)%'
+
+  App\Repository\ClientiRepository:
+    class: App\Repository\RestApi\RestV1\RestClientiRepository
+    arguments:
+      $ttlForClienti: '%env(int:TTL_REPO_CLIENTI)%'
+
+  App\Repository\ContattiRepository:
+    class: App\Repository\RestApi\RestV1\RestContattiRepository
+    arguments:
+      $ttlForContatti: '%env(int:TTL_REPO_CONTATTI)%'
+
+  App\Repository\DocumentiRepository:
+    class: App\Repository\RestApi\RestV1\RestDocumentiRepository
+    arguments:
+      $ttlForDocumenti: '%env(int:TTL_REPO_DOCUMENTI)%'
+
+  App\Repository\FilesRepository:
+    class: App\Repository\RestApi\RestV1\RestFilesRepository
+    arguments:
+      $ttlForDirectories: '%env(int:TTL_REPO_FILE)%'
+
+
+  App\Repository\DocumentiPersonaliRepository:
+    class: App\Repository\RestApi\RestV1\RestDocumentiPersonaliRepository
+    arguments:
+      $ttlForDocumentiPersonali: '%env(int:TTL_REPO_DOCUMENTI_PERSONALI)%'
+
+  App\Repository\EmailsRepository:
+    class: App\Repository\RestApi\RestV1\RestEmailsRepository
+    arguments:
+      $ttlForEmailInviate: '%env(int:TTL_REPO_EMAILINVIATE)%'
+
+
+  App\Repository\EwalletRepository:
+    class: App\Repository\RestApi\RestV1\RestEwalletRepository
+    arguments:
+      $ttlForEwallet: '%env(int:TTL_REPO_EWALLET)%'
+
+  App\Repository\FiltriRepository:
+    class: App\Repository\RestApi\RestV1\RestFiltriRepository
+    arguments:
+      $ttlForFiltri: '%env(int:TTL_REPO_FILTRI)%'
+
+  App\Repository\IndirizziRepository:
+    class: App\Repository\RestApi\RestV1\RestIndirizziRepository
+    arguments:
+      $ttlForIndirizzi: '%env(int:TTL_REPO_INDIRIZZISPEDIZIONE)%'
+
+  App\Repository\AndamentoAnnualeRepository:
+    class: App\Repository\RestApi\RestV1\RestAndamentoCarrieraAnnualeRepository
+    arguments:
+      $ttlForAndamentoCarrieraAnnuale: '%env(int:TTL_REPO_ANDAMENTOCARRIERAANNUALE)%'
+
+  App\Repository\InquadramentoFiscaleRepository:
+    class: App\Repository\RestApi\RestV1\RestInquadramentoFiscaleRepository
+    arguments:
+      $ttlForInquadramentoFiscale: '%env(int:TTL_REPO_INQUADRAMENTOFISCALE)%'
+
+  App\Repository\KitsRepository:
+    class: App\Repository\RestApi\RestV1\RestKitsRepository
+    arguments:
+      $ttlForkit: '%env(int:TTL_REPO_KIT)%'
+
+
+  App\Repository\MessaggiRepository:
+    class: App\Repository\RestApi\RestV1\RestMessaggiRepository
+    arguments:
+      $ttlForMessaggi: '%env(int:TTL_REPO_MESSAGGI)%'
+
+  App\Repository\ModalitaPagamentoRepository:
+    class: App\Repository\RestApi\RestV1\RestModalitaPagamentoRepository
+    arguments:
+      $ttlForMetodoPagamento: '%env(int:TTL_REPO_METODOPAGAMENTO)%'
+
+  App\Repository\ModalitaSpedizioneRepository:
+    class: App\Repository\RestApi\RestV1\RestModalitaSpedizioneRepository
+    arguments:
+      $ttlForModalitaSpedizione: '%env(int:TTL_REPO_MODALITASPEDIZIONE)%'
+
+  App\Repository\OrdiniRepository:
+    class: App\Repository\RestApi\RestV1\RestOrdiniRepository
+    arguments:
+      $ttlForOrdini: '%env(int:TTL_REPO_ORDINI)%'
+
+  App\Repository\SaldoCreditiRepository:
+    class: App\Repository\RestApi\RestV1\RestSaldoCreditiRepository
+    arguments:
+      $ttlForSaldoCrediti: '%env(int:TTL_REPO_SALDOCREDITI)%'
+
+  App\Repository\StoresRepository:
+    class: App\Repository\RestApi\RestV1\RestStoresRepository
+    arguments:
+      $ttlForStores: '%env(int:TTL_REPO_STORES)%'
+
+  App\Repository\SitoPersonaleRepository:
+    class: App\Repository\RestApi\RestV1\RestSitoPersonaleRepository
+    arguments:
+      $ttlForSitoPersonale: '%env(int:TTL_REPO_SITOPERSONALE)%'
+
+  App\Repository\SponsorRepository:
+    class: App\Repository\RestApi\RestV1\RestSponsorRepository
+    arguments:
+      $ttlForSponsor: '%env(int:TTL_REPO_SPONSOR)%'
+
+  App\Repository\Top5Repository:
+    class: App\Repository\RestApi\RestV1\RestTop5Repository
+    arguments:
+      $ttlForTop5: '%env(int:TTL_TOP5)%'
+
+  App\Repository\TotaliRepository:
+    class: App\Repository\RestApi\RestV1\RestTotaliRepository
+    arguments:
+      $ttlForTotali: '%env(int:TTL_REPO_TOTALI)%'
+
+  App\Repository\UtentiRepository:
+    class: App\Repository\RestApi\RestV1\RestUtentiRepository
+    arguments:
+      $ttlForUtenti: '%env(int:TTL_REPO_UTENTI)%'
+
+  App\Repository\UtentiStrutturaRepository:
+    class: App\Repository\RestApi\RestV1\RestUtentiStrutturaRepository
+    arguments:
+      $ttlForUtentiStruttura: '%env(int:TTL_REPO_UTENTESTRUTTURA)%'
+
+  App\Repository\VenditeRepository:
+    class: App\Repository\RestApi\RestV1\RestVenditeRepository
+    arguments:
+      $ttlForVendite: '%env(int:TTL_REPO_VENDITE)%'
+
+  App\Repository\ReteRepository:
+    class: App\Repository\RestApi\RestV1\RestReteRepository
+    arguments:
+      $ttlForRete: '%env(int:TTL_REPO_RETE)%'
+  #endregion

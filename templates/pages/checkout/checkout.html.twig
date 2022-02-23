@@ -1,0 +1,973 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Checkout{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords"
+          content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+          integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+{% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Checkout{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Checkout{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'layouts/partials/session_message.html.twig' %}
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        {% if residenza.indirizzo == '' and Fatturazione_Indirizzo == '' and Fatturazione_Numero_civico == '' and Fatturazione_CAP == '' and Fatturazione_Comune == '' and Fatturazione_Provincia == '' %}
+            <form id="form_checkout" name="form_checkout" method="post" action="{{ path('aggiorna-dati-residenza-checkout') }}">
+                <input type="hidden" name="step" value="spedizione">
+                <input type="hidden" name="id_spedizione" value="{{ id_spedizione }}">
+                <input type="hidden" name="note" value="{{ note }}">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>{% trans %}Compila i dati di residenza{% endtrans %}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <div class="col-sm-6" style="display: none;">
+                                                    <div id="private-company">
+                                                        <div class="mb-3">
+                                                            <div class="col">
+                                                                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                                        <input class="form-check-input" id="radioinline1" type="radio" name="Fatturazione_Natura_giuridica" {% if Fatturazione_Natura_giuridica == 'privato' %}checked{% endif %} value="privato" onclick="selezionaFatturazione('privato');">
+                                                                        <label class="form-check-label mb-0" for="radioinline1">{% trans %}Un privato{% endtrans %}</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                                        <input class="form-check-input" id="radioinline2" type="radio" name="Fatturazione_Natura_giuridica" {% if Fatturazione_Natura_giuridica == 'azienda' %}checked{% endif %} value="azienda" onclick="selezionaFatturazione('azienda');">
+                                                                        <label class="form-check-label mb-0" for="radioinline2">{% trans %}Un'azienda{% endtrans %}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6" style="display: none;">
+                                                    <div id="country">
+                                                        {% trans %}La nazione di fatturazione è{% endtrans %}
+                                                    </div>
+                                                </div>
+                                                <div id="customer_data">
+                                                    <div class="row" style="display: none;">
+                                                        <div class="company-data col-sm-12">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Ragione sociale{% endtrans %}</label>
+                                                                <input class="form-control" id="Ragione_sociale" name="Fatturazione_Ragione_sociale" value="{{ Fatturazione_Ragione_sociale }}" type="text">
+                                                                <div class="invalid-feedback">{% trans %}Specificare la ragione sociale{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="private-data col-sm-6 col-md-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Nome{% endtrans %}</label>
+                                                                <input class="form-control" id="Nome" name="Fatturazione_Nome" value="{{ Fatturazione_Nome }}" type="text">
+                                                                <div class="invalid-feedback">{% trans %}Specificare il nome{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="private-data col-sm-6 col-md-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Cognome{% endtrans %}</label>
+                                                                <input class="form-control" id="Cognome" name="Fatturazione_Cognome" value="{{ Fatturazione_Cognome }}" type="text">
+                                                                <div class="invalid-feedback">{% trans %}Specificare il cognome{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-9 col-md-9">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Indirizzo{% endtrans %}</label>
+                                                                <input class="form-control" id="Indirizzo" name="Fatturazione_Indirizzo" value="{{ Fatturazione_Indirizzo }}" type="text" required="">
+                                                                <div class="invalid-feedback">{% trans %}Specificare l'indirizzo{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Numero civico{% endtrans %}</label>
+                                                                <input class="form-control" id="Numero_civico" type="text" name="Fatturazione_Numero_civico" value="{{ Fatturazione_Numero_civico }}" required="">
+                                                                <div class="invalid-feedback">{% trans %}Specificare il numero civico{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearflix"></div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}CAP{% endtrans %}</label>
+                                                                <input class="form-control" id="CAP" name="Fatturazione_CAP" value="{{ Fatturazione_CAP }}" maxlength="5" type="text" required="">
+                                                                <div class="invalid-feedback">{% trans %}Specificare il CAP{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5 col-md-5">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Comune{% endtrans %}</label>
+                                                                <input class="form-control" id="Comune" name="Fatturazione_Comune" value="{{ Fatturazione_Comune }}" type="text" required="">
+                                                                <div class="invalid-feedback">{% trans %}Specificare il comune{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">{% trans %}Provincia{% endtrans %}</label>
+                                                                <input class="form-control text-uppercase" id="Provincia" name="Fatturazione_Provincia" value="{{ Fatturazione_Provincia }}" maxlength="2" type="text" required="">
+                                                                <div class="invalid-feedback">{% trans %}Specificare la provincia{% endtrans %}.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearflix"></div>
+
+                                                        <div style="display: none;">
+                                                            <div class="private-data col-sm-3 col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">{% trans %}Codice fiscale{% endtrans %}</label>
+                                                                    <input class="form-control text-uppercase" id="CF" name="Fatturazione_CF" value="{{ Fatturazione_CF }}" type="text">
+                                                                    <div class="invalid-feedback">{% trans %}Specificare il codice fiscale{% endtrans %}.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="display: none;">
+                                                        <div class="company-data row">
+                                                            <div class="col-sm-3 col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">{% trans %}Partita IVA{% endtrans %}</label>
+                                                                    <input class="form-control" id="PIVA" name="Fatturazione_PIVA" value="{{ Fatturazione_PIVA }}" type="text">
+                                                                    <div class="invalid-feedback">{% trans %}Specificare il numero di partita IVA{% endtrans %}.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">{% trans %}PEC{% endtrans %}</label>
+                                                                    <input class="form-control" id="PEC" name="Fatturazione_PEC" value="{{ Fatturazione_PEC }}" type="email">
+                                                                    <div class="invalid-feedback">{% trans %}Specificare la PEC o il codice univoco{% endtrans %}.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">{% trans %}Codice univoco{% endtrans %}</label>
+                                                                    <input class="form-control" id="Codice_univoco" name="Fatturazione_Codice_univoco" value="{{ Fatturazione_Codice_univoco }}" type="text">
+                                                                    <div class="invalid-feedback">{% trans %}Specificare la PEC o il codice univoco{% endtrans %}.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr style="background-color: #ecf3fa; opacity: 1; margin:0 !important;"/>
+                                <div class="card-header">
+                                    <h5>{% trans %}Compila i dati fiscali{% endtrans %}</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Codice fiscale{% endtrans %}</label>
+                                                <input class="form-control" id="codice_fiscale_dati-fiscali" name="codice_fiscale_datiFiscali" value="" type="">
+                                                <div class="invalid-feedback">{% trans %}Specificare il codice fiscale{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}PEC{% endtrans %}</label>
+                                                <input class="form-control" id="pec_dati-fiscali" name="pec_datiFiscali" value="" type="">
+                                                <div class="invalid-feedback">{% trans %}Specificare la PEC o il codice univoco{% endtrans %}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Partita IVA{% endtrans %}</label>
+                                                <input class="form-control" id="piva_dati-fiscali" name="piva_datiFiscali" value="" type="">
+                                                <div class="invalid-feedback">{% trans %}Specificare il numero di partita IVA{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Codice univoco{% endtrans %}</label>
+                                                <input class="form-control" id="codice_univoco_dati-fiscali" name="codice_univoco_datiFiscali" value="" type="" maxlength="7">
+                                                <div class="invalid-feedback">{% trans %}Specificare la PEC o il codice univoco{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                </div>
+                                <hr style="background-color: #ecf3fa; opacity: 1; margin:0 !important;"/>
+                                <div class="card-body">
+                                    <div class="clearflix"></div>
+                                    <div class="m-b-20"></div>
+                                    <button type="submit" class="btn btn-primary" onclick="salvaIndirizzoFatturazione();">{% trans %}Salva e prosegui{% endtrans %}</button>
+                                    <div class="m-b-20"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkout-details">
+                                <div class="order-box">
+                                    <div class="title-box">
+                                        <div class="checkbox-title">
+                                            <h4>{% trans %}Riepilogo{% endtrans %} </h4><span>&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <ul class="qty">
+                                        {% for articolo in carrello.articoli %}
+                                            <li>
+                                                <img class="img-fluid img-40 m-r-10" id="art_{{ articolo.id }}_{{ articolo.id_variante }}" src="{% if articolo.foto | length > 0 %}{{ articolo.foto[0].url }}{% else %}{{ asset('assets/images/not-found.png') }}{% endif %}" alt="#">{{ articolo.nome | raw }}
+                                                × {{ articolo.quantita }}
+                                                <span>{{ articolo.totale_prezzo }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <ul class="sub-total">
+                                        <li>{% trans %}Subtotale{% endtrans %} <span class="count">{{ carrello.totale }}</span></li>
+                                    </ul>
+                                    <div class="m-b-40"></div>
+                                    <p>{% trans %}Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione{% endtrans %}.</p>
+                                    <div class="m-b-40"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <form id="form_checkout" name="form_checkout" action="{{ path('checkout') }}" method="post">
+                <input type="hidden" name="step" value="spedizione">
+
+                <input type="hidden" name="Fatturazione_Natura_giuridica" value="{{ Fatturazione_Natura_giuridica }}">
+                <input type="hidden" name="Fatturazione_ID_nazione" value="{{ Fatturazione_ID_nazione }}">
+                <input type="hidden" name="Fatturazione_Ragione_sociale" value="{{ Fatturazione_Ragione_sociale }}">
+                <input type="hidden" name="Fatturazione_Nome" value="{{ Fatturazione_Nome }}">
+                <input type="hidden" name="Fatturazione_Cognome" value="{{ Fatturazione_Cognome }}">
+                <input type="hidden" name="Fatturazione_Comune" value="{{ Fatturazione_Comune }}">
+                <input type="hidden" name="Fatturazione_Provincia" value="{{ Fatturazione_Provincia }}">
+                <input type="hidden" name="Fatturazione_Indirizzo" value="{{ Fatturazione_Indirizzo }}">
+                <input type="hidden" name="Fatturazione_Numero_civico" value="{{ Fatturazione_Numero_civico }}">
+                <input type="hidden" name="Fatturazione_CAP" value="{{ Fatturazione_CAP }}">
+                <input type="hidden" name="Fatturazione_Cellulare" value="{{ Fatturazione_Cellulare }}">
+                <input type="hidden" name="Fatturazione_Email" value="{{ Fatturazione_Email }}">
+                <input type="hidden" name="Fatturazione_CF" value="{{ Fatturazione_CF }}">
+                <input type="hidden" name="Fatturazione_PIVA" value="{{ Fatturazione_PIVA }}">
+                <input type="hidden" name="Fatturazione_PEC" value="{{ Fatturazione_PEC }}">
+                <input type="hidden" name="Fatturazione_Codice_univoco" value="{{ Fatturazione_Codice_univoco }}">
+
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>{% trans %}Completa l'acquisto{% endtrans %}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12">
+                                    <div class="m-t-25"></div>
+                                    <div class="">
+                                        <h5 class="f-w-100">{% trans %}Intestatario ordine{% endtrans %}</h5>
+                                        <div class="chosen_method">
+                                            <table>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        {% if residenza.comune != '' and residenza.comune != '' %}
+                                                            <p>{{ residenza.nominativo }} - {{ residenza.indirizzoCompleto }}</p>
+                                                        {% else %}
+                                                            <p>{{ residenza.nominativo }} - {{ Fatturazione_Indirizzo }},{{ Fatturazione_Numero_civico }} - {{ Fatturazione_CAP }} - {{ Fatturazione_Comune }} ({{ Fatturazione_Provincia }})</p>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="m-b-40"></div>
+                                        <h5 class="f-w-100">{% trans %}Spedizione{% endtrans %}</h5>
+
+                                        <div class="chosen_method">
+                                            <table>
+                                                {% for indirizzo in indirizzi %}
+                                                    <tr>
+                                                        <td>
+                                                            <input type="radio" name="id_spedizione" id="id_spedizione_{{ indirizzo.id }}" value="{{ indirizzo.id }}" required
+                                                                   corriere="{{ indirizzo.isRaggiungibileDalCorriere }}"
+                                                                   onchange="selezionaIndirizzoSpedizione();"
+                                                                   {% if id_spedizione > 0 and id_spedizione == indirizzo.id %}checked{% endif %}>
+                                                        </td>
+                                                        <td>
+                                                            <p>
+                                                                {% if indirizzo.indirizzo == '' and indirizzo.cap == '' %}
+                                                                    <label for="id_spedizione_{{ indirizzo.id }}">
+                                                                        {{ indirizzo.nominativo }}
+                                                                        <span class="text-danger">{% trans %}Indirizzo incompleto{% endtrans %}</span>
+                                                                    </label>
+                                                                {% else %}
+                                                                    <label for="id_spedizione_{{ indirizzo.id }}">
+                                                                        {{ indirizzo.nominativo }}
+                                                                        - {{ indirizzo.indirizzo }},{{ indirizzo.civico }}
+                                                                        - {{ indirizzo.cap }} - {{ indirizzo.comune }}
+                                                                        ({{ indirizzo.provincia }})
+                                                                        - {{ indirizzo.nazione }}
+                                                                    </label>
+                                                                {% endif %}
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-link" id="{{ indirizzo.id }}" nome="{{ indirizzo.nome }}" cognome="{{ indirizzo.cognome }}" indirizzo="{{ indirizzo.indirizzo }}" civico="{{ indirizzo.civico }}" nazione="{{ indirizzo.nazione }}" cap="{{ indirizzo.cap }}" comune="{{ indirizzo.comune }}" provincia="{{ indirizzo.provincia }}" telefono="{{ indirizzo.numeroTelefono }}" email="{{ indirizzo.email }}" consegnaSabato="{{ indirizzo.consegnaSabato }}" note="{{ indirizzo.nota }}" isPredefinito="{{ indirizzo.isPrincipale }}" onclick="modificaIndirizzoSpedizione(this.id,this.getAttribute('nome'),this.getAttribute('cognome'),this.getAttribute('indirizzo'),this.getAttribute('civico'),this.getAttribute('nazione'),this.getAttribute('cap'),this.getAttribute('comune'),this.getAttribute('provincia'),this.getAttribute('telefono'),this.getAttribute('email'),this.getAttribute('consegnaSabato'),this.getAttribute('note'),this.getAttribute('isPredefinito'))">{% trans %}Modifica{% endtrans %}</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan=" 3">
+                                                            <hr/>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                        <div class="p-t-15">
+                                            <a class="btn btn-outline-light txt-dark" onclick="modificaIndirizzoSpedizione()">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}Aggiungi un nuovo indirizzo di spedizione{% endtrans %}</a>
+                                        </div>
+                                        <div class="m-b-40"></div>
+                                        <h5 class="f-w-100">{% trans %}Note per la consegna{% endtrans %}</h5>
+                                        <textarea class="width_100 form-control" name="note" placeholder="es: consegna al primo piano...">{{ note }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12">
+                                    <div class="checkout-details">
+                                        <div class="order-box">
+                                            <div class="title-box">
+                                                <div class="checkbox-title">
+                                                    <h4>{% trans %}Riepilogo{% endtrans %} </h4><span>&nbsp;</span>
+                                                </div>
+                                            </div>
+                                            <ul class="qty">
+                                                {% for articolo in carrello.articoli %}
+                                                    <li>
+                                                        <img class="img-fluid img-40 m-r-10" id="art_{{ articolo.id }}_{{ articolo.id_variante }}" src="{% if articolo.foto | length > 0 %}{{ articolo.foto[0].url }}{% else %}{{ asset('assets/images/not-found.png') }}{% endif %}" alt="#">{{ articolo.nome | raw }}
+                                                        × {{ articolo.quantita }}
+                                                        <span>{{ articolo.totale_prezzo }}</span>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="sub-total">
+                                                <li>{% trans %}Subtotale{% endtrans %} <span class="count">{{ carrello.totale }}</span></li>
+                                            </ul>
+                                            <ul class="qty">
+                                                <hr/>
+                                                <li class="shipping-class">{% trans %}Spedizione{% endtrans %}</li>
+                                                {% if id_spedizione > 0 %}
+                                                    {% for modalitaSpedizione in modalitaSpedizione %}
+                                                        <li>
+                                                            <input class="radio_animated1" id="modsped_{{ modalitaSpedizione.id }}" type="radio" name="id_modsped" data-original-title="" title="" value="{{ modalitaSpedizione.id }}" required
+                                                                   {% if id_modsped > 0 and id_modsped == modalitaSpedizione.id %}checked{% endif %} onclick="selezionaModalitaSpedizione();">
+                                                            <label for="modsped_{{ modalitaSpedizione.id }}">{{ modalitaSpedizione.tipo }}</label>
+                                                            {% if modalitaSpedizione.spesa is defined %}
+                                                                {% if modalitaSpedizione.spesa == '' %}
+                                                                    <span>Gratis</span>
+                                                                {% else %}
+                                                                    <span>+ {{ modalitaSpedizione.spesa }}</span>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li>{% trans %}Seleziona un indirizzo per scoprire le modalità di spedizione disponibili{% endtrans %}.</li>
+                                                {% endif %}
+                                            </ul>
+                                            <ul class="qty">
+                                                <hr/>
+                                                <li class="shipping-class">{% trans %}Pagamento{% endtrans %}</li>
+                                                {% if id_spedizione > 0 and id_modsped > 0 %}
+                                                    {% for metodoPagamento in metodiPagamento %}
+                                                        <li><input class="radio_animated2"
+                                                                   id="modpag_{{ metodoPagamento.id }}"
+                                                                   type="radio" name="id_modpag"
+                                                                   onchange="selezionaModalitaPagamento()"
+                                                                   data-original-title=""
+                                                                   title="" value="{{ metodoPagamento.id }}" required
+                                                                   {% if id_modpag > 0 and id_modpag == metodoPagamento.id %}checked{% endif %} >
+                                                            <label
+                                                                    for="modpag_{{ metodoPagamento.id }}">{{ metodoPagamento.tipo }}
+                                                                {% if metodoPagamento.foto != '' %}
+                                                                    <img class="img-paypal" src="{{ metodoPagamento.foto }}" alt="">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </label>
+                                                            {% if  metodoPagamento.spesa == '' %}
+                                                                <span>{% trans %}Gratis{% endtrans %}</span>
+                                                            {% else %}
+                                                                <span>+ {{ metodoPagamento.spesa }}</span>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li>{% trans %}Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili{% endtrans %}.</li>
+                                                {% endif %}
+                                            </ul>
+                                            {% if totali is defined and totali is not null %}
+                                                {% if totali.speseAmministrative != '' %}
+                                                    <ul class="sub-total">
+                                                        <hr/>
+                                                        <li>
+                                                            {% trans %}Spese Amministrative{% endtrans %}
+                                                            <span class="count" id="spese_amministrative">{{ totali.speseAmministrative }}</span>
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
+                                            {% endif %}
+                                            <ul class="sub-total total">
+                                                {% if totali is defined and totali is not null %}
+                                                    <li>
+                                                        {% trans %}Totale{% endtrans %}
+                                                        <span class="count" id="totale">{{ totali.totale }}</span>
+                                                    </li>
+                                                {% else %}
+                                                    <hr/>
+                                                    <li>
+                                                        {% trans %}Totale{% endtrans %}
+                                                        <span class="count" id="totale">{{ carrello.totale }}</span>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                            <div class="order-place">
+                                                {% if id_spedizione > 0 and id_modsped > 0 and id_modpag > 0 %}
+                                                    <a class="btn submit btn-primary" onclick="checkoutOrdine();">{% trans %}Conferma ordine{% endtrans %}</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+        <button id="buttonModal" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" hidden>Large modal</button>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <form class="form needs-validation" novalidate="" method="POST" action="{{ path('aggiorna-dati-spedizione-checkout') }}">
+                <input hidden id="Id_Spedizione_hidden" name="ID_Spedizione_hidden">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{% trans %}Dati spedizione{% endtrans %}</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="card">
+                                    <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}Nome{% endtrans %}</label>
+                                                        <input class="form-control" id="Spedizione_Nome" type="text" name="Spedizione_nome" required="" value="">
+                                                        <div class="invalid-feedback">{% trans %}Specificare il nome{% endtrans %}.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}Cognome{% endtrans %}</label>
+                                                        <input class="form-control" id="Spedizione_Cognome" type="text" name="Spedizione_cognome" required="" value="">
+                                                        <div class="invalid-feedback">{% trans %}Specificare il cognome{% endtrans %}.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}Nazione{% endtrans %}</label>
+                                                        <select class="form-control w-100" name="Spedizione_nazione" id="Spedizione_ID_nazione" required>
+                                                            <option value="" selected>---</option>
+                                                            {% for nazione in nazioni %}
+                                                                <option id="{{ nazione.id }}" value="{{ nazione.id }}">{{ nazione.nome }}</option>
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="clearflix"></div>
+                                                <div class="row" id="div_address">
+                                                    <div class="col-sm-12 col-md-8">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Indirizzo{% endtrans %}</label>
+                                                            <input class="form-control" id="Spedizione_Indirizzo" type="text" name="Spedizione_indirizzo" required="" value="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare l'indirizzo{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-4">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Numero civico{% endtrans %}</label>
+                                                            <input class="form-control" id="Spedizione_Numero_civico" type="text" name="Spedizione_numero_civico" required="" value="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare il numero civico{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-md-3">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}CAP{% endtrans %}</label>
+                                                            <input class="form-control" id="Spedizione_CAP" maxlength="5" type="text" name="Spedizione_cap" required="" value="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare il CAP{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Comune{% endtrans %}</label>
+                                                            <input class="form-control" id="Spedizione_Comune" type="text" name="Spedizione_comune" required="" value="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare il comune{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Provincia{% endtrans %}</label>
+                                                            <input class="form-control text-uppercase" id="Spedizione_Provincia" maxlength="2" type="text" name="Spedizione_provincia" required="" value="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare la provincia{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearflix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-t-20 p-b-20">
+                                            {% trans %}Informazioni utili per la consegna{% endtrans %}
+                                            <div class="m-b-20"></div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}Numero di telefono{% endtrans %}</label>
+                                                        <input class="form-control" id="Spedizione_telefono" name="Spedizione_numero_telefono" type="tel" value="" required>
+                                                        <div class="invalid-feedback">{% trans %}Specificare il numero di telefono{% endtrans %}.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}E-mail di notifica spedizione{% endtrans %}</label>
+                                                        <input class="form-control" id="Spedizione_Email_spedizione" name="Spedizione_email" type="email" value="" required>
+                                                        <div class="invalid-feedback">{% trans %}Specificare un indirizzo email valido{% endtrans %}.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"></label>
+                                                        <div class="form-check checkbox mb-0">
+                                                            <input class="form-check-input" id="Spedizione_checkbox-sabato" type="checkbox" name="Spedizione_consegna_sabato">
+                                                            <label class="form-check-label" for="Spedizione_checkbox-sabato">{% trans %}Consegna anche di sabato{% endtrans %}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 ">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"></label>
+                                                        <div class="form-check checkbox mb-0">
+                                                            <input class="form-check-input" id="Spedizione_checkbox-predefinito" type="checkbox" name="isPrincipale">
+                                                            <label class="form-check-label" for="Spedizione_checkbox-predefinito">{% trans %}Indirizzo predefinito{% endtrans %}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{% trans %}Note{% endtrans %}</label>
+                                                        <textarea class="form-control" id="Spedizione_note" placeholder="es: consegna al secondo piano" name="Spedizione_note"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">{% trans %}Chiudi{% endtrans %}</button>
+                            <button class="btn btn-primary" type="submit">{% trans %}Salva e prosegui{% endtrans %}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/touchspin/vendors.min.js"></script>
+<script src="../assets/js/touchspin/touchspin.js"></script>
+<script src="../assets/js/touchspin/input-groups.min.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		$(document).ready(function(){
+			$('#ID_nazione').change(function(){
+				$('#Indirizzo').val('');
+				$('#Numero_civico').val('');
+				$('#Comune').val('');
+				if($(this).val() == 'IT'){
+					$('#CAP').attr('minlength', '5').attr('maxlength', '5').val('');
+					$('#Provincia').attr('maxlength', '2').val('');
+				} else{
+					$('#CAP').removeAttr('maxlength').val('');
+					$('#Provincia').removeAttr('maxlength').val('');
+				}
+			});
+
+			$('#CAP').change(function(){
+				$(this).removeClass('is-invalid');
+			});
+
+			$('#PEC').change(function(){
+				$(this).removeClass('is-invalid');
+				$("#Codice_univoco").removeClass('is-invalid');
+				$("#PIVA").removeClass('is-invalid');
+			});
+
+			$('#Codice_univoco').change(function(){
+				$(this).removeClass('is-invalid');
+				$('#PEC').removeClass('is-invalid');
+				$('#PIVA').removeClass('is-invalid');
+			});
+
+			selezionaFatturazione('{{ Fatturazione_Natura_giuridica }}');
+		});
+
+		function selezionaFatturazione(tipo){
+			if(tipo == 'privato'){
+				$('.company-data').hide();
+				$('.private-data').show();
+				$('#Ragione_sociale').removeAttr('required');//.val('');
+				//$('#Cognome').attr('required', '');
+				//$('#CF').attr('required', '');
+				//$('#Nome').attr('required', '');
+				$('#PIVA').removeAttr('required').removeClass('is-invalid');
+				$('#Codice_univoco').removeClass('is-invalid');
+				$('#PEC').removeClass('is-invalid');
+			} else{
+				$('.company-data').show();
+				$('.private-data').hide();
+				$('#Nome').removeAttr('required');//.val('');
+				$('#Cognome').removeAttr('required');//.val('');
+				$('#Ragione_sociale').attr('required', '');
+				$('#CF').removeAttr('required');
+				$('#PIVA').attr('required', '');
+			}
+		}
+
+		//region Controllo se a questo indirizzo il corriere consegna, se non consegna disabilito contrassegno e corriere, se esiste abilito
+		function checkIndirizzo(){
+			var $spedizione = $('[name="id_spedizione"]:checked');
+			var id = $spedizione.val();
+			var corriere = $spedizione.attr('corriere');
+
+			if(corriere){
+				var $radios = $('input:radio[value=corriere]');
+				var $radiosPagamento = $('input:radio[value=Contrassegno]');
+				$radiosPagamento.attr("disabled", false);
+				$radios.attr("disabled", false);
+			} else{
+				$radios = $('input:radio[value=corriere]');
+				$radiosPagamento = $('input:radio[value=Contrassegno]');
+				if($radiosPagamento.is(':checked') === true){
+					$('input:radio[value=Contrassegno]:checked')[0].checked = false;
+				} else if($radios.is(':checked') === true){
+					$('input:radio[value=corriere]:checked')[0].checked = false;
+				}
+				$radiosPagamento.attr("disabled", true);
+				$radios.attr("disabled", true);
+			}
+		}
+		//endregion
+
+		//region Se clicco ritiro in sede,elimino la possibilità di pagare in contrassegno
+		function checkedFunction(){
+			var $radios = $('input:radio[value=Contrassegno]');
+			if($radios.is(':checked') === true){
+				var $radiosPagamento = $('input:radio[value="Ritiro in sede"]');
+				if($radiosPagamento.is(':checked') === true){
+					$('input:radio[value="Ritiro in sede"]:checked')[0].checked = false;
+					$radiosPagamento.attr("disabled", true);
+				} else{
+					$radiosPagamento.attr("disabled", true);
+				}
+			} else{
+				var $radiosPagamentos = $('input:radio[value="Ritiro in sede"]');
+				$radiosPagamentos.attr("disabled", false);
+			}
+		}
+		//endregion
+
+		//region Controlli custom di validazione
+		function checkOtherValidity(){
+			var ID_nazione = $("#ID_nazione").val();
+			var CAP = $("#CAP").val();
+			var PIVA = $("#PIVA").val();
+			var PEC = $("#PEC").val();
+			var Codice_univoco = $("#Codice_univoco").val();
+
+			if(ID_nazione == 104){
+				if(PIVA != "" && (PEC === "" && Codice_univoco === "")){
+					//$("#PEC").addClass('is-invalid');
+					//$("#PEC").attr('required', '');
+					//$("#Codice_univoco").addClass('is-invalid');
+					//$("#Codice_univoco").attr('required', '');
+					return false;
+				}
+
+				if(PIVA == '' && (PEC != '' || Codice_univoco != '')){
+					//$("#PIVA").addClass('is-invalid');
+					return false;
+				}
+
+				if(PIVA != '' && PEC != ''){
+					$("#Codice_univoco").removeAttr('required');
+				}
+
+				if(PIVA != '' && Codice_univoco != ''){
+					$("#PEC").removeAttr('required');
+				}
+
+				if(CAP == 5){
+					$("#CAP").removeClass("is-invalid");
+				} else{
+					//$("#CAP").addClass("is-invalid");
+				}
+			}
+			//endregion
+
+			//Verifico se il CAP è stato inserito correttamente
+			if(syntax_zipcode() === false){
+				return false;
+			}
+			return true;
+		}
+
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = checkOtherValidity();
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+		//endregion
+
+		//region Verifica sintassi CAP (da cambiare con una funzione che verifichi qualsiasi CAP a seconda della nazione specificata)
+		function syntax_zipcode(){
+			var regExp = /[0-9]/g;
+			var CAP = $("#CAP").val();
+			var ID_nazione = $("#ID_nazione").val();
+
+			if(ID_nazione == "104"){
+				if(!regExp.test(CAP)){
+					$("#CAP").addClass("is-invalid");
+					return false;
+				} else{
+					$("#CAP").removeClass("is-invalid");
+					return true;
+				}
+			}
+		}
+		//endregion
+
+		function salvaIndirizzoFatturazione(){
+			if(checkOtherValidity()){
+				document.form_checkout.submit();
+			}
+		}
+
+		function modificaIndirizzoFatturazione(){
+			$('[name="step"]').val('fatturazione');
+			document.form_checkout.submit();
+		}
+
+		function selezionaIndirizzoSpedizione(){
+			document.form_checkout.submit();
+		}
+
+		function selezionaModalitaSpedizione(){
+			$('[name="id_modpag"]').remove();
+			document.form_checkout.submit();
+		}
+
+		function selezionaModalitaPagamento(){
+			document.form_checkout.submit();
+		}
+
+		function checkoutOrdine(){
+			document.form_checkout.action = '{{ path('checkout-invio') }}';
+			document.form_checkout.submit();
+		}
+
+
+		function modificaIndirizzoSpedizione(id, nome, cognome, indirizzo, civico, nazione, cap, comune, provincia, telefono, email, consegnaSabato, note, isPredefinito){
+			document.getElementById('buttonModal').click()
+
+			var inputId = document.getElementById('Id_Spedizione_hidden');
+			var inputNome = document.getElementById('Spedizione_Nome');
+			var inputCognome = document.getElementById('Spedizione_Cognome');
+			var inputIndirizzo = document.getElementById('Spedizione_Indirizzo');
+			var inputNumeroCivico = document.getElementById('Spedizione_Numero_civico');
+			var inputNazione = document.getElementById('Spedizione_ID_nazione');
+			var inputCap = document.getElementById('Spedizione_CAP');
+			var inputComune = document.getElementById('Spedizione_Comune');
+			var inputProvincia = document.getElementById('Spedizione_Provincia');
+			var inputTelefono = document.getElementById('Spedizione_telefono');
+			var inputEmail = document.getElementById('Spedizione_Email_spedizione');
+			var inputNote = document.getElementById('Spedizione_note');
+			var consegnaSabatoCheckbox = document.getElementById('Spedizione_checkbox-sabato');
+			var isPredefinitoCheckbox = document.getElementById('Spedizione_checkbox-predefinito');
+
+			if(nome){
+				inputId.value = parseInt(id);
+				inputNome.value = nome;
+				inputCognome.value = cognome;
+				inputIndirizzo.value = indirizzo;
+				inputNumeroCivico.value = civico;
+				inputNazione.value = nazione;
+				inputCap.value = cap;
+				inputComune.value = comune;
+				inputProvincia.value = provincia;
+				inputTelefono.value = telefono;
+				inputEmail.value = email;
+				inputNote.value = note;
+
+				if(consegnaSabato){
+					consegnaSabatoCheckbox.setAttribute('checked', '');
+				} else{
+					if(consegnaSabatoCheckbox.hasAttribute('checked')){
+
+						consegnaSabatoCheckbox.removeAttribute('checked', '');
+					}
+				}
+
+				if(isPredefinito){
+					isPredefinitoCheckbox.setAttribute('checked', '');
+				} else{
+					if(isPredefinitoCheckbox.hasAttribute('checked')){
+
+						isPredefinitoCheckbox.removeAttribute('checked', '');
+					}
+				}
+			} else{
+
+				inputId.value = '';
+				inputNome.value = '';
+				inputCognome.value = '';
+				inputIndirizzo.value = '';
+				inputNumeroCivico.value = '';
+				inputNazione.value = '';
+				inputCap.value = '';
+				inputComune.value = '';
+				inputProvincia.value = '';
+				inputTelefono.value = '';
+				inputEmail.value = '';
+				inputNote.value = '';
+
+				if(isPredefinitoCheckbox.hasAttribute('checked')){
+
+					isPredefinitoCheckbox.removeAttribute('checked', '');
+				}
+				if(consegnaSabatoCheckbox.hasAttribute('checked')){
+
+					consegnaSabatoCheckbox.removeAttribute('checked', '');
+				}
+			}
+		}
+    </script>
+
+{% endblock javascript_page %}

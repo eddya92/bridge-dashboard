@@ -1,0 +1,40 @@
+<li class="language-nav">
+    <div class="translate_wrapper">
+        <div class="current_lang">
+            <div class="lang">
+                {% set flag_lingua = app.request.attributes.get('_locale') %}
+                {% if app.request.attributes.get('_locale') == 'en' %}
+                    {% set flag_lingua = 'gb' %}
+                {% endif %}
+                <i class="flag-icon flag-icon-{{ flag_lingua }}"></i><span class="lang-txt">{{ app.request.locale }}</span>
+            </div>
+        </div>
+        <div class="more_lang" style="width:100px;">
+            <div class="lang {% if app.request.locale == 'it' %}selected{% endif %}" data-value="{{ app.request.locale }}">
+                <a href=" {% if  app.request.attributes.get('_route_params')['id']|default(null) %}
+                {{ path(app.request.attributes.get('_route'), {_locale: 'it',id:  app.request.attributes.get('_route_params')['id']}) }}
+                {% else %}
+                {{ path(app.request.attributes.get('_route'), {_locale: 'it'}) }}
+                {% endif %}
+            "><i class="flag-icon flag-icon-it"></i><span class="lang-txt"><span> (IT)</span></span></a>
+            </div>
+            {% for lingua in lingue %}
+                {% set flag_lingua = lingua.Sigla|lower %}
+                {% if flag_lingua == 'en' %}
+                    {% set flag_lingua = 'gb' %}
+                {% endif %}
+                {% if  app.request.attributes.get('_route_params')['id']|default(null) %}
+                    <div class="lang {% if app.request.locale == lingua.Sigla|lower %}selected{% endif %}" data-value="{{ lingua.Sigla|lower }}">
+                        <a href="{{ path(app.request.attributes.get('_route'), {_locale: lingua.Sigla|lower,id:  app.request.attributes.get('_route_params')['id']}) }}"><i class="flag-icon flag-icon-{{ flag_lingua }}"></i><span class="lang-txt"><span> ({{ lingua.Sigla }})</span></span></a>
+                    </div>
+                    {% else %}
+                        <div class="lang {% if app.request.locale == lingua.Sigla|lower %}selected{% endif %}" data-value="{{ lingua.Sigla|lower }}">
+                            <a href="{{ path(app.request.attributes.get('_route'), {_locale: lingua.Sigla|lower}) }}"><i class="flag-icon flag-icon-{{ flag_lingua }}"></i><span class="lang-txt"><span> ({{ lingua.Sigla }})</span></span></a>
+                        </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</li>

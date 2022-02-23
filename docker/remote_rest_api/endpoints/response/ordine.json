@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "utente": "Mario Rossi",
+      "codice": "000003",
+      "qualifica": "Promoter",
+      "intestatario_ordine": "Mario Rossi",
+      "telefono": "+39 393 9375342",
+      "indirizzo": "Via dell'indipendenza, 325/A - 56127 - Pisa (PI).",
+      "modalita_di_spedizione": "corriere espresso",
+      "codice_ordine": "ORD2009550",
+      "stato": "in attesa di pagamento",
+      "data_ordine": " Lunedi 25/08/2021",
+      "spese_spedizione": "5",
+      "spese_modalita_pagamento": "3",
+      "totale_ordine": "1.250,00",
+      "ordine":[
+      {
+        "codice_prodotto": "ABC-123",
+        "prodotto": "Crema idratante all'Aloe Vera",
+        "quantita": "5",
+        "PC": "10",
+        "prezzo": "50"
+      },
+      {
+        "codice_prodotto": "ABC-124",
+        "prodotto": "Crema idratante all'Aloe Vera",
+        "quantita": "7",
+        "PC": "20",
+        "prezzo": "70"
+      },
+      {
+        "codice_prodotto": "ABC-123",
+        "prodotto": "Crema idratante all'Aloe Vera",
+        "quantita": "5",
+        "PC": "10",
+        "prezzo": "50"
+      },
+      {
+        "codice_prodotto": "ABC-124",
+        "prodotto": "Crema idratante all'Aloe Vera",
+        "quantita": "7",
+        "PC": "20",
+        "prezzo": "70"
+      }
+      ]
+    }
+  ]
+}

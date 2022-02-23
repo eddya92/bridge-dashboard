@@ -1,0 +1,16 @@
+<div id="div_sponsor" class="card custom-card height_100">
+    <div class="card-header"><img class="img-fluid" src="{{ asset('assets/images/sponsor_background_test.jpg') }}" alt=""></div>
+    <div class="card-profile"><img class="rounded-circle" src="{{ asset('assets/images/foto_sponsor_test.jpg') }}" alt=""></div>
+    <div class="text-center profile-details">
+        {% for sponsor in sponsors %}
+        <h6>Il tuo Sponsor è</h6>
+        <h4>{{ sponsor.nominativo }}</h4>
+        <h6>{{ sponsor.qualifica }}</h6>
+    </div>
+    <div class="m-3"></div>
+    <p class="text-center">Codice {{ sponsor.codice }}<br/>
+        {{ sponsor.telefono }} <br/>
+        {{ sponsor.email }}
+       </p>
+    {% endfor  %}
+</div>

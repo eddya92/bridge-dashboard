@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nome_destinatario": "Francesco",
+      "cognome_destinatario": "Ricci",
+      "nazione": "italia",
+      "provincia": "PI",
+      "cap": "54685",
+      "comune": "Pontedera",
+      "indirizzo": "piazza nilde iotti",
+      "civico": "13",
+      "numero_telefono": "3387585256",
+      "email": "francesco@2Rstudio.it",
+      "consegna_sabato": false,
+      "nota": "lasciare in ufficio",
+      "is_principale": false,
+      "corriere": true
+    },
+    {
+      "id": 2,
+      "nome_destinatario": "Francesco",
+      "cognome_destinatario": "Ricci",
+      "nazione": "italia",
+      "provincia": "PI",
+      "cap": "54685",
+      "comune": "Capannoli",
+      "indirizzo": "Via Roma",
+      "civico": "13",
+      "numero_telefono": "3387585256",
+      "email": "francesco@2Rstudio.it",
+      "consegna_sabato": false,
+      "nota": "lasciare al negozio",
+      "is_principale": false,
+      "corriere": false
+    }
+  ]
+}

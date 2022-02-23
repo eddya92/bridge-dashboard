@@ -1,0 +1,412 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}Inserisci nuovo cliente{% endblock %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">Virtual Office</li>
+                            <li class="breadcrumb-item active">Inserisci un nuovo cliente</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>Inserisci un nuovo cliente</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+            <form id="provaForm" class="form needs-validation" novalidate="" method="POST" action="{{ path('nuovo-cliente-inserito') }}">
+                <div class="edit-profile">
+                    <div class="row" id="row_page_inserisci_clienti">
+                        <div class="col-xl-4 resize_equal_height_xl resize_equal_height_xxl">
+                            <!-- region Dati generali -->
+                            <div class=" news ">
+                                <div id="div_sponsor" class="card custom-card p-b-0 resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                    <div id="div_profile_overview" class="p-15">
+                                        <div class="card-header d-none d-md-none d-sm-non d-lg-none d-xl-block p-t-0 p-b-0">
+                                            <img class="img-fluid" src="/assets/images/sponsor_background_test.jpg" alt="">
+                                        </div>
+                                        <div id="div_profile_general_data">
+                                            <div class="card-profile">
+                                                <img class="rounded-circle" src="/assets/images/handshake_icon.png" alt="">
+                                            </div>
+                                            <div class="text-center profile-details">
+                                                <h4>Nuovo Cliente</h4>
+                                                <h6>&nbsp;</h6>
+                                            </div>
+                                        </div>
+                                        <hr class="d-sm-none d-md-none"/>
+                                        <div class="m-b-20"></div>
+                                        <div class="text-justify">
+                                            ATTENZIONE! Stai inserendo informazioni di una terza persona della quale sei in possesso di dati personali.
+                                            <br/>
+                                            Assicurati di avere la dovute autorizzazione al trattamento di tali dati in ottemperanza con le Leggi vigenti ed in particolare che essi vengano trattati nel rispetto del Regolamento UE 2016/679 (GDPR).
+                                            <br/>
+                                            L'iscrizione verrà notificata al nuovo cliente tramite e-mail all'indirizzo specificato di seguito.
+                                            <br/>
+                                            L'azienda non si riterrà in alcun modo responsabile in caso di trattamento non autorizzato di dati personali.
+                                            <div class="m-b-20">&nbsp;</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- endregion Dati generali -->
+                        </div>
+                        <div class="col-xl-8  ">
+                            <div class="card">
+                                <div class="">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Inserisci i dati del nuovo cliente</h5>
+                                        <div class="card-options">
+                                            <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body resize_equal_height_xl resize_equal_height_xxl">
+                                        <div class="row ">
+                                            <div class="col-sm-6">
+                                                <div id="private-company">
+                                                    Il nuovo cliente è
+                                                    <div class="mb-3">
+                                                        <div class="col">
+                                                            <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                                                <div class="form-check form-check-inline radio radio-primary">
+                                                                    <input class="form-check-input " id="radioinline1" type="radio" name="radio1" value="privato" checked>
+                                                                    <label class="form-check-label mb-0" for="radioinline1">Un privato</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline radio radio-primary">
+                                                                    <input class="form-check-input" id="radioinline2" type="radio" name="radio1" value="azienda">
+                                                                    <label class="form-check-label mb-0" for="radioinline2">Un'azienda</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div id="country">
+                                                    La nazione di fatturazione è
+                                                    <div class="mb-3">
+                                                        <select class="form-select" id="ID_nazione" name="nazione">
+                                                            <option value="">Scegli...</option>
+                                                            <option value="1">Albania</option>
+                                                            <option value="2">Austria</option>
+                                                            <option value="104">Italia</option>
+                                                            <option value="3">Zimbawe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="customer_data">
+                                                <div class="row">
+                                                    <div class="company-data col-sm-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ragione sociale</label>
+                                                            <input class="form-control" id="Ragione_sociale" type="text" name="ragione_sociale" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare la ragione sociale.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="private-data col-sm-6 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Nome</label>
+                                                            <input class="form-control" id="Nome" type="text" name="nome" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il nome.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="private-data col-sm-6 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Cognome</label>
+                                                            <input class="form-control" id="Cognome" type="text" name="cognome" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il cognome.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearflix"></div>
+                                                    <div class="col-sm-9 col-md-9">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Indirizzo</label>
+                                                            <input class="form-control" id="Indirizzo" type="text" name="indirizzo" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare l'indirizzo.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Numero civico</label>
+                                                            <input class="form-control" id="Numero_civico" type="text" name="numero_civico" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il numero civico.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearflix"></div>
+                                                    <div class="col-sm-4 col-md-4">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">CAP</label>
+                                                            <input class="form-control" id="CAP" maxlength="5" type="text" name="cap" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il CAP.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Comune</label>
+                                                            <input class="form-control" id="Comune" type="text" name="comune" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il comune.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Provincia</label>
+                                                            <input class="form-control text-uppercase" id="Provincia" maxlength="2" type="text" name="provincia" required="" placeholder="es. RM">
+                                                            <div class="invalid-feedback">Specificare la provincia.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearflix"></div>
+                                                    <div class="col-sm-4 col-md-4">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Cellulare</label>
+                                                            <input class="form-control" id="Cellulare" maxlength="10" type="text" name="cellulare" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il numero di telefono.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">E-mail</label>
+                                                            <input class="form-control" id="Email" type="email" name="email" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare l'indirizzo e-mail.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="private-data col-sm-3 col-md-3">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Codice fiscale</label>
+                                                            <input class="form-control text-uppercase" id="CF" maxlength="16" type="text" name="codice_fiscale" required="" placeholder="">
+                                                            <div class="invalid-feedback">Specificare il codice fiscale.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="company-data row">
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Partita IVA</label>
+                                                                <input class="form-control" id="PIVA" type="text" name="piva" placeholder="">
+                                                                <div class="invalid-feedback">Specificare il numero di partita IVA.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">PEC</label>
+                                                                <input class="form-control" id="PEC" type="email" name="pec" placeholder="">
+                                                                <div class="invalid-feedback">Specificare la PEC o il codice univoco.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Codice univoco</label>
+                                                                <input class="form-control" id="Codice_univoco" type="text" name="codice_univoco" placeholder="">
+                                                                <div class="invalid-feedback">Specificare la PEC o il codice univoco.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearflix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input id="btn_submit" class="btn btn-primary" type="submit" value="Inserisci cliente">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Container-fluid Ends-->
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/tour/intro.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+
+{% endblock javascript %}
+
+{% block javascript_page %}
+
+    <script>
+
+		$("#private-company input").change(function(){
+			if($(this).val() == 'privato'){
+				$(".company-data").hide();
+				$(".private-data").show();
+				$("#Ragione_sociale").val('');
+				$("#Ragione_sociale").removeAttr('required');
+				$("#Cognome").attr('required', '');
+				$("#Nome").attr('required', '');
+				$("#PIVA").removeAttr('required');
+				$("#CF").attr('required', '');
+				$("#Codice_univoco").removeClass("is-invalid");
+				$("#PEC").removeClass("is-invalid");
+				$("#PIVA").removeClass("is-invalid");
+			} else{
+				$(".company-data").show();
+				$(".private-data").hide();
+				$("#Nome").val('');
+				$("#Cognome").val('');
+				$("#Ragione_sociale").attr('required', '');
+				$("#Nome").removeAttr('required');
+				$("#Cognome").removeAttr('required');
+				$("#CF").removeAttr('required');
+				$("#PIVA").attr('required', '');
+
+			}
+		});
+		$(document).ready(function(){
+			$("#Ragione_sociale").removeAttr('required');
+			$(".company-data").hide();
+			same_heights();
+		});
+
+		//Al cambio della nazione verifico la sintassi di CAP e provincia (solo caso Italia)
+		$("#ID_nazione").change(function(){
+			$("#Indirizzo").val('');
+			$("#Numero_civico").val('');
+			$("#Comune").val('');
+			$("#provincia").val('');
+			$("#CAP").val('');
+			$("#Provincia").val('');
+			if($(this).val() == 104){
+				$("#CAP").attr('maxlength', '5');
+				$("#Provincia").attr('maxlength', '2');
+			} else{
+				$("#CAP").removeAttr('maxlength');
+				$("#Provincia").removeAttr('maxlength');
+			}
+		});
+
+		//Controlli custom di validazione
+		function checkOtherValidity(){
+			//Se ho compilato la Partita IVA è necessario compilare codice univoco o PEC (solo per Italia)
+			var ID_nazione = $("#ID_nazione").val();
+			var CAP = $("#CAP").val();
+			var PIVA = $("#PIVA").val();
+			var PEC = $("#PEC").val();
+			var Codice_univoco = $("#Codice_univoco").val();
+
+			if(ID_nazione == 104){
+				if(PIVA != '' && (PEC == '' && Codice_univoco == '')){
+					$("#PEC").addClass('is-invalid');
+					$("#Codice_univoco").addClass('is-invalid');
+					return false;
+				}
+				if(PIVA == '' && (PEC != '' || Codice_univoco != '')){
+					$("#PIVA").addClass('is-invalid');
+					return false;
+				}
+			}
+
+			//Verifico se il CAP è stato inserito correttamente
+			if(syntax_zipcode() === false){
+				return false;
+			}
+			return true;
+		}
+
+		//Controlli del validatore standard
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = checkOtherValidity();
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+
+		//Rimuovo la classe invalid al click su PEC e codice univoco
+		$("#PEC").change(function(){
+			$(this).removeClass("is-invalid");
+			$("#Codice_univoco").removeClass("is-invalid");
+			$("#PIVA").removeClass("is-invalid");
+		});
+		$("#Codice_univoco").change(function(){
+			$(this).removeClass("is-invalid");
+			$("#PEC").removeClass("is-invalid");
+			$("#PIVA").removeClass("is-invalid");
+		});
+
+		//Verifica sintassi CAP (da cambiare con una funzione che verifichi qualsiasi CAP a seconda della nazione specificata)
+		function syntax_zipcode(){
+			var regExp = /[0-9]/g;
+			var CAP = $("#CAP").val();
+			var ID_nazione = $("#ID_nazione").val();
+
+			if(ID_nazione == "104"){
+				if(!regExp.test(CAP)){
+					$("#CAP").addClass("is-invalid");
+					return false;
+				} else{
+					$("#CAP").removeClass("is-invalid");
+					return true;
+				}
+			}
+		}
+    </script>
+
+{% endblock javascript_page %}

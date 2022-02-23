@@ -1,0 +1,177 @@
+{
+  "draw": 1,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+  "data": [
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 700,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<button type=\"button\" class=\"btn btn-primary btn-sm\">PAGA ORA</button>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Massimiliano De Laurentis",
+      "20",
+      "Test Utente",
+      "EUR 600,00",
+      "<span style='color:#922043;'>Esercitato recesso</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Bernardo Bernardeschi",
+      "20",
+      "Test Utente",
+      "EUR 300,00",
+      "<span style='color:#922043;'>Annullato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Sara Bianchi",
+      "20",
+      "Test Utente",
+      "EUR 1000,00",
+      "<span style='color:#922043;'>Reso</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Maurizio Lombardi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "In lavorazione",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Test Utente",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ],
+    [
+      "21/07/2021",
+      "ORD2009550",
+      "Mario Rossi",
+      "20",
+      "Massimiliano De Santis",
+      "EUR 100,00",
+      "<span style='color:#33b18a;'>Pagato</span>",
+      "<button type=\"button\" class=\"display-inherit btn btn-square btn-outline-light btn-sm text-dark\">DETTAGLI <i class=\"icon-zoom-in\"></i></button>"
+    ]
+  ]
+}

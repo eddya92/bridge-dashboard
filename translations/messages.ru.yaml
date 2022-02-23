@@ -1,0 +1,471 @@
+# COMMONS
+# Termini utilizzati in più pagine
+Virtual Office: Виртуальный офис
+Profilo: Профиль
+Aggiorna dati: Обновить данные
+Mostra caratteri: Показать символы
+alle ore: в
+Codice: Код
+Data di iscrizione: Дата регистрации
+E.mail: Электронная почта
+Nome: Имя
+Cognome: Фамилия
+Indirizzo: Адрес
+Numero civico: номер дома
+Nazione: Страна
+CAP: почтовый индекс
+Comune: Город
+Provincia: провинция
+Note: Примечание
+Modifica: Редактировать
+Elimina: Удалить
+Specificare il nome: Укажите имя.
+Specificare il cognome: Уточните фамилию.
+Specificare l indirizzo: Укажите адрес.
+Specificare il numero civico: Укажите номер дома.
+Specificare il CAP: Укажите почтовый индекс.
+Specificare il comune: Укажите муниципалитет.
+Specificare la provincia: Укажите провинцию.
+Specificare il numero di telefono: Укажите номер телефона.
+Specificare un indirizzo email valido: Укажите действующий адрес электронной почты.
+Nominativo: Имя
+Cellulare: Мобильный телефон
+filtra: фильтр
+chiudi: Закрыть
+Filtri: Фильтры
+Periodo: Periodo
+Qualifica: Квалификация
+Sponsor: Спонсор
+Incaricato: Назначен
+Livello: Уровень
+E-mail: Электронная почта
+Anno: Год
+precedente: предыдущий
+successivo: следующий
+nessun dato disponibile: данные недоступны
+visualizzati 0 a 0 di 0 elementi: Показано от 0 до 0 из 0 элементов
+filtrati da: отфильтровано
+elementi totali: общие элементы
+nessun_risultato: безрезультатно
+attiva_per_ordine_ascendente: активен_в_порядке_возрастания
+attiva_per_ordine_discendente: активен_в_порядке_убывания
+utenti: пользователи
+visualizzati: отображается
+mostra: показывать
+per pagina: на страницу
+caricamento: загрузка
+elaborazione: обработка
+Cerca: Около
+Gennaio: январь
+Febbraio: февраль
+Marzo: марш
+Aprile: апрель
+Maggio: Мая
+Giugno: июнь
+Luglio: июль
+Agosto: август
+Settembre: сентябрь
+Ottobre: Октябрь
+Novembre: ноябрь
+Dicembre: Декабрь
+Torna a: вернуться к
+Gen: Gen
+Feb: Feb
+Mar: Mar
+Apr: Apr
+Mag: Mag
+Giu: Giu
+Lug: Lug
+Ago: Ago
+Set: Set
+Ott: Ott
+Nov: Nov
+Dic: Dic
+Domenica: Domenica
+Lunedì: Lunedì
+Martedì: Martedì
+Mercoledì: Mercoledì
+Giovedì: Giovedì
+Venerdì: Venerdì
+Sabato: Sabato
+
+D: D
+L: L
+Ma: M
+Me: M
+G: G
+V: V
+S: S
+
+e: e
+Riepilogo: Резюме
+Chiudi: Закрыть
+Salva e prosegui: Сохранить и продолжить
+Torna indietro: Вернуться к началу
+
+Un'azienda: А компания
+Ragione sociale: Название компании
+Specificare la ragione sociale: Укажите название компании
+Specificare l'indirizzo: Укажите адрес
+Codice fiscale: Налоговый кодекс
+Specificare il codice fiscale: Укажите налоговый код
+Partita IVA: номер НДС
+PEC: ПЭК
+Specificare la PEC o il codice univoco: Укажите PEC или уникальный код
+Codice univoco: Уникальный код
+
+Accetto: Я принимаю
+Non accetto: Я не принимаю
+
+# PROFILO - PAGAMENTI
+Pagamenti: Платежи
+Inquadramento fiscale: Налоговая база
+Inquadramento fiscale descrizione: Если вы хотите изменить свою налоговую классификацию, пожалуйста, свяжитесь с администрацией по адресу
+Pagamento delle commissioni: Оплата комиссий
+Dati bancari: Банковские данные
+Dati bancari descrizione: Укажите IBAN, на который вы хотите получать комиссионные.
+IBAN: IBAN
+Specificare IBAN: Укажите IBAN.
+BIC SWIFT: BIC / SWIFT
+Specificare BIC SWIFT: Укажите BIC / SWIFT
+
+# PROFILO - ACCOUNT
+Account: Счет
+Gestisci i dati del tuo account: Управляйте данными своей учетной записи
+Vecchia password: Прежний пароль
+Specificare la vecchia password: Укажите старый пароль.
+Nuova password: новый пароль
+Specificare la nuova password: Укажите новый пароль (не менее 8 символов).
+Conferma password: Подтвердите пароль
+Le password immesse non corrispondono: Введенные пароли не совпадают.
+Desideri effettuare la richiesta di oblio dei dati: Вы хотите сделать запрос на забвение данных?
+Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione: Прежде чем сделать запрос на забвение, убедитесь, что вы понимаете, что влечет за собой эта операция.
+Per approfondimenti clicca qui: Для получения дополнительной информации нажмите здесь.
+Richiedi oblio: Запросить забвение
+La tua richiesta di oblio e stata registrata il: Ваш запрос на забвение зарегистрирован на
+ALERT_JS_Sei sicuro di voler richiedere loblio del tuo account: Вы уверены, что хотите запросить удаление вашей учетной записи?
+
+# PROFILO - SPEDIZIONI
+Dati di spedizione: Данные о доставке
+Aggiungi i dati di spedizione: Добавить информацию о доставке
+Informazioni utili per la consegna: Полезная информация для доставки
+Numero di telefono: Номер телефона
+E-mail di notifica spedizione: Уведомление об отправке по электронной почте
+Consegna anche di sabato: Доставка также по субботам
+Indirizzo predefinito: Адрес по умолчанию
+Aggiungi nuovo indirizzo: Добавьте новый адрес
+es consegna al secondo piano: например. доставка на второй этаж
+Altri indirizzi salvati: Другие сохраненные адреса
+ALERT_JS_sei sicuro di voler eliminare questo indirizzo: Вы уверены, что хотите удалить этот адрес?
+La modifica della nazione di spedizione potrebbe comportare variazioni: Изменение страны доставки может привести к изменению налогообложения и цен, отображаемых в электронной коммерции.
+La nazione di spedizione indicata e: Указана страна доставки
+Modifica i dati di spedizione: Изменить информацию о доставке
+I tuoi indirizzi: I tuoi indirizzi
+
+# PROFILO - DOCUMENTI
+Documenti: Документы
+Documenti obbligatori: Обязательные документы
+Altri documenti facoltativi: Другие документы (по желанию)
+Puoi richiedere le provvigioni: Вы можете запросить комиссию
+Reminder documenti obbligatori provvigioni: Напоминаем, что необходимо загрузить все обязательные документы, чтобы иметь возможность запрашивать комиссионные с электронного кошелька.
+crea tesserino: создать значок
+aggiorna tesserino: обновление карты
+carica file: загрузить файл
+sostituisci file: заменить файл
+Scarica il file: Скачать файл
+Hai caricato il file il: Вы загрузили файл на
+
+# RETE - ALBERO UNILEVEL
+Albero Unilevel: Одноуровневое дерево
+Le impostazioni sono state salvate correttamente: Настройки успешно сохранены!
+Vista default: Вид по умолчанию
+Elimina questa vista: Удалить это представление
+Zoom: Увеличить
+Stampa: Нажмите
+Filtri di ricerca: Поисковые фильтры
+Albero di: Дерево
+Livelli: Уровни
+Mese: Месяц
+Altezza: Высота
+Larghezza: Длина
+Orientamento: Ориентация
+Orizzontale: Горизонтальный
+Verticale: Вертикальный
+Salva come vista principale: Сохранить как основной вид
+Cerca per codice nominativo e-mail o telefono: Поиск по коду, имени, электронной почте или телефону
+scegli: твой выбор
+Crea una vista personalizzata: Создать собственное представление
+Salva la nuova vista: Сохраните новый вид
+Scrivi qui il nome del nuovo filtro: Напишите здесь название нового фильтра
+
+# RETE - LA TUA STRUTTURA
+La tua struttura: Ваша структура
+Consulta elenco clienti e collaboratori presenti nella struttura: Просмотрите список клиентов и сотрудников, присутствующих в структуре, и используйте фильтры для выполнения поиска, который вы хотите.
+Gruppo di: Группа
+Nome cognome o ragione sociale: Имя, фамилия или название компании
+Mostra solo clienti e collaboratori direttamente sponsorizzati: Показать только напрямую спонсируемых клиентов и сотрудников.
+Solo diretti: Только прямые
+
+# RETE - INSERISCI NUOVO CLIENTE
+Inserisci un nuovo cliente: Введите нового клиента
+Nuovo Cliente: Новый клиент
+Nuovo cliente alert autorizzazioni: ВНИМАНИЕ! Вы вводите информацию о третьем лице, персональные данные которого у вас есть. <br/> Убедитесь, что у вас есть необходимые полномочия для обработки таких данных в соответствии с действующим законодательством и, в частности, что они обрабатываются в соответствии с Регламент ЕС 2016 г. / 679 (GDPR).<br/> О регистрации новый клиент будет уведомлен по электронной почте по адресу, указанному ниже.<br/> Компания не будет нести никакой ответственности в случае несанкционированная обработка персональных данных.
+Inserisci i dati del nuovo cliente: Введите данные нового клиента
+Il nuovo cliente e: Новый клиент
+Un privato: Частное лицо
+Un azienda: Компания
+La nazione di residenza è: Страна проживания
+Inserisci cliente: Введите клиента
+
+# MESSAGGI
+Messaggi: Сообщения
+Non ci sono ancora messaggi da leggere.: Сообщений для чтения пока нет.
+da: от
+da leggere: читать
+già letto: уже прочитал
+Dettaglio messaggio: Подробности сообщения
+torna alla pagina dei messaggi: вернуться на страницу сообщения
+Scritto da: Написано
+
+# DOCUMENTI
+Cartella precedente: Предыдущая папка
+
+# BONUS
+Bonus: Бонус
+Bonus dell'anno: Бонус года
+Nel: В
+hai totalizzato Bonus per un totale di: вы накопили Бонусов на общую сумму
+Consulta lo storico di tutti i bonus accumulati nel: Просматривайте историю всех бонусов, накопленных в
+mese per mese: месяц за месяцем
+I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni: Серым цветом отмечены месяцы, за которые еще не начислена комиссия
+Qualifica raggiunta: Квалификация достигнута
+Attivo: Активный
+Totale: Всего
+
+# ELENCO ORDINI
+Ordini: Заказы
+Elenco degli ordini: Список заказов
+Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti: Смотрите список заказов. вы сможете увидеть историю ваших заказов, заказов вашей сети и заказов ваших клиентов
+Cliente: Клиент
+Esito: Исход
+Ordini dal: Заказы от
+al: к
+Tipologia di ordine: Тип заказа
+Data: Дата
+PC: PC
+Tutte le tipologie: Все типы
+ordini: заказы
+Cancella: Отмена
+Oggi: Сегодня
+
+# CREA NUOVO ORDINE
+Crea nuovo ordine: Создать новый заказ
+Scegli il negozio nel quale vuoi acquistare: Выберите магазин, в котором вы хотите купить
+Scegli negozio: Выберите магазин
+Cambia store: Изменить магазин
+Crea un ordine: Создать заказ
+Cerca un cliente o un collaboratore: Поиск заказчика или сотрудника
+Crea ordine: Создать заказ
+
+# SHOP
+Shop: Магазин
+Crea un nuovo ordine: Создать новый заказ
+Filtra: Filtra
+Filtri abilitati: Фильтры включены
+Previous: Предыдущий
+current: current
+Next: Следующий
+Quantità: Количество
+Dettagli del prodotto: Информация о продукте
+Non sono state fornite ulteriori informazioni sul prodotto: Не было предоставлено дополнительной информации о продукте
+Acquista: Купить
+Vedi dettagli: Смотрите подробности
+
+#INGRESSO
+Ingresso: Вход
+Virtual Office di: Виртуальный офис
+cerca un incaricato: искать представителя
+
+# ARTICOLO SHOP
+Disponibilità: Доступность
+Categoria: Категория
+In stock: В наличии
+Non disponibile: Нет в наличии
+Al momento non hai articoli nel carrello.: В настоящее время в вашей корзине нет товаров.
+Inizia ora i tuoi acquisti!: Начните делать покупки прямо сейчас!
+Concludi il tuo ordine!: Разместите свой заказ!
+Al momento hai: На данный момент у вас есть
+articoli nel carrello per un totale di: товаров в корзине на общую сумму
+Al momento hai 1 articolo nel carrello per un totale di: В настоящее время в вашей корзине находится 1 товар на общую сумму
+Descrizione: Описание
+
+# CARRELLO
+Carrello: Тележка
+Controlla la merce inserita nel carrello prima di concludere l'ordine: Проверьте товары в корзине перед завершением заказа
+Articolo: Статья
+Punti: Баллы
+Prezzo: Цена
+Totale Punti: Всего баллов
+Continua con lo shopping: Продолжить покупки
+Vai al checkout: Перейти к оформлению заказа
+Non hai articoli nel carrello: У вас нет товаров в корзине
+In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello. Al momento non ci sono articoli: На этой странице отображаются все товары в вашей корзине. В настоящее время нет предметов
+Fai il tuo primo ordine: Разместите свой первый заказ
+
+# CHECKOUT
+Checkout: Касса
+Compila i dati di residenza: Заполните данные о своем месте жительства
+La nazione di fatturazione è: Страна выставления счетов
+Compila i dati fiscali: Заполните налоговые данные
+Subtotale: Промежуточный итог
+Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione: Введите данные о месте проживания и доставки, затем вы можете выбрать способы оплаты и доставки
+Completa l'acquisto: Завершить покупку
+Intestatario ordine: Держатель заказа
+Spedizione: Доставка
+Indirizzo incompleto: Неполный адрес
+Aggiungi un nuovo indirizzo di spedizione: Добавить новый адрес доставки
+Note per la consegna: Накладные
+Seleziona un indirizzo per scoprire le modalità di spedizione disponibili: Выберите адрес, чтобы узнать о доступных способах доставки
+Pagamento: Оплата
+Gratis: Бесплатно
+Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili: Выберите адрес и способ доставки, чтобы открыть доступные способы оплаты
+Spese Amministrative: Административные расходы
+Conferma ordine: Подтверждение заказа
+Dati spedizione: Данные о доставке
+
+# Dettaglio Ordine
+Dettaglio Ordine: Детали заказа
+Ordine Cod.: Заказ №.
+Creato il: Создано на
+Stato: Статус
+Cod.: №.
+Spese modalità di pagamento: Расходы на способ оплаты
+Spese di spedizione: Стоимость доставки
+Modalità di spedizione: Способы доставки
+Spedire presso: Отправить в
+Modalità di pagamento: Способы оплаты
+Questo ordine risulta pagato: Этот заказ оплачен
+Questo ordine non risulta ancora pagato: Этот заказ еще не оплачен
+Torna allo shop: Назад в магазин
+
+# INVITA PERSONE
+Invita Persone: Приглашайте людей
+Marketing Tools: Инструменты маркетинга
+Scegli un modello di e-mail da inviare: Выберите шаблон электронного письма для отправки
+Consulta lo storico degli inviti che hai inviato: Просмотреть историю отправленных вами приглашений
+Data di invio: Дата отправки
+Invia il tuo invito: Отправьте свое приглашение
+Specificare il nome del destinatario: Укажите имя получателя
+Specificare l'indirizzo e-mail del destinatario: Укажите адрес электронной почты получателя
+Ultima ora: Последний час
+Hai ancora: У вас все еще есть
+inviti: приглашения
+Ultime 24 ore: Последние 24 часа
+Ultima settimana: Прошлая неделя
+Ultimo mese: Последний месяц
+Spedisci invito: Отправить приглашение
+
+# SITO PERSONALE
+Sito Personale: Персональный сайт
+Copia il link del tuo sito personale per condividerlo: Скопируйте ссылку на свой личный сайт, чтобы поделиться ею
+copia il link: скопировать ссылку
+Contattami al: Свяжитесь со мной по адресу
+Scrivimi a: Пишите мне по адресу
+Facebook: Facebook
+Instragram: Instagram
+Twitter: Twitter
+Youtube: Youtube
+
+#LOGIN
+Login: Авторизоваться
+Accedi al tuo account: Войдите в свою учетную запись
+Inserisci le tue credenziali per accedere: Введите свои учетные данные для входа.
+Username: Имя пользователя
+Password: Пароль
+Ricorda password: Помнить пароль
+Password dimenticata: Забыли пароль?
+Non hai un account: Нет аккаунта?
+Registrati adesso: Зарегистрироваться!
+
+#REGISTRAZIONE
+Crea il tuo account: Создать учетную запись
+Compila il modulo sottostante per iscriverti: Заполните форму ниже, чтобы зарегистрироваться
+Codice Sponsor: Спонсорский код
+Scrivi il codice del tuo sponsor: Напишите код вашего спонсора
+Desidero iscrivermi come: Я хочу зарегистрироваться как
+privato: частный
+azienda: агентство
+Scrivi il tuo indirizzo e-mail: Напишите свой адрес электронной почты
+Specifica la nazione di residenza: Укажите страну проживания
+Crea account: Зарегистрироваться
+Hai già un account: У вас уже есть аккаунт?
+
+#REGISTRAZIONE SUCCESS
+Account creato correttamente: Учетная запись успешно создана!
+Grazie per esserti iscritto a: Спасибо, что присоединились к MyBridge.
+Ti abbiamo inviato una e-mail di benvenuto: Мы отправили вам приветственное письмо, где вы можете найти полезную информацию.
+Vai al login: Перейти к входу
+
+#FORGOT PASSWORD
+Recupera password: Восстановить пароль
+Rigenera la tua password: Восстановите пароль
+Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password: Введите свой код или адрес электронной почты, на который должна быть отправлена ссылка для генерации нового пароля
+Richiedi il link: Ссылка для запроса
+Codice o e-mail: Код или электронная почта
+
+#INGRESSO CLIENTE
+Area riservata: Зарезервированная площадь
+Benvenuto: Добро пожаловать
+Guadagna con noi: Зарабатывай с нами!
+Diventa un distributore indipendente: Стать независимым дистрибьютором
+e scopri le opportunità di guadagno a te riservate aderendo al nostro team: и откройте для себя возможности заработка, зарезервированные для вас, присоединившись к нашей команде
+html guadagna con noi: <p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Зарабатывайте от 15 до 25% на прямых продажах</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Приведите минимум трех человек и получите непрямой заработок до 45%</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Станьте частью успешной темы!</p>
+Diventa un collaboratore: Стать соавтором
+I più venduti: Бестселлеры
+Acquistati di recente: Недавно купленный
+
+#WIDGET NOTIZIE
+Ultime notizie: Последние новости
+continua a leggere...: Продолжай читать...
+Nessuna novità per adesso: Новостей пока нет
+
+#CARRIERA
+Carriera: Карьера
+La tua carriera: Ваша карьера
+Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle: Ознакомьтесь со всеми квалификациями в карьерном плане и узнайте, как их достичь
+Qualifica precedente: Предыдущая квалификация
+Qualifica attuale: Текущая квалификация
+Qualifica successiva: Следующая квалификация
+Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi: История квалификаций, полученных с начала вашей карьеры до настоящего времени
+
+# DATI PERSONALI
+Dati personali: Персональные данные
+Contatti: Связаться с
+Dati fiscali: Фискальные данные
+Dati di residenza: Данные о проживании
+Sede Legale: Зарегистрированный офис
+
+#GRAFICO VENDITE
+Tipologia filtro: Тип фильтра
+Specifico mese: Конкретный месяц
+Specifico Anno: Конкретный год
+Ultimi 12 mesi: Последние 12 месяцев
+Mostra: Показать
+Punti Carriera: Карьерные очки
+Punti Volume: Объемные пункты
+Numero ordini: Количество заказов
+
+#RECUPERO PASSWORD
+Richiesta di rigenerazione password: Запрос на восстановление пароля
+Link inviato correttamente: Ссылка успешно отправлена
+Consulta la tua casella email: Проконсультируйтесь с вашим электронным ящиком.
+Ti abbiamo inviato il likn con il quale potrai generare la tua nuova password: Мы отправили вам ссылку, по которой вы можете сгенерировать новый пароль.
+L indirizzo digitato non è stato trovato: Введенный адрес не найден.
+Assicurati di avere scritto correttamente l indirizzo e riprova: Убедитесь, что вы правильно написали адрес, и повторите попытку.
+riprova: попробуй снова
+
+#PRIVACY
+Privacy: Конфиденциальность
+Permessi: Разрешения
+Privacy Policy: Политика конфиденциальности
+Visualizza i dati in nostro possesso: Просмотр данных, имеющихся в нашем распоряжении

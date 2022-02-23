@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "nome": "Privacy Policy Italia",
+      "descrizione": "I dati personali da lei comunicati verranno trattati nel rispetto del Regolamento UE 2016/679. Privacy Policy",
+      "link": ""
+    },
+    {
+      "id": "2",
+      "nome": "Newsletter Italia",
+      "descrizione": "Acconsento all'invio di materiale informativo, pubblicitario e promozionale anche attraverso società specializzate che operano per conto di 2R Studio Srl e con l'utilizzo dei mezzi di contatto (indirizzo, email, telefono) da me forniti.",
+      "link": ""
+    },
+    {
+      "id": "3",
+      "nome": "Profilazione Italia",
+      "descrizione": "Acconsento allo svolgimento di attività di profilazione individuale o aggregata e di ricerche di mercato volte, ad esempio, all'analisi delle mie abitudini e scelte di consumo.",
+      "link": ""
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+  secret: '%env(APP_SECRET)%'
+  #csrf_protection: true
+  http_method_override: false
+
+  # Enables session support. Note that the session will ONLY be started if you read or write from it.
+  # Remove or comment this section to explicitly disable session support.
+  session:
+    storage_factory_id: session.storage.factory.native
+    handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+    name: 'DASHBOARD'
+    cookie_lifetime: 0
+    cookie_path: /
+    cookie_domain: ''
+    cookie_samesite: lax
+    cookie_secure: auto
+    cookie_httponly: true
+    gc_divisor: 100
+    gc_probability: 1
+    gc_maxlifetime: 7200
+    sid_length: 43
+    sid_bits_per_character: 6
+    metadata_update_threshold: 0
+    enabled: true
+    use_cookies: true
+
+  #esi: true
+  #fragments: true
+  php_errors:
+    log: true
+
+when@test:
+  framework:
+    test: true
+    session:
+      storage_factory_id: session.storage.factory.mock_file

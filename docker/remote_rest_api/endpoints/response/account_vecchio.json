@@ -1,0 +1,42 @@
+{
+  "data": {
+    "id": 1,
+    "ruolo": "ibo",
+    "nome": "2R Studio",
+    "cognome": "",
+    "qualifica": "Manager",
+    "codice": "000001",
+    "data_iscrizione": "2010-10-09",
+    "codice_fiscale": "RCCFRN81R28G702N",
+    "telefono": "+39 392 9275342",
+    "email": "amministrazione@2rstudio.it",
+    "carriera": {
+      "qualifica": "Team Leader",
+      "qualifica_successiva": "Smeraldo",
+      "pc_qualifica_successiva": 100,
+      "pc_personali": 30,
+      "pc_mancanti": 70,
+      "incaricati_necessari_prossima_qualifica": 5,
+      "incaricati_personali": 3,
+      "incaricati_mancanti": 2
+    }
+  }
+}
+{
+  "data": {
+    "id": 7780,
+    "ruolo": "Cliente",
+    "nome": "Pedro",
+    "cognome": "Canarjes",
+    "nominativo": "Canarjes Pedro",
+    "qualifica": "Cliente",
+    "codice": "000005",
+    "data_iscrizione": "2021-09-15",
+    "codice_fiscale": "",
+    "telefono": "",
+    "email": "canarjes.pedro@mybridge.it",
+    "carriera": {
+      "qualifica": "Cliente 20%"
+    }
+  }
+}

@@ -1,0 +1,314 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Inserisci nuovo cliente{% endtrans %}{% endblock %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Inserisci un nuovo cliente{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Inserisci un nuovo cliente{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <form id="provaForm" class="form needs-validation" novalidate="" method="POST" action="{{ path('esegui-registrazione-cliente') }}">
+                <div class="edit-profile">
+                    <div class="row" id="row_data">
+                        <div class="col-xl-4  ">
+                            <!-- region Dati generali -->
+                            <div class=" news resize_equal_height_md resize_equal_height_lg resize_equal_height_xl resize_equal_height_xxl">
+                                <div id="div_sponsor" class="card custom-card p-b-0">
+                                    <div id="div_profile_overview" class="p-15">
+                                        <div class="card-header d-none d-md-none d-sm-non d-lg-none d-xl-block p-t-0 p-b-0">
+                                            <img class="img-fluid" src="/assets/images/sponsor_background_test.jpg" alt="">
+                                        </div>
+                                        <div id="div_profile_general_data">
+                                            <div class="card-profile">
+                                                <img class="rounded-circle" src="/assets/images/handshake_icon.png" alt="">
+                                            </div>
+                                            <div class="text-center profile-details">
+                                                <h4>{% trans %}Nuovo Cliente{% endtrans %}</h4>
+                                                <h6>&nbsp;</h6>
+                                            </div>
+                                        </div>
+                                        <hr class="d-sm-none d-md-none"/>
+                                        <div class="m-b-20"></div>
+                                        <div class="text-justify">
+                                            {% trans %}Nuovo cliente alert autorizzazioni{% endtrans %}
+                                            <div class="m-b-20">&nbsp;</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- endregion Dati generali -->
+                        </div>
+                        <div class="col-xl-8 ">
+                            <div class="card resize_equal_height_md resize_equal_height_lg resize_equal_height_xl resize_equal_height_xxl">
+                                <div class="">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">{% trans %}Inserisci i dati del nuovo cliente{% endtrans %}</h5>
+                                        <div class="card-options">
+                                            <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div id="private-company">
+                                                    {% trans %}Il nuovo cliente e{% endtrans %}
+                                                    <div class="mb-3">
+                                                        <div class="col">
+                                                            <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                                                <div class="form-check form-check-inline radio radio-primary">
+                                                                    <input class="form-check-input " id="radioinline1" type="radio" name="naturaGiuridica" value="privato" required>
+                                                                    <label class="form-check-label mb-0" for="radioinline1">{% trans %}Un privato{% endtrans %}</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline radio radio-primary">
+                                                                    <input class="form-check-input" id="radioinline2" type="radio" name="naturaGiuridica" value="azienda" required>
+                                                                    <label class="form-check-label mb-0" for="radioinline2">{% trans %}Un azienda{% endtrans %}</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="customer_data">
+                                                <div class="row">
+                                                    <div class="company-data col-sm-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Ragione sociale{% endtrans %}</label>
+                                                            <input class="form-control" id="Ragione_sociale" type="text" name="ragione_sociale" placeholder="" required="">
+                                                            <div class="invalid-feedback">Specificare la ragione sociale.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="private-data col-sm-6 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Nome{% endtrans %}</label>
+                                                            <input class="form-control" id="Nome" type="text" name="nome" required="" placeholder="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare il nome{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="private-data col-sm-6 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}Cognome{% endtrans %}</label>
+                                                            <input class="form-control" id="Cognome" type="text" name="cognome" required="" placeholder="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare il cognome{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearflix"></div>
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{% trans %}E-mail{% endtrans %}</label>
+                                                            <input class="form-control" id="Email" type="email" name="email" required="" placeholder="">
+                                                            <div class="invalid-feedback">{% trans %}Specificare l'indirizzo e-mail{% endtrans %}.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clearflix"></div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div id="country">
+                                                   {% trans %}La nazione di residenza è{% endtrans %}
+                                                    <div class="mb-3">
+                                                        <select id="selezionaNazione_id" class="form-select" name="ID_nazione" required="">
+                                                            <option value="" selected>---</option>
+                                                            {% for nazione in nazioni %}
+                                                                <option id="{{ nazione.id }}" value="{{ nazione.id }}">{{ nazione.nome }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearflix"></div>
+                                            <div class="col-12" id="agreements">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input id="btn_submit" class="btn btn-primary" type="submit" value="{% trans %}Inserisci cliente{% endtrans %}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Container-fluid Ends-->
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/tour/intro.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+        //region validazione campi registrazione nuovo utente
+        $(document).ready(function(){
+
+	        $("#private-company input").change(function(){
+		        if($(this).val() == 'privato'){
+					console.log('privato')
+			        $("#Nome").attr('required', '');
+			        $("#Cognome").attr('required', '');
+			        $("#Ragione_sociale").removeAttr('required');
+                }else{
+			        $("#Ragione_sociale").attr('required');
+			        $("#Nome").removeAttr('required', '');
+			        $("#Cognome").removeAttr('required', '');
+                }
+
+            });
+
+        });
+
+        //endregion
+
+    </script>
+
+    <script>
+		$(document).ready(function(){
+			$("#private-company input").change(function(){
+				if($(this).val() == 'privato'){
+					$(".company-data").hide();
+					$(".private-data").show();
+					$("#Ragione_sociale").val('');
+					$("#Ragione_sociale").removeAttr('required');
+					$("#Cognome").attr('required', '');
+					$("#Nome").attr('required', '');
+					$("#PIVA").removeAttr('required');
+					$("#CF").attr('required', '');
+					$("#Codice_univoco").removeClass("is-invalid");
+					$("#PEC").removeClass("is-invalid");
+					$("#PIVA").removeClass("is-invalid");
+				} else{
+					$(".company-data").show();
+					$(".private-data").hide();
+					$("#Nome").val('');
+					$("#Cognome").val('');
+					$("#Ragione_sociale").attr('required', '');
+					$("#Nome").removeAttr('required');
+					$("#Cognome").removeAttr('required');
+					$("#CF").removeAttr('required');
+					$("#PIVA").attr('required', '');
+
+				}
+			});
+
+			$("#Ragione_sociale").removeAttr('required');
+			$(".company-data").hide();
+			same_heights();
+
+			$('#selezionaNazione_id').on('change', function(){
+				loadData($('#selezionaNazione_id').val());
+			});
+			$('#selezionaNazione_id').trigger('change');
+		});
+
+////	function loadData(idNazione){
+////		if(typeof idNazione === 'undefined' || idNazione == ''){
+////			return;
+////		}
+
+////		let nazioneAgreements = "{# {{ path('ajax-agreements', { idNazione:':idNazione'}) }} #}";
+////		nazioneAgreements = nazioneAgreements.replace(':idNazione', idNazione);
+////		$.ajax({
+////			'url': nazioneAgreements,
+////			'method': 'GET',
+////			'success': function(risposta){
+////				$('#agreements').html(risposta);
+////			}
+////		})
+////	}
+
+////	//Controlli custom di validazione
+////	function checkOtherValidity(){
+
+////		return true;
+////	}
+
+
+
+		//Controlli del validatore standard
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = checkOtherValidity();
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+		//
+    </script>
+
+{% endblock javascript_page %}

@@ -1,0 +1,450 @@
+
+
+<div class="page-body">
+    <!-- region titolo e breadcrumb -->
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-sm-6 order-sm-1">
+                    <div class="mb-3 d-block d-sm-none"></div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Virtual Office</li>
+                        <li class="breadcrumb-item active">Ingresso</li>
+                    </ol>
+                    <div class="mb-2 d-block d-sm-none"></div>
+                </div>
+                <div class="col-sm-6 order-sm-0">
+                    <div class="float-sm-start">
+                        <h3>Virtual Office di</h3>
+                    </div>
+                    <div class="float-sm-start">
+                        <div id="typehead_ID_utente">
+                            <div id="typehead_sottoposti" class="input-group">
+                                <input class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="cerca un incaricato..." value="John Doe"><span class="input-group-text"><i class="icofont icofont-user"> </i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endregion Titolo e breadcrumb -->
+    <!-- Container-fluid starts-->
+    <div id="top5_carriera_sponsor" class="container-fluid">
+        <div class="row second-chart-list third-news-update">
+            <!-- region Totali -->
+            <div class="col-xl-12 xl-100 chart_data_left box-col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div id="div_totali" class="row m-0 chart-main">
+
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Indica quanto stai guadagnando dall'ultimo accredito provvigionale ad oggi sulla base degli ordini della tua rete">
+                                            <span>Guadagno attuale</span>
+                                            <div class="div_totali_value">
+                                                <h4>EUR 3.000,00</h4>
+                                            </div>
+                                            <span><a href="#">dettaglio</a></span>
+                                            <hr class="d-block d-sm-none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content">
+                                            <span>Clienti sponsorizzati</span>
+                                            <div class="div_totali_text">
+                                                Non hai ancora sponsorizzato clienti.
+                                            </div>
+                                            <span><a href="#">sponsorizza clienti</a></span>
+                                            <hr class="d-block d-sm-none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content">
+                                            <span>Collaboratori diretti</span>
+                                            <div class="div_totali_value">
+                                                <h4>10</h4>
+                                            </div>
+                                            <span><a href="#">mostra collaboratori</a></span>
+                                            <hr class="d-block d-sm-none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content">
+                                            <span>Collaboratori in downline</span>
+                                            <div class="div_totali_value">
+                                                <h4>100</h4>
+                                            </div>
+                                            <span><a href="#">mostra collaboratori</a></span>
+                                            <hr class="d-block d-sm-none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content">
+                                            <span>PC mese corrente</span>
+                                            <div class="div_totali_value">
+                                                <h4>100</h4>
+                                            </div>
+                                            <span><a href="#">dettaglio</a></span>
+                                            <hr class="d-block d-sm-none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-md-6 col-sm-6 p-0 box-col-6">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <div class="right-chart-content">
+                                            <span>PCP mese corrente</span>
+                                            <div class="div_totali_value">
+                                                <h4>100</h4>
+                                            </div>
+                                            <span><a href="#">dettaglio</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endregion Totali -->
+            <!-- region Notizie principali -->
+            <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12">
+                <div class="card">
+                    <div class="calender-widget" id="box_news">
+                        <div class="cal-img img-main-news"></div>
+                        <div class="cal-date">
+                            <h5>25
+                                <br>
+                                APR
+                            </h5>
+                        </div>
+                        <div class="cal-desc text-center card-body cal-desc-main-news">
+                            <h6 class="f-w-600">I must explain to you how all this mistaken idea truth</h6>
+                            <p class="text-muted mt-3 mb-0">Denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth,Letraset sheets containing Lorem Ipsum passages, and more recently with desktop Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                        <div class="text-center cal-desc-main-news-more"><a href="#">continua a leggere...</a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- endregion Notizie principali -->
+            <!-- region Grafico -->
+            <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
+                <div class="card earning-card">
+                    <div class="card-body p-0">
+                        <div class="row m-0">
+                            <div id="div_chart_filters">
+                                <div class="col-md-6">
+                                    Tipologia filtro
+                                    <div class="clearfix"></div>
+                                    <div class="col-5 float-start">
+                                        <select title="Scegli il periodo" class="form-select" name="Grafico_periodo">
+                                            <option value="ultimi_12" selected>Ultimi 12 mesi</option>
+                                            <option value="spec_mese">Specifico mese</option>
+                                            <option value="spec_anno">Specifico Anno</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-4 float-start">
+                                        <select title="Scegli il mese" class="form-select" name="Grafico_mese">
+                                            <!--<option value="0"></option>--->
+                                            <option value="1">Gennaio</option>
+                                            <option value="2">Febbraio</option>
+                                            <option value="3">Marzo</option>
+                                            <option value="4">Aprile</option>
+                                            <option value="5">Maggio</option>
+                                            <option value="6">Giugno</option>
+                                            <option value="7">Luglio</option>
+                                            <option value="8">Agosto</option>
+                                            <option value="9">Settembre</option>
+                                            <option value="10">Ottobre</option>
+                                            <option value="11">Novembre</option>
+                                            <option value="12">Dicembre</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3 float-start">
+                                        <select title="Scegli l'anno" class="form-select" name="Grafico_anno">
+                                            <option value="2021" selected>2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                        </select>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    Mostra
+                                    <select title="Scegli il dato da mostrare nel grafico" class="form-select" name="Grafico_dato">
+                                        <!--<option value="0"></option>--->
+                                        <option value="1">Mostra punti volume (PV)</option>
+                                        <option value="2">Fatturato (EUR)</option>
+                                        <option value="3">Numero ordini</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-xl-3 earning-content p-0">
+                                <div class="row m-0 chart-left">
+                                    <div class="col-xl-12 p-0 left_side_earning">
+                                        <h5>Totale ordini</h5>
+                                        <p class="font-roboto">EUR 120.000,00</p>
+                                    </div>
+                                    <div class="col-xl-12 p-0 left_side_earning">
+                                        <h5>Totale PC</h5>
+                                        <p class="font-roboto">120.000</p>
+                                    </div>
+                                    <div class="col-xl-12 p-0 left_side_earning">
+                                        <h5>Nuovi collaboratori</h5>
+                                        <p class="font-roboto">12</p>
+                                    </div>
+                                    <div class="col-xl-12 p-0 left_side_earning">
+                                        <h5>Nuovi clienti</h5>
+                                        <p class="font-roboto">Nessun nuovo cliente</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-9 p-0">
+                                <div class="chart-right">
+                                    <div class="m-30"></div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card-body p-0">
+                                                <div class="current-sale-container">
+                                                    <div id="chart-currently"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-30"></div>
+                                </div>
+                                <div class="row border-top m-0">
+                                    <div class="inner-top-right">
+                                        <ul class="d-flex list-unstyled">
+                                            <li>Vendite dirette</li>
+                                            <li>Vendite della rete</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endregion Grafico -->
+            <!-- region TOP5 -->
+            <div class="col-xl-4 xl-50 news box-col-6">
+                <div class="card height_100">
+                    <div id="top5_header" class="card-header">
+                        <div class="header-top">
+                            <div class="col-3">
+                                <h5 class="m-0">Top 5</h5>
+                            </div>
+                            <div class="col-5">
+                                <select title="Modifica Mese" class="form-select" name="Top5_Mese">
+                                    <option value="0">Mese</option>
+                                    <option value="1">Gennaio</option>
+                                    <option value="2">Febbraio</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Aprile</option>
+                                    <option value="5">Maggio</option>
+                                    <option value="6">Giugno</option>
+                                    <option value="7">Luglio</option>Tabs With Icon
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Settembre</option>
+                                    <option value="10">Ottobre</option>
+                                    <option value="11">Novembre</option>
+                                    <option value="12">Dicembre</option>
+                                </select>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-3">
+                                <select title="Modifica Anno" class="form-select" name="Top5_Anno">
+                                    <option value="">Anno</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="top5_container" class="card-body">
+                            <ul class="nav nav-tabs" id="icon-tab" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" id="top5-ultimi-iscritti-tab" data-bs-toggle="tab" href="#top5-ultimi-iscritti" role="tab" aria-controls="top5-ultimi-iscritti" aria-selected="true">Ultimi iscritti</a></li>
+                                <li class="nav-item"><a class="nav-link" id="top5-reclutatori-tab" data-bs-toggle="tab" href="#top5-reclutatori" role="tab" aria-controls="top5-reclutatori" aria-selected="false">Top reclutatori</a></li>
+                                <li class="nav-item"><a class="nav-link" id="top5-vendite-tab" data-bs-toggle="tab" href="#top5-vendite" role="tab" aria-controls="top5-vendite" aria-selected="false">Top vendite</a></li>
+                            </ul>
+                            <div class="tab-content" id="icon-tabContent">
+                                <div class="tab-pane fade show active" id="top5-ultimi-iscritti" role="tabpanel" aria-labelledby="top5-ultimi-iscritti-tab">
+                                    <div class="user-status table-responsive">
+                                        <table class="top5_users_list table table-bordernone">
+                                            <tbody>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td colspan="2"><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000003</td>
+                                                <td class="text-end">Iscritto il 10/10/2020</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td colspan="2"><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000003</td>
+                                                <td class="text-end">Iscritto il 10/10/2020</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="top5-reclutatori" role="tabpanel" aria-labelledby="top5-reclutatori-tab">
+                                    <div class="user-status table-responsive">
+                                        <table class="top5_users_list table table-bordernone">
+                                            <tbody>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td colspan="2"><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000003</td>
+                                                <td class="text-end">3 collaboratori</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td colspan="2"><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000004</td>
+                                                <td class="text-end">2 collaboratori</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="top5-vendite" role="tabpanel" aria-labelledby="top5-vendite-tab">
+                                    <div class="user-status table-responsive">
+                                        <table class="top5_users_list table table-bordernone">
+                                            <tbody>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                                <td class="text-end">2 ordini</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000003</td>
+                                                <td class="text-end">€ 30.000,00</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            <tr>
+                                                <td rowspan="2" class="bd-t-none u-s-tb">
+                                                    <div class="text-center align-middle image-sm-size"><img class="img-radius align-top m-r-5 rounded-circle" src="{{ asset('assets/images/user/4.jpg') }}" alt=""></div>
+                                                </td>
+                                                <td><div class="d-inline-block"><h6>Mario Rossi</h6></div></td>
+                                                <td class="text-end">2 ordini</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Codice: 000004</td>
+                                                <td class="text-end">€ 30.000,00</td>
+                                            </tr>
+                                            <tr><td colspan="3"><hr /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endregion TOP5 -->
+            <!-- region Carriera -->
+            <div class="col-xl-4 xl-50 news box-col-6">
+                <div class="card height_100">
+                    <div id="carriera_header" class="card-header">
+                        <div class="header-top">
+                            <h5 class="m-0">La tua Carriera</h5>
+                        </div>
+                    </div>
+                    <div id="carriera_container" class="card-body p-0">
+                        <div class="news-update">
+                            La tua qualifica è <span class="span_qualifica_1">Team Leader</span>
+                        </div>
+                        <div class="news-update">
+                            <p>La tua qualifica <span class="span_qualifica_2">Smeraldo</span> si ottiene con:</p>
+                            <p>&bull; <strong>100 PC</strong> nel mese</p>
+                            <div class="indent_15">
+                                <div class="progress">
+                                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small>Hai 10 PC, te ne mancano 90.</small>
+                                <hr />
+                            </div>
+                            <p>&bull; <strong>5 incaricati</strong> direttamente sponsorizzati con qualifica Team Leader</p>
+                            <div class="indent_15">
+                                <div>
+                                    <i data-feather="user"></i> <i data-feather="user"></i> <i class="opacity-50" data-feather="user"></i> <i class="opacity-50" data-feather="user"></i> <i class="opacity-50" data-feather="user"></i>
+                                </div>
+                                <small>Ne hai 2, te ne mancano 3.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer txt-success">
+                        Questo mese hai ottenuto 100 PC personali, quindi sei attivo e puoi percepire le provvigioni indirette.
+                    </div>
+                </div>
+            </div>
+            <!-- endregion Carriera -->
+            <!-- region Sponsor -->
+            <div class="col-xl-4 xl-50 news box-col-6">
+                <div id="div_sponsor" class="card custom-card height_100">
+                    <div class="card-header"><img class="img-fluid" src="{{ asset('assets/images/sponsor_background_test.jpg') }}" alt=""></div>
+                    <div class="card-profile"><img class="rounded-circle" src="{{ asset('assets/images/foto_sponsor_test.jpg') }}" alt=""></div>
+                    <div class="text-center profile-details">
+                        <h6>Il tuo Sponsor è</h6>
+                        <h4>Marco Renzoni</h4>
+                        <h6>Manager</h6>
+                    </div>
+                    <div class="m-3"></div>
+                    <p class="text-center">Codice 000003<br />
+                        +39 0587 213006<br />
+                        amministrazione@2rstudio.it</p>
+                </div>
+            </div>
+            <!-- endregion Sponsor -->
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>

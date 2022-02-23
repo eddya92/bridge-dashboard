@@ -1,0 +1,68 @@
+<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
+	<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+		<h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold color1">{{ host }}</h2>
+		<div>
+			<h3>A list: {{ param }}</h3>
+			<ul>
+				{% for item in list %}
+					<li>{{ item }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div>
+			<h3>Another list (<span id="myListCounter">&hellip;</span>)</h3>
+			<ul id="myList">
+				<i>Loading...</i>
+			</ul>
+		</div>
+		<div>
+			<h3>A list of other things</h3>
+			<ul>
+				{% for item in list3 %}
+					<li>{{ item.name }} ({{ item.score }})</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div>
+			<h3>A list of combined things</h3>
+			<ul>
+				{% for item in list4 %}
+					<li>{{ item.name }} ({{ item.score }})</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+<script>
+  function updateItemList(elementId, json) {
+    const myList = document.getElementById(elementId);
+    const myListCounter = document.getElementById(`${elementId}Counter`);
+    let counter = 0;
+    let filled = false;
+    json.forEach(item => {
+      const itemElement = document.createElement('li');
+      itemElement.innerHTML = item;
+      if (!filled) {
+        myList.innerHTML = '';
+      }
+      myList.appendChild(itemElement);
+      counter++;
+      filled = true;
+    });
+    if (!filled) {
+      myList.innerHTML = '<i>List is empty.</i>';
+    }
+    myListCounter.innerHTML = `${counter}`;
+  }
+
+  function showError(elementId, error) {
+    const myList = document.getElementById(elementId);
+	myList.innerHTML = `<span style="color: red">${error}</span>`
+  }
+
+  fetch('{{ path('someData') }}')
+    .then(response => response.json())
+    .then(json => updateItemList('myList', json))
+  	.catch(error => showError('myList', error))
+  ;
+</script>

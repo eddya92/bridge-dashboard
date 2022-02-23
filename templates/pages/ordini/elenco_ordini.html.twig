@@ -1,0 +1,722 @@
+{% extends 'layouts/interno.html.twig' %}
+   {% block title %}{% trans %}Ordini{% endtrans %}{% endblock title %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+              integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+              integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Elenco degli ordini{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Elenco degli ordini{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>{% trans %}Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti{% endtrans %}.</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="datatable_responsive_orders_container" class="dt-ext table-responsive overflow_x_hidden">
+                            <div id="filters_datatable" class="visually-hidden">
+                                <div class="row">
+                                    <div class="col-sm-4 p-t-10">
+                                        {% trans %}Gruppo di{% endtrans %}
+                                        <div id="typehead_sottoposti">
+                                            <div id="idUtenteSelezionato" hidden></div>
+                                            <div id="contenutoTypehead" hidden></div>
+                                            <input id="type-sottoposti" class="typeahead  form-control" type="text" placeholder="Scegli..."
+                                                   aria-label="scegli">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+                                        {% trans %}Cliente{% endtrans %}
+                                        <div id="typehead_clienti">
+                                            <input id="type-clienti" class="typeahead form-control" type="text" placeholder="Scegli..."
+                                                   aria-label="scegli">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+                                        {% trans %}Esito{% endtrans %}
+                                        <select id="ID_esito" class="js-example-placeholder-multiple col-sm-12"
+                                                multiple="multiple">
+                                            {% for filtroEsito  in filtriEsito %}
+                                                <option
+                                                        value="{{ filtroEsito.id }}">{{ filtroEsito.filtro }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+                                        {% trans %}Ordini dal{% endtrans %}
+                                        <div class="input-group">
+                                            <input id="Data_contratto_dal" class="datepicker-here form-control digits"
+                                                   data-language="it" type="text" placeholder="" aria-label="scegli"><span
+                                                    class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+                                        {% trans %}al{% endtrans %}
+                                        <div class="input-group">
+                                            <input id="Data_contratto_al" class="datepicker-here form-control digits"
+                                                   data-language="it" type="text" placeholder="" aria-label="scegli"><span
+                                                    class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 p-t-10">
+                                        {% trans %}Tipologia di ordine{% endtrans %}
+                                        <select id="Tipologia_ordine" class="js-example-placeholder-multiple col-sm-12"
+                                                multiple="multiple">
+                                            {% for filtroTipoOrdine in filtriTipoOrdine %}
+                                                <option value="{{ filtroTipoOrdine.id }}">{{ filtroTipoOrdine.filtro }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="m-b-20"></div>
+                                    <div class="col-sm-12">
+                                        <button id="button_filtra" type="button" class="btn btn-primary text-uppercase" onclick="filter();">
+                                            {% trans %}filtra{% endtrans %}
+                                        </button>
+                                        <button type="button" class="btn btn-light text-uppercase" onclick="close_filters();">
+                                            {% trans %}chiudi{% endtrans %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="filtriEsito" name="" type="text" hidden>
+                            <input id="filtriTipologiaOrdine" name="" type="text" hidden>
+                            <table id="table_filters">
+                                <tr>
+                                    <td>
+                                        <div id="filter_button_datatable" onclick="open_filters()">
+                                            {% trans %}Filtri{% endtrans %} <i class="fa fa-sliders"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="applied_filters_datatable">
+                                            <div id="applied_filters_datatable_container">
+                                                <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Gruppo di <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Periodo <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_nominativo" idRiferimento="type-clienti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Nominativo <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_esito" idRiferimento="ID_esito" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Esito <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_tipologia_ordine" idRiferimento="Tipologia_ordine" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Tipologia di ordine <i class="fa fa-times"></i></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <div class="m-b-20"></div>
+                            <table class="row-border hover" id="datatable_responsive_orders">
+                                <thead>
+                                <tr>
+                                    <th>{% trans %}Data{% endtrans %}</th>
+                                    <th>{% trans %}Codice{% endtrans %}</th>
+                                    <th>{% trans %}Incaricato{% endtrans %}</th>
+                                    <th>{% trans %}PC{% endtrans %}</th>
+                                    <th>{% trans %}Totale{% endtrans %}</th>
+                                    <th>{% trans %}Esito{% endtrans %}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <hr/>
+                        <div class="col-xs-12">
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+        </script>
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+
+		//region inizializzo variabili per datatable
+		var link_ordini = "{{ path('ordini-ajax') }}";
+		var table = '';
+		var sottoposti = document.getElementById('type-sottoposti').value;
+		var ricerca_clienti = document.getElementById('type-clienti').value;
+		var iD_esito = document.getElementById('filtriEsito').innerHTML;
+		var data_contratto_inizio = document.getElementById('Data_contratto_dal').value;
+		var data_contratto_fine = document.getElementById('Data_contratto_al').value;
+		var tipologia_ordine = document.getElementById('filtriTipologiaOrdine').innerHTML
+		var requestData = {
+			"sottoposti": sottoposti,
+			"ricerca_clienti": ricerca_clienti,
+			"id_esito": iD_esito,
+			"data_contratto_inizio": data_contratto_inizio,
+			"data_contratto_fine": data_contratto_fine,
+			"tipologia_ordine": tipologia_ordine
+		};
+		//endregion
+
+		//region lingua datatable
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: "{% trans %}precedente{% endtrans %}",
+				next: "{% trans %}successivo{% endtrans %}",
+			},
+			decimal: "",
+			emptyTable: "{% trans %}nessun dato disponibile{% endtrans %}",
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: "_TOTAL_ {% trans %}ordini{% endtrans %}|",
+			infoEmpty: "{% trans %}visualizzati 0 a 0 di 0 elementi{% endtrans %}",
+			infoFiltered: "({% trans %}filtrati da{% endtrans %} _MAX_ {% trans %}elementi totali{% endtrans %})",
+			infoPostFix: "",
+			thousands: ",",
+			lengthMenu: "{% trans %}mostra{% endtrans %} _MENU_ {% trans %}per pagina{% endtrans %}",
+			loadingRecords: "{% trans %}caricamento{% endtrans %}...",
+			processing: "{% trans %}elaborazione{% endtrans %}...",
+			search: "{% trans %}Cerca{% endtrans %}:",
+			zeroRecords: "{% trans %}nessun_risultato{% endtrans %}",
+			aria: {
+				"sortAscending": ": {% trans %}attiva_per_ordine_ascendente{% endtrans %}",
+				"sortDescending": ": {% trans %}attiva_per_ordine_discendente{% endtrans %}"
+			}
+		};
+		//endregion
+
+		//region Datatable
+		$(document).ready(function(){
+			table = $('#datatable_responsive_orders').DataTable({
+				language: DueRDataTableLaguages,
+				responsive: true,
+				paging: true,
+				ajax: {
+					method: "GET",
+					url: link_ordini,
+					data: function(){
+						return requestData;
+					}
+				},
+				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+				columnDefs: [
+					{orderable: false, targets: 6},
+					{
+						targets: 5,
+						className: 'dt-right'
+					},
+					{
+						targets: 3,
+						className: 'dt-right'
+					},
+					{
+						targets: 5,
+						className: 'dt-right'
+					},
+					{responsivePriority: 1, targets: 0},
+					{responsivePriority: 1, targets: 4},
+					{responsivePriority: 1, targets: 5}
+				]
+			});
+
+			//endregion
+
+			//region al click del bottone filtra.prendo tutti i campi e ricarico il datatable
+			$("#button_filtra").click(function(){
+				sottoposti = $("#idUtenteSelezionato").html();
+				ricerca_clienti = $("#type-clienti").val();
+				iD_esito = $("#filtriEsito").html();
+				data_contratto_inizio = modificaData($("#Data_contratto_dal").val());
+				data_contratto_fine = modificaData($("#Data_contratto_al").val());
+				tipologia_ordine = $("#filtriTipologiaOrdine").html();
+				requestData = {
+					"sottoposti": sottoposti,
+					"ricerca_clienti": ricerca_clienti,
+					"id_esito": iD_esito,
+					"data_contratto_inizio": data_contratto_inizio,
+					"data_contratto_fine": data_contratto_fine,
+					"tipologia_ordine": tipologia_ordine
+				};
+
+				table.ajax.url(link_ordini).load();
+			});
+		})
+		//endregion
+
+		function modificaData(data){
+			giorno = data.substr(0, 2);
+			mese = data.substr(3, 2);
+			anno = data.substr(6, 4);
+			return anno + "-" + mese + "-" + giorno;
+
+		}
+
+		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
+
+		$("#ID_esito").select2({
+			placeholder: "{% trans %}Scegli...{% endtrans %}"
+		});
+
+		$("#Tipologia_ordine").select2({
+			placeholder: "{% trans %}Tutte le tipologie{% endtrans %}"
+		});
+
+		$.fn.datepicker.language['it'] = {
+			days: ['{% trans %}Domenica{% endtrans %}', '{% trans %}Lunedì{% endtrans %}', '{% trans %}Martedì{% endtrans %}', '{% trans %}Mercoledì{% endtrans %}', '{% trans %}Giovedì{% endtrans %}', '{% trans %}Venerdì{% endtrans %}', '{% trans %}Sabato{% endtrans %}'],
+			daysShort: ['{% trans %}D{% endtrans %}', '{% trans %}L{% endtrans %}', '{% trans %}Ma{% endtrans %}', '{% trans %}Me{% endtrans %}', '{% trans %}G{% endtrans %}', '{% trans %}V{% endtrans %}', '{% trans %}S{% endtrans %}'],
+			daysMin: ['{% trans %}D{% endtrans %}', '{% trans %}L{% endtrans %}', '{% trans %}Ma{% endtrans %}', '{% trans %}Me{% endtrans %}', '{% trans %}G{% endtrans %}', '{% trans %}V{% endtrans %}', '{% trans %}S{% endtrans %}'],
+			months: ['{% trans %}Gennaio{% endtrans %}', '{% trans %}Febbraio{% endtrans %}', '{% trans %}Marzo{% endtrans %}', '{% trans %}Aprile{% endtrans %}', '{% trans %}Maggio{% endtrans %}', '{% trans %}Giugno{% endtrans %}', '{% trans %}Luglio{% endtrans %}', '{% trans %}Agosto{% endtrans %}', '{% trans %}Settembre{% endtrans %}', '{% trans %}Ottobre{% endtrans %}', '{% trans %}Novembre{% endtrans %}', '{% trans %}Dicembre{% endtrans %}'],
+			monthsShort: ['{% trans %}Gen{% endtrans %}', '{% trans %}Feb{% endtrans %}', '{% trans %}Mar{% endtrans %}', '{% trans %}Apr{% endtrans %}', '{% trans %}Mag{% endtrans %}', '{% trans %}Giu{% endtrans %}', '{% trans %}Lug{% endtrans %}', '{% trans %}Ago{% endtrans %}', '{% trans %}Set{% endtrans %}', '{% trans %}Ott{% endtrans %}', '{% trans %}Nov{% endtrans %}', '{% trans %}Dic{% endtrans %}'],
+			today: '{% trans %}Oggi{% endtrans %}',
+			clear: '{% trans %}Cancella{% endtrans %}',
+			dateFormat: 'dd/mm/yyyy',
+			timeFormat: 'hh:ii aa',
+			firstDay: 0
+		};
+
+		function close_filters(){
+			$("#filters_datatable").addClass("visually-hidden");
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+		}
+
+		function filter(){
+			close_filters();
+			var filtro_gruppoDi = $("#idUtenteSelezionato").html();
+			var filtro_nominativo = $("#type-clienti").val();
+			var iD_esito = $("#ID_esito").val();
+			var data_dal = $('#Data_contratto_dal').val();
+			var data_al = $('#Data_contratto_al').val();
+			var tipologia_ordine = $("#Tipologia_ordine").val();
+
+			//region se manaca una delle 2 date l'altra viene rimossa
+			if(data_dal){
+				if(data_al){
+
+				} else{
+					data_dal = "";
+					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date")
+				}
+			} else if(data_al){
+				if(data_dal){
+
+				} else{
+					data_al = "";
+					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date")
+				}
+			}
+			//endregion
+			azzeraFiltri()
+			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine)
+
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+
+			//	$table.ajax.url(
+			//		link_ordini + '?sottoposti=' + sottoposti
+			//		+ '&ricerca_clienti=' + ricerca_clienti
+			//		+ '&iD_esito=' + iD_esito
+			//		+ '&data_contratto_inizio=' + data_contratto_inizio
+			//		+ '&data_contratto_fine=' + data_contratto_fine
+			//		+ '&tipologia_ordine=' + tipologia_ordine
+			//	);
+		}
+
+
+		//region seleziono/rimuovo i filtri ESITO
+		$('#ID_esito').on('select2:select', function(e){
+			var data = e.params.data;
+
+			if(document.getElementById('filtriEsito').innerHTML){
+				document.getElementById('filtriEsito').innerHTML = document.getElementById('filtriEsito').innerHTML + data.id + "|";
+			} else{
+				document.getElementById('filtriEsito').innerHTML = data.id + "|";
+			}
+
+		}).on('select2:unselect', function(e){
+			var data = e.params.data;
+			document.getElementById('filtriEsito').innerHTML = document.getElementById('filtriEsito').innerHTML.replace(data.id + "|", '');
+		});
+		//endregion
+
+		//region seleziono/rimuovo i filtri TIPOLOGIA ORDINE
+		$('#Tipologia_ordine').on('select2:select', function(e){
+			var data = e.params.data;
+			if(document.getElementById('filtriTipologiaOrdine').innerHTML){
+				document.getElementById('filtriTipologiaOrdine').innerHTML = document.getElementById('filtriTipologiaOrdine').innerHTML + data.id + "|";
+			} else{
+				document.getElementById('filtriTipologiaOrdine').innerHTML = data.id + "|";
+			}
+		}).on('select2:unselect', function(e){
+			var data = e.params.data;
+			document.getElementById('filtriTipologiaOrdine').innerHTML = document.getElementById('filtriTipologiaOrdine').innerHTML.replace(data.id + "|", '');
+		});
+		//endregion
+
+		function open_filters(){
+			$("#filters_datatable").removeClass("visually-hidden");
+			$("#filter_button_datatable").addClass("visually-hidden");
+			$("#applied_filters_datatable").addClass("visually-hidden");
+		}
+
+    </script>
+
+    <script>
+		var objectNames = [];
+
+
+		function filtroCliente(utente){
+			var userArray = utente.split(' ');
+			var nome, cognome, codiceUtente;
+			nome = userArray[0];
+			cognome = userArray[1];
+			codiceUtente = userArray[2];
+		}
+
+		//region Popolo typehead Sottoposti
+		$(document).ready(function(){
+			var utenti = "{{ path('utenti-ajax') }}";
+			$('#type-sottoposti').typeahead(
+				{
+					hint: true,
+					highlight: true,
+					minLength: 3
+				},
+				{
+					limit: 50,
+					async: true,
+					name: 'result',
+					displayKey: 'displayKey',
+					source: function(query, processSync, processAsync){
+						//processSync(['This suggestion appears immediately', 'This one too']);
+						return $.ajax({
+							url: '{{ path('utenti-ajax') }}',
+							type: 'GET',
+							data: {query: query},
+							dataType: 'json',
+							success: function(json){
+								var elems = [];
+								$(json).each(function(i, j){
+									j['displayKey'] = j.nominativo + ' (' + j.codice + ')';
+									elems.push(j);
+								});
+
+								return processAsync(elems);
+							}
+						});
+					}
+				}
+			).bind('typeahead:select', function(evt, suggestion){
+				$('#idUtenteSelezionato').html(suggestion.id);
+				$('#contenutoTypehead').html(suggestion.displayKey);
+			}).change(function(){
+				if($('#contenutoTypehead').html() != ""){
+					if($('#contenutoTypehead').html() === $('#type-sottoposti').val()){
+					} else{
+						$('#idUtenteSelezionato').html('');
+						$('#contenutoTypehead').html('');
+						$('#type-sottoposti').val('');
+					}
+				}
+			})
+			;
+		});
+		//endregion
+
+		//region Popolo typehead Clienti
+		$(document).ready(function(){
+			var utenti = "{{ path('utenti-cliente-ajax') }}";
+			$.ajax(
+				{
+					'url': utenti,
+					'method': 'GET',
+					'success': function(risposta){
+						objectNames = risposta;
+						$('#type-clienti').typeahead({
+								hint: true,
+								highlight: true,
+								minLength: 1,
+								item: 4
+							},
+							{
+								name: 'names',
+								source: substringMatcher(creaListaDaOggetti(objectNames)),
+								item: 4
+							});
+						$('#type-clienti').on('typeahead:selected', function(evt, item){
+							/// do what you want with the item here
+							filtroCliente(item);
+						})
+					}
+				})
+		})
+		//endregion
+
+		var users = [];
+
+		//region controllo se cio che scrivo matcha con i record del typehead
+		var substringMatcher = function(strs){
+			//  console.log("strs", strs[0].id);
+			return function findMatches(q, cb){
+				//    console.log('q', q);
+				var matches, substringRegex;
+				// an array that will be populated with substring matches
+				matches = [];
+				// regex used to determine if a string contains the substring `q`
+				substrRegex = new RegExp(q, 'i');
+				// iterate through the pool of strings and for any string that
+				// contains the substring `q`, add it to the `matches` array
+				$.each(strs, function(i, str){
+					if(substrRegex.test(str)){
+						matches.push(str);
+					}
+				});
+				cb(matches);
+			};
+		};
+		//endregion
+
+		//region funzione che crea la visualizzazione delgli oggetti nel typejhead
+		function creaListaDaOggetti(listaOggettiUsers){
+			usersName = [];
+			listaOggettiUsers.forEach(element => usersName.push(
+				//element.nome
+				element.nome + " " + element.cognome + " " + element.codiceUtente
+			));
+
+			return usersName;
+		}
+		//endregion
+
+		$("#Data_contratto_dal").datepicker({
+			onSelect: function(dateText, inst){
+				if(dateText){
+					$("#Data_contratto_al").addClass('required');
+				} else{
+					if($("#Data_contratto_al").hasClass('required')){
+						$("#Data_contratto_al").removeClass('required')
+					} else{
+						$("#Data_contratto_al").addClass('required');
+					}
+				}
+			}
+		});
+
+		$("#Data_contratto_al").datepicker({
+			onSelect: function(dateText, inst){
+				if(dateText){
+					$("#Data_contratto_dal").addClass('required');
+				} else{
+					if($("#Data_contratto_dal").hasClass('required')){
+						$("#Data_contratto_dal").removeClass('required');
+					} else{
+						$("#Data_contratto_dal").addClass('required');
+					}
+				}
+			}
+		});
+
+		function azzeraFiltri(){
+			$("#applied_filters_gruppoDi").addClass("visually-hidden");
+			$("#applied_filters_periodo").addClass("visually-hidden");
+			$("#applied_filters_nominativo").addClass("visually-hidden");
+			$("#applied_filters_esito").addClass("visually-hidden");
+			$("#applied_filters_tipologia_ordine").addClass("visually-hidden");
+			count = 0;
+		}
+
+		//region al click di un filtro attivo, lo rimuovo
+		function rimuovoFiltro(id, filtro_di_Riferimento){
+			if(filtro_di_Riferimento === 'data'){
+				$('#Data_contratto_dal').val("");
+				$('#Data_contratto_al').val("");
+			} else if(filtro_di_Riferimento === 'type-sottoposti'){
+				$("#idUtenteSelezionato").html("");
+			} else if(filtro_di_Riferimento === 'Id_esito'){
+				$('#' + filtro_di_Riferimento).val(null).trigger('change');
+				$("#filtriEsito").html("");
+			} else if(filtro_di_Riferimento === 'Tipologia_ordine'){
+				filtriTipologiaOrdine
+				$("#filtriTipologiaOrdine").html("");
+			} else{
+				$('#' + filtro_di_Riferimento).val("");
+			}
+
+			$("#" + id).addClass("visually-hidden");
+			$('#' + filtro_di_Riferimento).val('');
+			count = count - 1;
+
+			if(count === 0){
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + " " + '<i class="fa fa-sliders"></i>';
+
+			} else{
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+			}
+		}
+		//endregion
+
+		function aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, filtro_esito, data_dal, data_al, filtro_tipologia_ordine){
+
+			if(filtro_gruppoDi){
+				$("#applied_filters_gruppoDi").removeClass("visually-hidden");
+				count = count + 1;
+			}
+
+			if(data_dal && data_al){
+				$("#applied_filters_periodo").removeClass("visually-hidden");
+				count = count + 1;
+			}
+
+			if(filtro_nominativo){
+				$("#applied_filters_nominativo").removeClass("visually-hidden");
+				count = count + 1;
+			}
+
+			if(filtro_esito.length > 0){
+				$("#applied_filters_esito").removeClass("visually-hidden");
+				count = count + 1;
+			}
+
+			if(filtro_tipologia_ordine.length > 0){
+				$("#applied_filters_tipologia_ordine").removeClass("visually-hidden");
+				count = count + 1;
+			}
+
+			if(count === 0){
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + " " + '<i class="fa fa-sliders"></i>';
+
+			} else{
+				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+			}
+		}
+
+    </script>
+    <script>
+		$(function(){
+			$("#Data_contratto_dal").datepicker({
+				onSelect: function(dateText, inst){
+					giorno = dateText.substring(0, 2);
+					mese = dateText.substring(3, 5);
+					anno = dateText.substring(6, 10);
+					var data = mese + "/" + giorno + "/" + anno;
+
+					minData(data);
+				}
+			});
+		})
+
+		function minData(data){
+			$('#Data_contratto_al').datepicker({
+				minDate: new Date(data) // Now can select only dates, which goes after today
+			})
+
+			//Disable Days of week
+			var disabledDays = [0, 6];
+
+			$('#Data_contratto_al').datepicker({
+				onRenderCell: function(date, cellType){
+					if(cellType == 'day'){
+						var day = date.getDay(),
+							isDisabled = disabledDays.indexOf(day) != -1;
+						return {
+							disabled: isDisabled
+						}
+					}
+				}
+			})
+		}
+
+    </script>
+{% endblock javascript_page %}
+
+

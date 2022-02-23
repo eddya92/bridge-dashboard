@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "data": "2021-01-15",
+      "mittente": "Carlo De Angelis",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus qui blanditiis.",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 2,
+      "data": "2021-02-17",
+      "mittente": "Marco Maffei",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 3,
+      "data": "2021-03-18",
+      "mittente": "Fabrizio Maurizio",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": false,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 4,
+      "data": "2021-04-20",
+      "mittente": "Michele Afragola",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": false,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 5,
+      "data": "2021-04-21",
+      "mittente": "Giorgio Robertis",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 6,
+      "data": "2021-05-07",
+      "mittente": "Federico Muccino",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 7,
+      "data": "2021-07-15",
+      "mittente": "Frank Curtis",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    },
+    {
+      "id": 32,
+      "data": "2021-10-10",
+      "mittente": "Stefano Usei",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    }
+  ]
+}

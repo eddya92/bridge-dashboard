@@ -1,0 +1,34 @@
+<div class=" news">
+    <div id="div_sponsor" class="card custom-card p-b-0 resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+        <div id="div_profile_overview" class="p-15">
+
+                <div class="card-header d-none d-md-none d-sm-non d-lg-none d-xl-block p-t-0 p-b-0">
+                    <img class="img-fluid" src="/assets/images/sponsor_background_test.jpg" alt=""></div>
+                <div id="div_profile_general_data">
+                    <div class="card-profile">
+                        <img class="rounded-circle" src="{{ account.foto != '' ? account.foto : '/assets/images/foto_profilobase_minisito.jpg' }}" alt="">
+                    </div>
+                    <div class="text-center profile-details">
+                        <h4>{{ account.nome }} {{ account.cognome }}</h4>
+                        <h6>{{ account.qualifica }}</h6>
+                    </div>
+                </div>
+                <hr class="d-sm-none d-md-none"/>
+                <div class="m-3"></div>
+                <table id="table_profile_general_data" class="m-auto">
+                    <tr>
+                        <td>{% trans %}Codice{% endtrans %}:</td>
+                        <td>{{ account.codice }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}Data di iscrizione{% endtrans %}:</td>
+                        <td>{{ account.dataIscrizione|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}E-mail{% endtrans %}:</td>
+                        <td>{{ account.email }}</td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+</div>

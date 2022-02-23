@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "cognome": "Renzoni",
+      "nome": "Marco",
+      "livello": "01",
+      "codice": "00085",
+      "qualifica": "Manager",
+      "colore": "span_qualifica_2",
+      "email": "marco@2RStudio.it",
+      "cellulare": "3807978325",
+      "sponsor": "Massimiliano Bianchi"
+    },
+    {
+      "id": "2",
+      "cognome": "Bianchi",
+      "nome": "Francesco",
+      "livello": "02",
+      "codice": "45898",
+      "qualifica": "Diamond",
+      "colore": "span_qualifica_1",
+      "email": "Francesco@2RStudio.it",
+      "cellulare": "7832545685",
+      "sponsor": "Simone Ciano"
+    },
+    {
+      "id": "3",
+      "cognome": "Rizzi",
+      "nome": "Carlo",
+      "livello": "03",
+      "codice": "0094",
+      "qualifica": "Manager",
+      "colore": "span_qualifica_2",
+      "email": "Carlo@2RStudio.it",
+      "cellulare": "3807978325",
+      "sponsor": "Gianluigi Vento"
+    },
+    {
+      "id": "4",
+      "cognome": "De Carolis",
+      "nome": "Pasquale",
+      "livello": "04",
+      "codice": "00099",
+      "qualifica": "Base",
+      "colore": "span_qualifica_2",
+      "email": "Pasquale@2RStudio.it",
+      "cellulare": "3807978325",
+      "sponsor": "Franco Creamonese"
+    },
+    {
+      "id": "5",
+      "cognome": "Rizzi",
+      "nome": "Matteo",
+      "livello": "05",
+      "codice": "22222",
+      "qualifica": "Manager",
+      "colore": "span_qualifica_2",
+      "email": "Matteo@2RStudio.it",
+      "cellulare": "3807978325",
+      "sponsor": "Andrea Marini"
+    }
+  ]
+}

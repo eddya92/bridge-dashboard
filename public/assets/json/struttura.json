@@ -1,0 +1,43 @@
+{
+  "draw": 1,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+  "data": [
+    [
+      "000002",
+      "0",
+      "Utente Loggato",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "utente.loggato@2rstudio.it",
+      "+39 3926598744",
+      "Bridge S.r.l."
+    ],
+    [
+      "000003",
+      "1",
+      "Mario Rossi",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "mario.rossi@2rstudio.it",
+      "+39 3203265987",
+      "Luigi Bianchi"
+    ],
+    [
+      "000016",
+      "2",
+      "Massimiliano Bianchi",
+      "<span class='span_qualifica_1'>Diamond</span>",
+      "massimiliano.bianchi@2rstudio.it",
+      "+39 3385656987",
+      "Mario Rossi"
+    ],
+    [
+      "000030",
+      "3",
+      "Marco Renzoni",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "marco@2rstudio.it",
+      "+39 3929275656",
+      "Massimiliano Bianchi"
+    ]
+  ]
+}

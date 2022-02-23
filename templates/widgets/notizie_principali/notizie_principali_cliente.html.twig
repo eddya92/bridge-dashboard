@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+        <div class="card-header">
+            <h5 class="card-title mb-0">{% trans %}Ultime notizie{% endtrans %}</h5>
+            <div class="card-options" style="display: none;">
+                <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+            </div>
+        </div>
+        <div class="calender-widget" id="box_news">
+            {% if messaggio | length > 0 %}
+                <div class="cal-img img-main-news" style="background-image: url('{{ messaggio.foto }}'); border-radius: 0;"></div>
+                <div class="cal-date">
+                    <h5>{{ messaggio.data | date('d') }}
+                        <br>{{ messaggio.data | date('M') }}</h5>
+                </div>
+                <div class="cal-desc text-center card-body cal-desc-main-news">
+                    <h6 class="f-w-600">{{ messaggio.titolo }}</h6>
+                    <p class="text-muted mt-3 mb-0">{{ messaggio.testo }}</p>
+                </div>
+                <div class="text-center cal-desc-main-news-more">
+                    <a href="{{ path('messaggi') }}">{% trans %}continua a leggere...{% endtrans %}</a></div>
+            {% else %}
+                <div class="cal-img img-main-news" style="background-image: url('/assets/images/sponsor_background_test.jpg'); border-radius: 0;"></div>
+                <div class="cal-date">
+                    <h5>{{ 'now' | date('d') }}
+                        <br>
+                        {{ 'now' | date('M') }}
+                    </h5>
+                </div>
+                <div class="cal-desc text-center card-body cal-desc-main-news">
+                    <h6 class="f-w-600"></h6>
+                    <p class="text-muted mt-3 mb-0">{% trans %}Nessuna novità per adesso{% endtrans %}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

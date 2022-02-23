@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="eng">
+<meta charset="UTF-8">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+        {% include 'layouts/partials/head.html.twig' %}
+    {% endblock head %}
+    {% block css_page %}{% endblock css_page %}
+</head>
+
+{% block body %}
+<body onload="startTime()"><!--onload="startTime()"-->
+<div class="loader-wrapper">
+    <div class="loader-index"><span></span></div>
+    <svg>
+        <defs></defs>
+        <filter id="goo">
+            <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+            <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></fecolormatrix>
+        </filter>
+    </svg>
+</div>
+<!-- tap on top starts-->
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<!-- tap on tap ends-->
+
+<!-- page-wrapper Start-->
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+    <!-- Page Header Start-->
+    {% include 'layouts/partials/page_header.html.twig' %}
+
+    <!-- Page Header Ends -->
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- modale di conferma per il nuovo ordine start-->
+        {% include 'layouts/partials/modale_nuovo_ordine.html.twig' %}
+        <!-- modale di conferma per il nuovo ordine end-->
+
+        <!-- Page Sidebar Start-->
+        {% include 'layouts/partials/sidebar.html.twig' %}
+        <!-- Page Sidebar Ends-->
+
+        <!-- region Contenuto centrale della pagina -->
+        {% block page_body %}
+        {% endblock page_body %}
+
+        <!--endregion Contenuto centrale della pagina -->
+        <!-- region Footer -->
+        {% include 'layouts/partials/footer.html.twig' %}
+        <!-- endregion Footer -->
+    </div>
+    <!-- Page Body ends-->
+</div>
+<!-- page-wrapper ends-->
+<!-- javascript Start-->
+{% include 'layouts/partials/script_modale_carrello.html.twig' %}
+{% block javascript %}
+{% endblock javascript %}
+
+{% block javascript_page %}
+{% endblock javascript_page %}
+{% block javascript_widget %}{% endblock javascript_widget %}
+<!-- javascript ends-->
+{% endblock body %}
+</body>
+</html>
+
+
+
+
+

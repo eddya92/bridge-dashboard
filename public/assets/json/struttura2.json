@@ -1,0 +1,34 @@
+{
+  "draw": 1,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+  "data": [
+    [
+      "000030",
+      "3",
+      "Marco Renzoni",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "marco@2rstudio.it",
+      "+39 3929275656",
+      "Massimiliano Bianchi"
+    ],
+    [
+      "000030",
+      "3",
+      "Marco Renzoni",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "marco@2rstudio.it",
+      "+39 3929275656",
+      "Massimiliano Bianchi"
+    ],
+    [
+      "000030",
+      "3",
+      "Marco Renzoni",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "marco@2rstudio.it",
+      "+39 3929275656",
+      "Massimiliano Bianchi"
+    ]
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "nome": "Mario",
+      "cognome": "Rossi",
+      "id": 1,
+      "codice": "00008"
+    },
+    {
+      "nome": "Antonio",
+      "cognome": "De Carolis",
+      "id": 2,
+      "codice": "00006"
+    },
+    {
+      "nome": "Edoardo",
+      "cognome": "Midali",
+      "id": 1,
+      "codice": "00005"
+    },
+    {
+      "nome": "Francesco",
+      "cognome": "Ricci",
+      "id": 2,
+      "codice": "00005"
+    },
+    {
+      "nome": "Marco",
+      "cognome": "Renzoni",
+      "id": 1,
+      "codice": "00004"
+    },
+    {
+      "nome": "Carlo",
+      "cognome": "Frani",
+      "id": 2,
+      "codice": "00001"
+    },
+    {
+      "nome": "Michele",
+      "cognome": "Pesoli",
+      "id": 1,
+      "codice": "00002"
+    },
+    {
+      "nome": "Virginia",
+      "cognome": "Vellis",
+      "id": 2,
+      "codice": "00003"
+    }
+  ]
+}

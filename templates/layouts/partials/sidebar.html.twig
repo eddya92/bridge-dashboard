@@ -1,0 +1,148 @@
+<div class="sidebar-wrapper">
+    <div>
+        <!-- region Logo -->
+        <div class="logo-wrapper">
+            <a href="{{ path('ingresso') }}"><img class="img-fluid for-light" src="{{ asset('assets/images/logo/logo.png') }}" alt=""><img class="img-fluid for-dark" src="{{ asset('assets/images/logo/logo_dark.png') }}" alt=""></a>
+            <div class="back-btn"><i class="fa fa-angle-left"></i></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"></i></div>
+        </div>
+        <div class="logo-icon-wrapper">
+            <a href="{{ path('ingresso') }}"><img class="img-fluid" src="{{ asset('assets/images/logo/logo-icon.png') }}" alt=""></a>
+        </div>
+        <!-- endregion Logo -->
+        <!-- region Menu -->
+        <nav class="sidebar-main">
+            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+            <div id="sidebar-menu">
+                <ul class="sidebar-links" id="simple-bar">
+                    <li class="back-btn">
+                        <a href="{{ path('ingresso') }}"><img class="img-fluid" src="{{ asset('assets/images/logo/logo-icon.png') }}" alt=""></a>
+                        <div class="mobile-back text-end">
+                            <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav " href="{{ path('ingresso') }}"><i data-feather="home"></i><span>Ingresso</span></a>
+                    </li>
+                    {% if app.user.idRuolo == 'customer' %}
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav " href="{{ path('registrazione-ibo') }}"><i data-feather="users"></i><span>Diventa collaboratore</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title  " href="#"><i data-feather="user"></i><span>Profilo</span></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ path('account') }}">Account</a></li>
+                            <li><a href="{{ path('dati-indirizzo-spedizione') }}">Spedizioni</a></li>
+                            <li><a href="{{ path('dati-residenza') }}">Dati personali</a></li>
+                            {% if app.user.idRuolo == 'ibo' %} <li><a href="{{ path('documenti-personali') }}">Documenti</a></li>{% endif  %}
+                            <li><a href="{{ path('privacy') }}">Privacy</a></li>
+                            {% if app.user.idRuolo == 'ibo' %}
+                                <li><a href="{{ path('pagamenti') }}">Pagamenti</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    {% if app.user.idRuolo == 'ibo' %}
+
+                        <!--region struttura-->
+                        <li class="sidebar-main-title">
+                            <div>
+                                <h6>Attività</h6>
+                                <p>Gestisci la tua rete</p>
+                            </div>
+                        </li>
+                        <li class="sidebar-list ">
+                            <a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>La tua rete</span></a>
+                            <ul class="sidebar-submenu">
+                                <li><a href="{{ path('albero-unilevel') }}">Albero Unilevel</a></li>
+                                <li><a href="{{ path('struttura-unilevel') }}">La tua struttura</a></li>
+                                <li><a href="{{ path('nuovo-cliente') }}">Inserisci un nuovo cliente</a></li>
+                                <li><a href="{{ path('carriera') }}">La tua carriera</a></li>
+                            </ul>
+                        </li>
+                        <!--endregion struttura-->
+
+                        <!--region marketing tools--->
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="#"><i data-feather="share"></i><span>Marketing Tools</span></a>
+                            <ul class="sidebar-submenu">
+                                <li><a href="{{ path('invita-persone') }}">Invita persone</a></li>
+                                <!-- <li><a href="#">Social Post</a></li>-->
+                                <li><a href="{{ path('sito-personale') }}">Sito personale</a></li>
+                                <!--li><a href="#">Referral link</a></li-->
+                                <!--li><a href="#">Materiale per stampa</a></li-->
+                            </ul>
+                        </li>
+                        <!--endregion--->
+                    {% endif %}
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="#"><i data-feather="shopping-bag"></i><span>Ordini</span></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ path('crea-nuovo-ordine') }}">Crea un nuovo ordine</a></li>
+                            <li><a href="{{ path('elenco-ordini') }}">Elenco degli ordini</a></li>
+                        </ul>
+                    </li>
+                    <!--li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>Clienti</span></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ path('nuovo-cliente') }}">Inserisci un nuovo cliente</a></li>
+                            <li><a href="{{ path('elenco-clienti') }}">Elenco dei clienti</a></li>
+                        </ul>
+                    </li-->
+                    <!--li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="#"><i data-feather="calendar"></i><span>Academy</span></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ path('eventi') }}">Eventi</a></li>
+                            <li><a href="{{ path('le-mie-iscrizioni') }}">Le mie iscrizioni</a></li>
+                        </ul>
+                    </li-->
+                    <!--li class="sidebar-list">
+                        <label class="badge badge-info">4</label><a class="sidebar-link sidebar-title link-nav" href="{{ path('promemoria') }}"><i data-feather="bell"></i><span>Promemoria</span></a>
+                    </li-->
+                    {% if app.user.idRuolo == 'ibo' %}
+
+                        <!--region guadagni e bonus-->
+                        <li class="sidebar-main-title">
+                            <div>
+                                <h6>Guadagni</h6>
+                                <p>Consulta e richiedi le provvigioni</p>
+                            </div>
+                        </li>
+                        <li class="sidebar-list ">
+                            <a class="sidebar-link sidebar-title link-nav " href="{{ path('bonus') }}"><i data-feather="award"></i><span>Bonus</span></a>
+                        </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>eWallet</span></a>
+                        </li>
+                        <!--endregion guadagni e bonus-->
+
+                    {% endif %}
+
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Utilities</h6>
+                            <p>Strumenti utili per la tua attività</p>
+                        </div>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ path('documenti') }}"><i data-feather="file-text"></i><span>Documenti</span></a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ path('messaggi') }}"><i data-feather="message-square"></i><span>Messaggi</span></a>
+                    </li>
+                    <!--li class="sidebar-list">
+                        <label class="badge badge-info">1</label><a class="sidebar-link sidebar-title link-nav" href="{{ path('ticketSystem') }}"><i data-feather="bookmark"></i><span>Ticket System</span></a>
+                    </li-->
+                    <!--<li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ path('multimedia-gallery') }}"><i data-feather="film"></i><span>Multimedia Gallery</span></a>
+                    </li>-->
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ path('logout') }}"><i data-feather="log-out"></i><span>Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+        </nav>
+        <!-- endregion Menu -->
+    </div>
+</div>

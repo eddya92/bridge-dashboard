@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "nazione": "Italia",
+      "icona": ""
+    },
+    {
+      "id": "2",
+      "nazione": "Francia",
+      "icona": ""
+    },
+    {
+      "id": "3",
+      "nazione": "Spagna",
+      "icona": ""
+    }
+  ]
+}

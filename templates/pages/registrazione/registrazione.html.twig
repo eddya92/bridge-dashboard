@@ -1,0 +1,248 @@
+{% extends 'layouts/interno.html.twig' %}
+
+{% block title %}{% trans %}Registrazione{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/additional.css">
+{% endblock css_page %}
+{% block body %}
+    <div id="lingue_front"><ul>{{ lingue() }}</ul></div>
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="login-card">
+                    <div>
+                        <div>
+                            <a class="logo" href="index.html"><img class="img-fluid" src="/assets/images/logo/logo.png" alt="logo"></a>
+                        </div>
+                        <div class="login-main div_registrazione">
+                            {% include 'layouts/partials/session_message.html.twig' %}
+
+                            <form id="form-registrazione" class="theme-form needs-validation" onsubmit="check_same_password();" action="{{ path('esegui-registrazione') }}" method="post">
+                                <div class="row">
+                                    <h4>{% trans %}Crea il tuo account{% endtrans %}</h4>
+                                    <p>{% trans %}Compila il modulo sottostante per iscriverti{% endtrans %}</p>
+                                    <div class="col-lg-6 col-xl-6 col-xxl-6 float-start">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                            <label class="col-form-label">{% trans %}Codice Sponsor{% endtrans %}</label>
+                                            <input class="form-control" type="text" required="" placeholder="{% trans %}Scrivi il codice del tuo sponsor{% endtrans %}" name="codiceSponsor" value="{{ old_post['codiceSponsor'] is defined ? old_post['codiceSponsor'] : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group p-t-10" id="private-company">
+                                            <label class="col-form-label pt-0">{% trans %}Desidero iscrivermi come{% endtrans %}</label>
+                                            <div class="row  m-t-15 m-b-20">
+                                                <div class="col-6">
+                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                        <input class="form-check-input " id="radioinline1" type="radio" name="naturaGiuridica" value="privato" checked>
+                                                        <label class="form-check-label mb-0" for="radioinline1">{% trans %}privato{% endtrans %}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                        <input class="form-check-input" id="radioinline2" type="radio" name="naturaGiuridica" value="azienda">
+                                                        <label class="form-check-label mb-0" for="radioinline2">{% trans %}azienda{% endtrans %}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group company-data">
+                                            <label class="col-form-label pt-0">{% trans %}Ragione sociale{% endtrans %}</label>
+                                            <div class="row g-2">
+                                                <div class="col-12">
+                                                    <input class="form-control" type="text" required="" placeholder="Ragione sociale" name="ragioneSociale" value="{{ old_post['nome'] is defined ? old_post['nome'] : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group private-data">
+                                            <label class="col-form-label pt-0">{% trans %}Nominativo{% endtrans %}</label>
+                                            <div class="row g-2">
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input class="form-control" type="text" required="" placeholder="{% trans %}Nome{% endtrans %}" name="nome" value="{{ old_post['nome'] is defined ? old_post['nome'] : '' }}">
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input class="form-control" type="text" required="" placeholder="{% trans %}Cognome{% endtrans %}" name="cognome" value="{{ old_post['cognome'] is defined ? old_post['cognome'] : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6 col-xxl-6 float-end">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{% trans %}E-mail{% endtrans %}</label>
+                                            <input class="form-control" type="email" required="" placeholder="{% trans %}Scrivi il tuo indirizzo e-mail{% endtrans %}" name="email" value="{{ old_post['email'] is defined ? old_post['email'] : '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label">{% trans %}Password{% endtrans %}</label>
+                                            <div class="form-input position-relative">
+                                                <input class="form-control" type="password" required="" placeholder="" name="password" value="{{ old_post['password'] is defined ? old_post['password'] : '' }}">
+                                                <div class="show-hide"><span class="show"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label">{% trans %}Conferma Password{% endtrans %}</label>
+                                            <div class="form-input position-relative">
+                                                <input class="form-control" type="password" required="" placeholder="" name="password_conferma">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-xl-6 col-xxl-6 float-end">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{% trans %}Specifica la nazione di residenza{% endtrans %}</label>
+                                            <select id="selezionaNazione_id" class="form-select" name="ID_nazione" required="">
+                                                <option value="" selected>---</option>
+                                                {% for nazione in nazioni %}
+                                                    <option id="{{ nazione.id }}" value="{{ nazione.id }}">{{ nazione.nome }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div id="agreements" class="m-t-15">
+
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="m-t-20"></div>
+                                <div class="m-auto text-center">
+                                    <div class="form-group mb-0">
+                                        <button class="btn btn-primary btn-block w-auto" type="submit">{% trans %}Crea account{% endtrans %}</button>
+                                    </div>
+                                    <p class="mt-4 mb-0">{% trans %}Hai già un account{% endtrans %}
+                                        <a class="ms-2" href="{{ path('login') }}">{% trans %}Vai al login{% endtrans %}</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'layouts/partials/footer_front.html.twig' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function check_same_password(){
+
+	        $("input[name=password]").removeClass('is-invalid');
+	        $("input[name=password_conferma]").removeClass('is-invalid');
+
+			let password = $("input[name=password]").val();
+			let password_confirm = $("input[name=password_conferma]").val();
+			let res = check_password(password, password_confirm);
+
+			if(!res['status']){
+				if(res['password_confirm'] && res['password']){
+					alert('Attenzione le password non coincidono');
+					$("input[name=password_conferma]").addClass('is-invalid');
+				}else{
+					alert('Formato password non valido')
+                }
+				event.preventDefault();
+				event.stopPropagation();
+            }
+
+			return res['status'];
+        }
+		$(document).ready(function(){
+			$.get("https://ipinfo.io", function(response) {
+				$("#selezionaNazione_id").val(response.country);
+				$("#selezionaNazione_id").change();
+			}, "jsonp");
+			$("#private-company input").change(function(){
+				if($(this).val() == 'privato'){
+					$('.company-data').hide();
+					$('.private-data').show();
+					$('[name="ragioneSociale"]').val('');
+					$('[name="ragioneSociale"]').removeAttr('required');
+					$('[name="cognome"]').attr('required', '');
+					$('[name="nome"]').attr('required', '');
+				} else{
+					$('.company-data').show();
+					$('.private-data').hide();
+					$('[name="cognome"]').val('');
+					$('[name="nome"]').val('');
+					$('[name="ragioneSociale"]').attr('required', '');
+					$('[name="nome"]').removeAttr('required');
+					$('[name="cognome"]').removeAttr('required');
+
+				}
+			});
+
+			$('[name="ragioneSociale"]').removeAttr('required');
+			$('.company-data').hide();
+
+			$('#selezionaNazione_id').on('change', function(){
+				loadData($('#selezionaNazione_id').val());
+			});
+			$('#selezionaNazione_id').trigger('change');
+		});
+
+		function loadData(idNazione){
+			if(typeof idNazione === 'undefined' || idNazione == ''){
+				return;
+			}
+
+			let nazioneAgreements = "{{ path('ajax-agreements', { idNazione:':idNazione'}) }}";
+			nazioneAgreements = nazioneAgreements.replace(':idNazione', idNazione);
+			$.ajax({
+				'url': nazioneAgreements,
+				'method': 'GET',
+				'success': function(risposta){
+					$('#agreements').html(risposta);
+					$('.overflow_agreement').css('min-height','80px');
+				}
+			})
+		}
+    </script>
+
+    {% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+                integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="../assets/js/icons/feather-icon/feather.min.js"></script>
+        <script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+                integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="../assets/js/scrollable/perfect-scrollbar.min.js"></script>
+        <script src="../assets/js/scrollable/scrollable-custom.js"></script>
+        <script src="../assets/js/config.js"></script>
+        <script src="../assets/js/script.js"></script>
+        <script src="../assets/js/custom.js"></script>
+        <script src="/assets/js/check_password.js"></script>
+    {% endblock js %}
+{% endblock body %}
+
+{% block javascript_page %}
+
+{% endblock javascript_page %}
+

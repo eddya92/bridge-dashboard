@@ -1,0 +1,369 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{{ articolo.nome }}{% endblock %}
+
+    {% block css_page %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+        <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="pixelstrap">
+        <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/themify.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/owlcarousel.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/rating.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/range-slider.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+        <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item">{% trans %}Shop{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{{ articolo.nome }}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>Shop / {{ articolo.nome }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div>
+                <div class="row product-page-main p-0">
+                    <div class="col-xl-4 xl-cs-65 box-col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="product-slider owl-carousel owl-theme" id="sync1">
+                                    {% if articolo.foto | length > 0 %}
+                                        {% for foto in articolo.foto %}
+                                            <div class="item">
+                                                <img src="{{ foto.url }}" alt="">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="item">
+                                            <img src="{{ asset('assets/images/not-found.png') }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {# <div class="item"><img src="/assets/images/ecommerce_product_3.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/02.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/03.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/04.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/05.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/06.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/07.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/08.jpg" alt=""></div> #}
+                                </div>
+                                <div class="owl-carousel owl-theme" id="sync2">
+                                    {% if articolo.foto | length > 0 %}
+                                        {% for foto in articolo.foto %}
+                                            <div class="item">
+                                                <img src="{{ foto.url }}" alt="">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="item">
+                                            <img src="{{ asset('assets/images/not-found.png') }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {# <div class="item"><img src="/assets/images/ecommerce_product_3.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/02.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/03.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/04.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/05.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/06.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/07.jpg" alt=""></div>
+                                    <div class="item"><img src="/assets/images/ecommerce/08.jpg" alt=""></div> #}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 xl-100 box-col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="product-page-details">
+                                    <h3>{{ articolo.nome }}</h3>
+                                    <div class="m-b-20"></div>
+                                    <!-- Se ci sono varianti devono essere mostrate qui utilizzando le select -->
+                                    {# <div class="m-b-20"></div>
+                                    <select class="form-select" id="confezioni">
+                                        {% for confezione in articolo.confezioni %}
+                                            <option id="{{ confezione.id_confezione }}" value="{{ confezione.id_confezione }}">{{ confezione.tipo }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="m-b-20"></div>
+                                    <select class="form-select">
+                                        <option value="1" selected>Confezione regalo</option>
+                                        <option value="2">Confezione standard</option>
+                                    </select>
+                                    <div class="m-b-20"></div>
+                                    <!-- fine blocco varianti --> #}
+                                </div>
+                                {# <table class="width_100">
+                                    <tr>
+                                        <td>
+                                            <div class="product-price" id="prezzo">&euro; {{ articolo.confezioni.0.prezzo }}
+                                                <del id="prezzoSenzaSconto">&euro; {{ articolo.confezioni.0.prezzo_iniziale }}</del>
+                                            </div>
+                                        </td>
+                                        <td class="text-gray-light text-end" id="punti">{{ articolo.confezioni.0.pc }}</td>
+                                    </tr>
+                                </table> #}
+                                <hr>
+                                <p>{{ articolo.abstract | raw }}</p>
+                                <hr>
+                                <div>
+                                    <table id="table_product_info" class="product-page-width">
+                                        <tbody>
+                                        <tr>
+                                            <td><b>{% trans %}Codice{% endtrans %}:</b></td>
+                                            <td>{{ articolo.codice }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{% trans %}Categoria{% endtrans %}:</b></td>
+                                            <td>{{ articolo.categoria }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{% trans %}Disponibilità{% endtrans %}</b></td>
+                                            {% if articolo.quantitaStock > 0 %}
+                                                <td class="txt-success">{% trans %}In stock{% endtrans %}</td>
+                                            {% else %}
+                                                <td class="txt-danger">{% trans %}Non disponibile{% endtrans %}</td>
+                                            {% endif %}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                {# <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Il tuo giudizio</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex">
+                                            <select id="u-rating-fontawesome" name="rating" autocomplete="off">
+                                                {% for i in 1..5 %}
+                                                    {% if i == articolo.rating %}
+                                                        <option value="{{ i }}" selected>{{ i }}</option>
+                                                    {% else %}
+                                                        <option value="{{ i }}">{{ i }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select><span>(250 feedback)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr> #}
+                                <div class="m-t-15">
+                                    <input hidden name="quantita_{{ articolo.id }}" value="{{ articolo.quantitaMultipla }}" min="{{ articolo.quantitaMultipla }}">
+                                    <div class="m-b-20"></div>
+                                    <ul>
+                                        {% for variante in articolo.varianti %}
+                                            <li style="display: inline-block;">
+
+                                                <button class="btn btn-outline-light" type="button" id_articolo="{{ articolo.id }}" id_variante="{{ variante.id_variante }}" prezzo="{{ variante.prezzo }}" prezzo_scontato="{{ variante.prezzo_scontato }}" onclick="selezionaVariante({{ variante.id_variante }});">{{ variante.nome | raw }}</button>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="m-b-20"></div>
+                                    <a id="acquista_{{ articolo.id }}" class="btn btn-primary m-r-10" onclick="aggiungiArticolo({{ articolo.id }});" idv="0">{% trans %}Acquista{% endtrans %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 xl-cs-35 box-col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                {% if carrello is null %}
+                                    {% trans %}Al momento non hai articoli nel carrello.{% endtrans %}
+                                    <a href="{{ path('crea-nuovo-ordine') }}">{% trans %}Inizia ora i tuoi acquisti!{% endtrans %}</a>
+                                {% else %}
+                                    {% if carrello.quantitaTotale == 0 %}
+                                        {% trans %}Al momento non hai articoli nel carrello.{% endtrans %}
+                                        <a href="{{ path('crea-nuovo-ordine') }}">{% trans %}Inizia ora i tuoi acquisti!{% endtrans %}</a>
+                                    {% elseif carrello.quantitaTotale > 0 %}
+                                        {% trans %}Al momento hai{% endtrans %} {{ carrello.quantitaTotale }} {% trans %}articoli nel carrello per un totale di{% endtrans %} {{ carrello.totale }} {% trans %}e{% endtrans %} {{ carrello.punti }}.
+                                        <a href="{{ path('carrello') }}">{% trans %}Concludi il tuo ordine!{% endtrans %}</a>
+                                    {% else %}
+                                        {% trans %}Al momento hai 1 articolo nel carrello per un totale di{% endtrans %} {{ carrello.totale }} {% trans %}e{% endtrans %} {{ carrello.punti }}.
+                                        <a href="{{ path('carrello') }}">{% trans %}Concludi il tuo ordine!{% endtrans %}</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="collection-filter-block">
+                                    <ul class="pro-services">
+                                        <li>
+                                            <div class="media"><i data-feather="truck"></i>
+                                                <div class="media-body">
+                                                    <h5>Spedizioni gratuite</h5>
+                                                    <p>Nessun costo di spedizione con un acquisto minimo di &euro; 50,00.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media"><i data-feather="clock"></i>
+                                                <div class="media-body">
+                                                    <h5>Consegna entro 48 ore</h5>
+                                                    <p>Consegnamo entro due giorni lavorativi dal pagamento dell'ordine.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media"><i data-feather="credit-card"></i>
+                                                <div class="media-body">
+                                                    <h5>Pagamento on-line</h5>
+                                                    <p>Paga in tutta sicurezza con i circuiti e i servizi online più famosi.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- silde-bar colleps block end here-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="row product-page-main">
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs border-tab mb-0" id="top-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="false">{% trans %}Descrizione{% endtrans %}</a>
+                                <div class="material-border"></div>
+                            </li>
+                            {# <li class="nav-item">
+                                <a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false">Video</a>
+                                <div class="material-border"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="true">Dettagli</a>
+                                <div class="material-border"></div>
+                            </li> #}
+                        </ul>
+                        <div class="tab-content" id="top-tabContent">
+                            <div class="tab-pane fade active show" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                                {{ articolo.descrizione | raw }}
+                            </div>
+                            {# <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                                <div class="p-t-10"></div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/jLvsQogBQZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/K7jhBX1oMdg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/Tl-Fh9A2ptY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/Tl-Fh9A2ptY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+                                <p class="mb-0 m-t-20">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                            </div> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="/assets/js/scrollbar/custom.js"></script>
+<script src="/assets/js/touchspin/touchspin.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/owlcarousel/owl.carousel.js"></script>
+<script src="/assets/js/sidebar-menu.js"></script>
+<script src="/assets/js/range-slider/ion.rangeSlider.min.js"></script>
+<script src="/assets/js/range-slider/rangeslider-script.js"></script>
+<script src="/assets/js/rating/jquery.barrating.js"></script>
+<script src="/assets/js/rating/rating-script.js"></script>
+<script src="/assets/js/ecommerce.js"></script>
+<script src="/assets/js/tooltip-init.js"></script>
+<script src="/assets/js/product-tab.js"></script>
+<script src="/assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="/assets/js/notify/index.js"></script>
+<script src="/assets/js/typeahead/handlebars.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		$(document).ready(function(){
+			$('#confezioni').on('change', function(){
+				$('#prezzo, #prezzoSenzaSconto , #punti').empty();
+				replaceElement($('#confezioni').val())
+			})
+		});
+
+		function replaceElement(id){
+
+		}
+
+		function selezionaVariante(id_variante){
+			let $variante = $('[id_variante="' + id_variante + '"]');
+
+			$('#articolo_punti').html($variante.attr('punti'));
+			$('#articolo_prezzo').html($variante.attr('prezzo') != $variante.attr('prezzo_scontato') ? $variante.attr('prezzo') + '<del>' + $variante.attr('prezzo_scontato') + '</del>' : $variante.attr('prezzo'));
+
+			$('#acquista_' + $variante.attr('id_articolo')).attr('idv', id_variante);
+		}
+
+		function aggiungiArticolo(id_articolo){
+			location.href = '{{ path('aggiungi-articolo') }}?id=' + id_articolo + '&idv=' + $('#acquista_' + id_articolo).attr('idv') + '&qty=' + $('[name="quantita_' + id_articolo + '"]').val();
+		}
+    </script>
+{% endblock javascript_page %}

@@ -1,0 +1,492 @@
+{% extends 'layouts/interno.html.twig' %}
+   {% block title %}{% trans %}La tua struttura{% endtrans %}{% endblock title %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+              integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+              integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}La tua struttura{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}La tua struttura{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>{% trans %}Consulta elenco clienti e collaboratori presenti nella struttura{% endtrans %}</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="datatable_responsive_orders_container" class="dt-ext table-responsive overflow_x_hidden">
+                            <div id="filters_datatable" class="datatable_struttura visually-hidden">
+                                <div class="row">
+                                    <div class="col-sm-4 p-t-10">
+										{% trans %}Gruppo di{% endtrans %}
+                                        <div id="typehead_sottoposti">
+                                            <div id="idUtenteSelezionato" hidden></div>
+                                            <div id="contenutoTypehead" hidden></div>
+                                            <input id="type-sottoposti" class="typeahead form-control" type="text" placeholder="Scegli..." aria-label="scegli" name="filtro_gruppoDi">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+										{% trans %}Nominativo{% endtrans %}
+                                        <div>
+                                            <input id="filtro_nominativo" class="form-control" type="text" placeholder="{% trans %}Nome cognome o ragione sociale{% endtrans %}" name="filtro_nominativo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+										{% trans %}E-mail{% endtrans %}
+                                        <div>
+                                            <input id="filtro_email" class="form-control" type="email" placeholder="" name="filtro_email">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+										{% trans %}Cellulare{% endtrans %}
+                                        <div>
+                                            <input id="filtro_cellulare" class="form-control" type="text" placeholder="" name="filtro_cellulare">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+										{% trans %}Mese{% endtrans %}
+                                        <div class="input-group">
+                                            <select id="filtro_mese" class="form-select" name="Mese">
+                                                <option value="01">{% trans %}Gennaio{% endtrans %}</option>
+                                                <option value="02">{% trans %}Febbraio{% endtrans %}</option>
+                                                <option value="03">{% trans %}Marzo{% endtrans %}</option>
+                                                <option value="04">{% trans %}Aprile{% endtrans %}</option>
+                                                <option value="05">{% trans %}Maggio{% endtrans %}</option>
+                                                <option value="06">{% trans %}Giugno{% endtrans %}</option>
+                                                <option value="07">{% trans %}Luglio{% endtrans %}</option>
+                                                <option value="08">{% trans %}Agosto{% endtrans %}</option>
+                                                <option value="09">{% trans %}Settembre{% endtrans %}</option>
+                                                <option value="10">{% trans %}Ottobre{% endtrans %}</option>
+                                                <option value="11">{% trans %}Novembre{% endtrans %}</option>
+                                                <option value="12">{% trans %}Dicembre{% endtrans %}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-t-10">
+										{% trans %}Anno{% endtrans %}
+                                        <div class="input-group">
+                                            <select id="filtro_anno" class="form-select" name="Anno">
+                                                {% for year in 2020.."now"|date("Y") %}
+                                                    <option value="{{ year }}">{{ year }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-t-10">
+                                        <table class="width_100 m-t-20">
+                                            <tr>
+                                                <td>{% trans %}Mostra solo clienti e collaboratori direttamente sponsorizzati{% endtrans %}</td>
+                                                <td>
+                                                    <div class="col">
+                                                        <div class="media-body text-end icon-state">
+                                                            <label class="switch">
+                                                                <input id="filtro_diretti" type="checkbox" onchange="onOffFunction(this.id)" name="filtro_diretti"><span class="switch-state"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="m-b-20"></div>
+                                    <div class="col-sm-12">
+                                        <button type="button" id="buttonFiltra" class="btn btn-primary text-uppercase" onclick="filter();">{% trans %}filtra{% endtrans %}</button>
+                                        <button type="button" class="btn btn-light text-uppercase" onclick="close_filters();">{% trans %}chiudi{% endtrans %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="table_filters">
+                                <tr>
+                                    <td>
+                                        <div id="filter_button_datatable" onclick="open_filters()" style="min-width: 130px;">
+											{% trans %}Filtri{% endtrans %} <i class="fa fa-sliders"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="applied_filters_datatable">
+                                            <div id="applied_filters_datatable_container">
+                                                <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Gruppo di{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_nominativo" idRiferimento="filtro_nominativo" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Nominativo{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_email" idRiferimento="filtro_email" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}E-mail{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_cellulare" idRiferimento="filtro_cellulare" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Cellulare{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_diretti" idRiferimento="filtro_diretti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Solo diretti{% endtrans %} <i class="fa fa-times"></i></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <div class="m-b-20"></div>
+                            <table class="row-border hover" id="datatable_responsive_orders">
+                                <thead>
+                                <tr>
+                                    <th>{% trans %}Codice{% endtrans %}</th>
+                                    <th>{% trans %}Livello{% endtrans %}</th>
+                                    <th>{% trans %}Incaricato{% endtrans %}</th>
+                                    <th>{% trans %}Qualifica{% endtrans %}</th>
+                                    <th>{% trans %}E-mail{% endtrans %}</th>
+                                    <th>{% trans %}Cellulare{% endtrans %}</th>
+                                    <th>{% trans %}Sponsor{% endtrans %}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+        <!-- Container-fluid Ends-->
+    </div>
+
+{% endblock page_body %}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		var requestData = {
+			"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
+			"filtro_nominativo": $("#filtro_nominativo").val(),
+			"filtro_email": $("#filtro_email").val(),
+			"filtro_cellulare": $("#filtro_cellulare").val(),
+			"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+			"filtro_diretti": $("#filtro_diretti").hasClass("onSelect")
+		};
+
+		var table = '0';
+
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: "{% trans %}precedente{% endtrans %}",
+				next: "{% trans %}successivo{% endtrans %}",
+			},
+			decimal: "",
+			emptyTable: "{% trans %}nessun dato disponibile{% endtrans %}",
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: "_TOTAL_ {% trans %}utenti{% endtrans %} | ",
+			infoEmpty: "{% trans %}visualizzati{% endtrans %} 0 a 0 di 0 elementi",
+			infoFiltered: "(filtrati da _MAX_ elementi totali)",
+			infoPostFix: "",
+			thousands: ",",
+			lengthMenu: "{% trans %}mostra{% endtrans %} _MENU_ {% trans %}per pagina{% endtrans %}",
+			loadingRecords: "{% trans %}caricamento{% endtrans %}...",
+			processing: "{% trans %}elaborazione{% endtrans %}...",
+			search: "{% trans %}Cerca{% endtrans %}:",
+			zeroRecords: "nessun_risultato",
+			aria: {
+				"sortAscending": ": attiva_per_ordine_ascendente",
+				"sortDescending": ": attiva_per_ordine_discendente"
+			}
+		};
+
+		function aggiornaRisultati(){
+			requestData = {
+				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
+				"filtro_nominativo": $("#filtro_nominativo").val(),
+				"filtro_email": $("#filtro_email").val(),
+				"filtro_cellulare": $("#filtro_cellulare").val(),
+				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect")
+			};
+			table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
+		}
+
+		//region aggiungo o rimuovo classe "onSelect" (input switch),in modo da selezionarlo quando è attivo
+		function onOffFunction(id){
+			if($("#" + id).hasClass('onSelect')){
+				$("#" + id).attr('checked', false);
+				$('#' + id).prop('checked', false);
+				$("#" + id).removeClass('onSelect');
+			} else{
+				$("#" + id).attr('checked', true)
+				$('#' + id).prop('checked', true);
+				$("#" + id).addClass('onSelect');
+			}
+		}
+		//endregion
+
+		//region creo pulsantini in base ai filtri attivi(solo graficamente)
+		//aggiorno il count in base ai filtri attivi
+		function renderFiltri(){
+			let count = 0;
+			if($("#idUtenteSelezionato").html()){
+				$("#applied_filters_gruppoDi").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_gruppoDi").addClass("visually-hidden");
+			}
+			if($("#filtro_anno").val() && $("#filtro_mese").val()){
+				$("#applied_filters_periodo").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_periodo").addClass("visually-hidden");
+			}
+			if( $("#filtro_nominativo").val()){
+				$("#applied_filters_nominativo").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_nominativo").addClass("visually-hidden");
+			}
+			if($("#filtro_email").val()){
+				$("#applied_filters_email").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_email").addClass("visually-hidden");
+			}
+			if($("#filtro_cellulare").val()){
+				$("#applied_filters_cellulare").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_cellulare").addClass("visually-hidden");
+			}
+			if($("#filtro_diretti").hasClass("onSelect")){
+				$("#applied_filters_diretti").removeClass("visually-hidden");
+				count = count + 1;
+			}else{
+				$("#applied_filters_diretti").addClass("visually-hidden");
+			}
+
+			if(count === 0){
+				document.getElementById('filter_button_datatable').innerHTML = "{% trans %}Filtri{% endtrans %}" + " " + '<i class="fa fa-sliders"></i>';
+			} else{
+				document.getElementById('filter_button_datatable').innerHTML = "{% trans %}Filtri{% endtrans %}" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
+			}
+			aggiornaRisultati();
+		}
+		//endregion
+
+		//region al click di un filtro attivo,lo rimuovo
+		function rimuovoFiltro(id, filtro_di_Riferimento){
+			if(filtro_di_Riferimento === 'filtro_diretti'){
+				$("#" + filtro_di_Riferimento).attr('checked', false);
+				$('#' + filtro_di_Riferimento).prop('checked', false);
+				$("#" + filtro_di_Riferimento).removeClass('onSelect');
+			} else if(filtro_di_Riferimento === 'type-sottoposti'){
+				$("#idUtenteSelezionato").html("")
+			}else{
+				$('#' + filtro_di_Riferimento).val('');
+			}
+			$("#" + id).addClass("visually-hidden");
+
+			renderFiltri();
+		}
+		//endregion
+
+		$(document).ready(function(){
+			table = $('#datatable_responsive_orders').DataTable({
+				responsive: true,
+				ajax: {
+					method: "GET",
+					url: "{{ path('struttura-personale-ajax') }}",
+					data: function(){
+						return requestData;
+					}
+				},
+				language: DueRDataTableLaguages,
+				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+				columnDefs: [
+					{responsivePriority: 1, targets: 0},
+					{responsivePriority: 2, targets: 2}
+				]
+			});
+			renderFiltri();
+		});
+
+		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
+
+		function close_filters(){
+			$("#filters_datatable").addClass("visually-hidden");
+			$("#filter_button_datatable").removeClass("visually-hidden");
+		}
+
+		function filter(){
+			close_filters();
+			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+			renderFiltri();
+		}
+
+		function open_filters(){
+			$("#filters_datatable").removeClass("visually-hidden");
+			$("#filter_button_datatable").addClass("visually-hidden");
+			$("#applied_filters_datatable").addClass("visually-hidden");
+		}
+
+		function filtroCliente(utente){
+			var userArray = utente.split(' ');
+			var nome, cognome, codiceUtente;
+			nome = userArray[0];
+			cognome = userArray[1];
+			codiceUtente = userArray[2];
+		}
+
+		$(document).ready(function(){
+			$('#type-sottoposti').typeahead(
+				{
+					hint: true,
+					highlight: true,
+					minLength: 3
+				},
+				{
+					limit: 50,
+					async: true,
+					name: 'result',
+					displayKey: 'displayKey',
+					source: function(query, processSync, processAsync){
+						//processSync(['This suggestion appears immediately', 'This one too']);
+						return $.ajax({
+							url: '{{ path('utenti-ajax') }}',
+							type: 'GET',
+							data: {query: query},
+							dataType: 'json',
+							success: function(json){
+								var elems = [];
+								$(json).each(function(i, j){
+									j['displayKey'] = j.nominativo + ' (' + j.codice + ')';
+									elems.push(j);
+								});
+
+								return processAsync(elems);
+							}
+						});
+					}
+				}
+			).bind('typeahead:select', function(evt, suggestion){
+				//$('[name="idUtente"]').val(suggestion.id);
+				$('#idUtenteSelezionato').html(suggestion.id);
+				$('#contenutoTypehead').html(suggestion.displayKey);
+			}).change(function(){
+				if($('#contenutoTypehead').html() != ""){
+					if($('#contenutoTypehead').html() === $('#type-sottoposti').val()){
+
+					} else{
+						$('#idUtenteSelezionato').html('');
+						$('#contenutoTypehead').html('');
+						document.getElementById('type-sottoposti').value = "";
+					}
+				}
+			})
+			;
+		});
+
+		//region controllo se cio che scrivo matcha con i record del typehead
+		var substringMatcher = function(strs){
+			//  console.log("strs", strs[0].id);
+			return function findMatches(q, cb){
+				//    console.log('q', q);
+				var matches, substringRegex;
+				// an array that will be populated with substring matches
+				matches = [];
+				// regex used to determine if a string contains the substring `q`
+				substrRegex = new RegExp(q, 'i');
+				// iterate through the pool of strings and for any string that
+				// contains the substring `q`, add it to the `matches` array
+				$.each(strs, function(i, str){
+					if(substrRegex.test(str)){
+						matches.push(str);
+					}
+				});
+				cb(matches);
+			};
+		};
+		//endregion
+
+    </script>
+
+{% endblock javascript_page %}
+
+

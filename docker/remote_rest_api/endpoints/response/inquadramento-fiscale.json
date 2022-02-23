@@ -1,0 +1,9 @@
+{
+  "data": {
+    "nome": "Ricevuta vendite a domicilio",
+    "descrizione": "Imponibile<br />\n- RA del 23% sul 78%",
+    "email_azienda": "amministrazione@2rstudio.it",
+    "iban": "ABCDEF12346500000000000132",
+    "bank_code": "12345"
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "data": [
+    {
+      "nome": "Home",
+      "id": 1,
+      "isDirectory": true,
+      "directories": [
+        {
+          "id": 22,
+          "nome": "Cartella 1",
+          "descrizione": "Eventuale descrizione della cartella 1.\n",
+          "cartella": true,
+          "numero_documenti": 2,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 23,
+          "nome": "File 1",
+          "descrizione": "Eventuale descrizione del file 1.\n",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "pdf",
+          "dimensione": 1255.55,
+          "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+        },
+        {
+          "id": 24,
+          "nome": "Cartella 2",
+          "descrizione": "Eventuale descrizione della cartella 2.\n",
+          "cartella": true,
+          "numero_documenti": 0,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 25,
+          "nome": "File 2",
+          "descrizione": "",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "video",
+          "dimensione": 2555.55,
+          "link": "https://www.google.it"
+        }
+      ]
+    },
+    {
+      "nome": "Moduli di registrazione",
+      "id": 2,
+      "isDirectory": true,
+      "directories": [
+        {
+          "id": 7,
+          "nome": "registro",
+          "descrizione": "Eventuale descrizione della cartella 1.\n",
+          "cartella": true,
+          "numero_documenti": 2,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 33,
+          "nome": "word",
+          "descrizione": "Eventuale descrizione del file 1.\n",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "word",
+          "dimensione": 1255.55,
+          "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+        },
+        {
+          "id": 34,
+          "nome": "Cartella 2",
+          "descrizione": "Eventuale descrizione della cartella 2.\n",
+          "cartella": true,
+          "numero_documenti": 0,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 35,
+          "nome": "zip",
+          "descrizione": "",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "zip",
+          "dimensione": 2555.55,
+          "link": "https://www.google.it"
+        }
+      ]
+    },
+    {
+      "nome": "Materiale per l'attività",
+      "id": 3,
+      "isDirectory": true,
+      "directories": [
+        {
+          "id": 7,
+          "nome": "registro",
+          "descrizione": "Eventuale descrizione della cartella 1.\n",
+          "cartella": true,
+          "numero_documenti": 2,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 33,
+          "nome": "word",
+          "descrizione": "Eventuale descrizione del file 1.\n",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "word",
+          "dimensione": 1255.55,
+          "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+        },
+        {
+          "id": 34,
+          "nome": "Cartella 2",
+          "descrizione": "Eventuale descrizione della cartella 2.\n",
+          "cartella": true,
+          "numero_documenti": 0,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 35,
+          "nome": "zip",
+          "descrizione": "",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "zip",
+          "dimensione": 2555.55,
+          "link": "https://www.google.it"
+        }
+      ]
+    },
+    {
+      "nome": "Notiziario",
+      "id": 4,
+      "isDirectory": true,
+      "directories": [
+        {
+          "id": 7,
+          "nome": "registro",
+          "descrizione": "Eventuale descrizione della cartella 1.\n",
+          "cartella": true,
+          "numero_documenti": 2,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 33,
+          "nome": "word",
+          "descrizione": "Eventuale descrizione del file 1.\n",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "word",
+          "dimensione": 1255.55,
+          "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+        },
+        {
+          "id": 34,
+          "nome": "Cartella 2",
+          "descrizione": "Eventuale descrizione della cartella 2.\n",
+          "cartella": true,
+          "numero_documenti": 0,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 35,
+          "nome": "zip",
+          "descrizione": "",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "zip",
+          "dimensione": 2555.55,
+          "link": "https://www.google.it"
+        }
+      ]
+    },
+    {
+      "nome": "Videogallery",
+      "id": 5,
+      "isDirectory": true,
+      "directories": [
+        {
+          "id": 7,
+          "nome": "registro",
+          "descrizione": "Eventuale descrizione della cartella 1.\n",
+          "cartella": true,
+          "numero_documenti": 2,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 33,
+          "nome": "word",
+          "descrizione": "Eventuale descrizione del file 1.\n",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "word",
+          "dimensione": 1255.55,
+          "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+        },
+        {
+          "id": 34,
+          "nome": "Cartella 2",
+          "descrizione": "Eventuale descrizione della cartella 2.\n",
+          "cartella": true,
+          "numero_documenti": 0,
+          "estensione": "",
+          "dimensione": 0,
+          "link": ""
+        },
+        {
+          "id": 35,
+          "nome": "zip",
+          "descrizione": "",
+          "cartella": false,
+          "numero_documenti": 0,
+          "estensione": "zip",
+          "dimensione": 2555.55,
+          "link": "https://www.google.it"
+        }
+      ]
+    }
+  ]
+}

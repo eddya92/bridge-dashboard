@@ -1,0 +1,76 @@
+<div class="file-content">
+    <div class="card resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+        <div class="card-body file-manager">
+            <h4 class="mb-3">{{ documento.breadcrumb }}</h4>
+            <h6>{{ documento.descrizione }}</h6>
+            <div class="m-b-20"></div>
+            <ul class="folder" id="appendiamoQuicartelle">
+                {% if documento.cartellaSuperiore is empty or documento.cartellaSuperiore.id == 0 or documento.cartellaSuperiore.id == 1 %}
+
+                {% else %}
+                    <li class="folder-box">
+                        <div class="media" id="{{ documento.cartellaSuperiore.id }}" onclick="lascioDirectoryEvidenziata(this.id,true)">
+                            <i class="fa fa-arrow-circle-left f-36 gray "></i>
+                            <div class="media-body ms-3">
+                                <h6 class="mb-0">{% trans %}Cartella precedente{% endtrans %}</h6>
+                                <p>{% trans %}Torna a{% endtrans %} {{ documento.cartellaSuperiore.nome }}'</p>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+                {% for file in documento.files %}
+                    {% if file.cartella == true %}
+                        <li class="folder-box" id="{{ file.id }}" onclick="lascioDirectoryEvidenziata(this.id,true)">
+                            <div class="media"><i class="fa fa-folder f-36 txt-warning"></i>
+                                <div class="media-body ms-3">
+                                    <h6 class="mb-0">{{ file.nome }}</h6>
+                                    <p>{{ file.numero_documenti }} file contenuti</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <div class="m-b-20"></div>
+            <ul class="files " id="appendiamoQui">
+                {% for file in documento.files %}
+                    {% if file.cartella == false %}
+                        <li class="file-box">
+                            <div class="file-top">
+                                <a href="{{ file.link }}" class="textcolorblu">
+                                    <table class="icon_name_document m-auto">
+                                        <tr>
+                                            {% if file.estensione == "png" or file.estensione == "img" or file.estensione == "jpg" or file.estensione == "jpeg" or file.estensione == "psd" %}
+                                                <td><i class="fa fa-file-image-o "></i></td>
+                                            {% elseif file.estensione == "pdf" %}
+                                                <td><i class="fa fa-file-pdf-o txt-danger "></i></td>
+                                            {% elseif file.estensione == "excel" or file.estensione == "xls" or file.estensione == "xlt" or file.estensione == "xml" %}
+                                                <td><i class="fa fa-file-excel-o txt-success "></i></td>
+                                            {% elseif file.estensione == "word" or file.estensione == "doc" or file.estensione == "dot" or file.estensione == "dotm" %}
+                                                <td><i class="fa fa-file-excel-o txt-primary "></i></td>
+                                            {% elseif file.estensione == "mp3" or file.estensione == "wma" or file.estensione == "audio" %}
+                                                <td><i class="fa fa-file-sound-o "></i></td>
+                                            {% elseif file.estensione == "zip" or file.estensione == "tar"  or file.estensione == "compresso" %}
+                                                <td><i class="fa fa-file-zip-o "></i></td>
+                                            {% elseif file.estensione == "mp4" or file.estensione == "mpeg" or file.estensione == "video" %}
+                                                <td><i class="fa fa-file-zip-o "></i></td>
+                                            {% else %}
+                                                <td><i class="fa fa-file-o "></i></td>
+                                            {% endif %}
+                                            <td>
+                                                <h6>{{ file.nome }}</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </a>
+                            </div>
+                            <div class="file-bottom">
+                                {{ file.descrizione }}
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

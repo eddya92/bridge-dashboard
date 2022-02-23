@@ -1,0 +1,470 @@
+# COMMONS
+# Termini utilizzati in più pagine
+Virtual Office: Virtual Office
+Profilo: Profilo
+Aggiorna dati: Aggiorna dati
+Mostra caratteri: Mostra caratteri
+alle ore: alle ore
+Codice: Codice
+Data di iscrizione: Data di iscrizione
+E.mail: E-mail
+Nome: Nome
+Cognome: Cognome
+Indirizzo: Indirizzo
+Numero civico: Numero civico
+Nazione: Nazione
+CAP: CAP
+Comune: Comune
+Provincia: Provincia
+Note: Note
+Modifica: Modifica
+Elimina: Elimina
+Specificare il nome: Specificare il nome.
+Specificare il cognome: Specificare il cognome.
+Specificare l indirizzo: Specificare l' 'indirizzo.
+Specificare il numero civico: Specificare il numero civico.
+Specificare il CAP: Specificare il CAP.
+Specificare il comune: Specificare il comune.
+Specificare la provincia: Specificare la provincia.
+Specificare il numero di telefono: Specificare il numero di telefono.
+Specificare un indirizzo email valido: Specificare un indirizzo email valido.
+Nominativo: Nominativo
+Cellulare: Cellulare
+filtra: filtra
+chiudi: chiudi
+Filtri: Filtri
+Periodo: Periodo
+Qualifica: Qualifica
+Sponsor: Sponsor
+Incaricato: Incaricato
+Livello: Livello
+E-mail: E-mail
+Anno: Anno
+precedente: precedente
+successivo: successivo
+nessun dato disponibile: nessun dato disponibile
+visualizzati 0 a 0 di 0 elementi: visualizzati 0 a 0 di 0 elementi
+filtrati da: filtrati da
+elementi totali: elementi totali
+nessun_risultato: nessun_risultato
+attiva_per_ordine_ascendente: attiva_per_ordine_ascendente
+attiva_per_ordine_discendente: attiva_per_ordine_discendente
+utenti: utenti
+visualizzati: visualizzati
+mostra: mostra
+per pagina: per pagina
+caricamento: caricamento
+elaborazione: elaborazione
+Cerca: Cerca
+Gennaio: Gennaio
+Febbraio: Febbraio
+Marzo: Marzo
+Aprile: Aprile
+Maggio: Maggio
+Giugno: Giugno
+Luglio: Luglio
+Agosto: Agosto
+Settembre: Settembre
+Ottobre: Ottobre
+Novembre: Novembre
+Dicembre: Dicembre
+Torna a: Torna a
+Gen: Gen
+Feb: Feb
+Mar: Mar
+Apr: Apr
+Mag: Mag
+Giu: Giu
+Lug: Lug
+Ago: Ago
+Set: Set
+Ott: Ott
+Nov: Nov
+Dic: Dic
+Domenica: Domenica
+Lunedì: Lunedì
+Martedì: Martedì
+Mercoledì: Mercoledì
+Giovedì: Giovedì
+Venerdì: Venerdì
+Sabato: Sabato
+
+D: D
+L: L
+Ma: M
+Me: M
+G: G
+V: V
+S: S
+
+e: e
+Riepilogo: Riepilogo
+Chiudi: Chiudi
+Salva e prosegui: Salva e prosegui
+Torna indietro: Torna indietro
+
+Un'azienda: Un'azienda
+Ragione sociale: Ragione sociale
+Specificare la ragione sociale: Specificare la ragione sociale
+Specificare l'indirizzo: Specificare l'indirizzo
+Codice fiscale: Codice fiscale
+Specificare il codice fiscale: Specificare il codice fiscale
+Partita IVA: Partita IVA
+PEC: PEC
+Specificare la PEC o il codice univoco: Specificare la PEC o il codice univoco
+Codice univoco: Codice univoco
+
+Accetto: Accetto
+Non accetto: Non accetto
+
+# PROFILO - PAGAMENTI
+Pagamenti: Pagamenti
+Inquadramento fiscale: Inquadramento fiscale
+Inquadramento fiscale descrizione: Se desideri modificare il tuo inquadramento fiscale contatta l'amministrazione all'indirizzo
+Pagamento delle commissioni: Pagamento delle commissioni
+Dati bancari: Dati bancari
+Dati bancari descrizione: Indica l'IBAN al quale desideri ricevere gli accrediti delle commissioni.
+IBAN: IBAN
+Specificare IBAN: Specificare l'IBAN.
+BIC SWIFT: BIC / SWIFT
+Specificare BIC SWIFT: Specificare BIC / SWIFT
+
+# PROFILO - ACCOUNT
+Account: Account
+Gestisci i dati del tuo account: Gestisci i dati del tuo account
+Vecchia password: Vecchia password
+Specificare la vecchia password: Specificare la vecchia password.
+Nuova password: Nuova password
+Specificare la nuova password: Specificare la nuova password (minimo 8 caratteri).
+Conferma password: Conferma password
+Le password immesse non corrispondono: Le password immesse non corrispondono.
+Desideri effettuare la richiesta di oblio dei dati: Desideri effettuare la richiesta di oblio dei dati?
+Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione: Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione.
+Per approfondimenti clicca qui: Per approfondimenti clicca qui.
+Richiedi oblio: Richiedi oblio
+La tua richiesta di oblio e stata registrata il: La tua richiesta di oblio è stata registrata il
+ALERT_JS_Sei sicuro di voler richiedere loblio del tuo account: Sei sicuro di voler richiedere l\'oblio del tuo account?
+
+# PROFILO - SPEDIZIONI
+Dati di spedizione: Dati di spedizione
+Aggiungi i dati di spedizione: Aggiungi i dati di spedizione
+Informazioni utili per la consegna: Informazioni utili per la consegna
+Numero di telefono: Numero di telefono
+E-mail di notifica spedizione: E-mail di notifica spedizione
+Consegna anche di sabato: Consegna anche di sabato
+Indirizzo predefinito: Indirizzo predefinito
+Aggiungi nuovo indirizzo: Aggiungi nuovo indirizzo
+es consegna al secondo piano: es. consegna al secondo piano
+Altri indirizzi salvati: Altri indirizzi salvati
+ALERT_JS_sei sicuro di voler eliminare questo indirizzo: Sei sicuro di voler eliminare questo indirizzo?
+La modifica della nazione di spedizione potrebbe comportare variazioni: La modifica della nazione di spedizione potrebbe comportare variazioni sulla fiscalità e sui prezzi esposti nell'e-commerce.
+La nazione di spedizione indicata e: La nazione di spedizione indicata è
+Modifica i dati di spedizione: Modifica i dati di spedizione
+I tuoi indirizzi: I tuoi indirizzi
+
+# PROFILO - DOCUMENTI
+Documenti: Documenti
+Documenti obbligatori: Documenti obbligatori
+Altri documenti facoltativi: Altri documenti (facoltativi)
+Puoi richiedere le provvigioni: Puoi richiedere le provvigioni
+Reminder documenti obbligatori provvigioni: Ti ricordiamo che è necessario caricare tutti i documenti obbligatori per poter richiedere le provvigioni dall'eWallet
+crea tesserino: crea tesserino
+aggiorna tesserino: aggiorna tesserino
+carica file: carica file
+sostituisci file: sostituisci file
+Scarica il file: Scarica il file
+Hai caricato il file il: Hai caricato il file il
+
+# RETE - ALBERO UNILEVEL
+Albero Unilevel: Albero Unilevel
+Le impostazioni sono state salvate correttamente: Le impostazioni sono state salvate correttamente!
+Vista default: Vista default
+Elimina questa vista: Elimina questa vista
+Zoom: Zoom
+Stampa: Stampa
+Filtri di ricerca: Filtri di ricerca
+Albero di: Albero di
+Livelli: Livelli
+Mese: Mese
+Altezza: Altezza
+Larghezza: Larghezza
+Orientamento: Orientamento
+Orizzontale: Orizzontale
+Verticale: Verticale
+Salva come vista principale: Salva come vista principale
+Cerca per codice nominativo e-mail o telefono: Cerca per codice, nominativo, e-mail o telefono
+scegli: scegli
+Crea una vista personalizzata: Crea una vista personalizzata
+Salva la nuova vista: Salva la nuova vista
+Scrivi qui il nome del nuovo filtro: Scrivi qui il nome del nuovo filtro
+
+# RETE - LA TUA STRUTTURA
+La tua struttura: La tua struttura
+Consulta elenco clienti e collaboratori presenti nella struttura: Consulta l'elenco dei clienti e dei collaboratori presenti nella struttura ed utilizza i filtri per effettuare le ricerche che desideri
+Gruppo di: Gruppo di
+Nome cognome o ragione sociale: Nome, cognome o ragione sociale
+Mostra solo clienti e collaboratori direttamente sponsorizzati: Mostra solo clienti e collaboratori direttamente sponsorizzati.
+Solo diretti: Solo diretti
+
+# RETE - INSERISCI NUOVO CLIENTE
+Inserisci un nuovo cliente: Inserisci un nuovo cliente
+Nuovo Cliente: Nuovo Cliente
+Nuovo cliente alert autorizzazioni: ATTENZIONE! Stai inserendo informazioni di una terza persona della quale sei in possesso di dati personali.<br/>Assicurati di avere la dovute autorizzazione al trattamento di tali dati in ottemperanza con le Leggi vigenti ed in particolare che essi vengano trattati nel rispetto del Regolamento UE 2016/679 (GDPR).<br/>L'iscrizione verrà notificata al nuovo cliente tramite e-mail all'indirizzo specificato di seguito.<br/>L'azienda non si riterrà in alcun modo responsabile in caso di trattamento non autorizzato di dati personali.
+Inserisci i dati del nuovo cliente: Inserisci i dati del nuovo cliente
+Il nuovo cliente e: Il nuovo cliente è
+Un privato: Un privato
+Un azienda: Un'azienda
+La nazione di residenza è: La nazione di residenza è
+Inserisci cliente: Inserisci cliente
+
+# MESSAGGI - MESSAGGIO
+Messaggi: Messaggi
+Non ci sono ancora messaggi da leggere.: Non ci sono ancora messaggi da leggere.
+da: da
+da leggere: da leggere
+già letto: già letto
+Dettaglio messaggio: Dettaglio messaggio
+torna alla pagina dei messaggi: torna alla pagina dei messaggi
+Scritto da: Scritto da
+
+# DOCUMENTI
+Cartella precedente: Cartella precedente
+
+# BONUS
+Bonus: Bonus
+Bonus dell'anno: Bonus dell'anno
+Nel: Nel
+hai totalizzato Bonus per un totale di: hai totalizzato Bonus per un totale di
+Consulta lo storico di tutti i bonus accumulati nel: Consulta lo storico di tutti i bonus accumulati nel
+mese per mese: mese per mese
+I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni: I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni
+Qualifica raggiunta: Qualifica raggiunta
+Attivo: Attivo
+Totale: Totale
+
+# ELENCO ORDINI
+Ordini: Ordini
+Elenco degli ordini: Elenco degli ordini
+Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti: Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti
+Cliente: Cliente
+Esito: Esito
+Ordini dal: Ordini dal
+al: al
+Tipologia di ordine: Tipologia di ordine
+Data: Data
+PC: PC
+Tutte le tipologie: Tutte le tipologie
+ordini: ordini
+Cancella: Cancella
+Oggi: Oggi
+
+# CREA NUOVO ORDINE
+Crea nuovo ordine: Crea nuovo ordine
+Scegli il negozio nel quale vuoi acquistare: Scegli il negozio nel quale vuoi acquistare
+Scegli negozio: Scegli negozio
+Cambia store: Cambia store
+Crea un ordine: Crea un ordine
+Cerca un cliente o un collaboratore: Cerca un cliente o un collaboratore
+Crea ordine: Crea ordine
+
+# SHOP
+Shop: Shop
+Crea un nuovo ordine: Crea un nuovo ordine
+Filtra: Filtra
+Filtri abilitati: Filtri abilitati
+Previous: Previous
+current: current
+Next: Next
+Quantità: Quantità
+Dettagli del prodotto: Dettagli del prodotto
+Non sono state fornite ulteriori informazioni sul prodotto: Non sono state fornite ulteriori informazioni sul prodotto
+Acquista: Acquista
+Vedi dettagli: Vedi dettagli
+
+#INGRESSO
+Ingresso: Ingresso
+Virtual Office di: Virtual Office di
+cerca un incaricato: cerca un incaricato
+
+# ARTICOLO SHOP
+Disponibilità: Disponibilità
+Categoria: Categoria
+In stock: In stock
+Non disponibile: Non disponibile
+Al momento non hai articoli nel carrello.: Al momento non hai articoli nel carrello.
+Inizia ora i tuoi acquisti!: Inizia ora i tuoi acquisti!
+Concludi il tuo ordine!: Concludi il tuo ordine!
+Al momento hai: Al momento hai
+articoli nel carrello per un totale di: articoli nel carrello per un totale di
+Al momento hai 1 articolo nel carrello per un totale di: Al momento hai 1 articolo nel carrello per un totale di
+Descrizione: Descrizione
+
+# CARRELLO
+Carrello: Carrello
+Controlla la merce inserita nel carrello prima di concludere l'ordine: Controlla la merce inserita nel carrello prima di concludere l'ordine
+Articolo: Articolo
+Punti: Punti
+Prezzo: Prezzo
+Totale Punti: Totale Punti
+Continua con lo shopping: Continua con lo shopping
+Vai al checkout: Vai al checkout
+Non hai articoli nel carrello: Non hai articoli nel carrello
+In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello. Al momento non ci sono articoli: In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello. Al momento non ci sono articoli
+Fai il tuo primo ordine: Fai il tuo primo ordine
+
+# CHECKOUT
+Checkout: Checkout
+Compila i dati di residenza: Compila i dati di residenza
+La nazione di fatturazione è: La nazione di fatturazione è
+Compila i dati fiscali: Compila i dati fiscali
+Subtotale: Subtotale
+Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione: Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione
+Completa l'acquisto: Completa l'acquisto
+Intestatario ordine: Intestatario ordine
+Spedizione: Spedizione
+Indirizzo incompleto: Indirizzo incompleto
+Aggiungi un nuovo indirizzo di spedizione: Aggiungi un nuovo indirizzo di spedizione
+Note per la consegna: Note per la consegna
+Seleziona un indirizzo per scoprire le modalità di spedizione disponibili: Seleziona un indirizzo per scoprire le modalità di spedizione disponibili
+Pagamento: Pagamento
+Gratis: Gratis
+Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili: Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili
+Spese Amministrative: Spese Amministrative
+Conferma ordine: Conferma ordine
+Dati spedizione: Dati spedizione
+
+# Dettaglio Ordine
+Dettaglio Ordine: Dettaglio Ordine
+Ordine Cod.: Ordine Cod.
+Creato il: Creato il
+Stato: Stato
+Cod.: Cod.
+Spese modalità di pagamento: Spese modalità di pagamento
+Spese di spedizione: Spese di spedizione
+Modalità di spedizione: Modalità di spedizione
+Spedire presso: Spedire presso
+Modalità di pagamento: Modalità di pagamento
+Questo ordine risulta pagato: Questo ordine risulta pagato
+Questo ordine non risulta ancora pagato: Questo ordine non risulta ancora pagato
+Torna allo shop: Torna allo shop
+
+# INVITA PERSONE
+Invita Persone: Invita Persone
+Marketing Tools: Marketing Tools
+Scegli un modello di e-mail da inviare: Scegli un modello di e-mail da inviare
+Consulta lo storico degli inviti che hai inviato: Consulta lo storico degli inviti che hai inviato
+Data di invio: Data di invio
+Invia il tuo invito: Invia il tuo invito
+Specificare il nome del destinatario: Specificare il nome del destinatario
+Specificare l'indirizzo e-mail del destinatario: Specificare l'indirizzo e-mail del destinatario
+Ultima ora: Ultima ora
+Hai ancora: Hai ancora
+inviti: inviti
+Ultime 24 ore: Ultime 24 ore
+Ultima settimana: Ultima settimana
+Ultimo mese: Ultimo mese
+Spedisci invito: Spedisci invito
+
+# SITO PERSONALE
+Sito personale: Sito personale
+Copia il link del tuo sito personale per condividerlo: Copia il link del tuo sito personale per condividerlo
+copia il link: copia il link
+Contattami al: Contattami al
+Scrivimi a: Scrivimi a
+Facebook: Facebook
+Instragram: Instagram
+Twitter: Twitter
+Youtube: Youtube
+
+#LOGIN
+Login: Login
+Accedi al tuo account: Accedi al tuo account
+Inserisci le tue credenziali per accedere: Inserisci le tue credenziali per accedere.
+Username: Username
+Password: Password
+Ricorda password: Ricorda password
+Password dimenticata: Password dimenticata?
+Non hai un account: Non hai un account?
+Registrati adesso: Registrati adesso!
+
+#REGISTRAZIONE
+Crea il tuo account: Crea il tuo account
+Compila il modulo sottostante per iscriverti: Compila il modulo sottostante per iscriverti
+Codice Sponsor: Codice Sponsor
+Scrivi il codice del tuo sponsor: Scrivi il codice del tuo sponsor
+Desidero iscrivermi come: Desidero iscrivermi come
+privato: privato
+azienda: azienda
+Scrivi il tuo indirizzo e-mail: Scrivi il tuo indirizzo e-mail
+Specifica la nazione di residenza: Specifica la nazione di residenza
+Crea account: Crea account
+Hai già un account: Hai già un account?
+
+#REGISTRAZIONE SUCCESS
+Account creato correttamente: Account creato correttamente!
+Grazie per esserti iscritto a: Grazie per esserti iscritto a MyBridge.
+Ti abbiamo inviato una e-mail di benvenuto: Ti abbiamo inviato una e-mail di benvenuto dove potrai trovare informazioni utili.
+Vai al login: Vai al login
+
+#FORGOT PASSWORD
+Recupera password: Recupera password
+Rigenera la tua password: Rigenera la tua password
+Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password: Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password
+Richiedi il link: Richiedi il link
+Codice o e-mail: Codice o e-mail
+
+#INGRESSO CLIENTE
+Area riservata: Area riservata
+Benvenuto: Benvenuto
+Guadagna con noi: Guadagna con noi!
+Diventa un distributore indipendente: Diventa un distributore indipendente
+e scopri le opportunità di guadagno a te riservate aderendo al nostro team: e scopri le opportunità di guadagno a te riservate aderendo al nostro team
+html guadagna con noi: <p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Guadagna dal 15 al 25% sulle vendite direttamente promosse</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Porta almeno tre persone ed ottieni guadagni indiretti fino al 45%</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Entra a far parte di un tem si successo!</p>
+Diventa un collaboratore: Diventa un collaboratore
+I più venduti: I più venduti
+Acquistati di recente: Acquistati di recente
+
+#WIDGET NOTIZIE
+Ultime notizie: Ultime notizie
+continua a leggere...: continua a leggere...
+Nessuna novità per adesso: Nessuna novità per adesso
+
+#CARRIERA
+Carriera: Carriera
+La tua carriera: La tua carriera
+Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle: Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle.
+Qualifica precedente: Qualifica precedente
+Qualifica attuale: Qualifica attuale
+Qualifica successiva: Qualifica successiva
+Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi: Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi
+
+# DATI PERSONALI
+Dati personali: Dati personali
+Contatti: Contatti
+Dati fiscali: Dati fiscali
+Dati di residenza: Dati di residenza
+Sede Legale: Sede Legale
+
+#GRAFICO VENDITE
+Tipologia filtro: Tipologia filtro
+Specifico mese: Specifico mese
+Specifico Anno: Specifico Anno
+Mostra: Mostra
+Punti Carriera: Punti Carriera
+Punti Volume: Punti Volume
+Numero ordini: Numero ordini
+
+#RECUPERO PASSWORD
+Richiesta di rigenerazione password: Richiesta di rigenerazione password
+Link inviato correttamente: Link inviato correttamente
+Consulta la tua casella email: Consulta la tua casella e-mail.
+Ti abbiamo inviato il likn con il quale potrai generare la tua nuova password: Ti abbiamo inviato il link con il quale potrai generare la tua nuova password.
+L indirizzo digitato non è stato trovato: L indirizzo digitato non è stato trovato.
+Assicurati di avere scritto correttamente l indirizzo e riprova: Assicurati di avere scritto correttamente l indirizzo e riprova.
+riprova: riprova
+
+#PRIVACY
+Privacy: Privacy
+Permessi: Permessi
+Privacy Policy: Privacy Policy
+Visualizza i dati in nostro possesso: Visualizza i dati in nostro possesso

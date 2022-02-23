@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+	<meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+	<meta name="author" content="pixelstrap">
+	<link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+	<title>Clienti</title>
+	<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+	<link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+</head>
+<body onload="startTime()">
+<div class="loader-wrapper">
+	<div class="loader-index"><span></span></div>
+	<svg>
+		<defs></defs>
+		<filter id="goo">
+			<fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+			<fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></fecolormatrix>
+		</filter>
+	</svg>
+</div>
+<!-- tap on top starts-->
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<!-- tap on tap ends-->
+<!-- page-wrapper Start-->
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+	<!-- Page Header Start-->
+	<div class="page-header">
+		<div class="header-wrapper row m-0">
+			<form class="form-inline search-full col" action="#" method="get">
+				<div class="form-group w-100">
+					<div class="Typeahead Typeahead--twitterUsers">
+						<div class="u-posRelative">
+							<input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
+							<div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div>
+							<i class="close-search" data-feather="x"></i>
+						</div>
+						<div class="Typeahead-menu"></div>
+					</div>
+				</div>
+			</form>
+			<!-- region Logo and Toggle Sidebar -->
+			<div class="header-logo-wrapper col-auto p-0">
+				<div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo.png" alt=""></a></div>
+				<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
+			</div>
+			<!-- endregion Logo and Toggle Sidebar -->
+			<!-- region Header Menu -->
+			<!-- region Azione rapida Nuovo ordine -->
+			<div class="left-header col horizontal-wrapper ps-0 d-none d-sm-block">
+				<ul class="horizontal-menu">
+					<li class="level-menu outside"><a class="nav-link" href="#!">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+							<circle cx="9" cy="21" r="1"></circle>
+							<circle cx="20" cy="21" r="1"></circle>
+							<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+						</svg>
+						<span>Nuovo ordine</span></a>
+						<ul class="header-level-menu menu-to-be-close">
+							<li><a href="#" data-original-title="" title="Nuovo ordine personale"><i data-feather="user"></i><span>Ordine personale</span></a></li>
+							<li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="users"></i><span>Ordine conto terzi</span></a>
+							<li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="package"></i><span>Ordine cumulativo</span></a>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- endregion Azione rapida Nuovo ordine -->
+			<div class="nav-right col-8 pull-right right-header p-0">
+				<ul class="nav-menus">
+					<!-- region Select cambio lingua -->
+					<li class="language-nav">
+						<div class="translate_wrapper">
+							<div class="current_lang">
+								<div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN</span></div>
+							</div>
+							<div class="more_lang">
+								<div class="lang selected" data-value="en"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span></div>
+								<div class="lang" data-value="de"><i class="flag-icon flag-icon-de"></i><span class="lang-txt">Deutsch</span></div>
+								<div class="lang" data-value="es"><i class="flag-icon flag-icon-es"></i><span class="lang-txt">Español</span></div>
+								<div class="lang" data-value="fr"><i class="flag-icon flag-icon-fr"></i><span class="lang-txt">Français</span></div>
+								<div class="lang" data-value="pt"><i class="flag-icon flag-icon-pt"></i><span class="lang-txt">Português<span> (BR)</span></span></div>
+								<div class="lang" data-value="cn"><i class="flag-icon flag-icon-cn"></i><span class="lang-txt">简体中文</span></div>
+								<div class="lang" data-value="ae"><i class="flag-icon flag-icon-ae"></i><span class="lang-txt">لعربية <span> (ae)</span></span></div>
+							</div>
+						</div>
+					</li>
+					<!-- endregion Select cambio lingua -->
+					<!-- region Searchbar -->
+					<li><span class="header-search"><i data-feather="search"></i></span></li>
+					<!-- endregion Searchbar -->
+					<!-- region Notifiche -->
+					<li class="onhover-dropdown">
+						<div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4</span></div>
+						<ul class="notification-dropdown onhover-show-div">
+							<li><i data-feather="bell"></i><h6 class="f-18 mb-0">Notitiche</h6></li>
+							<li>
+								<p><i class="fa fa-circle-o me-3 font-primary"> </i>3 clienti non acquistano da oltre 30 giorni <span class="pull-right">1 ora fa</span></p>
+							</li>
+							<li>
+								<p><i class="fa fa-circle-o me-3 font-success"></i>Lascia la tua opinione per l'ordine #18786748676<span class="pull-right">1 ora fa</span></p>
+							</li>
+							<li>
+								<p><i class="fa fa-circle-o me-3 font-info"></i>Questo mese hai 10 nuovi incaricati in rete<span class="pull-right">1 giorno fa</span></p>
+							</li>
+							<li><a class="btn btn-primary" href="#">Vai ai promemoria</a></li>
+						</ul>
+					</li>
+					<!-- endregion Notifiche -->
+					<!-- region Dark Mode -->
+					<li>
+						<div class="mode"><i class="fa fa-moon-o"></i></div>
+					</li>
+					<!-- endregion Dark Mode -->
+					<!-- region Carrello -->
+					<li class="cart-nav onhover-dropdown">
+						<div class="cart-box"><i data-feather="shopping-cart"></i><span class="badge rounded-pill badge-primary">2</span></div>
+						<ul class="cart-dropdown onhover-show-div">
+							<li><h6 class="mb-0 f-20">Il tuo Carrello</h6><i data-feather="shopping-cart"></i></li>
+							<li class="mt-0">
+								<div class="media"><img class="img-fluid rounded-circle me-3 img-60" src="../assets/images/ecommerce/01.jpg" alt="">
+									<div class="media-body"><span>T-shirt da donna</span>
+										<p>Taglia M</p>
+										<p>Quantità: 1</p>
+										<h6 class="text-end text-muted">EUR 50,00</h6>
+									</div>
+									<div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
+								</div>
+							</li>
+							<li class="mt-0">
+								<div class="media"><img class="img-fluid rounded-circle me-3 img-60" src="../assets/images/ecommerce/01.jpg" alt="">
+									<div class="media-body"><span>Pantaloni da donna</span>
+										<p>Taglia M</p>
+										<p>Quantità: 1</p>
+										<h6 class="text-end text-muted">EUR 80,00</h6>
+									</div>
+									<div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
+								</div>
+							</li>
+							<li>
+								<div class="total">
+									<h6 class="mb-2 mt-0 text-muted">Totale: <span class="f-right f-20">EUR 130,00</span></h6>
+								</div>
+							</li>
+							<li><a class="btn btn-block w-100 mb-2 btn-primary view-cart" href="cart.html">Vai al carrello</a><a class="btn btn-block w-100 btn-secondary view-cart" href="checkout.html">Checkout</a></li>
+						</ul>
+					</li>
+					<!-- endregion Carrello -->
+					<!-- region Messaggi -->
+					<li class="onhover-dropdown"><i data-feather="message-square"></i>
+						<ul class="chat-dropdown onhover-show-div">
+							<li><i data-feather="message-square"></i>
+								<h6 class="f-18 mb-0">Messaggi</h6>
+							</li>
+							<li>
+								<div class="media">
+									<p>Lorem Ipsum is simply dummy...</p>
+									<p class="f-12">1 giorno fa</p>
+								</div>
+							</li>
+							<li>
+								<div class="media">
+									<p>Lorem Ipsum is simply dummy...</p>
+									<p class="f-12">5 giorni fa</p>
+								</div>
+							</li>
+							<li class="text-center"><a class="btn btn-primary" href="#">Leggi tutti i messaggi</a></li>
+						</ul>
+					</li>
+					<!-- endregion Messaggi -->
+					<!-- region Fullscreen -->
+					<li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
+					<!-- endregion Fullscreen -->
+					<!-- region Profilo -->
+					<li class="profile-nav onhover-dropdown p-0 me-0">
+						<div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
+							<div class="media-body"><span>John Doe</span>
+								<p class="mb-0 font-roboto">Collaboratore <i class="middle fa fa-angle-down"></i></p>
+							</div>
+						</div>
+						<ul class="profile-dropdown onhover-show-div">
+							<li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
+							<li><a href="#"><i data-feather="log-out"> </i><span>Esci</span></a></li>
+						</ul>
+					</li>
+					<!-- endregion Profilo -->
+				</ul>
+			</div>
+			<script class="result-template" type="text/x-handlebars-template">
+				<div class="ProfileCard u-cf">
+					<div class="ProfileCard-avatar">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0">
+							<path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+							<polygon points="12 15 17 21 7 21 12 15"></polygon>
+						</svg>
+					</div>
+					<div class="ProfileCard-details">
+						<div class="ProfileCard-realName">{{name}}</div>
+					</div>
+				</div>
+			</script>
+			<script class="empty-template" type="text/x-handlebars-template">
+				<div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
+			<!-- endregion Header Menu -->
+		</div>
+	</div>
+	<!-- Page Header Ends -->
+	<!-- Page Body Start-->
+	<div class="page-body-wrapper">
+		<!-- Page Sidebar Start-->
+		<div class="sidebar-wrapper">
+			<div>
+				<!-- region Logo -->
+				<div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
+					<div class="back-btn"><i class="fa fa-angle-left"></i></div>
+					<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+				</div>
+				<div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""></a></div>
+				<!-- endregion Logo -->
+				<!-- region Menu -->
+				<nav class="sidebar-main">
+					<div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+					<div id="sidebar-menu">
+						<ul class="sidebar-links" id="simple-bar">
+							<li class="back-btn"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""></a>
+								<div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+							</li>
+							<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="home"> </i><span>Ingresso</span></a></li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="user"></i><span>Profilo</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Account</a></li>
+									<li><a href="#">Dati di residenza</a></li>
+									<li><a href="#">Dati di spedizione</a></li>
+									<li><a href="#">Documenti</a></li>
+									<li><a href="#">Privacy</a></li>
+									<li><a href="#">Pagamenti</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-main-title">
+								<div>
+									<h6>Attività</h6>
+									<p>Gestisci la tua rete</p>
+								</div>
+							</li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>La tua rete</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Albero Unilevel</a></li>
+									<li><a href="#">La tua struttura</a></li>
+									<li><a href="#">La tua carriera</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="share"></i><span>Marketing Tools</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Invita persone</a></li>
+									<li><a href="#">Social Post</a></li>
+									<li><a href="#">Sito personale</a></li>
+									<li><a href="#">Referral link</a></li>
+									<li><a href="#">Materiale per stampa</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="shopping-bag"></i><span>Ordini</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Crea un nuovo ordine</a></li>
+									<li><a href="#">Elenco degli ordini</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>Clienti</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Inserisci un nuovo cliente</a></li>
+									<li><a href="#">Elenco dei clienti</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-list">
+								<a class="sidebar-link sidebar-title" href="#"><i data-feather="calendar"></i><span>Academy</span></a>
+								<ul class="sidebar-submenu">
+									<li><a href="#">Eventi</a></li>
+									<li><a href="#">Le mie iscrizioni</a></li>
+								</ul>
+							</li>
+							<li class="sidebar-list"><label class="badge badge-info">4</label><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="bell"> </i><span>Promemoria</span></a></li>
+							<li class="sidebar-main-title">
+								<div>
+									<h6>Guadagni</h6>
+									<p>Consulta e richiedi le provvigioni</p>
+								</div>
+							</li>
+							<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="award"> </i><span>Bonus</span></a></li>
+							<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="download"> </i><span>eWallet</span></a></li>
+							<li class="sidebar-main-title">
+								<div>
+									<h6>Utilities</h6>
+									<p>Strumenti utili per la tua attività</p>
+								</div>
+							</li>
+							<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="file-text"> </i><span>Documenti</span></a></li>
+							<li class="sidebar-list"><label class="badge badge-info">2</label><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="message-square"> </i><span>Messaggi</span></a></li>
+							<li class="sidebar-list"><label class="badge badge-info">1</label><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="bookmark"> </i><span>Ticket System</span></a></li>
+							<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="#"><i data-feather="film"> </i><span>Multimedia Gallery</span></a></li>
+						</ul>
+					</div>
+					<div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+				</nav>
+				<!-- endregion Menu -->
+			</div>
+		</div>
+		<!-- Page Sidebar Ends-->
+		<!-- region Contenuto centrale della pagina -->
+		<div class="page-body">
+			<!-- region titolo e breadcrumb -->
+			<div class="container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-sm-6 order-sm-1">
+							<div class="mb-3 d-block d-sm-none"></div>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+								<li class="breadcrumb-item">Virtual Office</li>
+								<li class="breadcrumb-item active">Clienti</li>
+							</ol>
+							<div class="mb-2 d-block d-sm-none"></div>
+						</div>
+						<div class="col-sm-6 order-sm-0">
+							<div class="float-sm-start">
+								<h3>Clienti</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- endregion Titolo e breadcrumb -->
+			<!-- Container-fluid starts-->
+			<div class="container-fluid">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">
+							<span>Consulta l'elenco dei tuoi clienti.</span>
+						</div>
+						<div class="card-body">
+							<div id="datatable_responsive_customers_container" class="dt-ext table-responsive overflow_x_hidden">
+								<div id="filters_datatable" class="visually-hidden">
+									<div class="row">
+										<div class="col-sm-8 p-t-10">
+											Ricerca generica
+											<div class="input-group">
+												<input class="form-control" type="text" placeholder="Cerca per codice, nominativo, e-mail o telefono" aria-label="scegli"><span class="input-group-text"><i class="fa fa-search"></i></span>
+											</div>
+										</div>
+										<div class="col-sm-2 p-t-10">
+											Iscritti dal
+											<div class="input-group">
+												<input id="Data_contratto_dal" class="datepicker-here form-control digits" data-language="it" type="text" placeholder="" aria-label="scegli"><span class="input-group-text"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+										<div class="col-sm-2 p-t-10">
+											al
+											<div class="input-group">
+												<input id="Data_contratto_al" class="datepicker-here form-control digits" data-language="it" type="text" placeholder="" aria-label="scegli"><span class="input-group-text"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="m-b-20"></div>
+										<div class="col-sm-12">
+											<button type="button" class="btn btn-primary text-uppercase" onclick="filter();">filtra</button> <button type="button" class="btn btn-light text-uppercase" onclick="close_filters();">chiudi</button>
+										</div>
+									</div>
+								</div>
+								<table id="table_filters">
+									<tr>
+										<td>
+											<div id="filter_button_datatable" onclick="open_filters()">
+												Filtri (2) <i class="fa fa-sliders"></i>
+											</div>
+										</td>
+										<td>
+											<div id="applied_filters_datatable" class="visually-hidden">
+												<div id="applied_filters_datatable_container">
+													<span class="btn btn-outline-light btn-sm txt-dark">Ricerca generica <i class="fa fa-times"></i></span>
+													<span class="btn btn-outline-light btn-sm txt-dark">Periodo <i class="fa fa-times"></i></span>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</table>
+								<div class="clearfix"></div>
+								<div class="m-b-20"></div>
+								<table class="row-border hover" id="datatable_responsive_orders">
+									<thead>
+									<tr>
+										<th>Iscritto il</th>
+										<th>Codice</th>
+										<th>Nominativo</th>
+										<th>PC</th>
+										<th>Telefono</th>
+										<th>Email</th>
+										<th>Numero ordini</th>
+									</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Container-fluid Ends-->
+		</div>
+		<!--endregion Contenuto centrale della pagina -->
+		<!-- region Footer -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12 footer-copyright text-center">
+						<p class="mb-0">&copy; 2R Studio S.r.l. 2021  - info@2rstudio.it -  P.IVA 01746240504 | Privacy policy | Cookie policy | Contatti</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- endregion Footer -->
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js" integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+<script>
+	var DueRDataTableLaguages = {
+		paginate: {
+			previous: "precedente",
+			next: "successivo",
+		},
+		decimal: "",
+		emptyTable: "nessun dato disponibile",
+		/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+		info: "_TOTAL_ clienti | ",
+		infoEmpty: "visualizzati 0 a 0 di 0 elementi",
+		infoFiltered: "(filtrati da _MAX_ elementi totali)",
+		infoPostFix: "",
+		thousands: ",",
+		lengthMenu: "mostra _MENU_ per pagina",
+		loadingRecords: "caricamento...",
+		processing: "elaborazione...",
+		search: "Cerca:",
+		zeroRecords: "nessun_risultato",
+		aria: {
+			"sortAscending": ": attiva_per_ordine_ascendente",
+			"sortDescending": ": attiva_per_ordine_discendente"
+		}
+	};
+	$('#datatable_responsive_orders').DataTable( {
+		responsive: true,
+		ajax: "../assets/json/clienti.json",
+		language: DueRDataTableLaguages,
+		dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+		columnDefs: [
+			{   targets: 6,
+				className: 'dt-right'
+			},
+			{   targets: 3,
+				className: 'dt-right'
+			},
+			{   targets: 5,
+				className: 'dt-right'
+			},
+			{responsivePriority: 1, targets: 2},
+			{responsivePriority: 2, targets: 1}
+		]
+	} );
+	$("select[name=datatable_responsive_customers_length]").removeClass("form-control");
+
+	$.fn.datepicker.language['it'] = {
+		days: ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'],
+		daysShort: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+		daysMin: ['D', 'L', 'M', 'M', 'G', 'V', 'S'],
+		months: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno', 'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
+		monthsShort: ['Gen','Feb','Mar','Apr','Mag','Giu', 'Lug','Ago','Set','Ott','Nov','Dic'],
+		today: 'Oggi',
+		clear: 'Cancella',
+		dateFormat: 'dd/mm/yyyy',
+		timeFormat: 'hh:ii aa',
+		firstDay: 0
+	};
+
+	function  close_filters(){
+		$("#filters_datatable").addClass("visually-hidden");
+		$("#filter_button_datatable").removeClass("visually-hidden");
+		$("#applied_filters_datatable").removeClass("visually-hidden");
+	}
+	function  filter(){
+		close_filters();
+		$("#filter_button_datatable").removeClass("visually-hidden");
+		$("#applied_filters_datatable").removeClass("visually-hidden");
+
+	}
+	function open_filters(){
+		$("#filters_datatable").removeClass("visually-hidden");
+		$("#filter_button_datatable").addClass("visually-hidden");
+		$("#applied_filters_datatable").addClass("visually-hidden");
+	}
+</script>
+</body>
+</html>

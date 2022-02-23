@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "tipo": "PayPal",
+      "costo": 0.00,
+      "foto": "../assets/images/checkout/paypal.png",
+      "valuta": "EUR"
+    },
+    {
+      "id": 2,
+      "tipo": "Bonifico Bancario",
+      "costo": 10.00,
+      "foto": "",
+      "valuta": "EUR"
+    },
+    {
+      "id": 3,
+      "tipo": "Contrassegno",
+      "costo": 10.00,
+      "foto": "",
+      "valuta": "EUR"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{% for articolo in articoli %}
+    <div class="col-xl-3 col-sm-6 xl-4" id="creazioneCard">
+        <div class="card">
+            <div class="product-box">
+                {% if (articolo.sconto > 0) %}
+                    <div class="ribbon ribbon-success ribbon-right"> {{ articolo.sconto }}%</div>
+                {% endif %}
+                <div class="product-img">
+                    <img class="img-fluid" src="{% if articolo.foto | length > 0 %}{{ articolo.foto[0].url }}{% else %}{{ asset('assets/images/not-found.png') }}{% endif %}" alt="">
+                    <div class="product-hover">
+                        <ul>
+                            <li>
+                                {% if articolo.varianti|length < 1 %}
+                                    <span class="btn" type="button"
+                                          onclick="aggiungiArticolo({{ articolo.id }})"
+                                    ><i class="icon-shopping-cart"></i></span>
+                                {% else %}
+                                    <a href="{{ path('articolo', {id: articolo.id}) }}">
+                                       <span class="btn" type="button"
+                                       ><i class="icon-shopping-cart"></i></span>
+                                    </a>
+                                {% endif %}
+                            </li>
+                            <li>
+                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modal_articolo_{{ articolo.id }}">
+                                    <i class="icon-eye"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="modal_articolo_{{ articolo.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ articolo.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="product-box row">
+                                    <div class="product-img col-lg-6">
+                                        <img class="img-fluid" src="{% if articolo.foto | length > 0 %}{{ articolo.foto[0].url }}{% else %}{{ asset('assets/images/not-found.png') }}{% endif %}" alt="">
+                                    </div>
+                                    <div class="product-details col-lg-6 text-start">
+                                        <h4>{{ articolo.nome }}</h4>
+                                        <table class="width_100">
+                                            <tr>
+                                                <td>
+                                                    <div id="articolo_prezzo" class="product-price">
+                                                        {% if (articolo.sconto > 0) %}
+                                                            {{ articolo.prezzoScontato }}
+                                                            <del>{{ articolo.prezzo }}</del>
+                                                        {% else %}
+                                                            {{ articolo.prezzo }}
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                                <td id="articolo_punti" class="text-gray-light text-end">{{ articolo.punti }}</td>
+                                            </tr>
+                                        </table>
+                                        <div class="product-view">
+                                            <h6 class="f-w-600">{% trans %}Dettagli del prodotto{% endtrans %}</h6>
+                                            <p class="mb-0">{% if articolo.descrizione != '' %}{{ articolo.descrizione | raw }}{% else %}{% trans %}Non sono state fornite ulteriori informazioni sul prodotto{% endtrans %}.{% endif %}</p>
+                                        </div>
+                                        <div class="product-size">
+                                            <ul>
+                                                {% for variante in articolo.varianti %}
+                                                    <li>
+                                                        <button class="btn btn-outline-light" type="button" id_articolo="{{ articolo.id }}" id_variante="{{ variante.id_variante }}" prezzo="{{ variante.prezzo }}" prezzo_scontato="{{ variante.prezzo_scontato }}" onclick="selezionaVariante({{ variante.id_variante }});">{{ variante.nome | raw }}</button>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="product-qnty">
+                                            <h6 class="f-w-600">{% trans %}Quantità{% endtrans %}</h6>
+                                            <fieldset>
+                                                <div class="input-group">
+                                                    <input class="touchspin text-center" type="number" name="quantita_{{ articolo.id }}" value="{{ articolo.quantitaMultipla }}" min="{{ articolo.quantitaMultipla }}" {% if articolo.quantitaMax > 0 %}max="{{ articolo.quantitaMax }}"{% endif %} step="{{ articolo.quantitaMultipla }}">
+                                                </div>
+                                            </fieldset>
+                                            <div class="addcart-btn">
+                                                    <a id="acquista_{{ articolo.id }}" onclick="aggiungiArticolo({{ articolo.id }});" class="btn btn-primary" idv="0">{% trans %}Acquista{% endtrans %}</a>
+                                                <a href="{{ path('articolo', {id: articolo.id}) }}">
+                                                    <button class="btn btn-secondary" type="button">{% trans %}Vedi dettagli{% endtrans %}</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <div class="rating">
+                        {# {% for i in 1..articolo.rating %}
+                        <i class="fa fa-star"></i>
+                        {% endfor %} #}
+                    </div>
+                    <h4>{{ articolo.nome }}</h4>
+                    <p>Cod. {{ articolo.codice }}</p>
+                    <table class="width_100">
+                        <tr>
+                            <td>
+                                <div class="product-price">
+                                    {% if (articolo.sconto > 0) %}
+                                        {{ articolo.prezzoScontato }}
+                                        <del>{{ articolo.prezzo }}</del>
+                                    {% else %}
+                                        {{ articolo.prezzo }}
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="text-gray-light text-end">{{ articolo.punti }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,25 @@
+{
+  "draw": 1,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+  "data": [
+    [
+      "21/07/2021",
+      "CL000001",
+      "Mario Rossi",
+      "20",
+      "+39 329962655656",
+      "marco@2rstudio.it",
+      "10"
+    ],
+    [
+      "21/07/2021",
+      "CL000002",
+      "Luigi Bianchi",
+      "200",
+      "+39 3299626555455",
+      "marco.renzoni81@gmail.com",
+      "810"
+    ]
+  ]
+}

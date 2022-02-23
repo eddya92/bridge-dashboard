@@ -1,0 +1,232 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Sito personale{% endtrans %}{% endblock %}
+
+{% block css_page %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+{% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Marketing Tools{% endtrans %} / {% trans %}Sito personale{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Marketing Tools{% endtrans %} / {% trans %}Sito personale{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="blog-single">
+                        <div class="blog-box blog-details">
+                            <form id="form" method="post" action="{{ path('aggiorna-sito') }}" enctype="multipart/form-data">
+                                <div style="height: 200px; overflow: hidden;">
+                                    <img class="img-fluid w-100" src="{{ sito.fotoSfondo != '' ? sito.fotoSfondo : '/assets/images/foto_sfondo_base_minisito.jpg' }}" alt="landing page">
+                                </div>
+                                <div class="img_circle_centered">
+                                    <!-- <img class="rounded-circle" src="{{ sito.fotoProfilo }}" alt=""> -->
+                                    <img class="rounded-circle" src="{{ sito.fotoProfilo != '' ? sito.fotoProfilo : '/assets/images/foto_profilobase_minisito.jpg' }}" alt="">
+                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()">
+                                        <i class="fa fa-pencil"></i></div>
+                                    <input id="foto_profilo" hidden name="immagine" type="file">
+                                </div>
+                                <div class="blog-details">
+                                    <ul class="blog-social">
+                                        <li>{{ sito.qualifica }}</li>
+                                        {% if sito.collaboratori == 1 %}
+                                            <li>{{ sito.collaboratori }} collaboratore</li>
+                                        {% else %}
+                                            <li>{{ sito.collaboratori }} collaboratori</li>
+                                        {% endif %}
+                                    </ul>
+                                    <div class="col-sm-6 float-start">
+                                        <div class="single-blog-content-top">
+                                            <h4>
+                                                <input type="text" class="form-control bg-transparent f-w-600" name="titolo" value="{{ sito.titolo }}">
+                                            </h4>
+                                            <div class="m-b-20"></div>
+                                            <textarea class="form-control bg-transparent" name="descrizione">{{ sito.descrizione }}</textarea>
+                                            <div class="m-b-20"></div>
+                                            <hr>
+                                            <br>
+                                            <br>
+                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</h6>
+                                            <div class="input-group">
+                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}">
+                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span>
+                                            </div>
+                                            <div class="m-b-20"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 float-end">
+                                        <div class="m-b-40"></div>
+                                        <table class="width_100">
+                                            <tr>
+                                                <td class="text-end">{% trans %}Contattami al{% endtrans %}</td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                        <input type="text" class="form-control bg-transparent" name="telefono" value="{{ sito.telefono }}" placeholder="inserisci il tuo numero di telefono">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end p-t-20">{% trans %}Scrivimi a{% endtrans %}</td>
+                                                <td class=" p-t-20">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                                        <input type="email" class="form-control bg-transparent" name="email" value="{{ sito.email }}" placeholder="Inserisci la tua email">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end p-t-20">{% trans %}Facebook{% endtrans %}</td>
+                                                <td class=" p-t-20">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-facebook">  </i></span>
+                                                        <input class="form-control bg-transparent" type="text" name="facebook" value="{{ sito.facebook }}" placeholder="indirizzo della tua pagina Facebook">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end p-t-20">{% trans %}Instagram{% endtrans %}</td>
+                                                <td class=" p-t-20">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-instagram"></i></span>
+                                                        <input class="form-control bg-transparent" type="text" name="instagram" value="{{ sito.instagram }}" placeholder="indirizzo della tua pagina Instagram">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end p-t-20">{% trans %}Twitter{% endtrans %}</td>
+                                                <td class=" p-t-20">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-twitter"></i></span>
+                                                        <input class="form-control bg-transparent" type="text" name="twitter" value="{{ sito.twitter }}" placeholder="indirizzo della tua pagina Twitter">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end p-t-20">{% trans %}Youtube{% endtrans %}</td>
+                                                <td class=" p-t-20">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-youtube"></i></span>
+                                                        <input class="form-control bg-transparent" type="text" name="youtube" value="{{ sito.youtube }}" placeholder="indirizzo della tua pagina Youtube">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="m-b-40"></div>
+                                    <div class="m-auto w-auto text-center">
+                                        <button id="idpo" type="submit" class="btn btn-primary">{% trans %}Aggiorna dati{% endtrans %}</button>
+                                    </div>
+                                    <div class="m-b-40"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+
+		var input = document.getElementById('foto_profilo');
+
+		function modificaFotoProfilo(){
+			input.click()
+		}
+
+		input.onchange = function(e){
+			document.getElementById('idpo').click()
+		};
+
+		function copyToClipboard(text){
+			var sampleTextarea = document.createElement("textarea");
+			document.body.appendChild(sampleTextarea);
+			sampleTextarea.value = text; //save main text in it
+			sampleTextarea.select(); //select textarea contenrs
+			document.execCommand("copy");
+			document.body.removeChild(sampleTextarea);
+		}
+
+
+		function copy(){
+			var text = document.getElementById('inputCopy').value;
+			copyToClipboard(text);
+			alert('link copiato')
+		}
+    </script>
+{% endblock javascript_page %}

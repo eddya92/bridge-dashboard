@@ -1,0 +1,149 @@
+{
+  "draw": 1,
+  "recordsTotal": 12,
+  "recordsFiltered": 12,
+  "data": [
+    [
+      "<span>Dicembre 2021</span>",
+      "<span>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      12
+    ],
+    [
+      "Novembre 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      11
+    ]
+  ,
+    [
+      "Ottobre 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      10
+    ]
+  ,
+    [
+      "Settembre 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      9
+    ]
+  ,
+    [
+      "Agosto 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      8
+    ]
+  ,
+    [
+      "Luglio 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      7
+    ]
+  ,
+    [
+      "Giugno 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      6
+    ]
+  ,
+    [
+      "Maggio 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      5
+    ]
+  ,
+    [
+      "Aprile 2021",
+      "<span class='span_qualifica_1'>Advisor</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#b0b0b0;'>non richiesta</span>",
+      "<span style='color:#922043;'>NO</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      4
+    ]
+  ,
+    [
+      "Marzo 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      3
+    ]
+  ,
+    [
+      "Febbraio 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      2
+    ]
+  ,
+    [
+      "Gennaio 2021",
+      "<span class='span_qualifica_2'>Manager</span>",
+      "<span>10</span>",
+      "<span>40</span>",
+      "<span>50</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#33b18a;'>SI</span>",
+      "<span style='color:#b0b0b0;'>SI</span>",
+      1
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "name": "First user",
+      "score": 50
+    },
+    {
+      "name": "Second user",
+      "score": 40
+    },
+    {
+      "name": "Third user",
+      "score": 30
+    }
+  ]
+}

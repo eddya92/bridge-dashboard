@@ -1,0 +1,159 @@
+{
+  "data": [
+    {
+      "nome": "bronzo",
+      "qualifica_attuale": false,
+      "id": 1,
+      "colore": "#ccc",
+      "requisiti": [
+        {
+          "requisito": "15.000 PC",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno un collaboratore direttamente sponsorizzato con qualifica Advisor",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno un collaboratore direttamente sponsorizzato con qualifica Bronze",
+          "raggiunto": true
+        }
+      ],
+      "ricompensa": [
+        {
+          "ricompensa": "25% di provvigione diretta"
+        },
+        {
+          "ricompensa": "Unilevel Bonus fino a 7 livelli"
+        },
+        {
+          "ricompensa": "Car Bonus di € 1.000,00"
+        }
+      ]
+    },
+    {
+      "nome": "silver",
+      "qualifica_attuale": true,
+      "id": 2,
+      "colore": "#efefef",
+      "requisiti": [
+        {
+          "requisito": "35.000 PC",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno un collaboratore direttamente sponsorizzato con qualifica Advisor",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno un collaboratore direttamente sponsorizzato con qualifica Bronze",
+          "raggiunto": true
+        }
+      ],
+      "ricompensa": [
+        {
+          "ricompensa": "35% di provvigione diretta"
+        },
+        {
+          "ricompensa": "Unilevel Bonus fino a 9 livelli"
+        },
+        {
+          "ricompensa": "Car Bonus di € 2.000,00"
+        }
+      ]
+    },
+    {
+      "nome": "Gold",
+      "qualifica_attuale": false,
+      "id": 3,
+      "colore": "#ff3",
+      "requisiti": [
+        {
+          "requisito": "45.000 PC",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno due collaboratore direttamente sponsorizzato con qualifica Advisor",
+          "raggiunto": true
+        },
+        {
+          "requisito": "Almeno due collaboratore direttamente sponsorizzato con qualifica Bronze",
+          "raggiunto": false
+        }
+      ],
+      "ricompensa": [
+        {
+          "ricompensa": "37% di provvigione diretta"
+        },
+        {
+          "ricompensa": "Unilevel Bonus fino a 12 livelli"
+        },
+        {
+          "ricompensa": "Car Bonus di € 3.000,00"
+        }
+      ]
+    },
+    {
+      "nome": "diamond",
+      "qualifica_attuale": false,
+      "id": 4,
+      "colore": "#eee",
+      "requisiti": [
+        {
+          "requisito": "59.000 PC",
+          "raggiunto": false
+        },
+        {
+          "requisito": "Almeno tre collaboratore direttamente sponsorizzato con qualifica Advisor",
+          "raggiunto": false
+        },
+        {
+          "requisito": "Almeno tre collaboratore direttamente sponsorizzato con qualifica Bronze",
+          "raggiunto": false
+        }
+      ],
+      "ricompensa": [
+        {
+          "ricompensa": "41% di provvigione diretta"
+        },
+        {
+          "ricompensa": "Unilevel Bonus fino a 7 livelli"
+        },
+        {
+          "ricompensa": "Car Bonus di € 1.000,00"
+        }
+      ]
+    },
+    {
+      "nome": "EMERALD",
+      "qualifica_attuale": false,
+      "id": 5,
+      "colore": "#aeaeae",
+      "requisiti": [
+        {
+          "requisito": "15.000 PC",
+          "raggiunto": false
+        },
+        {
+          "requisito": "Almeno quattro collaboratore direttamente sponsorizzato con qualifica Advisor",
+          "raggiunto": false
+        },
+        {
+          "requisito": "Almeno quattro collaboratore direttamente sponsorizzato con qualifica Bronze",
+          "raggiunto": false
+        }
+      ],
+      "ricompensa": [
+        {
+          "ricompensa": "47% di provvigione diretta"
+        },
+        {
+          "ricompensa": "Unilevel Bonus fino a 7 livelli"
+        },
+        {
+          "ricompensa": "Car Bonus di € 1.000,00"
+        }
+      ]
+    }
+  ]
+}

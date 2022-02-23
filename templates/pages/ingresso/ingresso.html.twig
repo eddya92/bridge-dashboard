@@ -1,0 +1,133 @@
+{% extends 'layouts/interno.html.twig' %}
+
+{% block title %}{% trans %}Ingresso{% endtrans %}{% endblock %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb ">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item ">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Ingresso{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Virtual Office di{% endtrans %} {{ account.nome }}</h3>
+                        </div>
+                        <div class="float-sm-start" style="display: none;">
+                            <div id="typehead_ID_utente">
+                                <div id="typehead_sottoposti" class="input-group">
+                                    <input class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="John Doe"><span class="input-group-text"><i class="icofont icofont-user"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div id="top5_carriera_sponsor" class="container-fluid">
+            <div class="row second-chart-list third-news-update" id="row">
+                <!-- region Totali -->
+                <div class="col-xl-12 xl-100 chart_data_left box-col-12">
+                    {{ totali() }}
+                </div>
+                <!-- endregion Totali -->
+                <!-- region Notizie principali -->
+                <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12" id="notizie_principali_homePage">
+                    {{ notiziePrincipali(app.request.locale) }}
+                </div>
+                <!-- endregion Notizie principali -->
+                <!-- region Grafico -->
+                <div class="col-xl-8 xl-100 dashboard-sec box-col-12" id="grafico_vendite_homePage">
+                    {{ graficoVendite(app.request.locale) }}
+                </div>
+                <!-- endregion Grafico -->
+                <!-- region TOP5 -->
+                <div class="col-xl-4 xl-50 news box-col-6">
+                    {{ top5() }}
+                </div>
+                <!-- endregion TOP5 -->
+
+                <!-- region Carriera -->
+                <div class="col-xl-4 xl-50 news box-col-6">
+                    {{ carriera(app.user.codice(),app.request.locale()) }}
+                </div>
+                <!-- endregion Carriera -->
+
+                <!-- region Sponsor -->
+                <div class="col-xl-4 xl-50 news box-col-6">
+                    {{ account(superiore, 'sponsor',app.request.locale()) }}
+                </div>
+                <!-- endregion Sponsor -->
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/chart/chartist/chartist.js"></script>
+<script src="../assets/js/chart/chartist/chartist-plugin-tooltip.js"></script>
+<script src="../assets/js/chart/knob/knob.min.js"></script>
+<script src="../assets/js/chart/knob/knob-chart.js"></script>
+<script src="../assets/js/chart/apex-chart/apex-chart.js"></script>
+<script src="../assets/js/chart/apex-chart/stock-prices.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/dashboard/default.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="../assets/js/typeahead/typeahead.custom.js"></script>
+<script src="../assets/js/typeahead-search/handlebars.js"></script>
+<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		$(document).ready(function(){
+			resize();
+		});
+
+		function resize(){
+			var notiziePrincipali = $('#notizie_principali').height()
+			var graficoVendite = $('#grafico_vendite').height()
+			if(notiziePrincipali > graficoVendite){
+				console.log('piu grande notizie', notiziePrincipali);
+			} else if(notiziePrincipali < graficoVendite){
+				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
+			}
+		}
+
+    </script>
+{% endblock javascript_page %}

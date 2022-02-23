@@ -1,0 +1,24 @@
+{
+  "data": {
+    "id": 16,
+    "nome": "Documenti per gli Incaricati",
+    "descrizione": "Documenti per gli Incaricati",
+    "breadcrumb": "Documenti per gli Incaricati",
+    "cartella_superiore": {
+      "id": 1,
+      "nome": "Root"
+    },
+    "files": [
+      {
+        "id": 46,
+        "nome": "Piano Marketing",
+        "descrizione": "Piano Marketing dettagliato",
+        "cartella": false,
+        "numero_documenti": 0,
+        "estensione": "pdf",
+        "dimensione": 23365,
+        "link": "http://localhost:5300/private/Documenti/46.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20211116T113721Z&X-Amz-Expires=3600&X-Amz-Credential=miniouser%2F20211116%2Fus-east-1%2Fs3%2Faws4_request&x-amz-content-sha256=UNSIGNED-PAYLOAD&X-Amz-SignedHeaders=host&X-Amz-Signature=a040dbfee001b916fd08eead84015c82849874ac268517e8862cc871b9e8c7e1"
+      }
+    ]
+  }
+}

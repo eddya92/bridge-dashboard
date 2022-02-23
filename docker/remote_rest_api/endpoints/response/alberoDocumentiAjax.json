@@ -1,0 +1,53 @@
+{
+  "data": {
+    "id": 12,
+    "nome": "Sponsorizzazioni",
+    "descrizione": "Eventuale descrizione della cartella.\n",
+    "breadcrumb": "Materiale per l'attività / Sponsorizzazioni",
+    "cartella_superiore": {
+      "id": 14
+    },
+    "files": [
+      {
+        "id": 13,
+        "name": "Cartella 1",
+        "descrizione": "Eventuale descrizione della cartella 1.\n",
+        "cartella": true,
+        "numeroDocumenti": 2,
+        "estensione": "",
+        "dimensione": 0,
+        "link": ""
+      },
+      {
+        "id": 14,
+        "name": "File 1",
+        "descrizione": "Eventuale descrizione del file 1.\n",
+        "cartella": false,
+        "numeroDocumenti": 0,
+        "estensione": "pdf",
+        "dimensione": 1255.55,
+        "link": "https://cdn.2rstudio.it/download/adsdadadasdasas"
+      },
+      {
+        "id": 15,
+        "name": "Cartella 2",
+        "descrizione": "Eventuale descrizione della cartella 2.\n",
+        "cartella": true,
+        "numeroDocumenti": 0,
+        "estensione": "",
+        "dimensione": 0,
+        "link": ""
+      },
+      {
+        "id": 16,
+        "name": "File 2",
+        "descrizione": "",
+        "cartella": false,
+        "numeroDocumenti": 0,
+        "estensione": "png",
+        "dimensione": 2555.55,
+        "link": "https://www.google.it"
+      }
+    ]
+  }
+}

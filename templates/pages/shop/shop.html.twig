@@ -1,0 +1,799 @@
+{% extends 'layouts/interno.html.twig' %}
+{% block title %}{% trans %}Shop{% endtrans %}{% endblock %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+              integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+              integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/owlcarousel.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/range-slider.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none">{% trans %}Crea un nuovo ordine{% endtrans %}</div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Crea un nuovo ordine{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <div class="container-fluid product-wrapper">
+            {% include 'layouts/partials/session_message.html.twig' %}
+
+            <div class="product-grid">
+                <div class="feature-products">
+                    <!-- region Menu con motore di ricerca ed link di apertura dei filtri -->
+                    <div class="row">
+                        <div class="col-md-6 products-total">
+                            <div class="square-product-setting d-inline-block"><a class="icon-grid grid-layout-view"
+                                                                                  href="#" data-original-title=""
+                                                                                  title=""><i
+                                            data-feather="grid"></i></a></div>
+                            <div class="square-product-setting d-inline-block"><a class="icon-grid m-0 list-layout-view"
+                                                                                  href="#" data-original-title=""
+                                                                                  title=""><i
+                                            data-feather="list"></i></a></div>
+                            <span class="d-none-productlist filter-toggle">
+                                    {% trans %}Filtri di ricerca{% endtrans %} <span class="ms-2"><i class="toggle-data"
+                                                                                                     data-feather="chevron-down"></i></span></span>
+                            <div class="grid-options d-inline-block">
+                                <ul>
+                                    <li><a class="product-2-layout-view" href="#" data-original-title="" title=""><span
+                                                    class="line-grid line-grid-1 bg-primary"></span><span
+                                                    class="line-grid line-grid-2 bg-primary"></span></a></li>
+                                    <li><a class="product-3-layout-view" href="#" data-original-title="" title=""><span
+                                                    class="line-grid line-grid-3 bg-primary"></span><span
+                                                    class="line-grid line-grid-4 bg-primary"></span><span
+                                                    class="line-grid line-grid-5 bg-primary"></span></a></li>
+                                    <li><a class="product-4-layout-view" href="#" data-original-title="" title=""><span
+                                                    class="line-grid line-grid-6 bg-primary"></span><span
+                                                    class="line-grid line-grid-7 bg-primary"></span><span
+                                                    class="line-grid line-grid-8 bg-primary"></span><span
+                                                    class="line-grid line-grid-9 bg-primary"></span></a></li>
+                                    <li><a class="product-6-layout-view" href="#" data-original-title="" title=""><span
+                                                    class="line-grid line-grid-10 bg-primary"></span><span
+                                                    class="line-grid line-grid-11 bg-primary"></span><span
+                                                    class="line-grid line-grid-12 bg-primary"></span><span
+                                                    class="line-grid line-grid-13 bg-primary"></span><span
+                                                    class="line-grid line-grid-14 bg-primary"></span><span
+                                                    class="line-grid line-grid-15 bg-primary"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <span class="f-w-400 m-r-5"><span style="display: none;">Mostrati 1 - 24 di 200 risultati. </span></span>
+                            <span class="f-w-400 m-r-5" id="ordinamento_label"></span>
+                            <div id="ordinamento_container" class="select2-drpdwn-product select-options d-inline-block">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- endregion Menu con motore di ricerca ed link di apertura dei filtri -->
+                    <!-- region Filtri di ricerca -->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="product-sidebar">
+                                <div class="filter-section">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="mb-0 f-w-600">{% trans %}Filtri di ricerca{% endtrans %} <span
+                                                        class="text-primary f-w-100"
+                                                        id="numeroFiltriAttivi"></span><span class="pull-right"><i
+                                                            class="fa fa-chevron-down toggle-data"></i></span></h6>
+                                        </div>
+                                        <div class="left-filter" id="left-filter">
+                                            <div class="card-body filter-cards-view animate-chk">
+                                                <div class="product-filter" id="id_product-filter">
+                                                    <h6 class="f-w-600" id="nomeCategoriaSelezionata"></h6>
+                                                    <ul class="list-group list-group-flush" id="elencoFiltri">
+
+                                                    </ul>
+                                                </div>
+                                                <div class="m-b-20"></div>
+                                                <div class="" id="afterLinkFilter"></div>
+
+                                                <div class="m-b-20"></div>
+                                                <div class="product-filter pb-0">
+                                                    <button class="btn btn-primary" id="filtraButton" onclick="aggiornaShop()">{% trans %}Filtra{% endtrans %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-sm-12">
+                            <form>
+                                <div class="form-group m-0">
+                                    <input class="form-control searchBarQuery" type="search" id="searchBar" onkeyup="shop()"
+                                           placeholder="Cerca..." data-original-title="" title=""><i
+                                            class="fa fa-search"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- endregion Filtri di ricerca -->
+                </div>
+                <!-- region Prodotti -->
+                <div class="product-wrapper-grid">
+                    <div class="row">
+                        <div class="col-xs-12 p-l-30">
+                            <table class="w-auto">
+                                <tr>
+                                    <td>{% trans %}Filtri abilitati{% endtrans %}:</td>
+                                    <td>
+                                        <div id="applied_filters_datatable_container">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="m-b-10"></div>
+                    </div>
+                    <div class="row" id="articles-pers">
+                        <!-- region singolo prodotto -->
+
+                    </div>
+                </div>
+                <!-- endregion Prodotti -->
+            </div>
+            <!-- region pagination -->
+            <nav aria-label="..." style="display: none;">
+                <ul class="pagination pagination-primary float-end">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1">{% trans %}Previous{% endtrans %}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">2
+                            <span class="sr-only">({% trans %}current{% endtrans %})</span></a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">{% trans %}Next{% endtrans %}</a></li>
+                </ul>
+            </nav>
+            <div class="m-b-20"></div>
+            <!-- endregion pagination -->
+        </div>
+    </div>
+{% endblock page_body %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/touchspin/touchspin.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/owlcarousel/owl.carousel.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/range-slider/ion.rangeSlider.min.js"></script>
+<script src="../assets/js/range-slider/rangeslider-script.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/product-tab.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+
+{% endblock javascript %}
+
+{% block javascript_page %}
+    <script>
+		//faccio chiamata al json dei filtri
+		var locale = "{{ app.request.locale() }}";
+
+		(function(){
+			let url = " {{ path('filtri-ajax' , { locale : ':locale' }) }} ";
+			url = url.replace(':locale', locale);
+			$.ajax({
+				'url': url,
+				'method': 'GET',
+				'success': function(risposta){
+					creazioneFiltriDajson(risposta);
+					shopAjax();
+				}
+			})
+		})();
+
+		filtri = [];
+		prodottiInEvidenza = [];
+
+		/*
+        * scarico filtri da json
+        * creo i filtri in base al tipo di input che mi arriva
+        */
+		function creazioneFiltriDajson(risposta){
+			var clicked = false;
+			risposta.forEach(function(filtrato){
+				const expr = filtrato.tipo;
+				switch(expr){
+					case 'link':
+						var filtro = document.createElement('li');
+						filtro.setAttribute('class', 'list-group-item');
+						filtro.setAttribute('style', 'padding-left:10px !important;');
+						filtro.setAttribute('id', filtrato.id);
+						filtro.setAttribute('nameFilter', filtrato.id);
+						filtro.setAttribute('valueFilter', filtrato.nome);
+						filtro.setAttribute('onclick', 'selezionoFiltro(this.id,this.getAttribute("valueFilter"),)');
+						filtro.innerHTML = '<a href="#">' + filtrato.nome + '</a>';
+						var idContenitore = document.getElementById('elencoFiltri');
+						idContenitore.appendChild(filtro);
+						filtri.push(filtrato)
+						break;
+					case 'range':
+						afterLinkFilter = document.getElementById('afterLinkFilter');
+						let container = document.createElement('div');
+						container.setAttribute('class', 'product-filter pb-0');
+						container.setAttribute('id', 'containerRange' + filtrato.id);
+						container.setAttribute('minValue', filtrato.min);
+						container.setAttribute('maxValue', filtrato.max);
+						container.innerHTML = '<h6 class="f-w-600">' + filtrato.nome + '</h6>' + '<input name="' + filtrato.nome + '" id="' + filtrato.id + '" type="text" onchange="showRangeValue(this.value,this.id,this.name)">';
+
+						container.innerHTML = container.innerHTML + '<div class="m-b-20"></div>';
+						afterLinkFilter.appendChild(container);
+
+						$('#' + filtrato.id).ionRangeSlider({
+							type: "double",
+							min: filtrato.min,
+							max: filtrato.max,
+							from: filtrato.min,
+							to: filtrato.max,
+							grid: true,
+							prefix: filtrato.prefix
+						});
+						break;
+					case 'checkbox':
+						afterLinkFilter = document.getElementById('afterLinkFilter');
+						let checkbox = document.createElement('div');
+						checkbox.setAttribute('id', 'containerCheckbox' + filtrato.id);
+						checkbox.innerHTML = '<input type="checkbox" id="' + filtrato.id + '" name="scales" nameFilter="' + filtrato.nome + '" value="v"  onclick="getCheck(this.value,this.id, this.getAttribute(\'nameFilter\'))">' + '<label for="scales" id="label' + filtrato.id + '">' + filtrato.nome + '</label>';
+						checkbox.innerHTML = checkbox.innerHTML + '<div class="m-b-20"></div>';
+						afterLinkFilter.appendChild(checkbox);
+						break;
+					case 'select_ext':
+						var select = '';
+						select += '<select class="form-control btn-square select_ext" name="' + filtrato.id + '" id="' + filtrato.id + '" onchange="aggiornaShop();">';
+						$(filtrato.valori).each(function(i, j){
+							select += '<option value="' + j.valore + '" ' + (i == 0 ? 'selectd' : '') + '>' + j.nome + '</option>';
+						});
+						select += '</select>'
+						$('#ordinamento_container').html(select);
+						$('#ordinamento_label').html(filtrato.nome);
+						break;
+				}
+
+				if(!clicked){
+					clicked = true;
+					document.getElementById(filtrato.id).click();
+				}
+			})
+			prodottiInEvidenza = filtri[0];
+			filtri.shift()
+		}
+
+		function selezionoFiltro(idCategory, name){
+			var classeAttiva = document.querySelector('.f-w-500');
+			if(classeAttiva){
+				classeAttiva.classList.remove('f-w-500');
+			}
+			let filtroSelezionato = "";
+			filtroSelezionato = filtri.find(({id}) => id == idCategory)
+			if(filtroSelezionato){
+				filtroSelezionato = filtri.find(({id}) => id == idCategory)
+			} else{
+				filtroSelezionato = prodottiInEvidenza;
+				//fare qui chiamata senza filtri
+			}
+
+			if(filtroSelezionato.sottoCategorie.length === 0){
+				var categoria = document.getElementById(idCategory);
+				categoria.classList.add('f-w-500');
+				impostaFiltro(categoria, idCategory, name);
+
+			} else{
+				document.getElementById('elencoFiltri').innerHTML = "";
+				var nomeFiltro = document.getElementById('nomeCategoriaSelezionata');
+				nomeFiltro.innerHTML = filtroSelezionato.nome.charAt(0).toUpperCase() + filtroSelezionato.nome.slice(1);
+				creoFiltriSottocategoria(filtroSelezionato, filtroSelezionato.sottoCategorie)
+			}
+		}
+
+		function creoFiltriSottocategoria(categoria, sottocategorie){
+			var pEvidenza = document.createElement('li');
+			pEvidenza.setAttribute('class', 'list-group-item');
+			pEvidenza.setAttribute('style', 'padding-left:10px !important;');
+			pEvidenza.setAttribute('id', prodottiInEvidenza.id);
+			pEvidenza.setAttribute('nameFilter', "categoria");
+			pEvidenza.setAttribute('onclick', 'selezionoFiltroEvidenza(this.id)');
+			pEvidenza.innerHTML = '<a href="#">' + prodottiInEvidenza.nome + '</a>';
+			var idContenitore = document.getElementById('elencoFiltri');
+			idContenitore.appendChild(pEvidenza);
+
+			var filtro = document.createElement('li');
+			filtro.setAttribute('class', 'list-group-item');
+			filtro.setAttribute('style', 'padding-left:10px !important;');
+			filtro.setAttribute('id', categoria.id);
+			filtro.setAttribute('onclick', 'tornaIndietro(this.id)');
+			filtro.innerHTML = '<a href="#">' + "< Torna a " + categoria.nome + '</a>';
+			idContenitore.appendChild(filtro);
+
+			sottocategorie.forEach(function(filtrato){
+					var filtro = document.createElement('li');
+					filtro.setAttribute('class', 'list-group-item');
+					filtro.setAttribute('style', 'padding-left:10px !important;');
+					filtro.setAttribute('id', filtrato.id);
+					filtro.setAttribute('idCategoria', categoria.id);
+					filtro.setAttribute('nameFilter', "categoria");
+					filtro.setAttribute('onclick', 'selezionoFiltroSottoCategoria(this.id, this.getAttribute("idCategoria"),this.getAttribute("nameFilter"))');
+					filtro.innerHTML = '<a href="#">' + " &nbsp;&nbsp;&nbsp;" + filtrato.nome + '</a>';
+					var idContenitore = document.getElementById('elencoFiltri');
+					idContenitore.appendChild(filtro);
+				}
+			);
+		}
+
+		function selezionoFiltroSottoCategoria(idFiltro, idCategoria){
+			var classeAttiva = document.querySelector('.f-w-500');
+			if(classeAttiva){
+				classeAttiva.classList.remove('f-w-500');
+			}
+			let filtroSelezionato = filtri.find(({id}) => id == idCategoria)
+			let filtroSelezionatoSottocategoria = filtroSelezionato.sottoCategorie.find(({id}) => id == idFiltro)
+			if(filtroSelezionatoSottocategoria.sotto_categorie.length === 0){
+				var categoria = document.getElementById(idFiltro);
+				var nomeFiltro = document.getElementById('nomeCategoriaSelezionata');
+				nomeFiltro.innerHTML = filtroSelezionato.nome.charAt(0).toUpperCase() + filtroSelezionato.nome.slice(1);
+				//document.getElementById('numeroFiltriAttivi').innerHTML = "(1)";
+				categoria.classList.add('f-w-500');
+				impostaFiltro(categoria, filtroSelezionatoSottocategoria.id, filtroSelezionatoSottocategoria.nome);
+			}
+		}
+
+		let count = 0;
+
+		/*
+         *torna indietro da filtri sottocategoria a categoria
+         */
+		function tornaIndietro(idCategoria){
+			document.getElementById('nomeCategoriaSelezionata').innerHTML = " ";
+			document.getElementById('elencoFiltri').innerHTML = " ";
+
+			var pEvidenza = document.createElement('li');
+			pEvidenza.setAttribute('class', 'list-group-item');
+			pEvidenza.setAttribute('style', 'padding-left:10px !important;');
+			pEvidenza.setAttribute('id', prodottiInEvidenza.id);
+			pEvidenza.setAttribute('onclick', 'selezionoFiltroEvidenza(this.id)');
+			pEvidenza.innerHTML = '<a href="#">' + prodottiInEvidenza.nome + '</a>';
+			var idContenitore = document.getElementById('elencoFiltri');
+			idContenitore.appendChild(pEvidenza);
+
+			filtri.forEach(function(filtrato){
+					var filtro = document.createElement('li');
+					filtro.setAttribute('class', 'list-group-item');
+					filtro.setAttribute('style', 'padding-left:10px !important;');
+					filtro.setAttribute('id', filtrato.id);
+					filtro.setAttribute('onclick', 'selezionoFiltro(this.id)');
+					filtro.innerHTML = '<a href="#">' + filtrato.nome + '</a>';
+					var idContenitore = document.getElementById('elencoFiltri');
+					idContenitore.appendChild(filtro);
+				}
+			);
+		}
+
+		/*
+         *prendo l'id cliccato dall'utente per attivare i filtri,e chiamo la funzione "impostaFiltro" della sezione "in evidenza"
+         */
+		function selezionoFiltroEvidenza(idFiltro){
+			var classeAttiva = document.querySelector('.f-w-500');
+
+			if(classeAttiva){
+				classeAttiva.classList.remove('f-w-500');
+			}
+
+			let filtroSelezionato = prodottiInEvidenza;
+
+			if(filtroSelezionato.sottoCategorie.length === 0){
+				var categoria = document.getElementById(idFiltro);
+				categoria.classList.add('f-w-500');
+
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+				impostaFiltro(categoria, idFiltro, prodottiInEvidenza.nome);
+			} else{
+				document.getElementById('elencoFiltri').innerHTML = "";
+				var nomeFiltro = document.getElementById('nomeCategoriaSelezionata');
+				nomeFiltro.innerHTML = filtroSelezionato.nome.charAt(0).toUpperCase() + filtroSelezionato.nome.slice(1);
+				creoFiltriSottocategoria(filtroSelezionato, filtroSelezionato.sottoCategorie)
+			}
+
+		}
+
+		/*
+        *rimuovo la classe bold e rimuovo il filtro impostato(range o categoria)
+        */
+		function rimuoviFiltro(id){
+			var element = document.getElementById(id);
+			element.remove()
+			var classeAttiva = document.querySelector('.f-w-500');
+			if(classeAttiva){
+				classeAttiva.classList.remove('f-w-500');
+			}
+			count = count - 1;
+			if(count == 0){
+				document.getElementById('numeroFiltriAttivi').innerHTML = " ";
+
+			} else{
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		//fine funzione rimuovofiltro
+
+		/* controllo se ci sono filtri attivi "categoria",se non ci sono imposto questa...altrimenti la sostituisco!
+         * controllo se ci sono filtri attivi(se c'è un range attivo,imposto la categoria prima del range)
+         */
+		function impostaFiltro(categoria, idCategory, name){
+			let categoriaDaAttivare = categoria.children[0].innerHTML
+			let categoriaAttiva = categoriaDaAttivare.charAt(0).toUpperCase() + categoriaDaAttivare.slice(1);
+			let contenitore = document.getElementById('applied_filters_datatable_container')
+			var filtroEsistente = document.getElementById("filtrocategory");
+			let altriFiltri = document.querySelectorAll(".filtroAttivo");
+			if(filtroEsistente){
+				var filtroNuovo = document.createElement('span');
+				filtroNuovo.setAttribute('class', 'btn btn-outline-light btn-sm txt-dark filtroAttivo');
+				filtroNuovo.setAttribute('id', "filtrocategory");
+				filtroNuovo.setAttribute('valueFilter', categoria.id);
+				filtroNuovo.setAttribute('nameFilter', categoria.id);
+				filtroNuovo.setAttribute('onclick', 'rimuoviFiltro(this.id)');
+				filtroNuovo.innerHTML = categoriaAttiva + " " + '<i class="fa fa-times">';
+				if(altriFiltri){
+					filtroEsistente.remove();
+					contenitore.append(filtroNuovo)
+				} else{
+					contenitore.prepend(filtroNuovo)
+				}
+			} else{
+				var filtroNuovos = document.createElement('span');
+				filtroNuovos.setAttribute('class', 'btn btn-outline-light btn-sm txt-dark filtroAttivo');
+				filtroNuovos.setAttribute('id', "filtrocategory");
+				filtroNuovos.setAttribute('valueFilter', categoria.id);
+				filtroNuovos.setAttribute('nameFilter', categoria.id);
+				filtroNuovos.setAttribute('onclick', 'rimuoviFiltro(this.id)');
+				filtroNuovos.innerHTML = categoriaAttiva + " " + '<i class="fa fa-times">';
+				if(altriFiltri){
+					contenitore.prepend(filtroNuovos)
+				}
+				//contenitore.innerHTML = '<span class="btn btn-outline-light btn-sm txt-dark filtroAttivoAzionato" id="filtrocategory" onclick="rimuoviFiltro(this.id)">' + categoriaAttiva + " " + '<i class="fa fa-times">' + '</span>'
+
+				//    }
+				count++;
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		/*
+         * controllo se ci sono filtri attivi "range",se non ci sono imposto questa...altrimenti la sostituisco!
+         *controllo se ci sono filtri attivi(se c'è una "categoria" attivo,imposto il range dopo la categoria)
+         */
+		function showRangeValue(value, id, name){
+			let values = value.split(";");
+			let min = values[0];
+			let max = values[1];
+			let contenitore = document.getElementById('applied_filters_datatable_container')
+			let filtroRangeAttivo = document.getElementById('filtro' + id)
+
+			let filtroCategory = document.getElementById('filtrocategory');
+
+			if(filtroCategory){
+				var filtroNuovo = document.createElement('span');
+				filtroNuovo.setAttribute('class', "btn btn-outline-light btn-sm txt-dark filtroAttivo " + name);
+				filtroNuovo.setAttribute('id', 'filtro' + id);
+				filtroNuovo.setAttribute('valueFilter', value);
+				filtroNuovo.setAttribute('nameFilter', id);
+				filtroNuovo.setAttribute('onclick', 'rimuoviFiltroRange(this.id,this.getAttribute("minValue"),this.getAttribute("maxValue"))');
+				filtroNuovo.innerHTML = "Range" + " " + name + " " + "impostato" + " " + min + "-" + max + '<i class="fa fa-times">';
+				if(filtroRangeAttivo){
+					filtroRangeAttivo.remove();
+					contenitore.append(filtroNuovo)
+				} else{
+					contenitore.append(filtroNuovo)
+					count++;
+				}
+			} else{
+				var filtroNuovos = document.createElement('span');
+				filtroNuovos.setAttribute('class', "btn btn-outline-light btn-sm txt-dark filtroAttivo" + name);
+				filtroNuovos.setAttribute('id', 'filtro' + id);
+				filtroNuovos.setAttribute('valueFilter', value);
+				filtroNuovos.setAttribute('nameFilter', id);
+				filtroNuovos.setAttribute('onclick', 'rimuoviFiltroRange(this.id,this.getAttribute("minValue"),this.getAttribute("maxValue"))');
+				filtroNuovos.innerHTML = "Range" + " " + name + " " + "impostato" + " " + min + "-" + max + '<i class="fa fa-times">';
+				if(filtroRangeAttivo){
+					filtroRangeAttivo.remove();
+					contenitore.append(filtroNuovos)
+				} else{
+					contenitore.append(filtroNuovos)
+					count++;
+				}
+			}
+			if(count == 0){
+				document.getElementById('numeroFiltriAttivi').innerHTML = " ";
+			} else{
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		/*
+         *Rimuovo il filtro range e rimetto i valori al minimo e al massimo
+         */
+		function rimuoviFiltroRange(id, min, max){
+			var idRange = id.replace('filtro', '');
+			var my_range = $('#' + idRange).data("ionRangeSlider");
+			my_range.update({
+				from: min,
+				to: max
+			});
+			document.getElementById(id).remove();
+
+			count = count - 1;
+
+			if(count == 0){
+				document.getElementById('numeroFiltriAttivi').innerHTML = " ";
+			} else{
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		/*
+         *creo il filtro eventuale di una checkbox
+         */
+		function getCheck(value, id, name){
+			let contenitore = document.getElementById('applied_filters_datatable_container')
+			let filtroAttivo = document.getElementById('filtro' + id);
+			let checked = document.getElementById(id).checked;
+
+			if(filtroAttivo){
+				document.getElementById(id).checked = false;
+				filtroAttivo.remove()
+				count = count - 1;
+			} else{
+
+				document.getElementById(id).checked = true;
+				var filtroNuovo = document.createElement('span');
+				filtroNuovo.setAttribute('class', "btn btn-outline-light btn-sm txt-dark filtroAttivo " + name);
+				filtroNuovo.setAttribute('id', 'filtro' + id);
+				filtroNuovo.setAttribute('valueFilter', checked);
+				filtroNuovo.setAttribute('nameFilter', id);
+				filtroNuovo.setAttribute('onclick', 'rimuoviFiltroCheck(this.id)');
+				filtroNome = document.getElementById("label" + id).innerText;
+				filtroNuovo.innerHTML = filtroNome + '<i class="fa fa-times">';
+				contenitore.append(filtroNuovo)
+				count++;
+			}
+
+			if(count == 0){
+				document.getElementById('numeroFiltriAttivi').innerHTML = " ";
+			} else{
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		/*
+        *rimuovo il filtro e rimuovo il flag della checkbox
+        */
+		function rimuoviFiltroCheck(id){
+			var idCheckbox = id.replace('filtro', '');
+			document.getElementById(idCheckbox).checked = false;
+			document.getElementById(id).remove();
+			count = count - 1;
+
+			if(count == 0){
+				document.getElementById('numeroFiltriAttivi').innerHTML = " ";
+			} else{
+				document.getElementById('numeroFiltriAttivi').innerHTML = "(" + count + ")";
+			}
+		}
+
+		function aggiornaShop(value){
+
+			/*if(value === undefined){
+				elementList = document.querySelectorAll('.filtroAttivo');
+			} else{
+				elementList = document.querySelectorAll('.searchBarQuery, .filtroAttivo');
+			}*/
+			elementList = document.querySelectorAll('.searchBarQuery, .filtroAttivo');
+
+			arrayFilter = {};
+
+			Array.from(elementList).forEach(function(el){
+				arrayFilter[el.getAttribute("nameFilter")] = el.getAttribute("valueFilter");
+			});
+
+			$('.select_ext').each(function(i, j){
+				var $this = $(j);
+				arrayFilter[$this.attr('name')] = $this.val();
+			});
+
+			shopAjax(arrayFilter)
+		}
+
+		var timer;
+
+		function shopAjax(arrayFilter){
+			let articles = "{{ path('shop-ajax') }}";
+			//articles = articles.replace(':arrayFilter', arrayFilter);
+			$.post(articles, arrayFilter)
+				.done(function(data){
+					document.getElementById('articles-pers').innerHTML = "";
+					$('#articles-pers').html(data);
+				})
+		}
+
+		function shop(){
+			clearTimeout(timer);
+			timer = setTimeout(function validate(){
+				let searchbar = document.getElementById('searchBar')
+				let value = $('#searchBar').val()
+				if(value.length > 2){
+					searchbar.setAttribute('valueFilter', value);
+					searchbar.setAttribute('nameFilter', "ricerca");
+					aggiornaShop(value)
+					if(value.length === 0){
+						searchbar.removeAttribute(valueFilter);
+						searchbar.removeAttribute(nameFilter);
+					}
+				}
+			}, 1000);
+		}
+
+		function creaShop(){
+			let idFiltro = document.getElementById('filtroAttivo');
+			if(idFiltro){
+
+			}
+			let range = document.getElementById('filtroAttivo2');
+			if(range){
+				let values = range.split(";");
+				let min = values[0];
+				let max = values[1];
+			}
+		}
+
+		//verifico se è stata digitala almeno un password: in quel caso tutti i campi password diventano required
+		$(".type_password").change(function(index){
+			password_required = false;
+			if($(this).val() != ""){
+				password_required = true;
+			}
+			if(password_required){
+				$(".type_password").each(function(index){
+					$(this).attr("required", "true");
+				});
+			} else{
+				$(".type_password").each(function(index){
+					$(this).removeAttr("required");
+				});
+			}
+		});
+
+		//Controlli custom di validazione
+		function checkOtherValidity(){
+			//Rimuovo i messaggi di errore
+			$("#Password").removeClass('is-invalid');
+			$("#new_Password").removeClass('is-invalid');
+			$("#new_Password_confirm").removeClass('is-invalid');
+
+			//Verifico i valori delle password immesse e controllo se le due nuove password sono uguali
+			var new_Password = $("#new_Password").val();
+			var new_Password_confirm = $("#new_Password_confirm").val();
+			if(new_Password != '' || new_Password_confirm != ''){
+				if(new_Password != new_Password_confirm){
+					$("#new_Password").addClass('is-invalid');
+					$("#new_Password_confirm").addClass('is-invalid');
+					return false;
+				}
+			}
+			//Verifico se la nuova password ha almeno 8 caratteri
+			if(new_Password.length < 8){
+				$("#new_Password").addClass('is-invalid');
+				return false;
+			}
+			return true;
+		}
+
+		//Controlli del validatore standard
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = checkOtherValidity();
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+
+		function selezionaVariante(id_variante){
+			let $variante = $('[id_variante="' + id_variante + '"]');
+
+			$('#articolo_punti').html($variante.attr('punti'));
+			$('#articolo_prezzo').html($variante.attr('prezzo') != $variante.attr('prezzo_scontato') ? $variante.attr('prezzo') + '<del>' + $variante.attr('prezzo_scontato') + '</del>' : $variante.attr('prezzo'));
+
+			$('#acquista_' + $variante.attr('id_articolo')).attr('idv', id_variante);
+		}
+
+		function aggiungiArticolo(id_articolo){
+			//		$.ajax({
+			//			method: "POST",
+			//			// specifico la URL della risorsa da contattare
+			//			url: '{# {{ path('aggiungi-articolo') }} #}?id=' + id_articolo + '&idv=' + $('#acquista_' + id_articolo).attr('idv') + '&qty=' + $('[name="quantita_' + id_articolo + '"]').val(),
+			//			// imposto l'azione in caso di successo
+			//			success: function(risposta){
+			//				//visualizzo il contenuto del file nel div html
+			//				alert('articolo aggiunto al carrello');
+			//			},
+			//			//imposto l'azione in caso di errore
+			//			error: function(stato){
+			//				alert('error');
+			//			}
+			//		});
+
+
+			location.href = '{{ path('aggiungi-articolo') }}?id=' + id_articolo + '&idv=' + $('#acquista_' + id_articolo).attr('idv') + '&qty=' + $('[name="quantita_' + id_articolo + '"]').val();
+
+		}
+
+    </script>
+{% endblock javascript_page %}

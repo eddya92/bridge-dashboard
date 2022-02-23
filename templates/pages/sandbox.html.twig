@@ -1,0 +1,29 @@
+{% extends 'layouts/sandbox.base.html.twig' %}
+
+{% block title %}Hello TwigController!{% endblock %}
+
+{% block home %}
+	<div class="container px-4 py-5" id="custom-cards">
+		<h2 class="pb-2 border-bottom">seconda pagina...<br>
+			DOVE CI SONO STESSI WIDGETS CON PARAMETRI DIVERSI</h2>
+
+		<h3>Dump</h3>
+		<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+			{{ app.session.get('foo') }}
+		</div>
+
+		<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+			<div class="col">
+				{{ widget1_main() }}
+			</div>
+
+			<div class="col">
+				{{ widget2_mainBody(bar='un valore opzionale', foo='valore obbligatorio') }}
+			</div>
+
+			<div class="col ">
+				{{ widget3_mainBody(foo='valore obbligatorio') }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

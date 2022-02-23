@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "data": "2021-01-15",
+      "mittente": "Carlo De Angelis",
+      "foto": "../assets/images/message-image-example.jpg",
+      "da_leggere": true,
+      "titolo": "Accusamus et iusto odio dignissimos ducimus qui blanditiis.",
+      "testo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "id_messaggio_precedente": "",
+      "id_messaggio_successivo": ""
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 12583,
+      "nome": "Olife",
+      "codice": "010",
+      "categoria": "PRODOTTI",
+      "descrizione": "<p><span style=\"font-size: 10pt;\">Olife &egrave; l&rsquo;esclusivo integratore alimentare a base di <span style=\"color: #4b7e24;\"><strong>OLIVUM&reg;</strong></span>, l&rsquo;Infuso di Foglie d&rsquo; Olivo brevettato da Evergreen Life Products, e <strong>fiori di Calendula Officinalis</strong>.</span></p>\r\n<p><span style=\"font-size: 10pt;\">Grazie ad uno speciale processo di lavorazione, completamente naturale, vengono estratti, nel totale rispetto della pianta, i principi attivi presenti nelle foglie d&rsquo;olivo. Olife &egrave; ricco di molecole, tra le quali: l&rsquo;Oleuropeina, l&rsquo;Acido Elenolico, la Rutina, il Tirosolo ed il potente antiossidante Idrossitirosolo, e di principi attivi molto salutari.</span></p>\r\n<p><span style=\"font-size: 10pt;\">Olife contine il <span style=\"color: #4b7e24;\"><strong>93% di OLIVUM&reg;</strong></span>, rivelandosi un autentico gioiello della fitoterapia tradizionale che da anni gode della fiducia di migliaia di clienti soddisfatti. </span><br /><span style=\"font-size: 10pt;\">Si consiglia di consumare <strong>almeno 70 ml al giorno</strong>(pari a mezzo bicchiere). </span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 10pt;\">Dopo l&rsquo;apertura conservare in frigorifero e consumare entro 15 giorni.</span></p>",
+      "foto": "http://localhost:5300/public/Articoli/medium/nopic.png"
+    },
+    {
+      "id": 12579,
+      "nome": "Articolo di Prova",
+      "codice": "Prova",
+      "categoria": "PRODOTTI",
+      "descrizione": "",
+      "foto": "http://localhost:5300/public/Articoli/medium/nopic.png"
+    }
+  ]
+}

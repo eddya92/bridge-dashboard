@@ -1,0 +1,318 @@
+{
+  "data": [
+    {
+      "mese": "2021-01",
+      "mese_testo": "Gennaio",
+      "mese_testo_esteso": "Gennaio 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ],
+      "totale": "30,00 EUR",
+      "importo": 30
+    },
+    {
+      "mese": "2021-02",
+      "mese_testo": "Febbraio",
+      "mese_testo_esteso": "Febbraio 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-03",
+      "mese_testo": "Marzo",
+      "mese_testo_esteso": "Marzo 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-04",
+      "mese_testo": "Aprile",
+      "mese_testo_esteso": "Aprile 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-05",
+      "mese_testo": "Maggio",
+      "mese_testo_esteso": "Maggio 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-06",
+      "mese_testo": "Giugno",
+      "mese_testo_esteso": "Giugno 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-07",
+      "mese_testo": "Luglio",
+      "mese_testo_esteso": "Luglio 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-08",
+      "mese_testo": "Agosto",
+      "mese_testo_esteso": "Agosto 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-09",
+      "mese_testo": "Settembre",
+      "mese_testo_esteso": "Settembre 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-10",
+      "mese_testo": "Ottobre",
+      "mese_testo_esteso": "Ottobre 2021",
+      "qualifica": "CONSULENTE 40%",
+      "colore": "DBB844",
+      "livello": "25",
+      "qualificato": true,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "10,00 EUR",
+          "importo": 10
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "20,00 EUR",
+          "importo": 20
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-11",
+      "mese_testo": "Novembre",
+      "mese_testo_esteso": "Novembre 2021",
+      "qualifica": "PARTNER 20%",
+      "colore": "7AA5E6",
+      "livello": "20",
+      "qualificato": true,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "10,00 EUR",
+          "importo": 10
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "20,00 EUR",
+          "importo": 20
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    },
+    {
+      "mese": "2021-12",
+      "mese_testo": "Dicembre",
+      "mese_testo_esteso": "Dicembre 2021",
+      "qualifica": "-",
+      "colore": "",
+      "livello": 0,
+      "qualificato": false,
+      "bonus": [
+        {
+          "nome": "Bonus Clienti",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Differenze Sconto",
+          "totale": "0,00 EUR",
+          "importo": 0
+        },
+        {
+          "nome": "Royalties",
+          "totale": "0,00 EUR",
+          "importo": 0
+        }
+      ]
+    }
+  ]
+}

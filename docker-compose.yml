@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    container_name: dashboard-webserver
+    build:
+      context: ./docker/web
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 8081:80
+    volumes:
+      - ./:/var/www/app:rw,cached
+      - ./docker/web/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/web/php/symfony.ini:/usr/local/etc/php/conf.d/symfony.ini
+      - ./docker/web/apache/vhosts:/etc/apache2/sites-enabled
+    networks:
+      - bridgexl
+networks:
+  bridgexl:
+    driver: bridge

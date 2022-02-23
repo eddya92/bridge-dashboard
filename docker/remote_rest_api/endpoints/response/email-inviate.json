@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "data": "2010-05-23",
+      "user": "Mario Rossi",
+      "email": "mario.rossi@libero.it"
+    },
+    {
+      "data": "2011-02-23",
+      "user": "Carlo Bianchi",
+      "email": "carlo.bianchi@libero.it"
+    },
+    {
+      "data": "2014-04-23",
+      "user": "Gianluca Neri",
+      "email": "gianluca.neri@libero.it"
+    },
+    {
+      "data": "2019-07-23",
+      "user": "Carla De Andreis",
+      "email": "carla.deangelis@libero.it"
+    },
+    {
+      "data": "2010-05-21",
+      "user": "Marta Fusco",
+      "email": "marta.fusco@libero.it"
+    },
+    {
+      "data": "2010-05-23",
+      "user": "Roberto Granata",
+      "email": "roberto.granata@libero.it"
+    }
+  ]
+}

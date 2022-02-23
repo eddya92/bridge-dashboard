@@ -1,0 +1,24 @@
+{
+  "data": {
+    "id": 1,
+    "nome": "Root",
+    "descrizione": "",
+    "breadcrumb": "Root",
+    "cartella_superiore": {
+      "id": 0,
+      "nome": ""
+    },
+    "files": [
+      {
+        "id": 16,
+        "nome": "Documenti per gli Incaricati",
+        "descrizione": "Documenti per gli Incaricati",
+        "cartella": true,
+        "numero_documenti": 1,
+        "estensione": "",
+        "dimensione": 0,
+        "link": ""
+      }
+    ]
+  }
+}

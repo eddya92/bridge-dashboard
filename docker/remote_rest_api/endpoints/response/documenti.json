@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "documento": "Modulo di adesione firmato",
+      "caricato": true,
+      "data": "2010-05-12",
+      "link": "https://www.google.it",
+      "obbligatorio": true,
+      "tesserino": false,
+      "caricabile": true,
+      "descrizione": "Scarica il modulo che hai ricevuto via e-mail a seguito dell'iscrizione, firmalo e caricarlo qui.",
+      "id": 1
+    },
+    {
+      "documento": "Carta di identità",
+      "caricato": false,
+      "data": "2015-05-25",
+      "link": "https://www.google.it",
+      "obbligatorio": true,
+      "tesserino": false,
+      "caricabile": true,
+      "descrizione": "Carica la copia della tua carta di identità mostrando entrambi i lati (fronte - retro).",
+      "id": 2
+    },
+    {
+      "documento": "Tesserino personale",
+      "caricato": true,
+      "data": "2021-09-10",
+      "link": "https://www.google.it",
+      "obbligatorio": true,
+      "tesserino": true,
+      "caricabile": true,
+      "descrizione": "",
+      "id": 3
+    },
+    {
+      "documento": "Modulo trattamento dati personali",
+      "caricato": false,
+      "data": "2010-07-12",
+      "link": "",
+      "obbligatorio": true,
+      "tesserino": false,
+      "caricabile": true,
+      "descrizione": "Carica il modulo con i consensi al trattamenti dei dati personali firmato.",
+      "id": 4
+    },
+    {
+      "documento": "facoltativo_1",
+      "caricato": true,
+      "data": "2021-01-16",
+      "link": "",
+      "obbligatorio": false,
+      "tesserino": false,
+      "caricabile": true,
+      "descrizione": "",
+      "id": 5
+    },
+    {
+      "documento": "facoltativo_2",
+      "caricato": false,
+      "data": "2021-10-10",
+      "link": "https://www.google.it",
+      "obbligatorio": false,
+      "tesserino": false,
+      "caricabile": true,
+      "descrizione": "",
+      "id": 6
+    }
+  ]
+}

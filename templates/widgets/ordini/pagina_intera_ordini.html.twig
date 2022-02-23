@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6 order-sm-1">
+                <div class="mb-3 d-block d-sm-none"></div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item">Virtual Office</li>
+                    <li class="breadcrumb-item active">Elenco degli ordini</li>
+                </ol>
+                <div class="mb-2 d-block d-sm-none"></div>
+            </div>
+            <div class="col-sm-6 order-sm-0">
+                <div class="float-sm-start">
+                    <h3>Elenco degli ordini</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- endregion Titolo e breadcrumb -->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <span>Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti.</span>
+            </div>
+            <div class="card-body">
+                <div id="datatable_responsive_orders_container" class="dt-ext table-responsive overflow_x_hidden">
+                    <div id="filters_datatable" class="visually-hidden">
+                        <div class="row">
+                            <div class="col-sm-4 p-t-10">
+                                Gruppo di
+                                <div id="typehead_sottoposti">
+                                    <input id="type-sottoposti" class="typeahead  form-control" type="text" placeholder="Scegli..."
+                                           aria-label="scegli">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 p-t-10">
+                                Cliente
+                                <div id="typehead_clienti">
+                                    <input id="type-clienti" class="typeahead form-control" type="text" placeholder="Scegli..."
+                                           aria-label="scegli">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 p-t-10">
+                                Esito
+                                <select id="ID_esito" class="js-example-placeholder-multiple col-sm-12"
+                                        multiple="multiple">
+                                    {% for filtroEsito  in filtriEsito %}
+                                        <option
+                                                value="{{ filtroEsito.id }}">{{ filtroEsito.filtro }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-2 p-t-10">
+                                Ordini dal
+                                <div class="input-group">
+                                    <input id="Data_contratto_dal" class="datepicker-here form-control digits"
+                                           data-language="it" type="text" placeholder="" aria-label="scegli"><span
+                                            class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 p-t-10">
+                                al
+                                <div class="input-group">
+                                    <input id="Data_contratto_al" class="datepicker-here form-control digits"
+                                           data-language="it" type="text" placeholder="" aria-label="scegli"><span
+                                            class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 p-t-10">
+                                Tipologia di ordine
+                                <select id="Tipologia_ordine" class="js-example-placeholder-multiple col-sm-12"
+                                        multiple="multiple">
+                                    {% for filtroTipoOrdine in filtriTipoOrdine %}
+                                        <option value="{{ filtroTipoOrdine.id }}">{{ filtroTipoOrdine.filtro }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="m-b-20"></div>
+                            <div class="col-sm-12">
+                                <button id="button_filtra" type="button" class="btn btn-primary text-uppercase" onclick="filter();">
+                                    filtra
+                                </button>
+                                <button type="button" class="btn btn-light text-uppercase" onclick="close_filters();">
+                                    chiudi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <input id="filtriEsito" name="" type="text" hidden>
+                    <input id="filtriTipologiaOrdine" name="" type="text" hidden>
+                    <table id="table_filters">
+                        <tr>
+                            <td>
+                                <div id="filter_button_datatable" onclick="open_filters()">
+                                    Filtri <i class="fa fa-sliders"></i>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="applied_filters_datatable">
+                                    <div id="applied_filters_datatable_container">
+                                        <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Gruppo di <i class="fa fa-times"></i></span>
+                                        <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Periodo <i class="fa fa-times"></i></span>
+                                        <span id="applied_filters_nominativo" idRiferimento="type-clienti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Nominativo <i class="fa fa-times"></i></span>
+                                        <span id="applied_filters_esito" idRiferimento="ID_esito" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Esito <i class="fa fa-times"></i></span>
+                                        <span id="applied_filters_tipologia_ordine" idRiferimento="Tipologia_ordine" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">Tipologia di ordine <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="clearfix"></div>
+                    <div class="m-b-20"></div>
+                    <table class="row-border hover" id="datatable_responsive_orders">
+                        <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Codice</th>
+                            <th>Incaricato</th>
+                            <th>PC</th>
+                            <th>Intestatario</th>
+                            <th>Totale</th>
+                            <th>Esito</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <hr/>
+                <div class="col-xs-12">
+                    <table class="m-auto">
+                        <tr>
+                            <td><span class="txt-secondary"><i data-feather="shopping-cart"></i></span></td>
+                            <td class="p-l-10"><h6 class="txt-dark">5.659,00 EUR</h6></td>
+                            <td class="p-l-30"><span class="txt-secondary"><i data-feather="award"></i></span></td>
+                            <td class="p-l-10"><h6 class="text-dark">4.655,00 PC</h6></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

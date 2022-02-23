@@ -1,0 +1,140 @@
+<div class="card-body p-0">
+    <div id="top5_container" class="card-body">
+        <ul class="nav nav-tabs" id="icon-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="top5-ultimi-iscritti-tab" data-bs-toggle="tab" href="#top5-ultimi-iscritti" role="tab" aria-controls="top5-ultimi-iscritti" aria-selected="true">Ultimi iscritti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="top5-reclutatori-tab" data-bs-toggle="tab" href="#top5-reclutatori" role="tab" aria-controls="top5-reclutatori" aria-selected="false">Top reclutatori</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="top5-vendite-tab" data-bs-toggle="tab" href="#top5-vendite" role="tab" aria-controls="top5-vendite" aria-selected="false">Top vendite</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="icon-tabContent">
+            <div class="tab-pane fade show active" id="top5-ultimi-iscritti" role="tabpanel" aria-labelledby="top5-ultimi-iscritti-tab">
+                <div class="user-status table-responsive">
+                    <table class="top5_users_list table table-bordernone">
+                        <tbody id="ultimi-iscritti">
+
+                        {% if topUltimiIscritti | length > 0 %}
+                            {% for user in topUltimiIscritti %}
+                                <tr>
+                                    <td rowspan="2" class="bd-t-none u-s-tb">
+                                        <div class="text-center align-middle image-sm-size">
+                                            <img class="img-radius align-top m-r-5 rounded-circle" src="{{ user.foto }}" alt="">
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="d-inline-block"><h6>{{ user.nominativo }}</h6></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Codice: {{ user.codice }}</td>
+                                    <td class="text-end">Iscritto il {{ user.dataIscrizione | date('d/m/Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <br>
+                                    <div>Non hai ancora sponsorizzato nessuno!. Inizia a creare la tua rete sponsorizzando il tuo primo collaboratore!</div>
+                                    <br>
+                                    <a href="{{ path('invita-persone') }}" class="btn btn-primary">sponsorizza</a>
+                            </tr>
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="top5-reclutatori" role="tabpanel" aria-labelledby="top5-reclutatori-tab">
+                <div class="user-status table-responsive">
+                    <table class="top5_users_list table table-bordernone">
+                        <tbody id="reclutatori">
+                        {% if topReclutatori | length > 0 %}
+                            {% for user in topReclutatori %}
+                                <tr>
+                                    <td rowspan="2" class="bd-t-none u-s-tb">
+                                        <div class="text-center align-middle image-sm-size">
+                                            <img class="img-radius align-top m-r-5 rounded-circle" src="{{ user.foto }}" alt="">
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="d-inline-block"><h6>{{ user.nominativo }}</h6></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Codice: {{ user.codice }}</td>
+                                    <td class="text-end">{{ user.nCollaboratori }} {% if user.nCollaboratori == 1 %}collaboratore{% else %}collaboratori{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <br>
+                                    <div>Non hai ancora sponsorizzato nessuno!. Inizia a creare la tua rete sponsorizzando il tuo primo collaboratore!</div>
+                                    <br>
+                                    <a href="{{ path('invita-persone') }}" class="btn btn-primary">sponsorizza</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="top5-vendite" role="tabpanel" aria-labelledby="top5-vendite-tab">
+                <div class="user-status table-responsive">
+                    <table class="top5_users_list table table-bordernone top5" id="top5">
+                        <tbody id="vendite">
+                        {% if topVendite | length > 0 %}
+                            {% for user in topVendite %}
+                                <tr>
+                                    <td rowspan="2" class="bd-t-none u-s-tb">
+                                        <div class="text-center align-middle image-sm-size">
+                                            <img class="img-radius align-top m-r-5 rounded-circle" src="{{ user.foto }}" alt="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-inline-block"><h6>{{ user.nominativo }}</h6></div>
+                                    </td>
+                                    <td class="text-end">{{ user.ordini }} {% if user.ordini == 1 %}ordine{% else %}ordini{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td>Codice: {{ user.codice }}</td>
+                                    <!--td class="text-end">€ fatturato,00</td-->
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <br>
+                                    <div>Fai il tuo primo ordine</div>
+                                    <br>
+                                    <a href="{{ path('crea-nuovo-ordine') }}" class="btn btn-primary">vai allo shop</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

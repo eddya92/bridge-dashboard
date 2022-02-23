@@ -1,0 +1,93 @@
+<div class="card height_100 " id="top_5">
+    <div id="top5_header" class="card-header">
+        <div class="header-top">
+            <div class="col-3">
+                <h5 class="m-0">Top 5</h5>
+            </div>
+            <div class="col-5">
+                <select title="Modifica Mese" class="form-select" name="Top5_Mese" id="mese">
+                    <option value=""></option>
+                    {% for key,value in mesi %}
+                        <option value="{{ key }}" id="{{ key }}" class="forselect"
+                                {% if key == meseAttuale %}
+                                    selected
+                                {% endif %}
+                        >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-3">
+                <select title="Modifica Anno" class="form-select" name="Top5_Anno" id="anno">
+                    <option value=""></option>
+                    {% for anno in anni %}
+                        <option value="{{ anno }}"
+                                {% if anno == annoAttuale %}
+                                    selected
+                                {% endif %}
+                        >{{ anno }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0" id="top5_body">
+
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+	//region1. funzione che fa la chiamata api per la top5
+	function loadData(mese, anno){
+		if(mese === ''){
+			mese = 'generale';
+		}
+
+		if(anno === ''){
+			anno = 'generale';
+			mese = 'generale';
+		}
+
+		let top5 = "{{ path('top5-ajax', { anno:':anno', mese : ':mese'}) }}";
+		top5 = top5.replace(':mese', mese);
+		top5 = top5.replace(':anno', anno);
+		$.ajax({
+			'url': top5,
+			'method': 'GET',
+			'success': function(risposta){
+				$('#top5_body').html(risposta);
+			}
+		})
+	}
+	//endregion
+
+	$(document).ready(function(){
+		//region2.0 al cambio del mese faccio chiamata api con il nuovo mese di riferimento
+		$('#mese').on('change', function(){
+			loadData($('#mese').val(), $('#anno').val());
+		});
+		//endregion
+
+		//region2.1 cambio anno,faccio chiamata api con il nuovo anno di firerimento
+		//faccio un controllo se è l'anno in corso,se è l'anno in corso...non mostrare i mesi successivi a quello presente
+		$('#anno').on('change', function(){
+			if($('#anno').val() == {{ annoAttuale }}){
+				$('.forselect').each(function(index){
+					if($(this).val() > {{ meseAttuale }}){
+						$(this).addClass('d-none')
+					}
+				});
+			} else{
+				document.querySelectorAll('.d-none').forEach(el => el.classList.remove('d-none'));
+			}
+			loadData($('#mese').val(), $('#anno').val());
+		});
+		//endregion
+		$('#anno').trigger('change');
+	});
+</script>
+
+

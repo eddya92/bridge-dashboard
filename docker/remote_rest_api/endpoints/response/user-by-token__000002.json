@@ -1,0 +1,12 @@
+{
+  "data": {
+    "username": "ibo",
+    "codice": "000002",
+    "token": "000002",
+    "active": true,
+    "roles": [
+      "ROLE_IBO"
+    ],
+    "superiore": "000003"
+  }
+}
