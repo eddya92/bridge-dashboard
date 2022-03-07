@@ -346,9 +346,9 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-personali', name: 'dati-residenza', methods: ['GET'])]
 	public function datiResidenza(Request $request, $_locale){
-		$locale = $request->getLocale();
-		$residenza = $this->accountRepository->getResidenza($locale);
-		$nazione = $this->accountRepository->getAccount($this->getUser()->getCodice(), $locale)->getNazioneResidenza();
+		$residenza = $this->accountRepository->getResidenza($_locale);
+		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+		$nazione = $account->getNazioneResidenza();
 		$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
 		$contatti = $this->contattiRepository->getContatti($_locale);
 
@@ -369,6 +369,7 @@ class ProfiloController extends AbstractController{
 				'residenza'   => $residenza,
 				'datiFiscali' => $datiFiscali,
 				'contatti'    => $contatti,
+				'account'     => $account,
 			]
 		);
 	}

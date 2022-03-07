@@ -243,6 +243,7 @@ Attivo: Attivo
 Totale: Totale
 
 # ELENCO ORDINI
+Nuovo ordine: Nuovo ordine
 Ordini: Ordini
 Elenco degli ordini: Elenco degli ordini
 Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti: Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti
@@ -257,6 +258,11 @@ Tutte le tipologie: Tutte le tipologie
 ordini: ordini
 Cancella: Cancella
 Oggi: Oggi
+
+# NESSUN ORDINE
+Non hai ancora ordini da consultare: Non hai ancora ordini da consultare
+In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete: In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete
+
 
 # CREA NUOVO ORDINE
 Crea nuovo ordine: Crea nuovo ordine
@@ -468,3 +474,22 @@ Privacy: Privacy
 Permessi: Permessi
 Privacy Policy: Privacy Policy
 Visualizza i dati in nostro possesso: Visualizza i dati in nostro possesso
+
+
+# WIDGET
+# SIDEBAR
+Diventa collaboratore: Diventa collaboratore
+Spedizioni: Spedizioni
+Attività: Attività
+Gestisci la tua rete: Gestisci la tua rete
+La tua rete: La tua rete
+Invita persone: Invita persone
+Guadagni: Guadagni
+Consulta e richiedi le provvigioni: Consulta e richiedi le provvigioni
+Utilities: Utilities
+Strumenti utili per la tua attività: Strumenti utili per la tua attività
+Logout: Logout
+
+# REGISTRAZIONE-IBO
+Scopri una nuova opportunità di guadagno: Scopri una nuova opportunità di guadagno
+Scegli la modalità di iscrizione che preferisci: Scegli la modalità di iscrizione che preferisci

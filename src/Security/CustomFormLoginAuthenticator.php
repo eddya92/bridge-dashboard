@@ -69,13 +69,17 @@ final class CustomFormLoginAuthenticator extends AbstractLoginFormAuthenticator{
 	}
 
 	public function authenticate(Request $request) : PassportInterface{
-		$recaptcha = new ReCaptcha($this->secretKey);
-		$resp = $recaptcha->setExpectedHostname($this->hostName)
-			->verify($request->get('g-recaptcha-response'));
+		$recaptcha_verified = true;
+
+		if(strlen($this->secretKey) > 0){
+			$recaptcha = new ReCaptcha($this->secretKey);
+			$resp = $recaptcha->setExpectedHostname($this->hostName)
+				->verify($request->get('g-recaptcha-response'));
+			$recaptcha_verified = $resp->isSuccess();
+		}
 
 		$credentials = $this->getCredentials($request);
-		if($resp->isSuccess()){
-			// Verified!
+		if($recaptcha_verified){
 			$token = $this->remoteAuthenticator->authenticate($credentials['username'], $credentials['password']);
 			$passport = new SelfValidatingPassport(new UserBadge($token->toString()), [new RememberMeBadge(), new PreAuthenticatedUserBadge()]);
 		}else{
@@ -135,7 +139,6 @@ final class CustomFormLoginAuthenticator extends AbstractLoginFormAuthenticator{
 	}
 
 	public function onAuthenticationFailure(Request $request, AuthenticationException $exception) : Response{
-
 		return $this->failureHandler->onAuthenticationFailure($request, $exception);
 	}
 

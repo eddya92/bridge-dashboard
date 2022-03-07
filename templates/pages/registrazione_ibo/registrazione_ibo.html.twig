@@ -27,36 +27,40 @@
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <style>
-        .bg-custom-primary{
-            background-color: rgb(156, 10, 0) !important;
-        }
-        .bg-custom-secondary{
-	        background-color: rgb(69, 176, 137) !important;
-        }
-        .bg-custom-button{
-	        background-color: rgb(69, 176, 137) !important;
-        }
+		.bg-custom-primary {
+			background-color: rgb(156, 10, 0) !important;
+		}
+
+		.bg-custom-secondary {
+			background-color: rgb(69, 176, 137) !important;
+		}
+
+		.bg-custom-button {
+			background-color: rgb(69, 176, 137) !important;
+		}
 
     </style>
 {% endblock css_page %}
 {% block page_body %}
     <div class="page-body">
         <!-- region titolo e breadcrumb -->
+        {% include 'layouts/partials/session_message.html.twig' %}
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
-                            <li class="breadcrumb-item">Virtual Office</li>
-                            <li class="breadcrumb-item active">Diventa un collaboratore</li>
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Diventa un collaboratore{% endtrans %}</li>
                         </ol>
                         <div class="mb-2 d-block d-sm-none"></div>
                     </div>
                     <div class="col-sm-6 order-sm-0">
                         <div class="float-sm-start">
-                            <h3>Diventa un collaboratore</h3>
+                            <h3>{% trans %}Diventa un collaboratore{% endtrans %}</h3>
                         </div>
                     </div>
                 </div>
@@ -64,6 +68,7 @@
         </div>
         <!-- endregion Titolo e breadcrumb -->
         <!-- Container-fluid starts-->
+
         <div class="container-fluid">
             <div class="col-sm-12">
 
@@ -71,16 +76,21 @@
                     <div class="col-sm-4 p-0">
                         <img class="img-fluid sm-100-w" src="/assets/images/img-become-affiliate.png" alt=""></div>
                     <div class="col-sm-8 p-l-30 p-r-30">
-                        <h5>Scopri una nuova opportunità di guadagno!</h5>
+                        <h5>{% trans %}Scopri una nuova opportunità di guadagno{% endtrans %}!</h5>
                         <p class="font-size-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend aliquet arcu ac interdum. Duis id hendrerit ante. Donec suscipit felis purus, vel sollicitudin justo porttitor eu. Sed tempor finibus felis, ac imperdiet nibh pretium mattis. Ut nisl nulla, venenatis vitae tortor nec, fringilla viverra ligula. Curabitur vestibulum nulla sit amet ipsum posuere, euismod consectetur est elementum. Nulla ut ligula diam. Phasellus dapibus sed enim nec varius. Sed enim purus, euismod in augue ut, luctus auctor turpis. Nullam suscipit nunc felis, sed mattis nunc cursus a. Fusce ac leo eu tellus pulvinar hendrerit. Vivamus eget posuere purus, ac fermentum sem. Sed magna nisi, eleifend vel ligula vitae, sodales rhoncus odio. Mauris lobortis semper euismod. Phasellus elementum augue quis felis fermentum fringilla. Integer sit amet turpis vel turpis euismod convallis a egestas dolor.</p>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <h5>Scegli la modalità di iscrizione che preferisci</h5>
+                        <h5>{% trans %}Scegli la modalità di iscrizione che preferisci{% endtrans %}</h5>
                     </div>
                     <div class="card-body row pricing-block">
+                        <div class="col-4">
+                            <a href="{{ path('dati-per-trasformazione') }}">
+                                <button class="btn btn-primary">Esegui trasformazione</button>
+                            </a>
+                        </div>
                         {% for kit in kits %}
                         <div class="col-lg-3 col-md-6">
                             <div class="pricingtable">
