@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace App\Repository\RestApi;
 
-interface RemoteAuthenticator
-{
-    public function authenticate(string $username, string $password): Token;
+interface RemoteAuthenticator{
+	public function authenticate(string $username, string $password) : Token;
+
+	public function authenticateByTokenSSO(string $token) : Token;
 }
