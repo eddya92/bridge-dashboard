@@ -49,7 +49,7 @@ services:
       - { prefix: ':SESSION:' }
   #endregion
 
-  # region REST API
+  #region REST API
   App\Repository\RestApi\RestApiConnection:
     factory: [ App\Repository\RestApi\RestV1\RestApiV1Connection, create ]
     arguments:
@@ -64,9 +64,9 @@ services:
       - setTokenStorage: [ '@security.token_storage' ]
       - setAppKey: [ '@App\Repository\RestApi\AppKey' ]
       - setConnection: [ '@App\Repository\RestApi\RestApiConnection' ]
-  # endregion
+  #endregion
 
-  # region Login form
+  #region Login form
   CustomAuthenticationSuccessHandler:
     class: Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler
     arguments:
@@ -87,7 +87,28 @@ services:
       $options: { username_parameter: username, password_parameter: password, login_path: /login, check_path: /login, post_only: true, enable_csrf: true, csrf_parameter: _csrf_token, csrf_token_id: authenticate, use_forward: true }
     calls:
       - setHttpKernel: [ '@http_kernel' ]
-  # endregion
+  #endregion
+
+  #region CustomSSOAuthentication
+  CustomSSOAuthenticationSuccessHandler:
+    class: App\Security\SSOAuthenticationSuccessHandler
+    arguments:
+      $options: { always_use_default_target_path: false, default_target_path: /it/ingresso, login_path: /login, target_path_parameter: goTo, use_referer: true }
+
+  CustomSSOAuthenticationFailureHandler:
+    class: App\Security\SSOAuthenticationFailureHandler
+    arguments:
+      $options: { failure_path: null, failure_forward: true, login_path: /login, failure_path_parameter: backTo }
+
+  App\Security\SSOAuthenticator:
+    arguments:
+      $userProvider: '@App\Repository\RestApi\RestV1\Security\UserProvider'
+      $successHandler: '@CustomSSOAuthenticationSuccessHandler'
+      $failureHandler: '@CustomSSOAuthenticationFailureHandler'
+      $options: { token_parameter: token,  login_path: /sso, check_path: /sso, post_only: true, enable_csrf: true, csrf_parameter: _csrf_token, csrf_token_id: authenticate, use_forward: true }
+    calls:
+      - setHttpKernel: [ '@http_kernel' ]
+  #endregion
 
   #region TTL
   App\Repository\RestApi\RestV1\Security\UserProvider:

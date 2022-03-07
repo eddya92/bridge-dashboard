@@ -13,10 +13,11 @@ security:
     main:
       lazy: true
       provider: rest_user_provider
-      custom_authenticator: App\Security\CustomFormLoginAuthenticator
+      custom_authenticators:
+        - App\Security\SSOAuthenticator
+        - App\Security\CustomFormLoginAuthenticator
       logout:
         path: logout
-        # where to redirect after logout
         target: login
 
       # activate different ways to authenticate
@@ -30,6 +31,7 @@ security:
   access_control:
     # allow unauthenticated users to access the login form
     - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/sso, roles: PUBLIC_ACCESS }
     - { path: ^/forgot-password, roles: PUBLIC_ACCESS }
     - { path: ^/forgot-password-sent, roles: PUBLIC_ACCESS }
     - { path: ^/registrazione, roles: PUBLIC_ACCESS }

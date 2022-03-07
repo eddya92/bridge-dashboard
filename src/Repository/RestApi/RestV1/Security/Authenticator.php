@@ -66,4 +66,52 @@ class Authenticator implements RemoteAuthenticator{
 			throw new AuthenticationServiceException();
 		}
 	}
+
+	public function authenticateByTokenSSO(string $token) : Token{
+		try{
+			$response = $this->connection
+				->client()
+				->post('/db-v1/authenticate/user-sso', [
+					'form_params' => [
+						'token_sso' => $token,
+					],
+				]);
+
+			if($response->getStatusCode() != 200){
+				throw new Exception('Autenticazione fallita.', 404);
+			}
+
+			$userData = Json::decode((string) $response->getBody())['data'] ?? [];
+
+			$token = $userData['token'] ?? '';
+
+			if('' === $token){
+				throw new BadCredentialsException();
+			}
+
+			return new Token($token);
+		}catch(Throwable $exception){
+			if(404 === $exception->getCode()){
+				$notFoundException = new UserNotFoundException(sprintf('Autenticazione fallita.'));
+				$notFoundException->setUserIdentifier($token);
+
+				throw $notFoundException;
+			}
+			if(403 === $exception->getCode()){
+				throw new BadCredentialsException();
+			}
+
+			if(400 === $exception->getCode()){
+				$notFoundException = new UserNotFoundException(sprintf('Autenticazione fallita'));
+				$notFoundException->setUserIdentifier($token);
+
+				throw $notFoundException;
+			}
+			if(403 === $exception->getCode()){
+				throw new BadCredentialsException();
+			}
+
+			throw new AuthenticationServiceException();
+		}
+	}
 }

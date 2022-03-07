@@ -12,9 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class Security extends AbstractController{
-
 	public function __construct(
-		private AccountRepository   $accountRepository,
+		private AccountRepository $accountRepository,
 	){
 	}
 
@@ -34,6 +33,22 @@ class Security extends AbstractController{
 		}
 
 		return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+	}
+
+	#[Route('/sso', name: 'sso', methods: ['GET'])]
+	public function sso(AuthenticationUtils $authenticationUtils) : Response{
+		// get the login error if there is one
+		$error = $authenticationUtils->getLastAuthenticationError();
+
+		if($this->getUser()){
+			return $this->redirectToRoute('ingresso');
+		}
+
+		if($error != ''){
+			$this->addFlash('error', 'Credenziali non corrette, riprovare.');
+		}
+
+		return $this->redirectToRoute('login');
 	}
 
 	#[Route('/logout', name: 'logout', methods: ['GET'])]
@@ -60,12 +75,14 @@ class Security extends AbstractController{
 			[$result, $error_msg] = $this->accountRepository->inviaMailRecuperoPassword($request->get('code_or_email', ''));
 			if($result){
 				$this->addFlash('success', 'Informazioni aggiornate correttamente.');
+
 				return $this->redirectToRoute('forgotPasswordSent');
 			}else{
 				throw new Exception($error_msg);
 			}
 		}catch(Exception $e){
 			$this->addFlash('error', $e->getMessage());
+
 			return $this->redirectToRoute('forgotPasswordSent');
 		}
 	}
