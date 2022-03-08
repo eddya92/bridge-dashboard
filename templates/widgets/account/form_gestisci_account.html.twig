@@ -10,51 +10,18 @@
             <div class="row">
                 <div class="col-sm-6 col-md-6">
                     <div class="mb-3">
-                        <label class="form-label">{% trans %}Vecchia password{% endtrans %}</label>
-                        <input class="form-control type_password" name="vecchiaPassword" id="Password" type="password" required>
-                        <div class="invalid-feedback">{% trans %}Specificare la vecchia password{% endtrans %}</div>
+
+                        Cos’è Lorem Ipsum?
+
+                        Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
+
                     </div>
                 </div>
                 <div class="clearflix"></div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">{% trans %}Nuova password{% endtrans %}</label>
-                        <input class="form-control type_password" name="nuovaPassword" id="new_Password" type="password" required="">
-                        <div class="invalid-feedback">{% trans %}Specificare la nuova password{% endtrans %}</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">{% trans %}Conferma password{% endtrans %}</label>
-                        <input class="form-control type_password" required="" name="confermaPassword" id="new_Password_confirm" type="password">
-                        <div class="invalid-feedback">{% trans %}Le password immesse non corrispondono{% endtrans %}</div>
-                    </div>
-                </div>
-                <div class="col-sm-12"><input type="checkbox" id="show_characters" value="ON"> {% trans %}Mostra caratteri{% endtrans %}</div>
-                <!--div class="m-b-40"></div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Lingua predefinita</label>
-                        <i class="flag-icon flag-icon-it"></i><select class="form-select btn-square">
-                            <option value="0">Italiano</option>
-                            <option value="1">Germany</option>
-                            <option value="2">Canada</option>
-                            <option value="3">Usa</option>
-                            <option value="4">Aus</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input class="form-control" type="email" name="email" required="" value="digita-un-indirizzo@errato-per-fare-il-test.it">
-                        <div class="invalid-feedback">Specificare un indirizzo e-mail valido.</div>
-                    </div>
-                </div-->
             </div>
         </div>
         <div class="card-footer">
-            <input id="btn_submit" class="btn btn-primary" type="submit" onsubmit="verificaNuovaPassword()" value="{% trans %}Aggiorna dati{% endtrans %}">
+            <a target="_blank" href="{{ path('redirect-wp-modifica-password') }}" id="btn_submit" class="btn btn-primary" type="submit" >{% trans %}Modifica password{% endtrans %}</a>
         </div>
         <div class="card-footer">
             {% if oblio | length == 0 or (oblio | length > 0 and oblio.richiesta_pendente == 0) %}
