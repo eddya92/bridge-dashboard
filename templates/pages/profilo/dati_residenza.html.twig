@@ -72,7 +72,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Indirizzo{% endtrans %}</label>
                                                 <input class="form-control" id="Indirizzo" type="text"
-                                                       name="indirizzo" value="{{ (residenza != null) ? residenza.indirizzo : '' }}" required="">
+                                                       name="indirizzo" value="{{ (residenza != null) ? residenza.indirizzo : '' }}" required="" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare l'indirizzo{% endtrans %}.</div>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Numero civico{% endtrans %}</label>
                                                 <input class="form-control" id="Numero_civico" type="text"
-                                                       name="numero_civico" value="{{ (residenza != null) ? residenza.numeroCivico : '' }}" required="">
+                                                       name="numero_civico" value="{{ (residenza != null) ? residenza.numeroCivico : '' }}" required="" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il numero civico{% endtrans %}.</div>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}CAP{% endtrans %}</label>
                                                 <input class="form-control" id="CAP" maxlength="5" type="text"
-                                                       name="cap" value="{{ (residenza != null) ? residenza.cap : '' }}" required="">
+                                                       name="cap" value="{{ (residenza != null) ? residenza.cap : '' }}" required="" readonly disabled>
                                                 <div class="invalid-feedback">Specificare il CAP.</div>
                                             </div>
                                         </div>
@@ -97,7 +97,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Comune{% endtrans %}</label>
                                                 <input class="form-control" id="Comune" type="text" name="comune"
-                                                       value="{{ (residenza != null) ? residenza.comune : '' }}" required="">
+                                                       value="{{ (residenza != null) ? residenza.comune : '' }}" required="" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il comune{% endtrans %}.</div>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Provincia{% endtrans %}</label>
                                                 <input class="form-control text-uppercase" id="Provincia"
-                                                       maxlength="2" type="text" name="provincia" required="" value="{{ (residenza != null) ? residenza.provincia : '' }}">
+                                                       maxlength="2" type="text" name="provincia" required="" value="{{ (residenza != null) ? residenza.provincia : '' }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare la provincia{% endtrans %}.</div>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Codice fiscale{% endtrans %}</label>
                                                 <input class="form-control" id="Codice_fiscale" type="text" name="codice_fiscale" value="{{ datiFiscali.codiceFiscale }}" {{ (datiFiscali.codiceFiscale) ? 'readonly' : '' }}
-                                                >
+                                                       readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il codice fiscale{% endtrans %}.
                                                 </div>
                                             </div>
@@ -136,7 +136,7 @@
                                         <div class="col-sm-6 col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Partita IVA{% endtrans %}</label>
-                                                <input class="form-control" id="PIVA" type="text" name="piva" value="{{ datiFiscali.piva }}">
+                                                <input class="form-control" id="PIVA" type="text" name="piva" value="{{ datiFiscali.piva }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il numero di partita IVA{% endtrans %}.
                                                 </div>
                                             </div>
@@ -144,7 +144,7 @@
                                         <div class="col-sm-7 col-md-7">
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}PEC{% endtrans %}</label>
-                                                <input class="form-control" id="PEC" type="email" name="pec" value="{{ datiFiscali.pec }}">
+                                                <input class="form-control" id="PEC" type="email" name="pec" value="{{ datiFiscali.pec }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare la PEC{% endtrans %}.
                                                 </div>
                                             </div>
@@ -153,7 +153,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Codice univoco{% endtrans %}</label>
                                                 <input class="form-control" id="Codice_univoco" type="text"
-                                                       name="codice_univoco" value="{{ datiFiscali.codiceUnivoco }}">
+                                                       name="codice_univoco" value="{{ datiFiscali.codiceUnivoco }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il codice univoco{% endtrans %}.
                                                 </div>
                                             </div>
@@ -175,7 +175,7 @@
                                         <div class="col-sm-3 col-md-3">
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Telefono{% endtrans %}</label>
-                                                <input class="form-control" id="Telefono" type="text" name="telefono" value="{{ contatti.telefono }}">
+                                                <input class="form-control" id="Telefono" type="text" name="telefono" value="{{ contatti.telefono }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il numero di telefono{% endtrans %}.
                                                 </div>
                                             </div>
@@ -183,7 +183,7 @@
                                         <div class="col-sm-3 col-md-3">
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Cellulare{% endtrans %}</label>
-                                                <input class="form-control" id="Cellulare" type="text" name="cellulare" value="{{ contatti.cellulare }}">
+                                                <input class="form-control" id="Cellulare" type="text" name="cellulare" value="{{ contatti.cellulare }}" readonly disabled>
                                                 <div class="invalid-feedback">{% trans %}Specificare il numero di cellulare{% endtrans %}.
                                                 </div>
                                             </div>
@@ -192,14 +192,13 @@
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}Email{% endtrans %}</label>
                                                 <input class="form-control" id="Email" type="email"
-                                                       name="Email" value="assistenza@2rstudio.it" readonly disabled>
+                                                       name="Email" value="{{ account.email }}" readonly disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <input id="btn_submit" class="btn btn-primary" type="submit"
-                                           value="Aggiorna dati">
+                                    <a target="_blank" href="{{ path('redirect-wp-dati-personali') }}" class="btn btn-primary">Vai alla modifica dei tuoi dati</a>
                                 </div>
                             </div>
                         </div>
