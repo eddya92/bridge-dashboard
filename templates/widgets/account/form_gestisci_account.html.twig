@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a target="_blank" href="{{ path('redirect-wp-modifica-password') }}" id="btn_submit" class="btn btn-primary" type="submit" >{% trans %}Modifica password{% endtrans %}</a>
+            <a target="_blank" href="{{ path('aggiorna-dati-account') }}" id="btn_submit" class="btn btn-primary" type="submit" >{% trans %}Modifica password{% endtrans %}</a>
         </div>
         <div class="card-footer">
             {% if oblio | length == 0 or (oblio | length > 0 and oblio.richiesta_pendente == 0) %}

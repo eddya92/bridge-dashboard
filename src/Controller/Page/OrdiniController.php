@@ -36,6 +36,10 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('{_locale}/crea-nuovo-ordine', name: 'crea-nuovo-ordine', methods: ['GET'])]
 	public function creaNuovoOrdine(Request $request) : Response{
+
+		//Crea Nuovo Ordine non viene piu gestito da noi
+
+		return $this->redirect($this->getParameter('crea_ordine'));//
 		$sellingzoneGenerator = $this->storesRepository->getStore();
 
 		if($sellingzoneGenerator != null){

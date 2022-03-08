@@ -42,6 +42,7 @@ class CheckoutController extends AbstractController{
 	 */
 	#[Route('/{_locale}/checkout', name: 'checkout', methods: ['GET', 'POST'])]
 	public function checkout(Request $request, $_locale) : Response{
+
 		$indirizziGenerator = $this->repositoryIndirizzi->getElencoIndirizziSpedizioneSalvati($_locale);
 		$carrello = $this->repositoryCarrello->getCarrello($_locale);
 		$metodiPagamento = $this->repositoryMetodoPagamento->getModalitaPagamento((int) $request->request->get('id_spedizione', 0), (int) $request->request->get('id_modsped', 0));

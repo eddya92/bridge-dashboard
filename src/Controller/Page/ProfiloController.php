@@ -56,8 +56,11 @@ class ProfiloController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/{_locale}/aggiorna-dati-account', name: 'aggiorna-dati-account', methods: ['POST'])]
+	#[Route('/{_locale}/aggiorna-dati-account', name: 'aggiorna-dati-account', methods: ['GET', 'POST'])]
 	public function aggiornaDatiAccount(Request $request) : Response{
+
+		//Aggiornamento dati account(modifica password) non viene gestita da noi
+		return $this->redirect($this->getParameter('modifica_password'));
 		$vecchiaPassword = trim($request->get('vecchiaPassword', ''));
 		$nuovaPassword = trim($request->get('nuovaPassword', ''));
 		$confermaPassword = trim($request->get('confermaPassword', ''));
@@ -197,8 +200,11 @@ class ProfiloController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	#[Route('/{_locale}/aggiorna-dati-spedizione', name: 'aggiorna-dati-spedizione', methods: ['POST'])]
+	#[Route('/{_locale}/aggiorna-dati-spedizione', name: 'aggiorna-dati-spedizione', methods: ['GET', 'POST'])]
 	public function aggiornaDatiSpedizione(Request $request){
+
+		//la gestione dei dati di spedizione non è nostra
+		return $this->redirect($this->getParameter('dati_spedizione'));
 		$id = (int) $request->get('id', 0);
 		$nome = trim($request->get('nome', ''));
 		$cognome = trim($request->get('cognome', ''));
@@ -380,8 +386,10 @@ class ProfiloController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('aggiorna-dati-residenza', name: 'aggiorna-dati-residenza', methods: ['POST'])]
+	#[Route('aggiorna-dati-residenza', name: 'aggiorna-dati-residenza', methods: ['GET', 'POST'])]
 	public function aggiornaDatiResidenza(Request $request){
+		//Aggiornamento dati non viene gestito da noi
+		return $this->redirect($this->getParameter('dati_residenza'));
 		$id = (int) $request->get('id', 0);
 		$nome = trim($request->get('nome', ''));
 		$cognome = trim($request->get('cognome', ''));

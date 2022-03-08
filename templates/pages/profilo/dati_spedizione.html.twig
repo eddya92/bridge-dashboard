@@ -57,12 +57,14 @@
                                                 <br/>Consegna a {{ indirizzi.0.nominativo }} </a>
                                             {% endif %}
                                             <div class="clear"></div>
-                                            <form name="form-sped-{{ indirizzi.0.id }}" class="m-t-15" action="{{ path('modifica-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
-                                                <input type="hidden" name="id" value="{{ indirizzi.0.id }}">
+                                            <!--form name="form-sped-{{ indirizzi.0.id }}" class="m-t-15" action="{{ path('modifica-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
+                                                <input type="hidden" name="id" value="{{ indirizzi.0.id }}" readonly disabled>
                                                 <button class=" btn btn-light" type="submit">
-                                                    <i class="fa fa-pencil"></i> {% trans %}Modifica{% endtrans %}
+                                                    <i class="fa fa-pencil"></i>
                                                 </button>
-                                            </form>
+                                            </form-->
+                                            <a href="{{ path('ingresso') }} " class=" btn btn-light" type="submit">
+                                            <i class="fa fa-pencil"></i>{% trans %}Modifica{% endtrans %}</a>
                                         {% else %}
                                             {% for indirizzo in indirizzi %}
                                                 {% if indirizzo.isPrincipale %}<b>Indirizzo principale</b>
@@ -72,13 +74,13 @@
                                                     Consegna a {{ indirizzo.nominativo }} </a>
                                                 <div class="clear"></div>
                                                 <form name="form-sped-{{ indirizzo.id }}" class="m-t-15" action="{{ path('modifica-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
-                                                    <input type="hidden" name="id" value="{{ indirizzo.id }}">
+                                                    <input type="hidden" name="id" value="{{ indirizzo.id }}" readonly disabled>
                                                     <button class=" btn btn-light" type="submit">
                                                         <i class="fa fa-pencil"></i> {% trans %}Modifica{% endtrans %}
                                                     </button>
                                                 </form>
                                                 <form name="form-del-sped-{{ indirizzo.id }}" class="m-t-15" action="{{ path('elimina-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
-                                                    <input type="hidden" name="id" value="{{ indirizzo.id }}">
+                                                    <input type="hidden" name="id" value="{{ indirizzo.id }}" readonly disabled>
                                                     <button class=" btn btn-warning-outline" type="submit" onclick="confirmAlert()">
                                                         <i class="fa fa-remove"></i> {% trans %}Elimina{% endtrans %}
                                                     </button>
@@ -106,14 +108,14 @@
                                                 <div class="col-sm-6 col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">{% trans %}Nome{% endtrans %}</label>
-                                                        <input class="form-control" id="Nome" type="text" name="nome" required="" value="">
+                                                        <input class="form-control" id="Nome" type="text" name="nome" required="" value="" readonly disabled>
                                                         <div class="invalid-feedback">{% trans %}Specificare il nome{% endtrans %}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">{% trans %}Cognome{% endtrans %}</label>
-                                                        <input class="form-control" id="Cognome" type="text" name="cognome" required="" value="">
+                                                        <input class="form-control" id="Cognome" type="text" name="cognome" required="" value="" readonly disabled>
                                                         <div class="invalid-feedback">{% trans %}Specificare il cognome{% endtrans %}</div>
                                                     </div>
                                                 </div>
@@ -122,47 +124,47 @@
                                                     <div class="col-sm-9 col-md-9">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}Indirizzo{% endtrans %}</label>
-                                                            <input class="form-control" id="Indirizzo" type="text" name="indirizzo" required="" value="">
+                                                            <input class="form-control" id="Indirizzo" type="text" name="indirizzo" required="" value="" readonly disabled>
                                                             <div class="invalid-feedback">{% trans %}Specificare l'indirizzo{% endtrans %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}Numero civico{% endtrans %}</label>
-                                                            <input class="form-control" id="Numero_civico" type="text" name="numero_civico" required="" value="">
+                                                            <input class="form-control" id="Numero_civico" type="text" name="numero_civico" required="" value="" readonly disabled>
                                                             <div class="invalid-feedback">{% trans %}Specificare il numero civico{% endtrans %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}Nazione{% endtrans %}</label>
-                                                            <select class="form-control w-100" name="nazione" id="ID_nazione" required>
+                                                            <input class="form-control w-100" name="nazione" id="ID_nazione" required readonly disabled>
+                                                            <!--select class="form-control w-100" name="nazione" id="ID_nazione" required readonly disabled>
                                                                 <option value="" selected>---</option>
-                                                                {% for nazione in nazioni %}
+                                                                {# {% for nazione in nazioni %}
                                                                     <option id="{{ nazione.id }}" value="{{ nazione.id }}">{{ nazione.nome }}</option>
-                                                                {% endfor %}
-
-                                                            </select>
+                                                                {% endfor %} #}
+                                                            </select-->
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}CAP{% endtrans %}</label>
-                                                            <input class="form-control" id="CAP" maxlength="5" type="text" name="cap" required="" value="">
+                                                            <input class="form-control" id="CAP" maxlength="5" type="text" name="cap" required="" value="" readonly disabled>
                                                             <div class="invalid-feedback">{% trans %}Specificare il CAP{% endtrans %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}Comune{% endtrans %}</label>
-                                                            <input class="form-control" id="Comune" type="text" name="comune" required="" value="">
+                                                            <input class="form-control" id="Comune" type="text" name="comune" required="" value="" readonly disabled>
                                                             <div class="invalid-feedback">{% trans %}Specificare il comune{% endtrans %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3">
                                                         <div class="mb-3">
                                                             <label class="form-label">{% trans %}Provincia{% endtrans %}</label>
-                                                            <input class="form-control text-uppercase" id="Provincia" maxlength="2" type="text" name="provincia" required="" value="">
+                                                            <input class="form-control text-uppercase" id="Provincia" maxlength="2" type="text" name="provincia" required="" value="" readonly disabled>
                                                             <div class="invalid-feedback">{% trans %}Specificare la provincia{% endtrans %}</div>
                                                         </div>
                                                     </div>
@@ -177,14 +179,14 @@
                                                 <div class="col-sm-3 col-md-3">
                                                     <div class="mb-3">
                                                         <label class="form-label">{% trans %}Numero di telefono{% endtrans %}</label>
-                                                        <input class="form-control" id="telefono" name="numero_telefono" type="tel" value="" required>
+                                                        <input class="form-control" id="telefono" name="numero_telefono" type="tel" value="" required readonly disabled>
                                                         <div class="invalid-feedback">{% trans %}Specificare il numero di telefono{% endtrans %}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">{% trans %}E-mail di notifica spedizione{% endtrans %}</label>
-                                                        <input class="form-control" id="Email_spedizione" name="email" type="email" value="" required>
+                                                        <input class="form-control" id="Email_spedizione" name="email" type="email" value="" required readonly disabled>
                                                         <div class="invalid-feedback">{% trans %}Specificare un indirizzo email valido{% endtrans %}</div>
                                                     </div>
                                                 </div>
@@ -192,7 +194,7 @@
                                                     <div class="mb-3">
                                                         <label class="form-label"></label>
                                                         <div class="form-check checkbox mb-0">
-                                                            <input class="form-check-input" id="checkbox-sabato" type="checkbox" name="consegna_sabato">
+                                                            <input class="form-check-input" id="checkbox-sabato" type="checkbox" name="consegna_sabato" readonly disabled>
                                                             <label class="form-check-label" for="checkbox-sabato">{% trans %}Consegna anche di sabato{% endtrans %}</label>
                                                         </div>
                                                     </div>
@@ -202,14 +204,14 @@
                                                 <div class="col-sm-9 col-md-9">
                                                     <div class="mb-3">
                                                         <label class="form-label">{% trans %}Note{% endtrans %}</label>
-                                                        <textarea class="form-control" placeholder="{% trans %}es consegna al secondo piano{% endtrans %}" name="note"></textarea>
+                                                        <textarea class="form-control" placeholder="{% trans %}es consegna al secondo piano{% endtrans %}" name="note" readonly disabled></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3 col-md-3">
                                                     <div class="mb-3">
                                                         <label class="form-label"></label>
                                                         <div class="form-check checkbox mb-0">
-                                                            <input class="form-check-input" id="checkbox-predefinito" type="checkbox" name="isPrincipale">
+                                                            <input class="form-check-input" id="checkbox-predefinito" type="checkbox" name="isPrincipale" readonly disabled>
                                                             <label class="form-check-label" for="checkbox-predefinito">{% trans %}Indirizzo predefinito{% endtrans %}</label>
                                                         </div>
                                                     </div>
@@ -218,7 +220,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <div class="float-start">
-                                                <input id="btn_submit" class="btn btn-primary" type="submit" value="{% trans %}Aggiungi nuovo indirizzo{% endtrans %}">
+                                                <a target="_blank" href="{{ path('aggiorna-dati-spedizione') }}" class="btn btn-primary">{% trans %}Aggiungi nuovo indirizzo{% endtrans %}</a>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="m-b-10">&nbsp;</div>

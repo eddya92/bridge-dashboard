@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Repository\RestApi\RemoteAuthenticator;
-use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -69,18 +68,18 @@ final class CustomFormLoginAuthenticator extends AbstractLoginFormAuthenticator{
 	}
 
 	public function authenticate(Request $request) : PassportInterface{
-		$recaptcha = new ReCaptcha($this->secretKey);
-		$resp = $recaptcha->setExpectedHostname($this->hostName)
-			->verify($request->get('g-recaptcha-response'));
+		//$recaptcha = new ReCaptcha($this->secretKey);
+		//$resp = $recaptcha->setExpectedHostname($this->hostName)
+		//	->verify($request->get('g-recaptcha-response'));
 
 		$credentials = $this->getCredentials($request);
-		if($resp->isSuccess()){
+	    //	if($resp->isSuccess()){
 			// Verified!
 			$token = $this->remoteAuthenticator->authenticate($credentials['username'], $credentials['password']);
 			$passport = new SelfValidatingPassport(new UserBadge($token->toString()), [new RememberMeBadge(), new PreAuthenticatedUserBadge()]);
-		}else{
-			throw new AuthenticationException('Validazione ReCaptcha fallita.');
-		}
+		//}else{
+		//	throw new AuthenticationException('Validazione ReCaptcha fallita.');
+		//}
 
 		if($this->options['enable_csrf']){
 			$passport->addBadge(new CsrfTokenBadge($this->options['csrf_token_id'], $credentials['csrf_token']));

@@ -27,7 +27,7 @@
         <div class="left-header col horizontal-wrapper ps-0 d-none d-sm-block">
             <ul class="horizontal-menu">
                 <li class="level-menu outside">
-                    <a id="creaNuovoOrdine" onclick="return triggerMe()" target="_blank" class="nav-link" href="{{ path('redirect-wp-crea-ordine') }}"><!-- #! -->
+                    <a target="_blank" id="creaNuovoOrdine" onclick="return triggerMe()" class="nav-link" href="{{ path('crea-nuovo-ordine') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
@@ -43,11 +43,9 @@
             <ul class="nav-menus">
                 <!-- region Select cambio lingua -->
                 {{ lingue() }}
-                <!-- endregion Fullscreen -->
                 <!-- region Profilo -->
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
-
                         <img class="b-r-10" src="{% if app.user.foto == '' %}
                                                     {{ asset('assets/images/dashboard/profile.jpg') }}
                                                 {% else %}

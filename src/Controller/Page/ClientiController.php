@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientiController extends AbstractController{
 	public function __construct(
 		private ClientiRepository $repository,
-		private NazioniRepository $nazioniRepository,
+
 		private AccountRepository $accountRepository
 	){
 	}
@@ -29,22 +29,19 @@ class ClientiController extends AbstractController{
 	 */
 	#[Route('/{_locale}/nuovo-cliente', name: 'nuovo-cliente', methods: ['GET'])]
 	public function nuovoCliente() : Response{
-		$nazioni = $this->nazioniRepository->getNazioni();
 
-		if($nazioni == null){
-			$nazioni = [];
-		}
 
-		return $this->render('pages/clienti/inserisci_nuovo_cliente.html.twig', [
-			'nazioni' => $nazioni,
-		]);
+		return $this->render('pages/clienti/inserisci_nuovo_cliente.html.twig');
 	}
 
 	/**
 	 * Invio dati del form in Post
 	 */
-	#[Route('/{_locale}/esegui-registrazione-cliente', name: 'esegui-registrazione-cliente', methods: ['POST'])]
+	#[Route('/{_locale}/esegui-registrazione-cliente', name: 'esegui-registrazione-cliente', methods: ['GET','POST'])]
 	public function eseguiRegistrazioneCliente(Request $request){
+
+		//la registrazione del nuovo utente non la gestiamo noi
+		return $this->redirect($this->getParameter('inserisci_cliente'));
 		$codiceSponsor = $this->getUser()->getCodice();
 		$naturaGiuridica = trim($request->request->get('naturaGiuridica', ''));
 		$ragioneSociale = trim($request->request->get('ragioneSociale', 'privato'));

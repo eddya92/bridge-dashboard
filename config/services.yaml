@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+  inserisci_cliente: '%env(URL_REDIRECT_INSERISCI_CLIENTE)%'
+  crea_ordine: '%env(URL_REDIRECT_CREA_ORDINE)%'
+  modifica_password: '%env(URL_REDIRECT_MODIFICA_PASSWORD)%'
+  dati_spedizione: '%env(URL_REDIRECT_DATI_SPEDIZIONE)%'
+  dati_residenza: '%env(URL_REDIRECT_DATI_RESIDENZA)%'
 
 services:
   # default configuration for services in *this* file
