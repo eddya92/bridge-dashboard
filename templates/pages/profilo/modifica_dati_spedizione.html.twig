@@ -49,9 +49,14 @@
                                     </div>
                                     <div class="card-body">
                                         {% if indirizziSalvati|length == 1 %}
-                                            <a class="txt-dark" href="{{ path('dati-indirizzo-spedizione') }}"> {{ indirizziSalvati.0.comune }}({{ indirizziSalvati.0.provincia }}) - {{ indirizziSalvati.0.indirizzo }}, {{ indirizziSalvati.0.civico }}.
+                                            <a class="txt-dark" href="{{ path('dati-indirizzo-spedizione') }}">
+                                            {% if indirizziSalvati.0.comune == '' and  indirizziSalvati.0.provincia == '' %}
+                                                <span class="text-danger">Compila il form per aggiornare l'indirizzo</span></a>
+                                            {% else %}
+                                                {{ indirizziSalvati.0.comune }}({{ indirizziSalvati.0.provincia }}) - {{ indirizziSalvati.0.indirizzo }}, {{ indirizziSalvati.0.civico }}.
                                                 <br/>
                                                 Consegna a {{ indirizziSalvati.0.nominativo }} </a>
+                                            {% endif %}
                                             <div class="clear"></div>
                                             <form name="form-sped-{{ indirizziSalvati.0.id }}" class="m-t-15" action="{{ path('modifica-indirizzo-spedizione') }}" method="post" style="display: inline-block;">
                                                 <input type="hidden" name="id" value="{{ indirizziSalvati.0.id }}">

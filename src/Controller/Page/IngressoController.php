@@ -8,7 +8,6 @@ use App\Repository\ArticoliRepository;
 use App\Repository\KitsRepository;
 use App\Repository\RestApi\AuthenticatedConnectionCapability;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -88,22 +87,4 @@ final class IngressoController extends AbstractController{
 		}
 	}
 
-	/**
-	 * Vista di trasformazione cliente/incaricato
-	 */
-	#[Route('/{_locale}/registrazione-ibo', name: 'registrazione-ibo', methods: ['GET'])]
-	public function registrazioneIbo($_locale) : Response{
-		$kits = $this->kitrepository->getKits($_locale);
-
-		if($kits == null){
-			$kits = [];
-		}
-
-		return $this->render(
-			'pages/registrazione_ibo/registrazione_ibo.html.twig',
-			[
-				'kits' => $kits,
-			]
-		);
-	}
 }

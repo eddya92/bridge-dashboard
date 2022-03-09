@@ -18,7 +18,7 @@ RUN apt-get -y update --fix-missing \
     && rm -rf /usr/src/*
 
 ADD ./docker/web/apache/vhosts/default.conf /etc/apache2/sites-available/000-default.conf
-ADD --chown=www-data:root ./ /var/www/app/
+ADD ./ /var/www/app/
 RUN mkdir -p /var/app/var/ && chmod o+rw /var/app/var/
-USER www-data
+#USER www-data
 

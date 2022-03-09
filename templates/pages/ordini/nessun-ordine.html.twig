@@ -35,14 +35,14 @@
 						<div class="mb-3 d-block d-sm-none"></div>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-							<li class="breadcrumb-item">Virtual Office</li>
-							<li class="breadcrumb-item active">Elenco degli ordini</li>
+							<li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+							<li class="breadcrumb-item active">{% trans %}Elenco degli ordini{% endtrans %}</li>
 						</ol>
 						<div class="mb-2 d-block d-sm-none"></div>
 					</div>
 					<div class="col-sm-6 order-sm-0">
 						<div class="float-sm-start">
-							<h3>Elenco degli ordini</h3>
+							<h3>{% trans %}Elenco degli ordini{% endtrans %}</h3>
 						</div>
 					</div>
 				</div>
@@ -60,9 +60,9 @@
 								<div class="clearfix"></div>
 								<div class="m-b-20"></div>
 								<div class="m-auto w-auto text-center">
-									<h6>Non hai ancora ordini da consultare.</h6>
+									<h6>{% trans %}Non hai ancora ordini da consultare{% endtrans %}.</h6>
 									<div class="m-auto" style="max-width:450px;">
-										<p>In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete.</p>
+										<p>{% trans %}In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete{% endtrans %}.</p>
 									</div>
 									<div class="m-b-20"></div>
 									<a  target="_blank" href="{{ path('crea-nuovo-ordine')}}"  type="button" class="btn btn-primary">Fai il tuo primo ordine</a>
