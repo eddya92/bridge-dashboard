@@ -35,20 +35,7 @@
                         </svg>
                         <span>{% trans %}Nuovo ordine{% endtrans %}</span>
                     </a>
-                    <!--ul class="header-level-menu menu-to-be-close">
-                        <li><a href="#" data-original-title="" title="Nuovo ordine personale"><i data-feather="user"></i><span>Ordine personale</span></a></li>
-                        <li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="users"></i><span>Ordine conto terzi</span></a></li>
-                        <li><a href="#!" data-original-title="" title="Nuovo ordine conto terzi"><i data-feather="package"></i><span>Ordine cumulativo</span></a></li>
-                    </ul-->
-                </li>
-                <li class="level-menu outside">
-                    <a class="nav-link" href="{{ path('carrello') }}"><!-- #! -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                        <span>Carrello</span><span class="badge rounded-pill badge-secondary"></span></a>
+
                 </li>
             </ul>
         </div>
@@ -59,99 +46,7 @@
                 {{ lingue() }}
                 <!-- endregion Select cambio lingua -->
                 <!-- region Searchbar -->
-                <!--li><span class="header-search"><i data-feather="search"></i></span></li-->
-                <!-- endregion Searchbar -->
-                <!-- region Notifiche -->
-                <!--li class="onhover-dropdown">
-                    <div class="notification-box">
-                        <i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary"></span></div>
-                    <ul class="notification-dropdown onhover-show-div">
-                        <li><i data-feather="bell"></i><h6 class="f-18 mb-0">Notitiche</h6></li>
-                        <li>
-                            <p>non ci sono notifiche al momento</p>
-                            <p>
-                                <i class="fa fa-circle-o me-3 font-primary"> </i>3 clienti non acquistano da oltre 30 giorni
-                                <span class="pull-right">1 ora fa</span></--p>
-                        </li>
-                        <li><a class="btn btn-primary" href="#">Vai ai promemoria</a></li>
-                    </ul>
-                </li-->
-                <!-- endregion Notifiche -->
-                <!-- region Dark Mode -->
-                <!--li>
-                    <div class="mode"><i class="fa fa-moon-o"></i></div>
-                </li-->
-                <!-- endregion Dark Mode -->
-                <!-- region Carrello -->
-                <!--li class="cart-nav onhover-dropdown">
-                    <div class="cart-box">
-                        <i data-feather="shopping-cart"></i><span class="badge rounded-pill badge-primary"></span>
-                    </div>
-                    <ul class="cart-dropdown onhover-show-div">
-                        <li><h6 class="mb-0 f-20">Il tuo Carrello</h6><i data-feather="shopping-cart"></i></li>
-                        <li>non ci sono articoli nel carrello</li>
-                        <li class="mt-0">
-                            <div class="media">
-                                <img class="img-fluid rounded-circle me-3 img-60" src="" alt="">
-                                <div class="media-body"><span>T-shirt da donna</span>
-                                    <p>Taglia M</p>
-                                    <p>Quantità: 1</p>
-                                    <h6 class="text-end text-muted">EUR 50,00</h6>
-                                </div>
-                                <div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
-                            </div>
-                        </li>
-                        <li class="mt-0">
-                            <div class="media">
-                                <img class="img-fluid rounded-circle me-3 img-60" src="" alt="">
-                                <div class="media-body"><span>Pantaloni da donna</span>
-                                    <p>Taglia M</p>
-                                    <p>Quantità: 1</p>
-                                    <h6 class="text-end text-muted">EUR 80,00</h6>
-                                </div>
-                                <div class="close-circle"><a href="#"><i data-feather="x"></i></a></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="total">
-                                <h6 class="mb-2 mt-0 text-muted">Totale: <span class="f-right f-20">EUR 130,00</span>
-                                </h6>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="btn btn-block w-100 mb-2 btn-primary view-cart" href="cart.html">Vai al carrello</a><a class="btn btn-block w-100 btn-secondary view-cart" href="{{ path('checkout') }}">Checkout</a>
-                        </li>
-                    </ul>
-                </li-->
-                <!-- endregion Carrello -->
-                {{ carrello(app.request.locale) }}
-                <!-- region Messaggi -->
-                <!--li class="onhover-dropdown"><i data-feather="message-square"></i>
-                    <ul class="chat-dropdown onhover-show-div">
-                        <li><i data-feather="message-square"></i>
-                            <h6 class="f-18 mb-0">Messaggi</h6>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <p>Lorem Ipsum is simply dummy...</p>
-                                <p class="f-12">1 giorno fa</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <p>Lorem Ipsum is simply dummy...</p>
-                                <p class="f-12">5 giorni fa</p>
-                            </div>
-                        </li>
-                        <li class="text-center"><a class="btn btn-primary" href="{{ path('messaggi') }}">Leggi tutti i messaggi</a></li>
-                    </ul>
-                </li-->
-                <!-- endregion Messaggi -->
-                <!-- region Fullscreen -->
-                <!--li class="maximize">
-                    <a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a>
-                </li-->
-                <!-- endregion Fullscreen -->
+
                 <!-- region Profilo -->
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
@@ -193,9 +88,6 @@
                 </div>
             </div>
         </script>
-        <!--script class="empty-template" type="text/x-handlebars-template">
-            <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
-        < endregion Header Menu -->
 
         <button id="buttonModal" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" hidden>Large modal</button>
 
