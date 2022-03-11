@@ -52,24 +52,25 @@
                                     <div class="col-md-8 float-start">
                                         <div class="m-t-40"></div>
                                         <style>
-                                            #div_guadagna_con_noi i{
-                                                color: green;
-                                            }
-                                            #div_guadagna_con_noi p{
-	                                            display: flex;
-                                            }
+											#div_guadagna_con_noi i {
+												color: green;
+											}
+
+											#div_guadagna_con_noi p {
+												display: flex;
+											}
                                         </style>
                                         <div id="div_guadagna_con_noi">
-                                        {% trans %}html guadagna con noi{% endtrans %}
+                                            {% trans %}html guadagna con noi{% endtrans %}
                                         </div>
                                     </div>
                                     <div class="col-md-4 float-end text-center">
                                         <img class="m-auto width_100" style="max-width: 220px;" src="/assets/images/icon_become_affiliate.png" alt="{% trans %}Diventa un collaboratore{% endtrans %}">
                                         <div class="m-t-40"></div>
                                         {% if  app.request.server.get('ENABLE_URL_TRASFORMAZIONE_IBO') == 'true' %}
-                                        <a target="_blank" href="{{ path('registrazione-ibo') }}">
-                                            <button type="button" class="m-auto btn btn-primary">{% trans %}Diventa un collaboratore{% endtrans %}</button>
-                                        </a>
+                                            <a target="_blank" href="{{ path('registrazione-ibo') }}">
+                                                <button type="button" class="m-auto btn btn-primary">{% trans %}Diventa un collaboratore{% endtrans %}</button>
+                                            </a>
                                         {% endif %}
                                     </div>
                                     <div class="m-t-40"></div>
@@ -93,28 +94,37 @@
                                         <table id="best-products" class="table table-bordernone table-td-vertical-align-middle">
                                             <div class="m-t-20"></div>
                                             <tbody class="f-w-500">
-                                            {% for articoloPiuVenduto in articoliPiuVenduti %}
+                                                {% if articoliPiuVenduti|length > 0 %}
+                                                {% for articoloPiuVenduto in articoliPiuVenduti %}
                                                 <tr>
-                                                    <td>
-                                                        <div class="media">
-                                                            <img class="img-fluid m-r-15 rounded-circle" src="{{ articoloPiuVenduto.foto }}" alt="">
-                                                        </div>
+                                                <td>
+                                                    <div class="media">
+                                                        <img class="img-fluid m-r-15 rounded-circle" src="{{ articoloPiuVenduto.foto }}" alt="">
+                                                    </div>
+                                                </td>
+                                                <td class="p-t-0"><span>{{ articoloPiuVenduto.nome }}</span>
+                                                    <p>Cod. {{ articoloPiuVenduto.codice }}</p>
+                                                </td>
+                                                <!--td class="p-t-10"><span>EUR prezzo,00</span>
+                                                </td>
+                                                <td class="p-t-10">
+                                                    <p>punti PC</p>
+                                                </td>-->
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <hr/>
+                                                </td>
+                                            </tr>
+                                                {% endfor %}
+
+                                                {% else %}
+                                                    <td class="text-center" >
+                                                        <br>
+                                                        <div>Al momento non è stato possibile mostrare il contenuto!</div>
                                                     </td>
-                                                    <td class="p-t-0"><span>{{ articoloPiuVenduto.nome }}</span>
-                                                        <p>Cod. {{ articoloPiuVenduto.codice }}</p>
-                                                    </td>
-                                                    <!--td class="p-t-10"><span>EUR prezzo,00</span>
-                                                    </td>
-                                                    <td class="p-t-10">
-                                                        <p>punti PC</p>
-                                                    </td>-->
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <hr/>
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
+                                                {% endif %}
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -137,6 +147,7 @@
                                         <table id="reorder-products" class="table table-bordernone table-td-vertical-align-middle">
                                             <div class="m-t-20"></div>
                                             <tbody class="f-w-500">
+                                            {% if ultimiArticoliVenduti|length > 0 %}
                                             {% for ultimoArticoloVenduto in ultimiArticoliVenduti %}
                                                 <tr>
                                                     <td>
@@ -159,6 +170,13 @@
                                                     </td>
                                                 </tr>
                                             {% endfor %}
+                                            {% else %}
+                                                <td class="text-center" >
+                                                    <br>
+                                                    <div>Al momento non è stato possibile mostrare il contenuto!</div>
+                                                </td>
+                                            {% endif %}
+
                                             </tbody>
                                         </table>
                                     </div>
