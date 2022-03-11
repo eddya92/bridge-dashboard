@@ -67,7 +67,7 @@
         <!-- endregion Titolo e breadcrumb -->
         <!-- Container-fluid starts-->
         {% if residenza.indirizzo == '' and Fatturazione_Indirizzo == '' and Fatturazione_Numero_civico == '' and Fatturazione_CAP == '' and Fatturazione_Comune == '' and Fatturazione_Provincia == '' %}
-            <form id="form_checkout" name="form_checkout" method="post" action="{{ path('aggiorna-dati-residenza-checkout') }}">
+            <form id="form_checkout" name="form_checkout" method="post" action="{{ path('aggiorna-dati-personali-checkout') }}">
                 <input type="hidden" name="step" value="spedizione">
                 <input type="hidden" name="id_spedizione" value="{{ id_spedizione }}">
                 <input type="hidden" name="note" value="{{ note }}">

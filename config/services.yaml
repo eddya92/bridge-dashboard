@@ -9,6 +9,17 @@ parameters:
   modifica_password: '%env(URL_REDIRECT_MODIFICA_PASSWORD)%'
   dati_spedizione: '%env(URL_REDIRECT_DATI_SPEDIZIONE)%'
   dati_residenza: '%env(URL_REDIRECT_DATI_RESIDENZA)%'
+  trasformazione_ibo: '%env(URL_REDIRECT_TRASFORMAZIONE_IBO)%'
+
+  enable_crea_ordine: '%env(ENABLE_URL_CREA_ORDINE)%'
+  enable_inserisci_cliente: '%env(ENABLE_URL_INSERISCI_CLIENTE)%'
+  enable_modifica_password: '%env(ENABLE_URL_MODIFICA_PASSWORD)%'
+  enable_dati_spedizione: '%env(ENABLE_URL_DATI_SPEDIZIONE)%'
+  enable_dati_personali: '%env(ENABLE_URL_DATI_PERSONALI)%'
+  enable_trasformazione_ibo: '%env(ENABLE_URL_TRASFORMAZIONE_IBO)%'
+  enable_login: '%env(ENABLE_URL_LOGIN)%'
+  url_logout: '%env(URL_LOGOUT)%'
+  enable_url_registrazione: '%env(ENABLE_URL_REGISTRAZIONE)%'
 
 services:
   # default configuration for services in *this* file

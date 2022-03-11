@@ -174,7 +174,7 @@ class CheckoutController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	#[Route('/aggiorna-dati-residenza-checkout', name: 'aggiorna-dati-residenza-checkout', methods: ['POST'])]
+	#[Route('/aggiorna-dati-personali-checkout', name: 'aggiorna-dati-personali-checkout', methods: ['POST'])]
 	public function aggiornaDatiResidenza(Request $request){
 		$residenza = $this->repositoryAccount->getResidenza($request->getLocale());
 

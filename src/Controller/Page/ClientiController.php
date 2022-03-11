@@ -30,7 +30,10 @@ class ClientiController extends AbstractController{
 	#[Route('/{_locale}/nuovo-cliente', name: 'nuovo-cliente', methods: ['GET'])]
 	public function nuovoCliente() : Response{
 
-
+		//la registrazione del nuovo utente non la gestiamo noi se è false dall'env
+		if($this->getParameter('enable_inserisci_cliente') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
 		return $this->render('pages/clienti/inserisci_nuovo_cliente.html.twig');
 	}
 
@@ -40,8 +43,11 @@ class ClientiController extends AbstractController{
 	#[Route('/{_locale}/esegui-registrazione-cliente', name: 'esegui-registrazione-cliente', methods: ['GET','POST'])]
 	public function eseguiRegistrazioneCliente(Request $request){
 
-		//la registrazione del nuovo utente non la gestiamo noi
-		return $this->redirect($this->getParameter('inserisci_cliente'));
+		//la registrazione del nuovo utente non la gestiamo noi se è false dall'env
+		if($this->getParameter('enable_inserisci_cliente') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$codiceSponsor = $this->getUser()->getCodice();
 		$naturaGiuridica = trim($request->request->get('naturaGiuridica', ''));
 		$ragioneSociale = trim($request->request->get('ragioneSociale', 'privato'));

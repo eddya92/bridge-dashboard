@@ -21,20 +21,32 @@
                             <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav " href="{{ path('ingresso') }}"><i data-feather="home"></i><span>{% trans %}Ingresso{% endtrans %}</span></a>
+                            <a class="sidebar-link sidebar-title link-nav " href="{{ path('ingresso') }}"><i data-feather="home"></i><span>{% trans %}Ingresso{% endtrans %}</span></a>
                     </li>
-                    {% if app.user.idRuolo == 'customer' %}
-                    <li class="sidebar-list">
-                        <a target="_blank" class="sidebar-link sidebar-title link-nav " href="{{ path('registrazione-ibo') }}"><i data-feather="users"></i><span>{% trans %}Diventa collaboratore{% endtrans %}</span></a>
-                    </li>
+                    {% if  app.request.server.get('ENABLE_URL_TRASFORMAZIONE_IBO') == 'true' and app.user.idRuolo == 'customer' %}
+                        <li class="sidebar-list">
+                            <a target="_blank" class="sidebar-link sidebar-title link-nav " href="{{ path('registrazione-ibo') }}"><i data-feather="users"></i><span>{% trans %}Diventa collaboratore{% endtrans %}</span></a>
+                        </li>
                     {% endif %}
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title  " href="#"><i data-feather="user"></i><span>{% trans %}Profilo{% endtrans %}</span></a>
                         <ul class="sidebar-submenu">
-                            <li><a href="{{ path('account') }}">{% trans %}Account{% endtrans %}</a></li>
-                            <li><a href="{{ path('dati-indirizzo-spedizione') }}">{% trans %}Spedizioni{% endtrans %}</a></li>
-                            <li><a href="{{ path('dati-residenza') }}">{% trans %}Dati personali{% endtrans %}</a></li>
-                            {% if app.user.idRuolo == 'ibo' %} <li><a href="{{ path('documenti-personali') }}">{% trans %}Documenti{% endtrans %}</a></li>{% endif  %}
+                            <li>
+                                {% if  app.request.server.get('ENABLE_URL_MODIFICA_PASSWORD') == 'true' %}
+                                <a href="{{ path('account') }}">{% trans %}Account{% endtrans %}</a></li>
+                            {% endif %}
+                            <li>
+                                {% if  app.request.server.get('ENABLE_URL_DATI_SPEDIZIONE') == 'true' %}
+                                    <a href="{{ path('dati-indirizzo-spedizione') }}">{% trans %}Spedizioni{% endtrans %}</a>
+                                {% endif %}
+                            </li>
+                            <li>
+                                    <a href="{{ path('dati-personali') }}">{% trans %}Dati personali{% endtrans %}</a>
+                            </li>
+
+                            {% if app.user.idRuolo == 'ibo' %}
+                                <li><a href="{{ path('documenti-personali') }}">{% trans %}Documenti{% endtrans %}</a>
+                                </li>{% endif %}
                             <li><a href="{{ path('privacy') }}">{% trans %}Privacy{% endtrans %}</a></li>
                             {% if app.user.idRuolo == 'ibo' %}
                                 <li><a href="{{ path('pagamenti') }}">{% trans %}Pagamenti{% endtrans %}</a></li>
@@ -42,7 +54,6 @@
                         </ul>
                     </li>
                     {% if app.user.idRuolo == 'ibo' %}
-
                         <!--region struttura-->
                         <li class="sidebar-main-title">
                             <div>
@@ -53,9 +64,16 @@
                         <li class="sidebar-list ">
                             <a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>{% trans %}La tua rete{% endtrans %}</span></a>
                             <ul class="sidebar-submenu">
-                                <li><a href="{{ path('albero-unilevel') }}">{% trans %}Albero Unilevel{% endtrans %}</a></li>
-                                <li><a href="{{ path('struttura-unilevel') }}">{% trans %}La tua struttura{% endtrans %}</a></li>
-                                <li><a href="{{ path('nuovo-cliente') }}">{% trans %}Inserisci un nuovo cliente{% endtrans %}</a></li>
+                                <li><a href="{{ path('albero-unilevel') }}">{% trans %}Albero Unilevel{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('struttura-unilevel') }}">{% trans %}La tua struttura{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    {% if  app.request.server.get('ENABLE_URL_INSERISCI_CLIENTE') == 'true' %}
+                                    <a href="{{ path('nuovo-cliente') }}">{% trans %}Inserisci un nuovo cliente{% endtrans %}</a>
+                                    {% endif %}
+                                </li>
                                 <li><a href="{{ path('carriera') }}">{% trans %}La tua carriera{% endtrans %}</a></li>
                             </ul>
                         </li>
@@ -65,9 +83,11 @@
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title" href="#"><i data-feather="share"></i><span>{% trans %}Marketing Tools{% endtrans %}</span></a>
                             <ul class="sidebar-submenu">
-                                <li><a href="{{ path('invita-persone') }}">{% trans %}Invita persone{% endtrans %}</a></li>
+                                <li><a href="{{ path('invita-persone') }}">{% trans %}Invita persone{% endtrans %}</a>
+                                </li>
                                 <!-- <li><a href="#">Social Post</a></li>-->
-                                <li><a href="{{ path('sito-personale') }}">{% trans %}Sito personale{% endtrans %}</a></li>
+                                <li><a href="{{ path('sito-personale') }}">{% trans %}Sito personale{% endtrans %}</a>
+                                </li>
                                 <!--li><a href="#">Referral link</a></li-->
                                 <!--li><a href="#">Materiale per stampa</a></li-->
                             </ul>
@@ -78,29 +98,17 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#"><i data-feather="shopping-bag"></i><span>{% trans %}Ordini{% endtrans %}</span></a>
                         <ul class="sidebar-submenu">
-                            <li><a target="_blank" href="{{ path('crea-nuovo-ordine') }}">{% trans %}Crea un nuovo ordine{% endtrans %}</a></li>
-                            <li><a href="{{ path('elenco-ordini') }}">{% trans %}Elenco degli ordini{% endtrans %}</a></li>
+                            {% if  app.request.server.get('ENABLE_URL_CREA_ORDINE') == 'true' %}
+                                <li>
+                                    <a target="_blank" href="{{ path('crea-nuovo-ordine') }}">{% trans %}Crea un nuovo ordine{% endtrans %}</a>
+                                </li>
+                            {% endif %}
+                            <li><a href="{{ path('elenco-ordini') }}">{% trans %}Elenco degli ordini{% endtrans %}</a>
+                            </li>
                         </ul>
                     </li>
-                    <!--li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span>Clienti</span></a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="{{ path('nuovo-cliente') }}">Inserisci un nuovo cliente</a></li>
-                            <li><a href="{{ path('elenco-clienti') }}">Elenco dei clienti</a></li>
-                        </ul>
-                    </li-->
-                    <!--li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="#"><i data-feather="calendar"></i><span>Academy</span></a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="{{ path('eventi') }}">Eventi</a></li>
-                            <li><a href="{{ path('le-mie-iscrizioni') }}">Le mie iscrizioni</a></li>
-                        </ul>
-                    </li-->
-                    <!--li class="sidebar-list">
-                        <label class="badge badge-info">4</label><a class="sidebar-link sidebar-title link-nav" href="{{ path('promemoria') }}"><i data-feather="bell"></i><span>Promemoria</span></a>
-                    </li-->
-                    {% if app.user.idRuolo == 'ibo' %}
 
+                    {% if app.user.idRuolo == 'ibo' %}
                         <!--region guadagni e bonus-->
                         <li class="sidebar-main-title">
                             <div>
@@ -115,7 +123,6 @@
                             <a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>{% trans %}eWallet{% endtrans %}</span></a>
                         </li>
                         <!--endregion guadagni e bonus-->
-
                     {% endif %}
 
                     <li class="sidebar-main-title">

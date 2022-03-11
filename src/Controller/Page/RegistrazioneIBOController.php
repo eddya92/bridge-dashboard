@@ -43,7 +43,10 @@ final class RegistrazioneIBOController extends AbstractController{
 	 */
 	#[Route('/{_locale}/registrazione-ibo', name: 'registrazione-ibo', methods: ['GET'])]
 	public function registrazioneIbo($_locale) : Response{
-		return $this->redirect('https://it.wordpress.org/');
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_trasformazione_ibo') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
 		$kits = $this->kitrepository->getKits($_locale);
 
 		if($kits == null){
@@ -63,6 +66,10 @@ final class RegistrazioneIBOController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-per-trasformazione', name: 'dati-per-trasformazione', methods: ['GET'])]
 	public function viewForm(string $_locale) : Response{
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_trasformazione_ibo') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
 		$residenza = $this->accountRepository->getResidenza($_locale);
 		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
 		$nazione = $account->getNazioneResidenza();
@@ -96,6 +103,11 @@ final class RegistrazioneIBOController extends AbstractController{
 	 */
 	#[Route('/{_locale}/esegui-registrazione-ibo', name: 'esegui-registrazione-ibo', methods: ['POST'])]
 	public function trasformazioneIncaricato(Request $request) : Response{
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_trasformazione_ibo') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$indirizzo = trim($request->get('indirizzo', ''));
 		$numeroCivico = trim($request->get('numero_civico', ''));
 		$cap = trim($request->get('cap', ''));

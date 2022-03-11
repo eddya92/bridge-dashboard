@@ -31,6 +31,11 @@ final class RegistrazioneController extends AbstractController{
 	 */
 	#[Route('/registrazione', name: 'registrazione', methods: ['GET'])]
 	public function registrazione() : Response{
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_url_registrazione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$nazioni = $this->nazioniRepository->getNazioni();
 
 		if($this->getUser()){
@@ -61,6 +66,11 @@ final class RegistrazioneController extends AbstractController{
 	 */
 	#[Route('/esegui-registrazione', name: 'esegui-registrazione', methods: ['POST'])]
 	public function eseguiRegistrazione(Request $request) : Response{
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_url_registrazione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$codiceSponsor = trim($request->request->get('codiceSponsor', ''));
 		$nome = trim($request->request->get('nome', ''));
 		$cognome = trim($request->request->get('cognome', ''));
@@ -79,7 +89,8 @@ final class RegistrazioneController extends AbstractController{
 		try{
 			[$result, $error_msg] = $this->accountRepository->registrazioneCliente($codiceSponsor, $nome, $cognome, $ragioneSociale, $naturaGiuridica, $email, $password, $nazione, $agreements);
 			if($result){
-				$this->addFlash('success', 'Benvenuto '. $nome .'.');
+				$this->addFlash('success', 'Benvenuto ' . $nome . '.');
+
 				return $this->redirectToRoute('registrazione-success');
 			}else{
 				throw new Exception($error_msg);
@@ -98,6 +109,11 @@ final class RegistrazioneController extends AbstractController{
 	 */
 	#[Route('/registrazione-success', name: 'registrazione-success', methods: ['GET'])]
 	public function registrazione_success() : Response{
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_url_registrazione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		if($this->getUser()){
 			return $this->redirectToRoute('ingresso');
 		}

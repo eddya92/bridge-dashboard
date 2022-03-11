@@ -1,0 +1,335 @@
+{% extends 'layouts/interno.html.twig' %}
+
+{% block title %}{% trans %}Dati personali{% endtrans %}{% endblock %}
+
+    {% block css_page %}
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+              integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
+              integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+              integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    {% endblock css_page %}
+
+{% block page_body %}
+    <div class="page-body">
+        {% include 'layouts/partials/session_message.html.twig' %}
+        <!-- region titolo e breadcrumb -->
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 order-sm-1">
+                        <div class="mb-3 d-block d-sm-none"></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
+                            <li class="breadcrumb-item active">{% trans %}Profilo{% endtrans %} / {% trans %}Dati personali{% endtrans %}</li>
+                        </ol>
+                        <div class="mb-2 d-block d-sm-none"></div>
+                    </div>
+                    <div class="col-sm-6 order-sm-0">
+                        <div class="float-sm-start">
+                            <h3>{% trans %}Profilo{% endtrans %} / {% trans %}Dati personali{% endtrans %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- endregion Titolo e breadcrumb -->
+        <!-- Container-fluid starts-->
+        <form class="form needs-validation" novalidate="" method="POST"
+              action="{{ path('aggiorna-dati-personali') }}">
+            <div class="edit-profile">
+                <div class="row" id="row_page_dati_residenza">
+                    <div class="col-xl-4">
+                        {{ account(app.user.codice,'',app.request.locale) }}
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="card">
+                            <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{% if residenza.naturaGiuridica == 'privato' %}{% trans %}Dati di residenza{% endtrans %}{% else %}{% trans %}Sede Legale{% endtrans %}{% endif %}</h5>
+                                    <div class="card-options"><a class="card-options-collapse" href="#"
+                                                                 data-bs-toggle="card-collapse"><i
+                                                    class="fe fe-chevron-up"></i></a><a class="card-options-remove"
+                                                                                        href="#"
+                                                                                        data-bs-toggle="card-remove"><i
+                                                    class="fe fe-x"></i></a></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-9 col-md-9">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Indirizzo{% endtrans %}</label>
+                                                <input class="form-control" id="Indirizzo" type="text"
+                                                       name="indirizzo" value="{{ (residenza != null) ? residenza.indirizzo : '' }}" required="">
+                                                <div class="invalid-feedback">{% trans %}Specificare l'indirizzo{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Numero civico{% endtrans %}</label>
+                                                <input class="form-control" id="Numero_civico" type="text"
+                                                       name="numero_civico" value="{{ (residenza != null) ? residenza.numeroCivico : '' }}" required="">
+                                                <div class="invalid-feedback">{% trans %}Specificare il numero civico{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+                                        <div class="clearflix"></div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}CAP{% endtrans %}</label>
+                                                <input class="form-control" id="CAP" maxlength="5" type="text"
+                                                       name="cap" value="{{ (residenza != null) ? residenza.cap : '' }}" required="">
+                                                <div class="invalid-feedback">Specificare il CAP.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 col-md-5">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Comune{% endtrans %}</label>
+                                                <input class="form-control" id="Comune" type="text" name="comune"
+                                                       value="{{ (residenza != null) ? residenza.comune : '' }}" required="">
+                                                <div class="invalid-feedback">{% trans %}Specificare il comune{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Provincia{% endtrans %}</label>
+                                                <input class="form-control text-uppercase" id="Provincia"
+                                                       maxlength="2" type="text" name="provincia" required="" value="{{ (residenza != null) ? residenza.provincia : '' }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare la provincia{% endtrans %}.</div>
+                                            </div>
+                                        </div>
+                                        <div class="clearflix"></div>
+                                    </div>
+                                </div>
+                                <hr style="background-color: #ecf3fa; opacity: 1; margin:0 !important;"/>
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{% trans %}Dati fiscali{% endtrans %}</h5>
+                                    <div class="card-options"><a class="card-options-collapse" href="#"
+                                                                 data-bs-toggle="card-collapse"><i
+                                                    class="fe fe-chevron-up"></i></a><a class="card-options-remove"
+                                                                                        href="#"
+                                                                                        data-bs-toggle="card-remove"><i
+                                                    class="fe fe-x"></i></a></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Codice fiscale{% endtrans %}</label>
+                                                <input class="form-control" id="Codice_fiscale" type="text" name="codice_fiscale" value="{{ datiFiscali.codiceFiscale }}" {{ (datiFiscali.codiceFiscale) ? 'readonly' : '' }}
+                                                >
+                                                <div class="invalid-feedback">{% trans %}Specificare il codice fiscale{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Partita IVA{% endtrans %}</label>
+                                                <input class="form-control" id="PIVA" type="text" name="piva" value="{{ datiFiscali.piva }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare il numero di partita IVA{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}PEC{% endtrans %}</label>
+                                                <input class="form-control" id="PEC" type="email" name="pec" value="{{ datiFiscali.pec }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare la PEC{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 col-md-5">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Codice univoco{% endtrans %}</label>
+                                                <input class="form-control" id="Codice_univoco" type="text"
+                                                       name="codice_univoco" value="{{ datiFiscali.codiceUnivoco }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare il codice univoco{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="background-color: #ecf3fa; opacity: 1; margin:0 !important;"/>
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{% trans %}Contatti{% endtrans %}</h5>
+                                    <div class="card-options"><a class="card-options-collapse" href="#"
+                                                                 data-bs-toggle="card-collapse"><i
+                                                    class="fe fe-chevron-up"></i></a><a class="card-options-remove"
+                                                                                        href="#"
+                                                                                        data-bs-toggle="card-remove"><i
+                                                    class="fe fe-x"></i></a></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Telefono{% endtrans %}</label>
+                                                <input class="form-control" id="Telefono" type="text" name="telefono" value="{{ contatti.telefono }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare il numero di telefono{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Cellulare{% endtrans %}</label>
+                                                <input class="form-control" id="Cellulare" type="text" name="cellulare" value="{{ contatti.cellulare }}">
+                                                <div class="invalid-feedback">{% trans %}Specificare il numero di cellulare{% endtrans %}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">{% trans %}Email{% endtrans %}</label>
+                                                <input class="form-control" id="Email" type="email"
+                                                       name="Email" value="assistenza@2rstudio.it" readonly disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input id="btn_submit" class="btn btn-primary" type="submit"
+                                           value="Aggiorna dati">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    </div>
+
+    </div>
+{% endblock page_body %}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/sidebar-menu.js"></script>
+<script src="../assets/js/tooltip-init.js"></script>
+<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="../assets/js/notify/index.js"></script>
+<script src="../assets/js/typeahead/handlebars.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/theme-customizer/customizer.js"></script>
+{% endblock javascript %}
+{% block javascript_page %}
+    <script>
+		//Controlli custom di validazione
+		function checkOtherValidity(){
+			//Se ho compilato la Partita IVA è necessario compilare codice univoco o PEC (solo per Italia)
+			var ID_nazione = $("#ID_nazione").val();
+			var CAP = $("#CAP").val();
+			var PIVA = $("#PIVA").val();
+			var PEC = $("#PEC").val();
+			var Codice_univoco = $("#Codice_univoco").val();
+
+			if(ID_nazione == 104){
+				if(PIVA != '' && (PEC == '' && Codice_univoco == '')){
+					$("#PEC").addClass('is-invalid');
+					$("#Codice_univoco").addClass('is-invalid');
+					return false;
+				}
+				if(PIVA == '' && (PEC != '' || Codice_univoco != '')){
+					$("#PIVA").addClass('is-invalid');
+					return false;
+				}
+			}
+
+			//Verifico se il CAP è stato inserito correttamente
+			if(syntax_zipcode() === false){
+				return false;
+			}
+			return true;
+		}
+
+		//Controlli del validatore standard
+		window.addEventListener('load', function(){
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form){
+				form.addEventListener('submit', function(event){
+					var result_checkOtherValidity = checkOtherValidity();
+					if(result_checkOtherValidity === true){
+						if(form.checkValidity() === false){
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					} else{
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, false);
+			});
+		}, false);
+
+		$(document).ready(function(){
+			//Rimuovo la classe invalid al click su PEC e codice univoco
+			$("#PEC").change(function(){
+				$(this).removeClass("is-invalid");
+				$("#Codice_univoco").removeClass("is-invalid");
+				$("#PIVA").removeClass("is-invalid");
+			});
+			$("#Codice_univoco").change(function(){
+				$(this).removeClass("is-invalid");
+				$("#PEC").removeClass("is-invalid");
+				$("#PIVA").removeClass("is-invalid");
+			});
+
+			//Al cambio della nazione verifico la sintassi di CAP e provincia (solo caso Italia)
+			$("#ID_nazione").change(function(){
+				$("#CAP").val('');
+				$("#Provincia").val('');
+				if($(this).val() == 104){
+					$("#CAP").attr('maxlength', '5');
+					$("#Provincia").attr('maxlength', '2');
+				} else{
+					$("#CAP").removeAttr('maxlength');
+					$("#Provincia").removeAttr('maxlength');
+				}
+			});
+		});
+
+		//Verifica sintassi CAP (da cambiare con una funzione che verifichi qualsiasi CAP a seconda della nazione specificata)
+		function syntax_zipcode(){
+			var regExp = /[0-9]/g;
+			var CAP = $("#CAP").val();
+			var ID_nazione = $("#ID_nazione").val();
+
+			if(ID_nazione == "104"){
+				if(!regExp.test(CAP)){
+					$("#CAP").addClass("is-invalid");
+					return false;
+				} else{
+					$("#CAP").removeClass("is-invalid");
+					return true;
+				}
+			}
+		}
+    </script>
+{% endblock javascript_page %}

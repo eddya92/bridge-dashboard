@@ -44,6 +44,11 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/account', name: 'account', methods: ['GET', 'POST'])]
 	public function account() : Response{
+		//Aggiornamento dati account(modifica password) non viene gestita da noi
+		if($this->getParameter('enable_modifica_password') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		return $this->render('pages/profilo/account.html.twig', [
 			'codice' => $this->getUser()->getCodice(),
 		]);
@@ -58,9 +63,11 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/aggiorna-dati-account', name: 'aggiorna-dati-account', methods: ['GET', 'POST'])]
 	public function aggiornaDatiAccount(Request $request) : Response{
-
 		//Aggiornamento dati account(modifica password) non viene gestita da noi
-		return $this->redirect($this->getParameter('modifica_password'));
+		if($this->getParameter('enable_modifica_password') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$vecchiaPassword = trim($request->get('vecchiaPassword', ''));
 		$nuovaPassword = trim($request->get('nuovaPassword', ''));
 		$confermaPassword = trim($request->get('confermaPassword', ''));
@@ -107,6 +114,12 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-indirizzo-spedizione', name: 'dati-indirizzo-spedizione', methods: ['GET'])]
 	public function datiSpedizione(Request $request, $_locale){
+
+		//se questo è false,non lo gestiamo noi(.env)
+		if($this->getParameter('enable_dati_spedizione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$id = (int) $request->get('id', 0);
 
 		$indirizzi = [];
@@ -151,6 +164,12 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/modifica-indirizzo-spedizione', name: 'modifica-indirizzo-spedizione', methods: ['GET', 'POST'])]
 	public function modificaIndirizzoSpedizione(Request $request, $_locale){
+
+		//se questo è false,non lo gestiamo noi(.env)
+		if($this->getParameter('enable_dati_spedizione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$id = (int) $request->get('id', 0);
 
 		$indirizzo = $this->indirizziSpedizioneRepository->getIndirizzoSpedizione($id, $_locale);
@@ -177,6 +196,11 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/elimina-indirizzo-spedizione', name: 'elimina-indirizzo-spedizione', methods: ['POST'])]
 	public function eliminaIndirizzoSpedizione(Request $request){
+		//se questo è false,non lo gestiamo noi(.env)
+		if($this->getParameter('enable_dati_spedizione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$id = (int) $request->get('id', 0);
 
 		try{
@@ -203,8 +227,11 @@ class ProfiloController extends AbstractController{
 	#[Route('/{_locale}/aggiorna-dati-spedizione', name: 'aggiorna-dati-spedizione', methods: ['GET', 'POST'])]
 	public function aggiornaDatiSpedizione(Request $request){
 
-		//la gestione dei dati di spedizione non è nostra
-		return $this->redirect($this->getParameter('dati_spedizione'));
+		//se questo è false,non lo gestiamo noi(.env)
+		if($this->getParameter('enable_dati_spedizione') === 'false'){
+			return $this->redirectToRoute('error404');
+		}
+
 		$id = (int) $request->get('id', 0);
 		$nome = trim($request->get('nome', ''));
 		$cognome = trim($request->get('cognome', ''));
@@ -350,8 +377,9 @@ class ProfiloController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/{_locale}/dati-personali', name: 'dati-residenza', methods: ['GET'])]
+	#[Route('/{_locale}/dati-personali', name: 'dati-personali', methods: ['GET'])]
 	public function datiResidenza(Request $request, $_locale){
+
 		$locale = $request->getLocale();
 		$residenza = $this->accountRepository->getResidenza($locale);
 		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
@@ -371,7 +399,19 @@ class ProfiloController extends AbstractController{
 			$contatti = [];
 		}
 
-		return $this->render('pages/profilo/dati_residenza.html.twig', [
+
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_dati_personali') === 'false'){
+			return $this->render('pages/profilo/dati_personali_disabled.html.twig', [
+				'nazione'     => $nazione,
+				'residenza'   => $residenza,
+				'datiFiscali' => $datiFiscali,
+				'contatti'    => $contatti,
+				'account'     => $account,
+			]);
+		}
+
+		return $this->render('pages/profilo/dati_personali.html.twig', [
 				'nazione'     => $nazione,
 				'residenza'   => $residenza,
 				'datiFiscali' => $datiFiscali,
@@ -386,7 +426,7 @@ class ProfiloController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('aggiorna-dati-residenza', name: 'aggiorna-dati-residenza', methods: ['GET', 'POST'])]
+	#[Route('aggiorna-dati-personali', name: 'aggiorna-dati-personali', methods: ['GET', 'POST'])]
 	public function aggiornaDatiResidenza(Request $request){
 		//Aggiornamento dati non viene gestito da noi
 		return $this->redirect($this->getParameter('dati_residenza'));
@@ -429,6 +469,6 @@ class ProfiloController extends AbstractController{
 			$this->addFlash('error', $e->getMessage());
 		}
 
-		return $this->redirectToRoute('dati-residenza');
+		return $this->redirectToRoute('dati-personali');
 	}
 }

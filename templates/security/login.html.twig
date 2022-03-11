@@ -101,9 +101,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-4 mb-0 text-center">{% trans %}Non hai un account{% endtrans %}
-                                    <a class="ms-2" href="{{ path('registrazione') }}">{% trans %}Registrati adesso{% endtrans %}</a>
-                                </p>
+                                {% if  app.request.server.get('ENABLE_URL_REGISTRAZIONE') == 'true' %}
+                                    <p class="mt-4 mb-0 text-center">{% trans %}Non hai un account{% endtrans %}
+                                        <a class="ms-2" href="{{ path('registrazione') }}">{% trans %}Registrati adesso{% endtrans %}</a>
+                                    </p>
+                                {% endif %}
                             </form>
                         </div>
                     </div>

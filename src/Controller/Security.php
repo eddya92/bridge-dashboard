@@ -28,6 +28,11 @@ class Security extends AbstractController{
 			return $this->redirectToRoute('ingresso');
 		}
 
+		//é false quando non viene gestito da noi(.env)
+		if($this->getParameter('enable_login') === 'false'){
+			return $this->redirect($this->getParameter('url_logout'));
+		}
+
 		if($error != ''){
 			$this->addFlash('error', 'Credenziali non corrette, riprovare.');
 		}

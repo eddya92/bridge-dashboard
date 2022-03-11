@@ -66,9 +66,11 @@
                                     <div class="col-md-4 float-end text-center">
                                         <img class="m-auto width_100" style="max-width: 220px;" src="/assets/images/icon_become_affiliate.png" alt="{% trans %}Diventa un collaboratore{% endtrans %}">
                                         <div class="m-t-40"></div>
+                                        {% if  app.request.server.get('ENABLE_URL_TRASFORMAZIONE_IBO') == 'true' %}
                                         <a target="_blank" href="{{ path('registrazione-ibo') }}">
                                             <button type="button" class="m-auto btn btn-primary">{% trans %}Diventa un collaboratore{% endtrans %}</button>
                                         </a>
+                                        {% endif %}
                                     </div>
                                     <div class="m-t-40"></div>
                                 </div>
