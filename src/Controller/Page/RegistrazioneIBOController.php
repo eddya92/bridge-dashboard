@@ -43,6 +43,7 @@ final class RegistrazioneIBOController extends AbstractController{
 	 */
 	#[Route('/{_locale}/registrazione-ibo', name: 'registrazione-ibo', methods: ['GET'])]
 	public function registrazioneIbo($_locale) : Response{
+		return $this->redirect('https://it.wordpress.org/');
 		$kits = $this->kitrepository->getKits($_locale);
 
 		if($kits == null){
