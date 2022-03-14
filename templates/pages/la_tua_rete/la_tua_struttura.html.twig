@@ -152,7 +152,7 @@
                                         <div id="applied_filters_datatable">
                                             <div id="applied_filters_datatable_container">
                                                 <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Gruppo di{% endtrans %} <i class="fa fa-times"></i></span>
-                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_nominativo" idRiferimento="filtro_nominativo" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Nominativo{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_email" idRiferimento="filtro_email" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}E-mail{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_cellulare" idRiferimento="filtro_cellulare" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Cellulare{% endtrans %} <i class="fa fa-times"></i></span>
@@ -345,7 +345,6 @@
 			} else{
 				document.getElementById('filter_button_datatable').innerHTML = "{% trans %}Filtri{% endtrans %}" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
 			}
-			aggiornaRisultati();
 		}
 		//endregion
 
@@ -391,6 +390,8 @@
 		function close_filters(){
 			$("#filters_datatable").addClass("visually-hidden");
 			$("#filter_button_datatable").removeClass("visually-hidden");
+			$("#applied_filters_datatable").removeClass("visually-hidden");
+			renderFiltri();
 		}
 
 		function filter(){
@@ -398,6 +399,7 @@
 			$("#filter_button_datatable").removeClass("visually-hidden");
 			$("#applied_filters_datatable").removeClass("visually-hidden");
 			renderFiltri();
+			aggiornaRisultati();
 		}
 
 		function open_filters(){
