@@ -208,8 +208,6 @@
 
 		//region al cambio del parametro "anno" ricarico la pagina con il èarametro anno
 		function changePage(anno){
-			cconsole.log
-
 			let url = "{{ path('bonus', { anno : ':anno'}) }}";
 			url = url.replace(':anno', anno.value);
 			document.location.href = url;
