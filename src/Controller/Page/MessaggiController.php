@@ -6,7 +6,6 @@ namespace App\Controller\Page;
 use App\Repository\MessaggiRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
