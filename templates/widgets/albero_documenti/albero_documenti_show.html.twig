@@ -18,6 +18,9 @@
                         </div>
                     </li>
                 {% endif %}
+                {% if  documento.files|length < 1%}
+                <div>Non  ci sono file in questa cartella</div>
+                {% else %}
                 {% for file in documento.files %}
                     {% if file.cartella == true %}
                         <li class="folder-box" id="{{ file.id }}" onclick="lascioDirectoryEvidenziata(this.id,true)">
@@ -30,6 +33,7 @@
                         </li>
                     {% endif %}
                 {% endfor %}
+                {% endif %}
             </ul>
             <div class="m-b-20"></div>
             <ul class="files " id="appendiamoQui">
