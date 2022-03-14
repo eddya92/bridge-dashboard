@@ -19,15 +19,21 @@ Provincia: Provincia
 Note: Note
 Modifica: Modifica
 Elimina: Elimina
-Specificare il nome: Specificare il nome.
-Specificare il cognome: Specificare il cognome.
-Specificare l indirizzo: Specificare l' 'indirizzo.
-Specificare il numero civico: Specificare il numero civico.
-Specificare il CAP: Specificare il CAP.
-Specificare il comune: Specificare il comune.
-Specificare la provincia: Specificare la provincia.
-Specificare il numero di telefono: Specificare il numero di telefono.
-Specificare un indirizzo email valido: Specificare un indirizzo email valido.
+Specificare il nome: Specificare il nome
+Specificare il cognome: Specificare il cognome
+Specificare l indirizzo: Specificare l' 'indirizzo
+Specificare il numero civico: Specificare il numero civico
+Specificare il CAP: Specificare il CAP
+Specificare il comune: Specificare il comune
+Specificare il numero di partita IVA: Specificare il numero di partita IVA
+Specificare la PEC: Specificare la PEC
+Specificare il codice univoco: Specificare il codice univoco
+Email: Email
+Telefono: Telefono
+Specificare il numero di cellulare: Specificare il numero di cellulare
+Specificare la provincia: Specificare la provincia
+Specificare il numero di telefono: Specificare il numero di telefono
+Specificare un indirizzo email valido: Specificare un indirizzo email valido
 Nominativo: Nominativo
 Cellulare: Cellulare
 filtra: filtra
@@ -450,6 +456,7 @@ Contatti: Contatti
 Dati fiscali: Dati fiscali
 Dati di residenza: Dati di residenza
 Sede Legale: Sede Legale
+
 
 #GRAFICO VENDITE
 Tipologia filtro: Tipologia filtro

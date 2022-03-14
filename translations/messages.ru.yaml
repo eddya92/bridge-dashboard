@@ -19,15 +19,21 @@ Provincia: провинция
 Note: Примечание
 Modifica: Редактировать
 Elimina: Удалить
-Specificare il nome: Укажите имя.
-Specificare il cognome: Уточните фамилию.
-Specificare l indirizzo: Укажите адрес.
-Specificare il numero civico: Укажите номер дома.
-Specificare il CAP: Укажите почтовый индекс.
-Specificare il comune: Укажите муниципалитет.
-Specificare la provincia: Укажите провинцию.
-Specificare il numero di telefono: Укажите номер телефона.
-Specificare un indirizzo email valido: Укажите действующий адрес электронной почты.
+Specificare il nome: Укажите имя
+Specificare il cognome: Уточните фамилию
+Specificare l indirizzo: Укажите адрес
+Specificare il numero civico: Укажите номер дома
+Specificare il CAP: Укажите почтовый индекс
+Specificare il comune: Укажите муниципалитет
+Specificare la provincia: Укажите провинцию
+Specificare la PEC: Укажите PEC
+Specificare il codice univoco: Укажите уникальный код
+Email: Электронная почта
+Telefono: Телефон
+Specificare il numero di cellulare: Укажите номер мобильного телефона
+Specificare il numero di partita IVA: Укажите номер НДС
+Specificare il numero di telefono: Укажите номер телефона
+Specificare un indirizzo email valido: Укажите действующий адрес электронной почты
 Nominativo: Имя
 Cellulare: Мобильный телефон
 filtra: фильтр
