@@ -65,7 +65,9 @@
 										<p>{% trans %}In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete{% endtrans %}.</p>
 									</div>
 									<div class="m-b-20"></div>
-									<a  target="_blank" href="{{ path('crea-nuovo-ordine')}}"  type="button" class="btn btn-primary">Fai il tuo primo ordine</a>
+									{% if  app.request.server.get('ENABLE_URL_CREA_ORDINE') == 'true' %}
+									<a  target="_blank" href=" {{ path('crea-nuovo-ordine')}} "  type="button" class="btn btn-primary">Fai il tuo primo ordine</a>
+									{% endif %}
 								</div>
 								<div class="m-b-40"></div>
 							</div>
