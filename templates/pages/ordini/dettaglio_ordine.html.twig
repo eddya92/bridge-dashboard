@@ -2,8 +2,8 @@
    {% block title %}{% trans %}Dettaglio Ordine{% endtrans %}{% endblock title %}
 
     {% block css_page %}
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
-        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/select2.css">
+        <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
     {% endblock css_page %}
 
 {% block page_body %}
@@ -52,34 +52,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
-<script src="../assets/js/scrollbar/custom.js"></script>
-<script src="../assets/js/config.js"></script>
-<script src="../assets/js/sidebar-menu.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/js/tooltip-init.js"></script>
-<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
-<script src="../assets/js/notify/index.js"></script>
-<script src="../assets/js/typeahead/handlebars.js"></script>
-<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
-<script src="../assets/js/typeahead/typeahead.custom.js"></script>
-<script src="../assets/js/typeahead-search/handlebars.js"></script>
-<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
-<script src="../assets/js/print.js"></script>
-<script src="../assets/js/script.js"></script>
-<script src="../assets/js/theme-customizer/customizer.js"></script>
+<script src="/assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="/assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="/assets/js/scrollbar/custom.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/sidebar-menu.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/js/tooltip-init.js"></script>
+<script src="/assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="/assets/js/notify/index.js"></script>
+<script src="/assets/js/typeahead/handlebars.js"></script>
+<script src="/assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="/assets/js/typeahead/typeahead.custom.js"></script>
+<script src="/assets/js/typeahead-search/handlebars.js"></script>
+<script src="/assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="/assets/js/print.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/theme-customizer/customizer.js"></script>
 {% endblock javascript %}
 
 {% block javascript_page %}
@@ -110,7 +110,7 @@
 		};
 		$('#datatable_responsive_orders').DataTable({
 			responsive: true,
-			ajax: "../assets/json/ordini.json",
+			ajax: "/assets/json/ordini.json",
 			language: DueRDataTableLaguages,
 			dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 			columnDefs: [
