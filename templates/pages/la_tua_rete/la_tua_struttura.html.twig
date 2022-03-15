@@ -356,12 +356,14 @@
 				$("#" + filtro_di_Riferimento).removeClass('onSelect');
 			} else if(filtro_di_Riferimento === 'type-sottoposti'){
 				$("#idUtenteSelezionato").html("")
+				$("#type-sottoposti").val("")
 			}else{
 				$('#' + filtro_di_Riferimento).val('');
 			}
 			$("#" + id).addClass("visually-hidden");
 
 			renderFiltri();
+			aggiornaRisultati();
 		}
 		//endregion
 
