@@ -18,8 +18,8 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForInquadramentoFiscale
-
+		private int                    $ttlForInquadramentoFiscale,
+		private string                 $locales,
 	){
 	}
 
@@ -81,7 +81,10 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 				],
 			]);
 
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INQUADRAMENTO_FISCALE)]);
+		$lingue = explode(',', $this->locales);
+		foreach($lingue as $lingua){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INQUADRAMENTO_FISCALE . "[" . $lingua . "]")]);
+		}
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];

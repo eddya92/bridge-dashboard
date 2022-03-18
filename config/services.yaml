@@ -229,6 +229,7 @@ services:
     class: App\Repository\RestApi\RestV1\RestInquadramentoFiscaleRepository
     arguments:
       $ttlForInquadramentoFiscale: '%env(int:TTL_REPO_INQUADRAMENTOFISCALE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\KitsRepository:
     class: App\Repository\RestApi\RestV1\RestKitsRepository
