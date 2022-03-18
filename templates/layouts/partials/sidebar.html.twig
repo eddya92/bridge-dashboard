@@ -47,7 +47,7 @@
                             {% if app.user.idRuolo == 'ibo' %}
                                 <li><a href="{{ path('documenti-personali') }}">{% trans %}Documenti{% endtrans %}</a>
                                 </li>{% endif %}
-                            <li><a href="{{ path('privacy') }}">{% trans %}Privacy{% endtrans %}</a></li>
+                            <!--li><a href="{# {{ path('privacy') }} #}">{% trans %}Privacy{% endtrans %}</a></li-->
                             {% if app.user.idRuolo == 'ibo' %}
                                 <li><a href="{{ path('pagamenti') }}">{% trans %}Pagamenti{% endtrans %}</a></li>
                             {% endif %}
@@ -120,7 +120,7 @@
                             <a class="sidebar-link sidebar-title link-nav " href="{{ path('bonus') }}"><i data-feather="award"></i><span>{% trans %}Bonus{% endtrans %}</span></a>
                         </li>
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>{% trans %}eWallet{% endtrans %}</span></a>
+                            <!--a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>{% trans %}eWallet{% endtrans %}</span></a-->
                         </li>
                         <!--endregion guadagni e bonus-->
                     {% endif %}
