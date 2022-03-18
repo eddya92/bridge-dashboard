@@ -67,7 +67,7 @@
                                         <tr>
                                             <td>
                                                 <form id="form_vista" name="form_vista" class="form" novalidate="" method="post" action="{{ path('albero-unilevel') }}">
-													<select name="idVista" class="form-select" onchange="document.form_vista.submit();">
+                                                    <select name="idVista" class="form-select" onchange="document.form_vista.submit();">
                                                         {% if vista != null %}
                                                             <option value="{{ vista.id }}" selected>{{ vista.nome }}</option>
                                                         {% endif %}
@@ -88,15 +88,15 @@
                                                 </form>
                                             </td>
                                             <td class="text-start">
-												{% if viste | length > 0 %}
-                                                <form id="form_vista_elimina" name="form_vista_elimina" class="form" novalidate="" method="post" action="{{ path('elimina-albero-unilevel') }}">
-                                                    <input type="hidden" name="idVistaElimina" value="0">
+                                                {% if viste | length > 0 %}
+                                                    <form id="form_vista_elimina" name="form_vista_elimina" class="form" novalidate="" method="post" action="{{ path('elimina-albero-unilevel') }}">
+                                                        <input type="hidden" name="idVistaElimina" value="0">
 
-                                                    <button id="btn-delete-view" class="btn btn-outline-light txt-dark" type="button" onclick="elimina_vista();">
-                                                        <i class="fa fa-trash"></i> {% trans %}Elimina questa vista{% endtrans %}
-                                                    </button>
-                                                </form>
-												{% endif %}
+                                                        <button id="btn-delete-view" class="btn btn-outline-light txt-dark" type="button" onclick="elimina_vista();">
+                                                            <i class="fa fa-trash"></i> {% trans %}Elimina questa vista{% endtrans %}
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
                                             </td>
                                             <td class="text-end">
                                                 <button type="button" id="zoom_tree" class="btn btn-outline-light txt-dark" onclick="zoomVistaAlbero()">
@@ -190,7 +190,7 @@
                                                         <div class="m-b-30"></div>
                                                         <label class="form-label">{% trans %}Orientamento{% endtrans %}</label>
                                                         <select class="form-select" name="orientamento" onchange="aggiorna_albero();">
-                                                            <option value="orizzontale" {% if vista is not null and vista.orientamento == 'orizzontale' %} selected="selected" {%  endif %}>{% trans %}Orizzontale{% endtrans %}</option>
+                                                            <option value="orizzontale" {% if vista is not null and vista.orientamento == 'orizzontale' %} selected="selected" {% endif %}>{% trans %}Orizzontale{% endtrans %}</option>
                                                             <option value="verticale" {% if vista is not null and vista.orientamento == 'verticale' %} selected="selected" {% endif %}>{% trans %}Verticale{% endtrans %}</option>
                                                         </select>
                                                     </td>
@@ -203,8 +203,8 @@
                                                     </td>
                                                 </tr>
                                             </table>
-											<input type="hidden" id="idVista" name="idVista" value="{% if vista is not null %}{{ vista.id }}{% else %}0{% endif %}">
-											<input type="hidden" id="nomeVista" name="nomeVista" value="{% if vista is not null %}{{ vista.nome }}{% endif %}">
+                                            <input type="hidden" id="idVista" name="idVista" value="{% if vista is not null %}{{ vista.id }}{% else %}0{% endif %}">
+                                            <input type="hidden" id="nomeVista" name="nomeVista" value="{% if vista is not null %}{{ vista.nome }}{% endif %}">
                                             <div class="m-t-30"></div>
                                             <button class="btn btn-primary" type="submit">{% trans %}Salva come vista principale{% endtrans %}</button>
                                         </div>
@@ -213,7 +213,7 @@
                                 <div class="card-header p-0"></div>
                                 <div class="card-body">
                                     <div class="m-t-20"></div>
-									{% trans %}Crea una vista personalizzata{% endtrans %}
+                                    {% trans %}Crea una vista personalizzata{% endtrans %}
                                     <div class="m-t-10"></div>
                                     <input class="form-control" id="input_nuovo_filtro" type="text" placeholder="{% trans %}Scrivi qui il nome del nuovo filtro{% endtrans %}" name="nome">
                                     <div class="m-t-10"></div>
@@ -349,34 +349,41 @@
 			$('.tooltip-albero').remove();
 
 			var idVista = $('[name="idVista"]').val();
+			console.log('idVista ', idVista)
 			if(idVista == ''){
 				idVista = 0;
 			}
 
 			var idUtente = $('[name="idUtente"]').val();
+			console.log('idUtente ', idUtente)
 			if(idUtente == ''){
 				idUtente = 0;
 			}
 
 			livello = $('[name="livello"]').val();
+			console.log('livello ', livello)
 			var mese = $('[name="mese"]').val();
 
 			var punti = $('[name="punti"]').val();
+			console.log('punti', punti)
 			if(punti == ''){
 				punti = 'pv_mensile';
 			}
 
 			orientamento = $('[name="orientamento"]').val();
+			console.log('orientamento ', orientamento)
 			if(orientamento != 'orizzontale' && orientamento != 'verticale'){
 				orientamento = 'verticale';
 			}
 
 			var width = $('[name="larghezza"]').val();
+			console.log('width ', width)
 			if(width == 'auto'){
 				width = 900;
 			}
 
 			var height = $('[name="altezza"]').val();
+			console.log('height ', height)
 			if(height == 'auto'){
 				height = 900;
 			}
@@ -390,7 +397,7 @@
 				var wsvg = $('#body_albero').width() - 20;
 			}
 
-			var m = [20, 120, 20, 120];
+			var m = [20, 170, 20, 170];
 			var w = wsvg - m[1] - m[3];
 			if(width > 0){
 				w = width - m[1] - m[3];
@@ -428,6 +435,7 @@
 				.text('');
 
 			var url = '{{ path('albero-unilevel-ajax') }}?idUtente=' + idUtente + '&mese=' + mese + '&livello=' + livello + '&punti=' + punti + '&idVista=' + idVista;
+		console.log('url ',url)
 			d3.json(url, function(json){
 				root = json;
 				if(root == 'error'){
@@ -439,7 +447,7 @@
 					} else{
 						root.y0 = 10;
 					}
-
+console.log('root ',root)
 					root.children.forEach(toggleAll);
 					root.children.forEach(toggleAllLevels);
 					update(root);
