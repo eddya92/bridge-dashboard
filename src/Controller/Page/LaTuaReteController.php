@@ -295,8 +295,11 @@ class LaTuaReteController extends AbstractController{
 		$filtroCellulare = trim($request->get('filtro_cellulare', ''));
 		$filtroPeriodo = trim($request->get('filtro_periodo', ''));
 		$filtroDiretti = ($request->get('filtro_diretti', 'false'));
+		$filtroColonnaOrdinamento = $request->get('colonna', '');
+		$filtroDirezioneOrdinamento = strtoupper($request->get('direzione', ''));
+		$numeroRecord = $request->get('numeroRecord', '');
 
-		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti);
+		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $numeroRecord);
 		$struttura = [];
 
 		if($strutturaGenerator != null){

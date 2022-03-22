@@ -23,9 +23,9 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 	){
 	}
 
-	public function getUtentiStruttura(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti) : ?Generator{
+	public function getUtentiStruttura(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento, string $numeroRecord) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallstrutturaPersonale($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallstrutturaPersonale($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $numeroRecord));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -36,12 +36,12 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 		}
 	}
 
-	private function apiCallstrutturaPersonale(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti){
-		return function(ItemInterface $item) use ($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti){
+	private function apiCallstrutturaPersonale(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento, string $numeroRecord){
+		return function(ItemInterface $item) use ($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $numeroRecord){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&periodo' . $filtroPeriodo . '&solo_diretti=' . $filtroDiretti);
+				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&periodo' . $filtroPeriodo . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&numeroRecord=' . $numeroRecord);
 			$item->expiresAfter($this->ttlForUtentiStruttura);
 			$item->tag($this->authenticatedCacheTag(self::TAG_UTENTI_STRUTTURA));
 

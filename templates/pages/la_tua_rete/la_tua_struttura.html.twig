@@ -2,27 +2,27 @@
    {% block title %}{% trans %}La tua struttura{% endtrans %}{% endblock title %}
 
     {% block css_page %}
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/themify.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
               integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"
               integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
-        <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/select2.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/datatables.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/datatable-extension.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/chartist.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/vendors/date-picker.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
               integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-        <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+        <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
     {% endblock css_page %}
 
 {% block page_body %}
@@ -63,7 +63,7 @@
                             <div id="filters_datatable" class="datatable_struttura visually-hidden">
                                 <div class="row">
                                     <div class="col-sm-4 p-t-10">
-										{% trans %}Gruppo di{% endtrans %}
+                                        {% trans %}Gruppo di{% endtrans %}
                                         <div id="typehead_sottoposti">
                                             <div id="idUtenteSelezionato" hidden></div>
                                             <div id="contenutoTypehead" hidden></div>
@@ -71,25 +71,25 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4 p-t-10">
-										{% trans %}Nominativo{% endtrans %}
+                                        {% trans %}Nominativo{% endtrans %}
                                         <div>
                                             <input id="filtro_nominativo" class="form-control" type="text" placeholder="{% trans %}Nome cognome o ragione sociale{% endtrans %}" name="filtro_nominativo">
                                         </div>
                                     </div>
                                     <div class="col-sm-4 p-t-10">
-										{% trans %}E-mail{% endtrans %}
+                                        {% trans %}E-mail{% endtrans %}
                                         <div>
                                             <input id="filtro_email" class="form-control" type="email" placeholder="" name="filtro_email">
                                         </div>
                                     </div>
                                     <div class="col-sm-4 p-t-10">
-										{% trans %}Cellulare{% endtrans %}
+                                        {% trans %}Cellulare{% endtrans %}
                                         <div>
                                             <input id="filtro_cellulare" class="form-control" type="text" placeholder="" name="filtro_cellulare">
                                         </div>
                                     </div>
                                     <div class="col-sm-2 p-t-10">
-										{% trans %}Mese{% endtrans %}
+                                        {% trans %}Mese{% endtrans %}
                                         <div class="input-group">
                                             <select id="filtro_mese" class="form-select" name="Mese">
                                                 <option value="01">{% trans %}Gennaio{% endtrans %}</option>
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2 p-t-10">
-										{% trans %}Anno{% endtrans %}
+                                        {% trans %}Anno{% endtrans %}
                                         <div class="input-group">
                                             <select id="filtro_anno" class="form-select" name="Anno">
                                                 {% for year in 2020.."now"|date("Y") %}
@@ -145,7 +145,7 @@
                                 <tr>
                                     <td>
                                         <div id="filter_button_datatable" onclick="open_filters()" style="min-width: 130px;">
-											{% trans %}Filtri{% endtrans %} <i class="fa fa-sliders"></i>
+                                            {% trans %}Filtri{% endtrans %} <i class="fa fa-sliders"></i>
                                         </div>
                                     </td>
                                     <td>
@@ -167,18 +167,21 @@
                             <table class="row-border hover" id="datatable_responsive_orders">
                                 <thead>
                                 <tr>
-                                    <th>{% trans %}Codice{% endtrans %}</th>
-                                    <th>{% trans %}Livello{% endtrans %}</th>
-                                    <th>{% trans %}Incaricato{% endtrans %}</th>
-                                    <th>{% trans %}Qualifica{% endtrans %}</th>
-                                    <th>{% trans %}E-mail{% endtrans %}</th>
-                                    <th>{% trans %}Cellulare{% endtrans %}</th>
-                                    <th>{% trans %}Sponsor{% endtrans %}</th>
+                                    <th id="0-colonna" nomeColonna="codice">{% trans %}Codice{% endtrans %}</th>
+                                    <th id="1-colonna" nomeColonna="livello">{% trans %}Livello{% endtrans %}</th>
+                                    <th id="2-colonna" nomeColonna="incaricato">{% trans %}Incaricato{% endtrans %}</th>
+                                    <th id="3-colonna" nomeColonna="qualifica">{% trans %}Qualifica{% endtrans %}</th>
+                                    <th id="4-colonna" nomeColonna="email">{% trans %}E-mail{% endtrans %}</th>
+                                    <th id="5-colonna" nomeColonna="cellulare">{% trans %}Cellulare{% endtrans %}</th>
+                                    <th id="6-colonna" nomeColonna="sponsor">{% trans %}Sponsor{% endtrans %}</th>
                                 </tr>
                                 </thead>
                             </table>
                         </div>
                         <div class="clearfix"></div>
+                        <div id="valore-colonna" hidden>codice</div>
+                        <div id="valore-direzione" hidden>asc</div>
+                        <div id="valore-numero-record" hidden>10</div>
                     </div>
                 </div>
             </div>
@@ -207,44 +210,60 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
-<script src="../assets/js/scrollbar/custom.js"></script>
-<script src="../assets/js/config.js"></script>
-<script src="../assets/js/sidebar-menu.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
-<script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/js/tooltip-init.js"></script>
-<script src="../assets/js/notify/bootstrap-notify.min.js"></script>
-<script src="../assets/js/notify/index.js"></script>
-<script src="../assets/js/typeahead/handlebars.js"></script>
-<script src="../assets/js/typeahead/typeahead.bundle.js"></script>
-<script src="../assets/js/typeahead/typeahead.custom.js"></script>
-<script src="../assets/js/typeahead-search/handlebars.js"></script>
-<script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
-<script src="../assets/js/script.js"></script>
-<script src="../assets/js/theme-customizer/customizer.js"></script>
+<script src="/assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="/assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="/assets/js/scrollbar/custom.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/sidebar-menu.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="/assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/js/tooltip-init.js"></script>
+<script src="/assets/js/notify/bootstrap-notify.min.js"></script>
+<script src="/assets/js/notify/index.js"></script>
+<script src="/assets/js/typeahead/handlebars.js"></script>
+<script src="/assets/js/typeahead/typeahead.bundle.js"></script>
+<script src="/assets/js/typeahead/typeahead.custom.js"></script>
+<script src="/assets/js/typeahead-search/handlebars.js"></script>
+<script src="/assets/js/typeahead-search/typeahead-custom.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/theme-customizer/customizer.js"></script>
 {% endblock javascript %}
 
 {% block javascript_page %}
     <script>
+
+		//region
+		var colonna = document.getElementById('valore-colonna').innerHTML;
+		var direzione = document.getElementById('valore-direzione').innerHTML;
+		var numeroRecord = document.getElementById('valore-numero-record').innerHTML;
+		var filtro_gruppoDi = $("#idUtenteSelezionato").html();
+		var filtro_nominativo = $("#filtro_nominativo").val();
+		var filtro_email = $("#filtro_email").val();
+		var filtro_cellulare = $("#filtro_cellulare").val();
+		var filtro_periodo = $("#filtro_anno").val() + "-" + $("#filtro_mese").val();
+		var filtro_diretti = $("#filtro_diretti").hasClass("onSelect");
+		//endregion
+
 		var requestData = {
 			"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
 			"filtro_nominativo": $("#filtro_nominativo").val(),
 			"filtro_email": $("#filtro_email").val(),
 			"filtro_cellulare": $("#filtro_cellulare").val(),
 			"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
-			"filtro_diretti": $("#filtro_diretti").hasClass("onSelect")
+			"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
+			"colonna": colonna,
+			"direzione": direzione,
+			"numeroRecord": numeroRecord
 		};
 
 		var table = '0';
@@ -273,18 +292,6 @@
 			}
 		};
 
-		function aggiornaRisultati(){
-			requestData = {
-				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
-				"filtro_nominativo": $("#filtro_nominativo").val(),
-				"filtro_email": $("#filtro_email").val(),
-				"filtro_cellulare": $("#filtro_cellulare").val(),
-				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
-				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect")
-			};
-			table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
-		}
-
 		//region aggiungo o rimuovo classe "onSelect" (input switch),in modo da selezionarlo quando è attivo
 		function onOffFunction(id){
 			if($("#" + id).hasClass('onSelect')){
@@ -306,37 +313,37 @@
 			if($("#idUtenteSelezionato").html()){
 				$("#applied_filters_gruppoDi").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_gruppoDi").addClass("visually-hidden");
 			}
 			if($("#filtro_anno").val() && $("#filtro_mese").val()){
 				$("#applied_filters_periodo").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_periodo").addClass("visually-hidden");
 			}
-			if( $("#filtro_nominativo").val()){
+			if($("#filtro_nominativo").val()){
 				$("#applied_filters_nominativo").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_nominativo").addClass("visually-hidden");
 			}
 			if($("#filtro_email").val()){
 				$("#applied_filters_email").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_email").addClass("visually-hidden");
 			}
 			if($("#filtro_cellulare").val()){
 				$("#applied_filters_cellulare").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_cellulare").addClass("visually-hidden");
 			}
 			if($("#filtro_diretti").hasClass("onSelect")){
 				$("#applied_filters_diretti").removeClass("visually-hidden");
 				count = count + 1;
-			}else{
+			} else{
 				$("#applied_filters_diretti").addClass("visually-hidden");
 			}
 
@@ -357,7 +364,7 @@
 			} else if(filtro_di_Riferimento === 'type-sottoposti'){
 				$("#idUtenteSelezionato").html("")
 				$("#type-sottoposti").val("")
-			}else{
+			} else{
 				$('#' + filtro_di_Riferimento).val('');
 			}
 			$("#" + id).addClass("visually-hidden");
@@ -377,6 +384,13 @@
 						return requestData;
 					}
 				},
+				lengthMenu: [
+					[ 10, 25, 50, -1 ],
+					[ '10', '25', '50', 'Show all' ]
+				],
+				buttons: [
+					'pageLength'
+				],
 				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
@@ -384,8 +398,63 @@
 					{responsivePriority: 2, targets: 2}
 				]
 			});
+			table.on("order.dt", function(event, settings, ordArr){
+				colonna = ordArr[0].col;
+				direzione = ordArr[0].dir;
+
+				var tag = document.getElementById(colonna + "-colonna");
+				colonna = tag.getAttribute('nomeColonna');
+
+				aggiornaRisultati()
+			});
+			table.on("length.dt", function(e, settings, len){
+
+				numeroRecord = len;
+				aggiornaRisultati()
+			});
 			renderFiltri();
 		});
+
+		var count = 0;
+		function aggiornaRisultati(){
+
+			requestData = {
+				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
+				"filtro_nominativo": $("#filtro_nominativo").val(),
+				"filtro_email": $("#filtro_email").val(),
+				"filtro_cellulare": $("#filtro_cellulare").val(),
+				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
+				"colonna": colonna,
+				"direzione": direzione,
+				"numeroRecord": numeroRecord
+			};
+
+			if(count % 2 == 1){
+				count++
+				return;
+			} else{
+				count++;
+				table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
+			}
+
+		}
+
+
+		//var tabledata = '';
+		//var colonna = '';
+		//var ordinamento = '';
+		//function ordinaDatatable(nomeColonna){
+		//	tabledata = table.order()[0];
+		//	ordinamento = tabledata[1];
+		//	console.log(tabledata)
+		//	console.log(colonna)
+		//	console.log(ordinamento)
+		//	aggiornaRisultati(nomeColonna, ordinamento);
+		//	tabledata = '';
+		//	colonna = '';
+		//	ordinamento = '';
+		//}
 
 		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
 
@@ -401,6 +470,7 @@
 			$("#filter_button_datatable").removeClass("visually-hidden");
 			$("#applied_filters_datatable").removeClass("visually-hidden");
 			renderFiltri();
+
 			aggiornaRisultati();
 		}
 
