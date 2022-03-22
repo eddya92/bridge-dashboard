@@ -222,7 +222,7 @@ class LaTuaReteController extends AbstractController{
 	#[Route('/{_locale}/salva-albero-unilevel', name: 'salva-albero-unilevel', methods: ['POST'])]
 	public function salvaAlberoUnilevel(Request $request){
 		$idVista = (int) $request->get('idVista', 0);
-		$idUtente = (int) $request->get('idUtenteSalva', 0);
+		$idUtente = (int) $request->get('idUtente', 0);
 		$livello = (int) $request->get('livello', 0);
 		$nome = trim($request->get('nome', ''));
 		$mese = trim($request->get('mese', ''));
