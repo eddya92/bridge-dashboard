@@ -142,7 +142,7 @@
                                         <div id="typehead_sottoposti" style="width:100% !important;">
                                             <input id="type-sottoposti" class="typeahead form-control" type="text" placeholder="{% trans %}Cerca per codice nominativo e-mail o telefono{% endtrans %}" aria-label="{% trans %}scegli{% endtrans %}">
                                         </div>
-                                        <input type="hidden" name="idUtente">
+                                        <input type="hidden" name="idUtente" value="{{ vista.idUtente }}">
                                         <div>
                                             <table class="width_100">
                                                 <tr>
@@ -354,35 +354,29 @@
 			}
 
 			var idUtente = $('[name="idUtente"]').val();
-			console.log('idUtente ', idUtente)
 			if(idUtente == ''){
 				idUtente = 0;
 			}
 
 			livello = $('[name="livello"]').val();
-			console.log('livello ', livello)
 			var mese = $('[name="mese"]').val();
 
 			var punti = $('[name="punti"]').val();
-			console.log('punti', punti)
 			if(punti == ''){
 				punti = 'pv_mensile';
 			}
 
 			orientamento = $('[name="orientamento"]').val();
-			console.log('orientamento ', orientamento)
 			if(orientamento != 'orizzontale' && orientamento != 'verticale'){
 				orientamento = 'verticale';
 			}
 
 			var width = $('[name="larghezza"]').val();
-			console.log('width ', width)
 			if(width == 'auto'){
 				width = 900;
 			}
 
 			var height = $('[name="altezza"]').val();
-			console.log('height ', height)
 			if(height == 'auto'){
 				height = 900;
 			}
@@ -434,7 +428,6 @@
 				.text('');
 
 			var url = '{{ path('albero-unilevel-ajax') }}?idUtente=' + idUtente + '&mese=' + mese + '&livello=' + livello + '&punti=' + punti + '&idVista=' + idVista;
-		console.log('url ',url)
 			d3.json(url, function(json){
 				root = json;
 				if(root == 'error'){
@@ -446,7 +439,6 @@
 					} else{
 						root.y0 = 10;
 					}
-console.log('root ',root)
 					root.children.forEach(toggleAll);
 					root.children.forEach(toggleAllLevels);
 					update(root);
