@@ -394,7 +394,9 @@
 		var totaleDocumentiObbligatoriCaricati = {{ documentiObbligatoriCaricati }};
 
 		function calcoloPercentuale(totaleDocumenti, totaleDocumentiObbligatoriCaricati){
-			percentualeCaricati = (totaleDocumentiObbligatoriCaricati * 100) / totaleDocumenti;
+			console.log(totaleDocumenti,totaleDocumentiObbligatoriCaricati)
+			percentualeCaricati = Math.floor((totaleDocumentiObbligatoriCaricati * 100) / totaleDocumenti);
+
 			return percentualeCaricati;
 		}
 
@@ -431,7 +433,7 @@
 						enabled: false,
 						enabledOnSeries: undefined,
 						formatter: function(val, opts){
-							return (val / 100) * 4 + '/4';//val + "%"
+							return (val / 100) * 100 + '/4';//val + "%"
 						},
 						textAnchor: 'middle',
 						distributed: false,
