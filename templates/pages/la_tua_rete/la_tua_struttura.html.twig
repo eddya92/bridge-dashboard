@@ -419,7 +419,7 @@
 			aggiornaRisultati();
 		}
 		//endregion
-
+		var count = 0;
 		$(document).ready(function(){
 			table = $('#datatable_responsive_orders').DataTable({
 				responsive: true,
@@ -447,11 +447,26 @@
 			table.on("order.dt", function(event, settings, ordArr){
 				colonna = ordArr[0].col;
 				direzione = ordArr[0].dir;
-
+				console.log('ORDINAMENTO')
 				var tag = document.getElementById(colonna + "-colonna");
 				colonna = tag.getAttribute('nomeColonna');
 
-				aggiornaRisultati()
+				if(count == 0){
+					count++
+					return;
+				} else{
+					if(count % 2 == 1){
+
+						count++
+						return aggiornaRisultati();
+					} else{
+						count++;
+						return;
+
+					}
+				}
+
+
 			});
 			table.on("length.dt", function(e, settings, len){
 
@@ -461,7 +476,7 @@
 			renderFiltri();
 		});
 
-		var count = 0;
+
 		function aggiornaRisultati(){
 			requestData = {
 				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
@@ -475,15 +490,7 @@
 				"direzione": direzione,
 				"numeroRecord": numeroRecord
 			};
-
-			if(count % 2 == 1){
-				count++
-				return;
-			} else{
-				count++;
-				table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
-			}
-
+			table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
 		}
 
 		//var tabledata = '';
