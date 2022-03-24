@@ -276,8 +276,26 @@ class LaTuaReteController extends AbstractController{
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	#[Route('/{_locale}/struttura-unilevel', name: 'struttura-unilevel', methods: ['GET'])]
-	public function strutturaUnilevel(){
-		return $this->render('pages/la_tua_rete/la_tua_struttura.html.twig');
+	public function strutturaUnilevel(Request $request){
+		$clienti = $request->get('clienti', '');
+		$collaboratori = $request->get('incaricati', '');
+		$diretti = $request->get('diretti', '');
+
+		$filtroAttivo = '';
+		if($clienti != ''){
+			$filtroAttivo = $clienti;
+		}
+
+		if($collaboratori != ''){
+			$filtroAttivo = $collaboratori;
+		}
+
+		$filtroAttivo = 'incaricati';
+
+		return $this->render('pages/la_tua_rete/la_tua_struttura.html.twig', [
+			'filtroAttivo' => $filtroAttivo,
+			'diretti'      => $diretti,
+		]);
 	}
 
 	/**
@@ -298,8 +316,9 @@ class LaTuaReteController extends AbstractController{
 		$filtroColonnaOrdinamento = $request->get('colonna', '');
 		$filtroDirezioneOrdinamento = strtoupper($request->get('direzione', ''));
 		$numeroRecord = $request->get('numeroRecord', '');
+		$tipologiaUtenza = $request->get('filtro_tipoligiaUtente', '');
 
-		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $numeroRecord);
+		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $numeroRecord, $tipologiaUtenza);
 		$struttura = [];
 
 		if($strutturaGenerator != null){

@@ -90,33 +90,47 @@
                                     </div>
                                     <div class="col-sm-2 p-t-10">
                                         {% trans %}Mese{% endtrans %}
+                                        <input id="annoAttuale" hidden value="00">
+
                                         <div class="input-group">
                                             <select id="filtro_mese" class="form-select" name="Mese">
-                                                <option value="01">{% trans %}Gennaio{% endtrans %}</option>
-                                                <option value="02">{% trans %}Febbraio{% endtrans %}</option>
-                                                <option value="03">{% trans %}Marzo{% endtrans %}</option>
-                                                <option value="04">{% trans %}Aprile{% endtrans %}</option>
-                                                <option value="05">{% trans %}Maggio{% endtrans %}</option>
-                                                <option value="06">{% trans %}Giugno{% endtrans %}</option>
-                                                <option value="07">{% trans %}Luglio{% endtrans %}</option>
-                                                <option value="08">{% trans %}Agosto{% endtrans %}</option>
-                                                <option value="09">{% trans %}Settembre{% endtrans %}</option>
-                                                <option value="10">{% trans %}Ottobre{% endtrans %}</option>
-                                                <option value="11">{% trans %}Novembre{% endtrans %}</option>
-                                                <option value="12">{% trans %}Dicembre{% endtrans %}</option>
+
+                                                <option value="01" id="filtro-mese-01" {{ "now"|date("m") == '01' ? 'selected' : '' }}>{% trans %}Gennaio{% endtrans %}</option>
+                                                <option value="02" id="filtro-mese-02" {{ "now"|date("m") == '02' ? 'selected' : '' }}>{% trans %}Febbraio{% endtrans %}</option>
+                                                <option value="03" id="filtro-mese-03" {{ "now"|date("m") == '03' ? 'selected' : '' }}>{% trans %}Marzo{% endtrans %}</option>
+                                                <option value="04" id="filtro-mese-04" {{ "now"|date("m") == '04' ? 'selected' : '' }}>{% trans %}Aprile{% endtrans %}</option>
+                                                <option value="05" id="filtro-mese-05" {{ "now"|date("m") == '05' ? 'selected' : '' }}>{% trans %}Maggio{% endtrans %}</option>
+                                                <option value="06" id="filtro-mese-06" {{ "now"|date("m") == '06' ? 'selected' : '' }}>{% trans %}Giugno{% endtrans %}</option>
+                                                <option value="07" id="filtro-mese-07" {{ "now"|date("m") == '07' ? 'selected' : '' }}>{% trans %}Luglio{% endtrans %}</option>
+                                                <option value="08" id="filtro-mese-08" {{ "now"|date("m") == '08' ? 'selected' : '' }}>{% trans %}Agosto{% endtrans %}</option>
+                                                <option value="09" id="filtro-mese-09" {{ "now"|date("m") == '09' ? 'selected' : '' }}>{% trans %}Settembre{% endtrans %}</option>
+                                                <option value="10" id="filtro-mese-10" {{ "now"|date("m") == '10' ? 'selected' : '' }}>{% trans %}Ottobre{% endtrans %}</option>
+                                                <option value="11" id="filtro-mese-11" {{ "now"|date("m") == '11' ? 'selected' : '' }}>{% trans %}Novembre{% endtrans %}</option>
+                                                <option value="12" id="filtro-mese-12" {{ "now"|date("m") == '12' ? 'selected' : '' }}>{% trans %}Dicembre{% endtrans %}</option>
+
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-2 p-t-10">
                                         {% trans %}Anno{% endtrans %}
                                         <div class="input-group">
-                                            <select id="filtro_anno" class="form-select" name="Anno">
+                                            <select id="filtro_anno" class="form-select" name="Anno" onchange="controlloAnnoAttuale(this.value)">
                                                 {% for year in 2020.."now"|date("Y") %}
-                                                    <option value="{{ year }}">{{ year }}</option>
+                                                    <option value="{{ year }}" {{ "now"|date("Y") == year ? 'selected' : '' }}>{{ year }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
                                     </div>
+									<div class="col-sm-4 p-t-10">
+										{% trans %}Tipologia utenza {% endtrans %}
+										<div class="input-group">
+											<select id="filtro_tipologiaUtenza" class="form-select" name="tipologiaUtenza" onchange="">
+												<option value="" {{ filtroAttivo == '' ? 'selected' : '' }}>Tutti</option>
+												<option value="incaricati" {{ filtroAttivo == 'incaricati' ? 'selected' : '' }}>Incaricati</option>
+												<option value="clienti" {{ filtroAttivo == 'clienti' ? 'selected' : '' }}>Clienti</option>
+											</select>
+										</div>
+									</div>
                                     <div class="col-sm-4 p-t-10">
                                         <table class="width_100 m-t-20">
                                             <tr>
@@ -151,12 +165,13 @@
                                     <td>
                                         <div id="applied_filters_datatable">
                                             <div id="applied_filters_datatable_container">
-                                                <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Gruppo di{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Gruppo di{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_nominativo" idRiferimento="filtro_nominativo" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Nominativo{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_email" idRiferimento="filtro_email" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}E-mail{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_cellulare" idRiferimento="filtro_cellulare" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Cellulare{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_diretti" idRiferimento="filtro_diretti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Solo diretti{% endtrans %} <i class="fa fa-times"></i></span>
+                                                <span id="applied_filters_tipologiaUtenza" idRiferimento="filtro_tipologiaUtenza" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Tipologia Utenza{% endtrans %} <i class="fa fa-times"></i></span>
                                             </div>
                                         </div>
                                     </td>
@@ -240,9 +255,43 @@
 {% endblock javascript %}
 
 {% block javascript_page %}
+
+
     <script>
 
 		//region
+		var annoAttuale = "{{ "now"|date("Y") }}";
+		var filtroAttivo = "{{ filtroAttivo }}";
+		var filtroDirettiAttivo = "{{ diretti }}"
+		//endregion
+
+		var requestData = '';
+		$(document).ready(function(){
+			if(filtroDirettiAttivo){
+				filtroAttivoFunction()
+			}
+
+			requestData = {
+				"filtro_tipoligiaUtente":$("#filtro_tipologiaUtenza").val(),
+				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
+				"filtro_nominativo": $("#filtro_nominativo").val(),
+				"filtro_email": $("#filtro_email").val(),
+				"filtro_cellulare": $("#filtro_cellulare").val(),
+				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
+				"colonna": colonna,
+				"direzione": direzione,
+				"numeroRecord": numeroRecord
+			};
+		})
+
+		function filtroAttivoFunction(){
+			let soloDiretti = document.getElementById('filtro_diretti')
+			soloDiretti.setAttribute('checked', '');
+			soloDiretti.className += 'onSelect';
+		}
+
+		//region dati per datatable
 		var colonna = document.getElementById('valore-colonna').innerHTML;
 		var direzione = document.getElementById('valore-direzione').innerHTML;
 		var numeroRecord = document.getElementById('valore-numero-record').innerHTML;
@@ -253,18 +302,6 @@
 		var filtro_periodo = $("#filtro_anno").val() + "-" + $("#filtro_mese").val();
 		var filtro_diretti = $("#filtro_diretti").hasClass("onSelect");
 		//endregion
-
-		var requestData = {
-			"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
-			"filtro_nominativo": $("#filtro_nominativo").val(),
-			"filtro_email": $("#filtro_email").val(),
-			"filtro_cellulare": $("#filtro_cellulare").val(),
-			"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
-			"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
-			"colonna": colonna,
-			"direzione": direzione,
-			"numeroRecord": numeroRecord
-		};
 
 		var table = '0';
 
@@ -321,6 +358,12 @@
 				count = count + 1;
 			} else{
 				$("#applied_filters_periodo").addClass("visually-hidden");
+			}
+			if($("#filtro_tipologiaUtenza").val()){
+				$("#applied_filters_tipologiaUtenza").removeClass("visually-hidden");
+				count = count + 1;
+			} else{
+				$("#applied_filters_tipologiaUtenza").addClass("visually-hidden");
 			}
 			if($("#filtro_nominativo").val()){
 				$("#applied_filters_nominativo").removeClass("visually-hidden");
@@ -385,8 +428,8 @@
 					}
 				},
 				lengthMenu: [
-					[ 10, 25, 50, -1 ],
-					[ '10', '25', '50', 'Show all' ]
+					[10, 25, 50, -1],
+					['10', '25', '50', 'Show all']
 				],
 				buttons: [
 					'pageLength'
@@ -417,8 +460,8 @@
 
 		var count = 0;
 		function aggiornaRisultati(){
-
 			requestData = {
+				"filtro_tipoligiaUtente":$("#filtro_tipologiaUtenza").val(),
 				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
 				"filtro_nominativo": $("#filtro_nominativo").val(),
 				"filtro_email": $("#filtro_email").val(),
@@ -440,20 +483,19 @@
 
 		}
 
-
 		//var tabledata = '';
 		//var colonna = '';
 		//var ordinamento = '';
 		//function ordinaDatatable(nomeColonna){
-		//	tabledata = table.order()[0];
-		//	ordinamento = tabledata[1];
-		//	console.log(tabledata)
-		//	console.log(colonna)
-		//	console.log(ordinamento)
-		//	aggiornaRisultati(nomeColonna, ordinamento);
-		//	tabledata = '';
-		//	colonna = '';
-		//	ordinamento = '';
+		// tabledata = table.order()[0];
+		// ordinamento = tabledata[1];
+		// console.log(tabledata)
+		// console.log(colonna)
+		// console.log(ordinamento)
+		// aggiornaRisultati(nomeColonna, ordinamento);
+		// tabledata = '';
+		// colonna = '';
+		// ordinamento = '';
 		//}
 
 		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
@@ -539,9 +581,9 @@
 
 		//region controllo se cio che scrivo matcha con i record del typehead
 		var substringMatcher = function(strs){
-			//  console.log("strs", strs[0].id);
+			// console.log("strs", strs[0].id);
 			return function findMatches(q, cb){
-				//    console.log('q', q);
+				// console.log('q', q);
 				var matches, substringRegex;
 				// an array that will be populated with substring matches
 				matches = [];
@@ -558,6 +600,21 @@
 			};
 		};
 		//endregion
+
+		//region variabili controllo mese e anno
+
+		////endregion
+		//$(document).ready(function(){
+		// controlloAnnoAttuale(){
+
+		// }filtro-mese-01
+		//})
+
+		function controlloAnnoAttuale(anno){
+			if(annoAttuale === anno){
+
+			}
+		}
 
     </script>
 
