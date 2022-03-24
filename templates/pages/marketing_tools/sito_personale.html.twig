@@ -79,10 +79,10 @@
                                     <div class="col-sm-6 float-start">
                                         <div class="single-blog-content-top">
                                             <h4>
-                                                <input type="text" class="form-control bg-transparent f-w-600" name="titolo" value="{{ sito.titolo }}">
+                                                <input type="text" class="form-control bg-transparent f-w-600" name="titolo" placeholder="{% trans %}Titolo{% endtrans %}" value="{{ sito.titolo }}">
                                             </h4>
                                             <div class="m-b-20"></div>
-                                            <textarea class="form-control bg-transparent" name="descrizione">{{ sito.descrizione }}</textarea>
+                                            <textarea class="form-control bg-transparent" placeholder="{% trans %}Descrizione{% endtrans %} . . ." name="descrizione">{{ sito.descrizione }}</textarea>
                                             <div class="m-b-20"></div>
                                             <hr>
                                             <br>
