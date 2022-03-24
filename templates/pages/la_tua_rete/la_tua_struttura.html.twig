@@ -95,18 +95,18 @@
                                         <div class="input-group">
                                             <select id="filtro_mese" class="form-select" name="Mese">
 
-                                                <option value="01" id="filtro-mese-01" {{ "now"|date("m") == '01' ? 'selected' : '' }}>{% trans %}Gennaio{% endtrans %}</option>
-                                                <option value="02" id="filtro-mese-02" {{ "now"|date("m") == '02' ? 'selected' : '' }}>{% trans %}Febbraio{% endtrans %}</option>
-                                                <option value="03" id="filtro-mese-03" {{ "now"|date("m") == '03' ? 'selected' : '' }}>{% trans %}Marzo{% endtrans %}</option>
-                                                <option value="04" id="filtro-mese-04" {{ "now"|date("m") == '04' ? 'selected' : '' }}>{% trans %}Aprile{% endtrans %}</option>
-                                                <option value="05" id="filtro-mese-05" {{ "now"|date("m") == '05' ? 'selected' : '' }}>{% trans %}Maggio{% endtrans %}</option>
-                                                <option value="06" id="filtro-mese-06" {{ "now"|date("m") == '06' ? 'selected' : '' }}>{% trans %}Giugno{% endtrans %}</option>
-                                                <option value="07" id="filtro-mese-07" {{ "now"|date("m") == '07' ? 'selected' : '' }}>{% trans %}Luglio{% endtrans %}</option>
-                                                <option value="08" id="filtro-mese-08" {{ "now"|date("m") == '08' ? 'selected' : '' }}>{% trans %}Agosto{% endtrans %}</option>
-                                                <option value="09" id="filtro-mese-09" {{ "now"|date("m") == '09' ? 'selected' : '' }}>{% trans %}Settembre{% endtrans %}</option>
-                                                <option value="10" id="filtro-mese-10" {{ "now"|date("m") == '10' ? 'selected' : '' }}>{% trans %}Ottobre{% endtrans %}</option>
-                                                <option value="11" id="filtro-mese-11" {{ "now"|date("m") == '11' ? 'selected' : '' }}>{% trans %}Novembre{% endtrans %}</option>
-                                                <option value="12" id="filtro-mese-12" {{ "now"|date("m") == '12' ? 'selected' : '' }}>{% trans %}Dicembre{% endtrans %}</option>
+                                                <option value="01" id="filtro-mese-01" class="meseDaControllare" {{ "now"|date("m") == '01' ? 'selected' : '' }}>{% trans %}Gennaio{% endtrans %}</option>
+                                                <option value="02" id="filtro-mese-02" class="meseDaControllare" {{ "now"|date("m") == '02' ? 'selected' : '' }}>{% trans %}Febbraio{% endtrans %}</option>
+                                                <option value="03" id="filtro-mese-03" class="meseDaControllare" {{ "now"|date("m") == '03' ? 'selected' : '' }}>{% trans %}Marzo{% endtrans %}</option>
+                                                <option value="04" id="filtro-mese-04" class="meseDaControllare" {{ "now"|date("m") == '04' ? 'selected' : '' }}>{% trans %}Aprile{% endtrans %}</option>
+                                                <option value="05" id="filtro-mese-05" class="meseDaControllare" {{ "now"|date("m") == '05' ? 'selected' : '' }}>{% trans %}Maggio{% endtrans %}</option>
+                                                <option value="06" id="filtro-mese-06" class="meseDaControllare" {{ "now"|date("m") == '06' ? 'selected' : '' }}>{% trans %}Giugno{% endtrans %}</option>
+                                                <option value="07" id="filtro-mese-07" class="meseDaControllare" {{ "now"|date("m") == '07' ? 'selected' : '' }}>{% trans %}Luglio{% endtrans %}</option>
+                                                <option value="08" id="filtro-mese-08" class="meseDaControllare" {{ "now"|date("m") == '08' ? 'selected' : '' }}>{% trans %}Agosto{% endtrans %}</option>
+                                                <option value="09" id="filtro-mese-09" class="meseDaControllare" {{ "now"|date("m") == '09' ? 'selected' : '' }}>{% trans %}Settembre{% endtrans %}</option>
+                                                <option value="10" id="filtro-mese-10" class="meseDaControllare" {{ "now"|date("m") == '10' ? 'selected' : '' }}>{% trans %}Ottobre{% endtrans %}</option>
+                                                <option value="11" id="filtro-mese-11" class="meseDaControllare" {{ "now"|date("m") == '11' ? 'selected' : '' }}>{% trans %}Novembre{% endtrans %}</option>
+                                                <option value="12" id="filtro-mese-12" class="meseDaControllare" {{ "now"|date("m") == '12' ? 'selected' : '' }}>{% trans %}Dicembre{% endtrans %}</option>
 
                                             </select>
                                         </div>
@@ -121,16 +121,16 @@
                                             </select>
                                         </div>
                                     </div>
-									<div class="col-sm-4 p-t-10">
-										{% trans %}Tipologia utenza {% endtrans %}
-										<div class="input-group">
-											<select id="filtro_tipologiaUtenza" class="form-select" name="tipologiaUtenza" onchange="">
-												<option value="" {{ filtroAttivo == '' ? 'selected' : '' }}>Tutti</option>
-												<option value="incaricati" {{ filtroAttivo == 'incaricati' ? 'selected' : '' }}>Incaricati</option>
-												<option value="clienti" {{ filtroAttivo == 'clienti' ? 'selected' : '' }}>Clienti</option>
-											</select>
-										</div>
-									</div>
+                                    <div class="col-sm-4 p-t-10">
+                                        {% trans %}Tipologia utenza {% endtrans %}
+                                        <div class="input-group">
+                                            <select id="filtro_tipologiaUtenza" class="form-select" name="tipologiaUtenza" onchange="">
+                                                <option value="" {{ filtroAttivo == '' ? 'selected' : '' }}>Tutti</option>
+                                                <option value="incaricati" {{ filtroAttivo == 'incaricati' ? 'selected' : '' }}>Incaricati</option>
+                                                <option value="clienti" {{ filtroAttivo == 'clienti' ? 'selected' : '' }}>Clienti</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-sm-4 p-t-10">
                                         <table class="width_100 m-t-20">
                                             <tr>
@@ -261,18 +261,21 @@
 
 		//region
 		var annoAttuale = "{{ "now"|date("Y") }}";
+		var meseAttuale = "{{ "now"|date("m") }}";
 		var filtroAttivo = "{{ filtroAttivo }}";
 		var filtroDirettiAttivo = "{{ diretti }}"
+		const mesiCollection = document.getElementsByClassName("meseDaControllare");
 		//endregion
 
 		var requestData = '';
 		$(document).ready(function(){
+			controlloAnnoAttuale(annoAttuale);
 			if(filtroDirettiAttivo){
 				filtroAttivoFunction()
 			}
 
 			requestData = {
-				"filtro_tipoligiaUtente":$("#filtro_tipologiaUtenza").val(),
+				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
 				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
 				"filtro_nominativo": $("#filtro_nominativo").val(),
 				"filtro_email": $("#filtro_email").val(),
@@ -461,7 +464,7 @@
 		var count = 0;
 		function aggiornaRisultati(){
 			requestData = {
-				"filtro_tipoligiaUtente":$("#filtro_tipologiaUtenza").val(),
+				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
 				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
 				"filtro_nominativo": $("#filtro_nominativo").val(),
 				"filtro_email": $("#filtro_email").val(),
@@ -612,7 +615,15 @@
 
 		function controlloAnnoAttuale(anno){
 			if(annoAttuale === anno){
-
+				mesiCollection.forEach(function(element){
+					if(meseAttuale < element.value){
+						element.setAttribute('hidden', '')
+					}
+				})
+			} else{
+				mesiCollection.forEach(function(element){
+					element.removeAttribute('hidden')
+				})
 			}
 		}
 
