@@ -290,8 +290,6 @@ class LaTuaReteController extends AbstractController{
 			$filtroAttivo = $collaboratori;
 		}
 
-		$filtroAttivo = 'incaricati';
-
 		return $this->render('pages/la_tua_rete/la_tua_struttura.html.twig', [
 			'filtroAttivo' => $filtroAttivo,
 			'diretti'      => $diretti,
