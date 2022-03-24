@@ -123,7 +123,6 @@
 			var notiziePrincipali = $('#notizie_principali').height()
 			var graficoVendite = $('#grafico_vendite').height()
 			if(notiziePrincipali > graficoVendite){
-				console.log('piu grande notizie', notiziePrincipali);
 			} else if(notiziePrincipali < graficoVendite){
 				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
 			}

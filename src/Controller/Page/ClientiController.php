@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ClientiController extends AbstractController{
 	public function __construct(
-		private ClientiRepository $repository,
+		//private ClientiRepository $repository,
 
 		private AccountRepository $accountRepository
 	){
@@ -81,42 +81,42 @@ class ClientiController extends AbstractController{
 	/**
 	 * Vista della pagina elenco clienti
 	 */
-	#[Route('/{_locale}/elenco-clienti', name: 'elenco-clienti', methods: ['GET'])]
-	public function elencoClienti() : Response{
-		return $this->render('pages/clienti/elenco_clienti.html.twig');
-	}
+	##[Route('/{_locale}/elenco-clienti', name: 'elenco-clienti', methods: ['GET'])]
+	#public function elencoClienti() : Response{
+	#	return $this->render('pages/clienti/elenco_clienti.html.twig');
+	#}
 
 	/**
 	 * Datatable elenco clienti
 	 */
-	#[Route('/{_locale}/clienti-ajax', name: 'clienti-ajax', methods: ['GET'])]
-	public function clientiAjax(Request $request, $_locale) : JsonResponse{
-		$ricercaGenerica = $request->get('ricerca_generica', '');
-		$dataDal = $request->get('data_dal', '');
-		$dataAl = $request->get('data_al', '');
-
-		$clienti = $this->repository->getClienti($_locale,$ricercaGenerica, $dataDal, $dataAl);
-
-		if($clienti != null){
-			$datatableClienti = [];
-			foreach($clienti as $item){
-				$array = [];
-				array_push($array, $item->getDataIscrizione(), $item->getCodice(), $item->getNominativo(), $item->getPc(), $item->getTelefono(), $item->getEmail(), $item->getOrdini());
-				$datatableClienti[] = $array;
-			}
-			$count = count($datatableClienti);
-		}else{
-			$count = 0;
-			$datatableClienti = [];
-		}
-
-		$elencoClienti = array(
-			'draw'            => 1,
-			'recordsTotal'    => $count,
-			'recordsFiltered' => $count,
-			'data'            => $datatableClienti,
-		);
-
-		return $this->json($elencoClienti);
-	}
+	//#[Route('/{_locale}/clienti-ajax', name: 'clienti-ajax', methods: ['GET'])]
+	//public function clientiAjax(Request $request, $_locale) : JsonResponse{
+	//	$ricercaGenerica = $request->get('ricerca_generica', '');
+	//	$dataDal = $request->get('data_dal', '');
+	//	$dataAl = $request->get('data_al', '');
+//
+	//	$clienti = $this->repository->getClienti($_locale,$ricercaGenerica, $dataDal, $dataAl);
+//
+	//	if($clienti != null){
+	//		$datatableClienti = [];
+	//		foreach($clienti as $item){
+	//			$array = [];
+	//			array_push($array, $item->getDataIscrizione(), $item->getCodice(), $item->getNominativo(), $item->getPc(), $item->getTelefono(), $item->getEmail(), $item->getOrdini());
+	//			$datatableClienti[] = $array;
+	//		}
+	//		$count = count($datatableClienti);
+	//	}else{
+	//		$count = 0;
+	//		$datatableClienti = [];
+	//	}
+//
+	//	$elencoClienti = array(
+	//		'draw'            => 1,
+	//		'recordsTotal'    => $count,
+	//		'recordsFiltered' => $count,
+	//		'data'            => $datatableClienti,
+	//	);
+//
+	//	return $this->json($elencoClienti);
+	//}
 }

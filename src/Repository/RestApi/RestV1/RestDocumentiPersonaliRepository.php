@@ -36,8 +36,6 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		//	error_log('ERROREEEEE!: '. $e->getMessage());
 		//	return null;
 		//}
-
-
 	}
 
 	/**

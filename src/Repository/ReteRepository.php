@@ -10,9 +10,9 @@ interface ReteRepository{
 
 	public function getAlberoViste() : ?Generator;
 
-	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti ,int $idVista) : array;
+	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista) : array;
 
-	public function eliminaAlberoVista(int $id) ;
+	public function eliminaAlberoVista(int $id);
 
 	public function salvaAlberoVista(int $principale, string $nome, int $idUtente, int $livelli, string $mese, string $altezza, string $larghezza, string $orientamento, string $punti, int $idVista) : array;
 }

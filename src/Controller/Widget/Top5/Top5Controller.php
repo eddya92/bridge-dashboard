@@ -40,9 +40,7 @@ final class Top5Controller extends AbstractController{
 				}
 			}
 		}
-
 		//endregion
-
 		return $this->render('widgets/top5/top5_body_ajax.html.twig', [
 			'year'              => $anno,
 			'month'             => $mese,

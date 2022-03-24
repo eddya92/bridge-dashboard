@@ -29,6 +29,7 @@ class DocumentiPersonaliController extends AbstractController{
 		$documentiObbligatori = [];
 		$documentiFacoltativi = [];
 		$documenti = [];
+		
 		try{
 			$documentiGenerator = $this->repository->getDocumentiPersonali($_locale);
 			foreach($documentiGenerator as $documento){
