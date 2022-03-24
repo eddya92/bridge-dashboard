@@ -198,7 +198,7 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('{_locale}/elenco-ordini', name: 'elenco-ordini', methods: ['GET'])]
 	public function elencOrdini($_locale){
-		$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '');
+		$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '', '', '');
 
 		if($ordiniGenerator != null && iterator_count($ordiniGenerator) == 0){
 			return $this->render('pages/ordini/nessun-ordine.html.twig');
@@ -214,6 +214,7 @@ class OrdiniController extends AbstractController{
 		if($filtriTipoOrdine == null){
 			$filtriTipoOrdine = [];
 		}
+
 
 		return $this->render('pages/ordini/elenco_ordini.html.twig', [
 			'filtriEsito'      => $filtriEsito,
@@ -232,8 +233,10 @@ class OrdiniController extends AbstractController{
 		$data_dal = $request->query->get('data_contratto_inizio', '');
 		$data_al = $request->query->get('data_contratto_fine', '');
 		$tipolgia_ordine = $request->query->get('tipologia_ordine', '');
+		$colonna = $request->query->get('colonna', '');
+		$ordinamento = $request->query->get('ordinamento', '');
 
-		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine);
+		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento);
 		$count = 0;
 		$datatableorders = [];
 		//region se i dati presi dal repository degli ordini sono validi, li dispongo per visualizzarli nel datatable

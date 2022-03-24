@@ -9,7 +9,7 @@ use Generator;
 interface OrdiniRepository{
 	public const TAG_ORDINI = 'ordini';
 
-	public function getOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine) : ?Generator;
+	public function getOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine, string $colonna, string $ordinamento) : ?Generator;
 
 	public function getDettaglioOrdine(int $id) : ?DettaglioOrdineViewModel;
 }

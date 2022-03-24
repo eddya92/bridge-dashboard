@@ -24,9 +24,9 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine) : ?Generator{
+	public function getOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine, string $colonna, string $ordinamento) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -40,12 +40,12 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine) : callable{
-		return function(ItemInterface $item) use ($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine) : string{
+	private function apiCallOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine, string $colonna, string $ordinamento) : callable{
+		return function(ItemInterface $item) use ($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento) : string{
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&ricerca_clienti=' . $clienti . '&id_esito=' . $esito . '&data_contratto_inizio=' . $data_dal . '&data_contratto_fine=' . $data_al . '&tipologia_ordine=' . $tipolgia_ordine);
+				->request('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&ricerca_clienti=' . $clienti . '&id_esito=' . $esito . '&data_contratto_inizio=' . $data_dal . '&data_contratto_fine=' . $data_al . '&tipologia_ordine=' . $tipolgia_ordine . '&colonna=' . $colonna . '&ordinamento=' . $ordinamento);
 			//, [
 			//					'id_utente'   => $clienti,
 			//					'sottoposti'  => $sottoposti,
@@ -78,6 +78,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		}
 
 		$results = $results['data'];
+
 		return new DettaglioOrdineViewModel($results['id'], $results['codice'], $results['azienda'], $results['data'], $results['esito'], $results['sponsor'], $results['intestatario'], $results['spedizione'], $results['articoli'], $results['modalita_pagamento'], $results['modalita_spedizione'], $results['spese_amministrative'], $results['totale'], $results['punti'], $results['note'], $results['pagamento']);
 	}
 
