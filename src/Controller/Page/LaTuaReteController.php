@@ -279,7 +279,7 @@ class LaTuaReteController extends AbstractController{
 	public function strutturaUnilevel(Request $request){
 		$clienti = $request->get('clienti', '');
 		$collaboratori = $request->get('incaricati', '');
-		$diretti = $request->get('diretti', '');
+		$diretti = $request->get('diretti', false);
 
 		$filtroAttivo = '';
 		if($clienti != ''){
@@ -288,6 +288,10 @@ class LaTuaReteController extends AbstractController{
 
 		if($collaboratori != ''){
 			$filtroAttivo = $collaboratori;
+		}
+
+		if($diretti != 'true'){
+			$diretti = '';
 		}
 
 		return $this->render('pages/la_tua_rete/la_tua_struttura.html.twig', [
