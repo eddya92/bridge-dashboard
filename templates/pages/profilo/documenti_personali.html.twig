@@ -166,13 +166,14 @@
                                                      float-start">
                                                         {% if documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
                                                             {% trans %}crea tesserino{% endtrans %}
-                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
+                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == false %}
                                                             {% trans %}aggiorna tesserino{% endtrans %}
                                                         {% elseif documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
                                                             {% trans %}carica file{% endtrans %}
-                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
+                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == false %}
                                                             {% trans %}sostituisci file{% endtrans %}
                                                         {% endif %}
+
                                                     </button>
                                                 </div>
                                             </div>
