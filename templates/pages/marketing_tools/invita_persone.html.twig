@@ -104,10 +104,10 @@
                             <table class="row-border hover" id="datatable_responsive_bonus">
                                 <thead>
                                 <tr>
-                                    <th>{% trans %}Data di invio{% endtrans %}</th>
-                                    <th>{% trans %}Nominativo{% endtrans %}</th>
-                                    <th>{% trans %}E-mail{% endtrans %}</th>
-                                    <th></th>
+                                    <th id="0-colonna" nomeColonna="data">{% trans %}Data di invio{% endtrans %}</th>
+                                    <th id="1-colonna" nomeColonna="nominativo">{% trans %}Nominativo{% endtrans %}</th>
+                                    <th id="2-colonna" nomeColonna="email">{% trans %}E-mail{% endtrans %}</th>
+                                    <th id="3-colonna" nomeColonna="button"></th>
                                 </tr>
                                 </thead>
                             </table>
@@ -243,13 +243,21 @@
 {% endblock javascript %}
 
 {% block javascript_page %}
+
     <script>
-		var exampleModal = document.getElementById('modalSend')
-		exampleModal.addEventListener('show.bs.modal', function(event){
-			var button = event.relatedTarget
-			var id = button.getAttribute('data-bs-id');
-			var modalButton = exampleModal.querySelector('#id_email');
-		})
+		/************************************
+		 * Dichiarazione variabili pagina     *
+        /************************************/
+			//region variabili per datatable
+		var email = '{{ path('email-ajax') }}';
+		var requestData = {
+			"colonna": 'data',
+			"ordinamento": 'asc',
+			"search": '',
+			"length": 25
+		}
+		var count = 0;
+		//endregion
 
 		var DueRDataTableLaguages = {
 			paginate: {
@@ -274,9 +282,80 @@
 			}
 		};
 
-		$('#datatable_responsive_bonus').DataTable({
+		var exampleModal = document.getElementById('modalSend');
+		var searchbar = '';
+    </script>
+
+    <script>
+		/************************************
+		 * Dichiarazione funzioni pagina     *
+        /************************************/
+		var colInterno = '';
+		var dirInterno = '';
+		var searchInterno = '';
+		var lenInterno = '';
+		/*
+		/ funzione che al click dei filtri(Searchbar, ordinamento campo, lunghezza datatable) aggiorna il datatable.
+		*/
+		function aggiornaRisultatiDatatable(col, dir, search, len){
+			console.log(col, dir, search, len, 'ingresso funzioni')
+			console.log(colInterno, dirInterno, searchInterno, lenInterno, 'interno')
+			if(col != colInterno){
+				colInterno = col;
+			}
+			if(dir != dirInterno){
+				dirInterno = dir;
+			}
+			if(search != searchInterno){
+				searchInterno = search;
+			}
+			if(len != lenInterno){
+				lenInterno = len;
+			}
+
+			if(colInterno >= 0 && colInterno !== ''){
+				var tag = document.getElementById(colInterno + "-colonna");
+				colInterno = tag.getAttribute('nomeColonna');
+			} else{
+				colInterno = 'data';
+				dirInterno = 'asc';
+			}
+
+			requestData = {
+				"colonna": colInterno,
+				"ordinamento": dirInterno,
+				"search": searchInterno,
+				"length": lenInterno
+			};
+
+			if(count % 2 == 0){
+				count++
+				return;
+			} else{
+				count++;
+				table.ajax.url(email).load();
+			}
+		}
+    </script>
+
+
+    <script>
+
+		exampleModal.addEventListener('show.bs.modal', function(event){
+			var button = event.relatedTarget
+			var id = button.getAttribute('data-bs-id');
+			var modalButton = exampleModal.querySelector('#id_email');
+		})
+
+		var table = $('#datatable_responsive_bonus').DataTable({
 			responsive: true,
-			ajax: '{{ path('email-ajax') }}',
+			ajax: {
+				method: "GET",
+				url: email,
+				data: function(){
+					return requestData;
+				}
+			},
 			language: DueRDataTableLaguages,
 			dom: '<"top"f<"clear">>rt<"bottom"ilp<"clear">>',
 			order: [0, 'desc'],
@@ -290,6 +369,27 @@
 				{responsivePriority: 2, targets: 1},
 				{responsivePriority: 3, targets: 2}
 			]
+		});
+
+		table.on('length.dt', function(e, settings, len){
+			aggiornaRisultatiDatatable(colInterno, dirInterno, searchInterno, len)
+		});
+
+
+		table.on("order.dt", function(event, settings, ordArr){
+			var col = ordArr[0].col;
+			var dir = ordArr[0].dir;
+			aggiornaRisultatiDatatable(col, dir, searchInterno, lenInterno)
+		});
+
+
+		table.on("search.dt", function(){
+			if(table.search().length >= 3){
+				if(table.search() !== searchbar){
+					aggiornaRisultatiDatatable(colInterno,dirInterno, table.search(),lenInterno)
+				}
+				searchbar = table.search();
+			}
 		});
 
 		$('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');
@@ -329,4 +429,6 @@
 			});
 		}, false);
     </script>
+
+
 {% endblock javascript_page %}
