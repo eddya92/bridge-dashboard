@@ -151,13 +151,13 @@
                             <table class="row-border hover" id="datatable_responsive_orders">
                                 <thead>
                                 <tr>
-                                    <th>{% trans %}Data{% endtrans %}</th>
-                                    <th>{% trans %}Codice{% endtrans %}</th>
-                                    <th>{% trans %}Incaricato{% endtrans %}</th>
-                                    <th>{% trans %}PC{% endtrans %}</th>
-                                    <th>{% trans %}Totale{% endtrans %}</th>
-                                    <th>{% trans %}Esito{% endtrans %}</th>
-                                    <th></th>
+                                    <th id="0-colonna" nomeColonna="data">{% trans %}Data{% endtrans %}</th>
+                                    <th id="1-colonna" nomeColonna="codice">{% trans %}Codice{% endtrans %}</th>
+                                    <th id="2-colonna" nomeColonna="incaricato">{% trans %}Incaricato{% endtrans %}</th>
+                                    <th id="3-colonna" nomeColonna="pc">{% trans %}PC{% endtrans %}</th>
+                                    <th id="4-colonna" nomeColonna="totale">{% trans %}Totale{% endtrans %}</th>
+                                    <th id="5-colonna" nomeColonna="esito">{% trans %}Esito{% endtrans %}</th>
+                                    <th id="6-colonna" nomeColonna="vuoto"></th>
                                 </tr>
                                 </thead>
                             </table>
@@ -171,10 +171,6 @@
                 </div>
             </div>
         </div>
-
-        <script>
-
-        </script>
     </div>
 
 {% endblock page_body %}
@@ -231,8 +227,11 @@
     <script>
 
 		//region inizializzo variabili per datatable
+		var counts = 0;
 		var link_ordini = "{{ path('ordini-ajax') }}";
 		var table = '';
+		var colonna = '0';
+		var direzione = 'asc';
 		var sottoposti = document.getElementById('type-sottoposti').value;
 		var ricerca_clienti = document.getElementById('type-clienti').value;
 		var iD_esito = document.getElementById('filtriEsito').innerHTML;
@@ -245,9 +244,27 @@
 			"id_esito": iD_esito,
 			"data_contratto_inizio": data_contratto_inizio,
 			"data_contratto_fine": data_contratto_fine,
-			"tipologia_ordine": tipologia_ordine
+			"tipologia_ordine": tipologia_ordine,
+			"colonna": colonna,
+			"direzione": direzione,
 		};
 		//endregion
+		function aggiornaRisultati(){
+			 requestData = {
+				"sottoposti": sottoposti,
+				"ricerca_clienti": ricerca_clienti,
+				"id_esito": iD_esito,
+				"data_contratto_inizio": data_contratto_inizio,
+				"data_contratto_fine": data_contratto_fine,
+				"tipologia_ordine": tipologia_ordine,
+				"colonna": colonna,
+				"direzione": direzione,
+			};
+			table.ajax.url(link_ordini).load();
+		}
+
+
+
 
 		//region lingua datatable
 		var DueRDataTableLaguages = {
@@ -311,6 +328,27 @@
 
 			//endregion
 
+			table.on("order.dt", function(event, settings, ordArr){
+				colonna = ordArr[0].col;
+				direzione = ordArr[0].dir;
+				var tag = document.getElementById(colonna + "-colonna");
+				colonna = tag.getAttribute('nomeColonna');
+
+				if(counts == 0){
+					counts++
+					return;
+				} else{
+					if(counts % 2 == 1){
+						counts++
+						return aggiornaRisultati();
+					} else{
+						counts++;
+						return;
+
+					}
+				}
+			});
+
 			//region al click del bottone filtra.prendo tutti i campi e ricarico il datatable
 			$("#button_filtra").click(function(){
 				sottoposti = $("#idUtenteSelezionato").html();
@@ -319,17 +357,20 @@
 				data_contratto_inizio = modificaData($("#Data_contratto_dal").val());
 				data_contratto_fine = modificaData($("#Data_contratto_al").val());
 				tipologia_ordine = $("#filtriTipologiaOrdine").html();
-			requestData = {
+				requestData = {
 					"sottoposti": sottoposti,
 					"ricerca_clienti": ricerca_clienti,
 					"id_esito": iD_esito,
 					"data_contratto_inizio": data_contratto_inizio,
 					"data_contratto_fine": data_contratto_fine,
-					"tipologia_ordine": tipologia_ordine
-			};
+					"tipologia_ordine": tipologia_ordine,
+					"colonna": colonna,
+					"direzione": direzione,
+				};
 
 				table.ajax.url(link_ordini).load();
 			});
+			//endregion
 		})
 		//endregion
 
