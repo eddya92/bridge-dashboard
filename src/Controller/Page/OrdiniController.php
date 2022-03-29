@@ -250,16 +250,12 @@ class OrdiniController extends AbstractController{
 				$ordine[] = $item->getUser();
 				$ordine[] = $item->getPc();
 				$ordine[] = $item->getTotale();
-				if($item->getEsito() == ''){
-					$ordine[] = '<button type="button" class="btn btn-primary btn-sm">PAGA ORA</button>';
-				}else{
-					$ordine[] = '<span style="color:' . $item->getEsitoColore() . ';">' . $item->getEsito() . '</span>';
-				}
-				if($item->isVisibile() == '1'){
-					$ordine[] = '<a href="dettaglio-ordine/' . $item->getId() . '"><button type="button" class="display-inherit btn btn-square btn-outline-light btn-sm text-dark">DETTAGLI <i class="icon-zoom-in"></i></button></a>';
-				}else{
-					$ordine[] = "";
-				}
+				$ordine[] = '<span style="color:' . $item->getEsitoColore() . ';">' . $item->getEsito() . '</span>';
+				//if($item->isVisibile() == '1'){
+				//	$ordine[] = '<a href="dettaglio-ordine/' . $item->getId() . '"><button type="button" class="display-inherit btn btn-square btn-outline-light btn-sm text-dark">DETTAGLI <i class="icon-zoom-in"></i></button></a>';
+				//}else{
+				//	$ordine[] = "";
+				//}
 				$datatableorders[] = $ordine;
 				$count++;
 			}

@@ -157,7 +157,6 @@
                                     <th id="3-colonna" nomeColonna="pc">{% trans %}PC{% endtrans %}</th>
                                     <th id="4-colonna" nomeColonna="totale">{% trans %}Totale{% endtrans %}</th>
                                     <th id="5-colonna" nomeColonna="esito">{% trans %}Esito{% endtrans %}</th>
-                                    <th id="6-colonna" nomeColonna=""></th>
                                 </tr>
                                 </thead>
                             </table>
@@ -292,7 +291,6 @@
 				},
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
-					{orderable: false, targets: 6},
 					{
 						targets: 5,
 						className: 'dt-right'
@@ -408,31 +406,23 @@
 
 				} else{
 					data_dal = "";
-					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date")
+					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date");
 				}
 			} else if(data_al){
 				if(data_dal){
 
 				} else{
 					data_al = "";
-					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date")
+					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date");
 				}
 			}
 			//endregion
-			azzeraFiltri()
-			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine)
+			azzeraFiltri();
+			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine);
 
 			$("#filter_button_datatable").removeClass("visually-hidden");
 			$("#applied_filters_datatable").removeClass("visually-hidden");
 
-			//	$table.ajax.url(
-			//		link_ordini + '?sottoposti=' + sottoposti
-			//		+ '&ricerca_clienti=' + ricerca_clienti
-			//		+ '&iD_esito=' + iD_esito
-			//		+ '&data_contratto_inizio=' + data_contratto_iniziodocumenti-personali
-			//		+ '&data_contratto_fine=' + data_contratto_fine
-			//		+ '&tipologia_ordine=' + tipologia_ordine
-			//	);
 		}
 
 
