@@ -232,6 +232,7 @@
 		var table = '';
 		var colonna = '0';
 		var direzione = 'asc';
+		var length = 10;
 		var sottoposti = document.getElementById('type-sottoposti').value;
 		var ricerca_clienti = document.getElementById('type-clienti').value;
 		var iD_esito = document.getElementById('filtriEsito').innerHTML;
@@ -247,10 +248,11 @@
 			"tipologia_ordine": tipologia_ordine,
 			"colonna": colonna,
 			"direzione": direzione,
+			"length": length,
 		};
 		//endregion
 		function aggiornaRisultati(){
-			 requestData = {
+			requestData = {
 				"sottoposti": sottoposti,
 				"ricerca_clienti": ricerca_clienti,
 				"id_esito": iD_esito,
@@ -259,11 +261,10 @@
 				"tipologia_ordine": tipologia_ordine,
 				"colonna": colonna,
 				"direzione": direzione,
+				"length": length,
 			};
 			table.ajax.url(link_ordini).load();
 		}
-
-
 
 
 		//region lingua datatable
@@ -325,10 +326,10 @@
 					{responsivePriority: 1, targets: 5}
 				]
 			});
-
 			//endregion
 
 			table.on("order.dt", function(event, settings, ordArr){
+				console.log('order')
 				colonna = ordArr[0].col;
 				direzione = ordArr[0].dir;
 				var tag = document.getElementById(colonna + "-colonna");
@@ -344,10 +345,16 @@
 					} else{
 						counts++;
 						return;
-
 					}
 				}
 			});
+
+			table.on('length.dt', function(a,b,len){
+				console.log('lenght')
+				length = len;
+				counts++;
+				aggiornaRisultati()
+			})
 
 			//region al click del bottone filtra.prendo tutti i campi e ricarico il datatable
 			$("#button_filtra").click(function(){
@@ -366,6 +373,7 @@
 					"tipologia_ordine": tipologia_ordine,
 					"colonna": colonna,
 					"direzione": direzione,
+					"length": length,
 				};
 
 				table.ajax.url(link_ordini).load();
