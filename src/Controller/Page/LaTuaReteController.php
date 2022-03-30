@@ -275,28 +275,19 @@ class LaTuaReteController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/{_locale}/struttura-unilevel', name: 'struttura-unilevel', methods: ['GET'])]
+	#[Route('/{_locale}/struttura-unilevel/{utenza}/{diretti}', name: 'struttura-unilevel', methods: ['GET'], defaults: ['utenza' => '', 'diretti' => ''])]
 	public function strutturaUnilevel(Request $request){
-		$clienti = $request->get('clienti', '');
-		$collaboratori = $request->get('incaricati', '');
-		$diretti = $request->get('diretti', false);
 
-		$filtroAttivo = '';
-		if($clienti != ''){
-			$filtroAttivo = $clienti;
-		}
+		$tipologiaUtenza = $request->get('utenza', '');
+		$diretti = $request->get('diretti', '');
 
-		if($collaboratori != ''){
-			$filtroAttivo = $collaboratori;
-		}
-
-		if($diretti != 'true'){
+		if($diretti != 'diretti'){
 			$diretti = '';
 		}
 
 		return $this->render('pages/la_tua_rete/la_tua_struttura.html.twig', [
-			'filtroAttivo' => $filtroAttivo,
-			'diretti'      => $diretti,
+			'tipologiaUtenza' => $tipologiaUtenza,
+			'diretti'         => $diretti,
 		]);
 	}
 

@@ -125,9 +125,9 @@
                                         {% trans %}Tipologia utenza {% endtrans %}
                                         <div class="input-group">
                                             <select id="filtro_tipologiaUtenza" class="form-select" name="tipologiaUtenza" onchange="">
-                                                <option value="" {{ filtroAttivo == '' ? 'selected' : '' }}>Tutti</option>
-                                                <option value="incaricati" {{ filtroAttivo == 'incaricati' ? 'selected' : '' }}>Incaricati</option>
-                                                <option value="clienti" {{ filtroAttivo == 'clienti' ? 'selected' : '' }}>Clienti</option>
+                                                <option value="" {{ tipologiaUtenza == '' ? 'selected' : '' }}>Tutti</option>
+                                                <option value="incaricati" {{ tipologiaUtenza == 'incaricati' ? 'selected' : '' }}>Incaricati</option>
+                                                <option value="clienti" {{ tipologiaUtenza == 'clienti' ? 'selected' : '' }}>Clienti</option>
                                             </select>
                                         </div>
                                     </div>
@@ -262,7 +262,7 @@
 		//region
 		var annoAttuale = "{{ "now"|date("Y") }}";
 		var meseAttuale = "{{ "now"|date("m") }}";
-		var filtroAttivo = "{{ filtroAttivo }}";
+		var filtroAttivo = "{{ tipologiaUtenza }}";
 		var filtroDirettiAttivo = "{{ diretti }}"
 		const mesiCollection = document.getElementsByClassName("meseDaControllare");
 		//endregion
