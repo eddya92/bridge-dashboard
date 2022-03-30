@@ -179,7 +179,7 @@ class OrdiniController extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
-	#[Route('/utenti-ordine-cliente-ajax', name: 'utenti-cliente-ajax', methods: ['GET'])]
+	#[Route('/utenti-cliente-ajax', name: 'utenti-cliente-ajax', methods: ['GET'])]
 	public function utentiOrdineClienteAjax(Request $request){
 		$cerca = trim($request->query->get('query', ''));
 
