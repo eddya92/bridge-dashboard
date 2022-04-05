@@ -66,7 +66,14 @@
 
             <div class="edit-profile">
                 <div class="row" id="row_data">
-                    <div class="col-xl-4">
+                    <div class="col-xl-4"
+                            {% if inquadramentoFiscale == true %}
+
+                            {% else %}
+                                hidden
+                            {% endif %}
+
+                    >
                         <!-- region Inquadramento fiscale -->
                         <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl card">
                             <div class="card-header">
@@ -86,7 +93,8 @@
                                     <p>{{ inquadramento.descrizione|raw }}
                                     </p>
                                     <div class="m-t-10"></div>
-                                    <p>{% trans %}Inquadramento fiscale descrizione{% endtrans %} <a href="mailto:{{ inquadramento.emailAzienda }}">{{ inquadramento.emailAzienda }}</a>
+                                    <p>{% trans %}Inquadramento fiscale descrizione{% endtrans %}
+                                        <a href="mailto:{{ inquadramento.emailAzienda }}">{{ inquadramento.emailAzienda }}</a>
                                     </p>
                                     <div class="m-t-40"></div>
                                 </div>
@@ -94,7 +102,7 @@
                         </div>
                         <!-- endregion Dati generali -->
                     </div>
-                    <div class="col-xl-8">
+                    <div {{ inquadramentoFiscale == true ? 'class="col-xl-8"' : 'class="col-xl-12"'}} >
                         <form class="form card needs-validation" novalidate="" method="post" action="{{ path('aggiorna-dati-pagamento') }}">
                             <div class="resize_equal_height resize_equal_height_xl resize_equal_height_xxl">
                                 <div class="card-header">
@@ -104,17 +112,17 @@
                                     <div class="row">
                                         <h5>{% trans %}Dati bancari{% endtrans %}</h5>
                                         <p>{% trans %}Dati bancari descrizione{% endtrans %}</p>
-                                        <div class="col-sm-12">
+                                        <div {{ inquadramentoFiscale == true ? 'class="col-sm-12""' : 'class="col-sm-6"'}}>
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}IBAN{% endtrans %}</label>
-                                                <input class="form-control" id="iban" type="text" required name="iban" value="{{  inquadramento.iban }}">
+                                                <input class="form-control" id="iban" type="text" required name="iban" value="{{ inquadramento.iban }}">
                                                 <div class="invalid-feedback">{% trans %}Specificare IBAN{% endtrans %}</div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">{% trans %}BIC SWIFT{% endtrans %}</label>
-                                                <input class="form-control" id="bankCode" type="text" name="bankCode" value="{{  inquadramento.bankCode}}">
+                                                <input class="form-control" id="bankCode" type="text" name="bankCode" value="{{ inquadramento.bankCode }}">
                                                 <div class="invalid-feedback">{% trans %}Specificare BIC SWIFT{% endtrans %}</div>
                                             </div>
                                         </div>

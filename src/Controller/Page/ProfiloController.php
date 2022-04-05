@@ -114,7 +114,6 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-indirizzo-spedizione', name: 'dati-indirizzo-spedizione', methods: ['GET'])]
 	public function datiSpedizione(Request $request, $_locale){
-
 		//se questo è false,non lo gestiamo noi(.env)
 		if($this->getParameter('enable_dati_spedizione') === 'false'){
 			return $this->redirectToRoute('error404');
@@ -164,7 +163,6 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/modifica-indirizzo-spedizione', name: 'modifica-indirizzo-spedizione', methods: ['GET', 'POST'])]
 	public function modificaIndirizzoSpedizione(Request $request, $_locale){
-
 		//se questo è false,non lo gestiamo noi(.env)
 		if($this->getParameter('enable_dati_spedizione') === 'false'){
 			return $this->redirectToRoute('error404');
@@ -226,7 +224,6 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/aggiorna-dati-spedizione', name: 'aggiorna-dati-spedizione', methods: ['GET', 'POST'])]
 	public function aggiornaDatiSpedizione(Request $request){
-
 		//se questo è false,non lo gestiamo noi(.env)
 		if($this->getParameter('enable_dati_spedizione') === 'false'){
 			return $this->redirectToRoute('error404');
@@ -333,6 +330,11 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/pagamenti', name: 'pagamenti', methods: ['GET'])]
 	public function pagamenti(string $_locale){
+		$inquadramentoFiscale = true;
+		if($this->getParameter('enable_inquadramento_fiscale') === 'false'){
+			$inquadramentoFiscale = false;
+		}
+
 		$inquadramento = $this->inquadramentoFiscaleRepository->getInquadramentoFiscale($_locale);
 
 		if($inquadramento == null){
@@ -342,7 +344,8 @@ class ProfiloController extends AbstractController{
 		}
 
 		return $this->render('pages/profilo/pagamenti.html.twig', [
-			'inquadramento' => $inquadramento,
+			'inquadramento'        => $inquadramento,
+			'inquadramentoFiscale' => $inquadramentoFiscale,
 		]);
 	}
 
@@ -379,7 +382,6 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-personali', name: 'dati-personali', methods: ['GET'])]
 	public function datiResidenza(Request $request, $_locale){
-
 		$locale = $request->getLocale();
 		$residenza = $this->accountRepository->getResidenza($locale);
 		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
@@ -398,7 +400,6 @@ class ProfiloController extends AbstractController{
 		if($contatti == null){
 			$contatti = [];
 		}
-
 
 		//é false quando non viene gestito da noi(.env)
 		if($this->getParameter('enable_dati_personali') === 'false'){

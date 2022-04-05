@@ -20,6 +20,7 @@ parameters:
   enable_login: '%env(ENABLE_URL_LOGIN)%'
   url_logout: '%env(URL_LOGOUT)%'
   enable_url_registrazione: '%env(ENABLE_URL_REGISTRAZIONE)%'
+  enable_inquadramento_fiscale: '%env(ENABLE_VISUALIZZAZIONE_INQUADRAMENTO_FISCALE)%'
 
 services:
   # default configuration for services in *this* file
