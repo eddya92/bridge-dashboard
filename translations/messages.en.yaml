@@ -1,0 +1,503 @@
+# COMMONS
+# Termini utilizzati in più pagine
+Virtual Office: Virtual Office
+Profilo: Profile
+Aggiorna dati: Update data
+Mostra caratteri: Show characters
+alle ore: at
+Codice: Code
+Data di iscrizione: Date of entry
+E.mail: E-mail
+Nome: Name
+Cognome: Surname
+Indirizzo: Address
+Numero civico: House number
+Nazione: Nation
+CAP: ZIP CODE
+Comune: Municipality
+Provincia: Province
+Note: Notes
+Modifica: Edit
+Elimina: Delete
+Specificare il nome: Specify the name
+Specificare il cognome: Specify last name
+Specificare l indirizzo: Specify the address
+Specificare il numero civico: Specify the house number
+Specificare il CAP: Specify the zip code
+Specificare il comune: Specify the municipality
+Specificare il numero di partita IVA: Specify the VAT number
+Specificare la PEC: Specify the PEC
+Specificare il codice univoco: Specify the unique code
+Email: Email
+Telefono: Phone
+Specificare il numero di cellulare: Specify cell phone number
+Specificare la provincia: Specify the province
+Specificare il numero di telefono: Specify the phone number
+Specificare un indirizzo email valido: Specify a valid email address
+Nominativo: Name
+Cellulare: Cell phone
+filtra: filter
+chiudi: close
+Filtri: Filters
+Periodo: Period
+Qualifica: Qualification
+Sponsor: Sponsor
+Incaricato: Appointed
+Livello: Level
+E-mail: E-mail
+Anno: Year
+precedente: previous
+successivo: next
+nessun dato disponibile: no data available
+visualizzati 0 a 0 di 0 elementi: displayed 0 to 0 of 0 items
+filtrati da: filtered by
+elementi totali: total elements
+nessun_risultato: no_result
+attiva_per_ordine_ascendente: active_by_order_ascending
+attiva_per_ordine_discendente: active_by_order
+utenti: users
+visualizzati: displayed
+mostra: exhibition
+per pagina: per page
+caricamento: Loading
+elaborazione: processing
+Cerca: Search
+Gennaio: January
+Febbraio: February
+Marzo: March
+Aprile: April
+Maggio: May
+Giugno: June
+Luglio: July
+Agosto: August
+Settembre: September
+Ottobre: October
+Novembre: November
+Dicembre: December
+Torna a: Back to
+Gen: Jan
+Feb: Feb
+Mar: Mar
+Apr: Apr
+Mag: Mag
+Giu: Jun
+Lug: Jul
+Ago: Aug
+Set: Set
+Ott: Oct
+Nov: Nov
+Dic: Dec
+Domenica: Sunday
+Lunedì: Monday
+Martedì: Tuesday
+Mercoledì: Wednesday
+Giovedì: Thursday
+Venerdì: Friday
+Sabato: Saturday
+
+D: D
+L: L
+Ma: M
+Me: M
+G: G
+V: V
+S: S
+
+e: e
+Riepilogo: Summary
+Chiudi: Close
+Salva e prosegui: Save and continue
+Torna indietro: Back to top
+
+Un'azienda: A company
+Ragione sociale: Business name
+Specificare la ragione sociale: Specify the company name
+Specificare l'indirizzo: Specify the address
+Codice fiscale: Tax code
+Specificare il codice fiscale: Specify the tax code
+Partita IVA: VAT number
+PEC: PEC
+Specificare la PEC o il codice univoco: Specify the PEC or the unique code
+Codice univoco: Unique code
+
+Accetto: I accept
+Non accetto: I do not accept
+
+# PROFILO - PAGAMENTI
+Pagamenti: Payments
+Inquadramento fiscale: Fiscal framework
+Inquadramento fiscale descrizione: If you would like to change your tax status please contact the administration at
+Pagamento delle commissioni: Payment of commissions
+Dati bancari: Bank data
+Dati bancari descrizione: Indicate the IBAN to which you wish to receive commission credits
+IBAN: IBAN
+Specificare IBAN: Specify IBAN
+BIC SWIFT: BIC / SWIFT
+Specificare BIC SWIFT: Specify BIC / SWIFT
+
+# PROFILO - ACCOUNT
+Account: Account
+Gestisci i dati del tuo account: Manage your account information
+Vecchia password: Old password
+Specificare la vecchia password: Specify the old password
+Nuova password: New password
+Specificare la nuova password: Specify the new password (minimum 8 characters)
+Conferma password: Password confirmation
+Le password immesse non corrispondono: Passwords do not match
+Desideri effettuare la richiesta di oblio dei dati: You wish to make the request to forget the data
+Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione: Before you make the request to be forgotten, make sure you understand what this entails
+Per approfondimenti clicca qui: For further information click here
+Richiedi oblio: Request forgetting
+La tua richiesta di oblio e stata registrata il: Your request to be forgotten was registered on
+ALERT_JS_Sei sicuro di voler richiedere loblio del tuo account: Are you sure you want to request your account to be forgotten
+
+# PROFILO - SPEDIZIONI
+Dati di spedizione: Shipping data
+Aggiungi i dati di spedizione: Add shipping information
+Informazioni utili per la consegna: Useful information for delivery
+Numero di telefono: Phone number
+E-mail di notifica spedizione: Shipment notification email
+Consegna anche di sabato: Delivery also on Saturday
+Indirizzo predefinito: Default address
+Aggiungi nuovo indirizzo: Add new address
+es consegna al secondo piano: e.g. delivery to the second floor
+Altri indirizzi salvati: Other saved addresses
+ALERT_JS_sei sicuro di voler eliminare questo indirizzo: Are you sure you want to delete this address
+La modifica della nazione di spedizione potrebbe comportare variazioni: Changing the country of shipment could lead to changes in taxation and prices displayed in e-commerce
+La nazione di spedizione indicata e: The shipping country indicated is
+Modifica i dati di spedizione: Edit shipment data
+I tuoi indirizzi: Your addresses
+
+# PROFILO - DOCUMENTI
+Documenti: Documents
+Documenti obbligatori: Compulsory documents
+Altri documenti facoltativi: Other documents (optional)
+Puoi richiedere le provvigioni: You can request commissions
+Reminder documenti obbligatori provvigioni: We remind you that it is necessary to upload all the mandatory documents in order to request commissions from the eWallet
+crea tesserino: create badge
+aggiorna tesserino: update badge
+carica file: upload file
+sostituisci file: replace file
+Scarica il file: Download the file
+Hai caricato il file il: You have uploaded the file on
+
+# RETE - ALBERO UNILEVEL
+Albero Unilevel: Unilevel Shaft
+Le impostazioni sono state salvate correttamente: Settings have been saved correctly
+Vista default: Default view
+Elimina questa vista: Delete this view
+Zoom: Zoom
+Stampa: Print
+Filtri di ricerca: Search filters
+Albero di: Tree of
+Livelli: Levels
+Mese: Month
+Altezza: Height
+Larghezza: Width
+Orientamento: Orientation
+Orizzontale: Horizontal
+Verticale: Vertical
+Salva come vista principale: Save as main view
+Cerca per codice nominativo e-mail o telefono: Search by code, name, email or phone
+scegli: choose
+Crea una vista personalizzata: Create a custom view
+Salva la nuova vista: Save new view
+Scrivi qui il nome del nuovo filtro: Write here the name of the new filter
+
+# RETE - LA TUA STRUTTURA
+La tua struttura: Your Structure
+Consulta elenco clienti e collaboratori presenti nella struttura: Consult the list of clients and collaborators present in the structure and use the filters to carry out the desired searches
+Gruppo di: Group of
+Nome cognome o ragione sociale: First name, last name or company name
+Mostra solo clienti e collaboratori direttamente sponsorizzati: Show only directly sponsored customers and collaborators
+Solo diretti: Direct only
+
+# RETE - INSERISCI NUOVO CLIENTE
+Inserisci un nuovo cliente: Add a new customer
+Nuovo Cliente: New Customer
+Nuovo cliente alert autorizzazioni: ATTENTION! You are entering information of a third person whose personal data you are in possession of.<br/>Ensure that you have due authorization to process such data in compliance with the Laws in force and in particular that they are processed in accordance with EU Regulation 2016/679 (GDPR).<br/>The registration will be notified to the new customer by email to the address specified below.<br/>The company will not be held responsible in any way in case of unauthorized processing of personal data.
+Inserisci i dati del nuovo cliente: Enter new customer data
+Il nuovo cliente e: The new customer is
+Un privato: A private person
+Un azienda: A company
+La nazione di residenza è: The country of residence is
+Inserisci cliente: Insert customer
+
+# MESSAGGI - MESSAGGIO
+Messaggi: Messages
+Non ci sono ancora messaggi da leggere.: There are no messages to read yet
+da: from
+da leggere: Readable
+già letto: already read
+Dettaglio messaggio: Message Detail
+torna alla pagina dei messaggi: back to the messages page
+Scritto da: Written by
+
+# DOCUMENTI
+Cartella precedente: Previous folder
+
+# BONUS
+Bonus: Bonus
+Bonus dell'anno: Bonus of the Year
+Nel: In
+hai totalizzato Bonus per un totale di: you have totaled bonuses for a total of
+Consulta lo storico di tutti i bonus accumulati nel: See the history of all the bonuses accumulated in the
+mese per mese: month by month
+I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni: The months in grey are those for which commissions have not yet been credited
+Qualifica raggiunta: Qualification achieved
+Attivo: Active
+Totale: Total
+
+# ELENCO ORDINI
+Nuovo ordine: New Order
+Ordini: Orders
+Elenco degli ordini: Order list
+Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti: Consult the list of orders. You can see the history of your orders, the orders of your network and those of your customers.
+Cliente: Customer
+Esito: Outcome
+Ordini dal: Orders from
+al: at
+Tipologia di ordine: Order type
+Data: Date
+PC: PC
+Tutte le tipologie: All types
+ordini: orders
+Cancella: Delete
+Oggi: Today
+
+# NESSUN ORDINE
+Non hai ancora ordini da consultare: You don't have any orders yet
+In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete: This page shows all your orders and all orders placed by your downlines. At the moment there are no orders neither yours nor of your network.
+
+
+# CREA NUOVO ORDINE
+Crea nuovo ordine: Create new order
+Scegli il negozio nel quale vuoi acquistare: Choose the store where you want to buy
+Scegli negozio: Choose store
+Cambia store: Change store
+Crea un ordine: Create an order
+Cerca un cliente o un collaboratore: Search for a client or collaborator
+Crea ordine: Create order
+
+# SHOP
+Shop: Shop
+Crea un nuovo ordine: Create a new order
+Filtra: Filter
+Filtri abilitati: Enabled filters
+Previous: Previous
+current: current
+Next: Next
+Quantità: Quantity
+Dettagli del prodotto: Product Details
+Non sono state fornite ulteriori informazioni sul prodotto: No further product information has been provided
+Acquista: Shop
+Vedi dettagli: View Details
+
+#INGRESSO
+Ingresso: Entry
+Virtual Office di: Virtual Office of
+cerca un incaricato: search for an appointee
+
+# ARTICOLO SHOP
+Disponibilità: Availability
+Categoria: Category
+In stock: In stock
+Non disponibile: Not available
+Al momento non hai articoli nel carrello.: You currently have no items in your shopping cart.
+Inizia ora i tuoi acquisti!: Start your shopping now!
+Concludi il tuo ordine!: Place your order!
+Al momento hai: At the moment you have
+articoli nel carrello per un totale di: items in the cart for a total of
+Al momento hai 1 articolo nel carrello per un totale di: You currently have 1 item in your cart for a total of
+Descrizione: Description
+
+# CARRELLO
+Carrello: Trolley
+Controlla la merce inserita nel carrello prima di concludere l'ordine: Check the goods in your cart before completing your order
+Articolo: Article
+Punti: Points
+Prezzo: Price
+Totale Punti: Total Points
+Continua con lo shopping: Continue shopping
+Vai al checkout: Checkout
+Non hai articoli nel carrello: You have no items in your cart
+In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello. Al momento non ci sono articoli: This page shows all your items in the cart. At the moment there are no items
+Fai il tuo primo ordine: Place your first order
+
+# CHECKOUT
+Checkout: Checkout
+Compila i dati di residenza: Fill in the residence data
+La nazione di fatturazione è: Billing country is
+Compila i dati fiscali: Fill in the fiscal data
+Subtotale: Subtotal
+Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione: Enter the data of residence and shipping, then you can choose the mode of payment and shipment
+Completa l'acquisto: Complete the purchase
+Intestatario ordine: Order holder
+Spedizione: Shipping
+Indirizzo incompleto: Incomplete address
+Aggiungi un nuovo indirizzo di spedizione: Add a new shipping address
+Note per la consegna: Delivery notes
+Seleziona un indirizzo per scoprire le modalità di spedizione disponibili: Select an address to find out the available shipping methods
+Pagamento: Payment
+Gratis: Gratis
+Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili: Select an address and a shipping method to discover the available payment methods
+Spese Amministrative: Administrative Expenses
+Conferma ordine: Order confirmation
+Dati spedizione: Shipping data
+
+# Dettaglio Ordine
+Dettaglio Ordine: Order Detail
+Ordine Cod.: Order Cod.
+Creato il: Created on
+Stato: Status
+Cod.: Code
+Spese modalità di pagamento: Payment method expenses
+Spese di spedizione: Shipping costs
+Modalità di spedizione: Shipping methods
+Spedire presso: Shipping to
+Modalità di pagamento: Payment method
+Questo ordine risulta pagato: This order is paid
+Questo ordine non risulta ancora pagato: This order has not yet been paid for
+Torna allo shop: Back to shop
+
+# INVITA PERSONE
+Invita Persone: Invite People
+Marketing Tools: Marketing Tools
+Scegli un modello di e-mail da inviare: Choose a template email to send
+Consulta lo storico degli inviti che hai inviato: See the history of invitations you have sent
+Data di invio: Send date
+Invia il tuo invito: Send your invitation
+Specificare il nome del destinatario: Specify the name of the recipient
+Specificare l'indirizzo e-mail del destinatario: Specify the recipient's e-mail address
+Ultima ora: Last hour
+Hai ancora: You still have
+inviti: invitations
+Ultime 24 ore: Last 24 hours
+Ultima settimana: Last Week
+Ultimo mese: Last Month
+Spedisci invito: Send invitation
+
+# SITO PERSONALE
+Titolo: Title
+Sito personale: Personal website
+Copia il link del tuo sito personale per condividerlo: Copy the link to your personal website to share it
+copia il link: copy the link
+Contattami al: Contact me at
+Scrivimi a: Write me at
+Facebook: Facebook
+Instragram: Instagram
+Twitter: Twitter
+Youtube: Youtube
+
+#LOGIN
+Login: Login
+Accedi al tuo account: Sign in to your account
+Inserisci le tue credenziali per accedere: Enter your credentials to access.
+Username: Username
+Password: Password
+Ricorda password: Remember password
+Password dimenticata: Forgot your password?
+Non hai un account: Don't have an account?
+Registrati adesso: Sign up now!
+
+#REGISTRAZIONE
+Crea il tuo account: Create your account
+Compila il modulo sottostante per iscriverti: Fill out the form below to register
+Codice Sponsor: Sponsor Code
+Scrivi il codice del tuo sponsor: Write your sponsor code
+Desidero iscrivermi come: I wish to register as
+privato: private
+azienda: company
+Scrivi il tuo indirizzo e-mail: Enter your e-mail address
+Specifica la nazione di residenza: Specify the country of residence
+Crea account: Create account
+Hai già un account: Already have an account?
+
+#REGISTRAZIONE SUCCESS
+Account creato correttamente: Account created correctly!
+Grazie per esserti iscritto a: Thank you for signing up for MyBridge.
+Ti abbiamo inviato una e-mail di benvenuto: We have sent you a welcome email where you can find useful information.
+Vai al login: login
+
+#FORGOT PASSWORD
+Recupera password: Recover password
+Rigenera la tua password: Regenerate your password
+Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password: Enter your code or your e-mail address to which you want to send the link to generate a new password
+Richiedi il link: Request link
+Codice o e-mail: Code or e-mail
+
+#INGRESSO CLIENTE
+Area riservata: Reserved area
+Benvenuto: Welcome
+Guadagna con noi: Earn money with us!
+Diventa un distributore indipendente: Become an independent distributor
+e scopri le opportunità di guadagno a te riservate aderendo al nostro team: and discover the earning opportunities reserved for you by joining our team
+html guadagna con noi: <p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Earn 15 to 25% on directly promoted sales</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Porta almeno tre persone ed ottieni guadagni indiretti fino al 45%</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Entra a far parte di un tem si successo!</p>
+Diventa un collaboratore: Become a collaborator
+I più venduti: Top sellers
+Acquistati di recente: Recently Purchased
+
+#WIDGET NOTIZIE
+Ultime notizie: Breaking News
+continua a leggere...: continue reading...
+Nessuna novità per adesso: No news for now
+
+#CARRIERA
+Carriera: Career
+La tua carriera: Your career
+Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle: See all career plan qualifications and find out how to achieve them
+Qualifica precedente: Previous qualification
+Qualifica attuale: Current Qualification
+Qualifica successiva: Next qualification
+Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi: History of qualifications obtained from the beginning of your career to date
+
+# DATI PERSONALI
+Dati personali: Personal Data
+Contatti: Contact
+Dati fiscali: Fiscal data
+Dati di residenza: Residence data
+Sede Legale: Legal seat
+
+
+#GRAFICO VENDITE
+Tipologia filtro: Filter type
+Specifico mese: Specific month
+Specifico Anno: Specific Year
+Mostra: Show
+Punti Carriera: Career Points
+Punti Volume: Volume Points
+Numero ordini: Number of orders
+
+#RECUPERO PASSWORD
+Richiesta di rigenerazione password: Password regeneration request
+Link inviato correttamente: Link sent correctly
+Consulta la tua casella email: Check your mailbox.
+Ti abbiamo inviato il likn con il quale potrai generare la tua nuova password: We have sent you the link with which you can generate your new password.
+L indirizzo digitato non è stato trovato: The address you entered was not found.
+Assicurati di avere scritto correttamente l indirizzo e riprova: Make sure you have spelled the address correctly and try again.
+riprova: try again
+
+#PRIVACY
+Privacy: Privacy
+Permessi: Permissions
+Privacy Policy: Privacy Policy
+Visualizza i dati in nostro possesso: View the data in our possession
+
+
+# WIDGET
+# SIDEBAR
+Diventa collaboratore: Become a collaborator
+Spedizioni: Shipping
+Attività: Activities
+Gestisci la tua rete: Manage your network
+La tua rete: Your Network
+Invita persone: Invite people
+Guadagni: Earnings
+Consulta e richiedi le provvigioni: Consult and ask for commissions
+Utilities: Utilities
+Strumenti utili per la tua attività: Useful tools for your business
+Logout: Logout
+
+# REGISTRAZIONE-IBO
+Scopri una nuova opportunità di guadagno: Discover a new earning opportunity
+Scegli la modalità di iscrizione che preferisci: Choose the enrollment method you prefer
