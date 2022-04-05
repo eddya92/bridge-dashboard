@@ -75,7 +75,6 @@
                                         <div class="pricingtable p-t-0">
                                             <div class="pricingtable-header text-center">
                                                 <img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}">
-                                                <img class="rounded-circle" style="width:100px; border:2px solid white; margin-top:-50px; display: inline-block;" src="{% if template.foto != '' %}{{ template.foto }}{% else %}/{{ asset('assets/images/dashboard/profile.jpg') }}{% endif %}" alt="">
                                             </div>
                                             <div class="p-15 text-start">
                                                 {{ template.email | replace({'$Nome $Cognome': app.user.nominativo}) | raw }}
