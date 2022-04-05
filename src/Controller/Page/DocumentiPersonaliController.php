@@ -91,4 +91,28 @@ class DocumentiPersonaliController extends AbstractController{
 
 		return $this->redirectToRoute('documenti-personali');
 	}
+
+	/**
+	 * Crea il tesserino e se tutto va bene fa il redirect con un messaggio success
+	 *
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	#[Route('/crea-tesserino', name: 'crea-tesserino', methods: ['GET'])]
+	public function creaTesserino(Request $request) : Response{
+		try{
+			[$result, $error_msg] = $this->repository->creaTesserino();
+			if($result){
+				$this->addFlash('success', 'Il tuo tesserino è stato aggiornato correttamente.');
+			}else{
+				throw new Exception($error_msg);
+			}
+		}catch(Exception $e){
+			$this->addFlash('error', $e->getMessage());
+		}
+
+		return $this->redirectToRoute('documenti-personali');
+	}
+
 }

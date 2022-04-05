@@ -11,4 +11,6 @@ interface DocumentiPersonaliRepository{
 	public function getDocumentiPersonali(string $locale) : Generator;
 
 	public function caricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array;
+
+	public function creaTesserino() ;
 }

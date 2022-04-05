@@ -27,11 +27,11 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 
 	public function getDocumentiPersonali(string $locale) : Generator{
 		//try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumentiPersonali($locale));
-			$results = Json::decode($cached);
-			foreach($results['data'] as $item){
-				yield new DocumentoPersonaleViewModel($item['nome'], $item['caricato'], $item['data'], $item['link'], $item['obbligatorio'], $item['tesserino'], $item['caricabile'], $item['descrizione'], $item['id']);
-			}
+		$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumentiPersonali($locale));
+		$results = Json::decode($cached);
+		foreach($results['data'] as $item){
+			yield new DocumentoPersonaleViewModel($item['nome'], $item['caricato'], $item['data'], $item['link'], $item['obbligatorio'], $item['tesserino'], $item['caricabile'], $item['descrizione'], $item['id']);
+		}
 		//}catch(Throwable $e){
 		//	error_log('ERROREEEEE!: '. $e->getMessage());
 		//	return null;
@@ -90,4 +90,28 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 
 		return [true, ''];
 	}
+
+	public function creaTesserino() : array{
+		try{
+			$results = $this->apiCallCreaTesserino();
+		}catch(Throwable $exception){
+			return [false, $exception->getMessage()];
+		}
+
+		return $results;
+	}
+
+	public function apiCallCreaTesserino() : array{
+		$response = $this->restApiConnection()
+			->withAuthentication($this->authenticationToken())
+			->client()
+			->request('POST', '/db-v1/utenti/documento-crea-tesserino');
+
+		if($response->getStatusCode() != 200){
+			return [false, $response->getReasonPhrase()];
+		}
+
+		return [true, ''];
+	}
+
 }

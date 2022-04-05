@@ -157,24 +157,28 @@
                                             <div class="col-sm-4 col-md-4 col-xl-3">
                                                 <div class="mb-3">
                                                     <div class="m-b-10"></div>
-                                                    <button data-bs-toggle="modal" data-bs-target="#caricaDocumentoPersonaleModal" data-bs-id="{{ toString(documentoObbligatorio.id) }}" class="btn
+                                                    {% if documentoObbligatorio.tesserino == true %}
+                                                        <button data-bs-toggle="" data-bs-target="" onclick="creaTesserino()" data-bs-id="{{ toString(documentoObbligatorio.id) }}" {{ (documentoObbligatorio.caricato == true ) ? 'class="btn btn-light float-start"> sostituisci tesserino ' : 'class="btn btn-primary float-start"> crea tesserino</button>' }}
+                                                    {% else %}
+                                                        <button data-bs-toggle="modal" data-bs-target="#caricaDocumentoPersonaleModal" data-bs-id="{{ toString(documentoObbligatorio.id) }}" class="btn
                                                     {% if documentoObbligatorio.caricato == false %}
                                                        btn-primary
                                                     {% else %}
                                                         btn-light
                                                     {% endif %}
                                                      float-start">
-                                                        {% if documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
-                                                            {% trans %}crea tesserino{% endtrans %}
-                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == false %}
-                                                            {% trans %}aggiorna tesserino{% endtrans %}
-                                                        {% elseif documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
-                                                            {% trans %}carica file{% endtrans %}
-                                                        {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == false %}
-                                                            {% trans %}sostituisci file{% endtrans %}
-                                                        {% endif %}
+                                                            {% if documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == true %}
+                                                                {% trans %}crea tesserino{% endtrans %}
+                                                            {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == true and documentoObbligatorio.caricabile == false %}
+                                                                {% trans %}aggiorna tesserino{% endtrans %}
+                                                            {% elseif documentoObbligatorio.caricato == false and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == true %}
+                                                                {% trans %}carica file{% endtrans %}
+                                                            {% elseif documentoObbligatorio.caricato == true and documentoObbligatorio.tesserino == false and documentoObbligatorio.caricabile == false %}
+                                                                {% trans %}sostituisci file{% endtrans %}
+                                                            {% endif %}
 
-                                                    </button>
+                                                        </button>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
@@ -390,7 +394,6 @@
 		var totaleDocumentiObbligatoriCaricati = {{ documentiObbligatoriCaricati }};
 
 		function calcoloPercentuale(totaleDocumenti, totaleDocumentiObbligatoriCaricati){
-			console.log(totaleDocumenti,totaleDocumentiObbligatoriCaricati)
 			percentualeCaricati = Math.floor((totaleDocumentiObbligatoriCaricati * 100) / totaleDocumenti);
 
 			return percentualeCaricati;
@@ -473,6 +476,19 @@
 			$('.apexcharts-datalabel-value').html('1/4');
 			$('.apexcharts-datalabel-value').css('font-size', '16px');
 		}
+
+		function creaTesserino(){
+			let text = "sei sicuro di voler generare un nuovo tesserino?";
+			if(confirm(text) == true){
+				window.location.href = "{{ path('documenti-personali') }}";
+					//imposto l'azione in caso di insuccesso
+			} else{
+
+			}
+
+
+		}
+
     </script>
 {% endblock javascript_page %}
 
