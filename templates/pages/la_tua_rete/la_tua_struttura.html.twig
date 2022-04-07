@@ -179,23 +179,34 @@
                             </table>
                             <div class="clearfix"></div>
                             <div class="m-b-20"></div>
+                            <div id="colonnaDatatable" hidden></div>
+                            <div id="direzioneDatatable" hidden></div>
                             <table class="row-border hover" id="datatable_responsive_orders">
-                                <thead>
+                                <!--thead>$strutturaGenerator
                                 <tr>
-                                    <th id="0-colonna" nomeColonna="codice">{% trans %}Codice{% endtrans %}</th>
-                                    <th id="1-colonna" nomeColonna="livello">{% trans %}Livello{% endtrans %}</th>
-                                    <th id="2-colonna" nomeColonna="incaricato">{% trans %}Incaricato{% endtrans %}</th>
-                                    <th id="3-colonna" nomeColonna="qualifica">{% trans %}Qualifica{% endtrans %}</th>
-                                    <th id="4-colonna" nomeColonna="email">{% trans %}E-mail{% endtrans %}</th>
-                                    <th id="5-colonna" nomeColonna="cellulare">{% trans %}Cellulare{% endtrans %}</th>
-                                    <th id="6-colonna" nomeColonna="sponsor">{% trans %}Sponsor{% endtrans %}</th>
+                                    <th id="0-colonna" nomeColonna="codice" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Codice{% endtrans %}</th>
+                                    <th id="1-colonna" nomeColonna="livello" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Livello{% endtrans %}</th>
+                                    <th id="2-colonna" nomeColonna="incaricato" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Incaricato{% endtrans %}</th>
+                                    <th id="3-colonna" nomeColonna="qualifica" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Qualifica{% endtrans %}</th>
+                                    <th id="4-colonna" nomeColonna="email" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}E-mail{% endtrans %}</th>
+                                    <th id="5-colonna" nomeColonna="cellulare" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Cellulare{% endtrans %}</th>
+                                    <th id="6-colonna" nomeColonna="sponsor" data-direzione="asc" onclick="ordinaDatatable(this.id,this.getAttribute('nomeColonna'),this.getAttribute('data-direzione'))">{% trans %}Sponsor{% endtrans %}</th>
                                 </tr>
-                                </thead>
+                                </thead-->
+								<thead>
+								<tr>
+									<th>{% trans %}Codice{% endtrans %}</th>
+									<th>{% trans %}Livello{% endtrans %}</th>
+									<th>{% trans %}Incaricato{% endtrans %}</th>
+									<th>{% trans %}Qualifica{% endtrans %}</th>
+									<th>{% trans %}E-mail{% endtrans %}</th>
+									<th>{% trans %}Cellulare{% endtrans %}</th>
+									<th>{% trans %}Sponsor{% endtrans %}</th>
+								</tr>
+								</thead>
                             </table>
                         </div>
                         <div class="clearfix"></div>
-                        <div id="valore-colonna" hidden>codice</div>
-                        <div id="valore-direzione" hidden>asc</div>
                         <div id="valore-numero-record" hidden>10</div>
                     </div>
                 </div>
@@ -267,25 +278,11 @@
 		const mesiCollection = document.getElementsByClassName("meseDaControllare");
 		//endregion
 
-		var requestData = '';
 		$(document).ready(function(){
 			controlloAnnoAttuale(annoAttuale);
 			if(filtroDirettiAttivo){
 				filtroAttivoFunction()
 			}
-
-			requestData = {
-				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
-				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
-				"filtro_nominativo": $("#filtro_nominativo").val(),
-				"filtro_email": $("#filtro_email").val(),
-				"filtro_cellulare": $("#filtro_cellulare").val(),
-				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
-				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
-				"colonna": colonna,
-				"direzione": direzione,
-				"numeroRecord": numeroRecord
-			};
 		})
 
 		function filtroAttivoFunction(){
@@ -295,9 +292,9 @@
 		}
 
 		//region dati per datatable
-		var colonna = document.getElementById('valore-colonna').innerHTML;
-		var direzione = document.getElementById('valore-direzione').innerHTML;
-		var numeroRecord = document.getElementById('valore-numero-record').innerHTML;
+		var colonna = document.getElementById('colonnaDatatable').innerHTML;
+		var direzione = document.getElementById('direzioneDatatable').innerHTML;
+		var items = document.getElementById('valore-numero-record').innerHTML;
 		var filtro_gruppoDi = $("#idUtenteSelezionato").html();
 		var filtro_nominativo = $("#filtro_nominativo").val();
 		var filtro_email = $("#filtro_email").val();
@@ -306,7 +303,7 @@
 		var filtro_diretti = $("#filtro_diretti").hasClass("onSelect");
 		//endregion
 
-		var table = '0';
+		var table = null;
 
 		var DueRDataTableLaguages = {
 			paginate: {
@@ -401,7 +398,7 @@
 		}
 		//endregion
 
-		//region al click di un filtro attivo,lo rimuovo
+		//region al click di un filtro attivo, lo rimuovo
 		function rimuovoFiltro(id, filtro_di_Riferimento){
 			if(filtro_di_Riferimento === 'filtro_diretti'){
 				$("#" + filtro_di_Riferimento).attr('checked', false);
@@ -419,17 +416,37 @@
 			aggiornaRisultati();
 		}
 		//endregion
-		var count = 0;
+
+		var countAggiornaRisultati = false;
+		var countOrder = false;
+		var testOrder = true;
 		$(document).ready(function(){
+			let requestData = {
+				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
+				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
+				"filtro_nominativo": $("#filtro_nominativo").val(),
+				"filtro_email": $("#filtro_email").val(),
+				"filtro_cellulare": $("#filtro_cellulare").val(),
+				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
+				"items": items
+			};
+
+			var query = "";
+			for (var key in requestData){
+				if(query != ""){
+					query += "&";
+				}
+				query += key + "=" + encodeURIComponent(requestData[key]);
+			}
+
 			table = $('#datatable_responsive_orders').DataTable({
 				responsive: true,
-				ajax: {
-					method: "GET",
-					url: "{{ path('struttura-personale-ajax') }}",
-					data: function(){
-						return requestData;
-					}
-				},
+				processing: true,
+				serverSide: true,
+				ordering: true,
+				searching: false,
+				ajax: "{{ path('struttura-personale-ajax') }}?" + query,
 				lengthMenu: [
 					[10, 25, 50, -1],
 					['10', '25', '50', 'Show all']
@@ -442,42 +459,19 @@
 				columnDefs: [
 					{responsivePriority: 1, targets: 0},
 					{responsivePriority: 2, targets: 2}
-				]
-			});
-			table.on("order.dt", function(event, settings, ordArr){
-				colonna = ordArr[0].col;
-				direzione = ordArr[0].dir;
-				var tag = document.getElementById(colonna + "-colonna");
-				colonna = tag.getAttribute('nomeColonna');
+				],
+				pageSize: items,
+				order: [[0, 'asc']],
+				serverPaging: true,
+				serverFiltering: true,
+				serverSorting: true,
+			})
 
-				if(count == 0){
-					count++
-					return;
-				} else{
-					if(count % 2 == 1){
-
-						count++
-						return aggiornaRisultati();
-					} else{
-						count++;
-						return;
-
-					}
-				}
-
-
-			});
-			table.on("length.dt", function(e, settings, len){
-
-				numeroRecord = len;
-				aggiornaRisultati()
-			});
 			renderFiltri();
 		});
 
-
 		function aggiornaRisultati(){
-			requestData = {
+			let requestData = {
 				"filtro_tipoligiaUtente": $("#filtro_tipologiaUtenza").val(),
 				"filtro_gruppoDi": $("#idUtenteSelezionato").html(),
 				"filtro_nominativo": $("#filtro_nominativo").val(),
@@ -485,27 +479,19 @@
 				"filtro_cellulare": $("#filtro_cellulare").val(),
 				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
 				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
-				"colonna": colonna,
-				"direzione": direzione,
-				"numeroRecord": numeroRecord
+				"items": items
 			};
-			table.ajax.url("{{ path('struttura-personale-ajax') }}").load();
-		}
 
-		//var tabledata = '';
-		//var colonna = '';
-		//var ordinamento = '';
-		//function ordinaDatatable(nomeColonna){
-		// tabledata = table.order()[0];
-		// ordinamento = tabledata[1];
-		// console.log(tabledata)
-		// console.log(colonna)
-		// console.log(ordinamento)
-		// aggiornaRisultati(nomeColonna, ordinamento);
-		// tabledata = '';
-		// colonna = '';
-		// ordinamento = '';
-		//}
+			var query = "";
+			for (var key in requestData) {
+				if (query != "") {
+					query += "&";
+				}
+				query += key + "=" + encodeURIComponent(requestData[key]);
+			}
+
+			table.ajax.url("{{ path('struttura-personale-ajax') }}?" + query).load();
+		}
 
 		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
 
@@ -517,6 +503,8 @@
 		}
 
 		function filter(){
+			countAggiornaRisultati = true;
+			countOrder = true;
 			close_filters();
 			$("#filter_button_datatable").removeClass("visually-hidden");
 			$("#applied_filters_datatable").removeClass("visually-hidden");
@@ -609,15 +597,6 @@
 			};
 		};
 		//endregion
-
-		//region variabili controllo mese e anno
-
-		////endregion
-		//$(document).ready(function(){
-		// controlloAnnoAttuale(){
-
-		// }filtro-mese-01
-		//})
 
 		function controlloAnnoAttuale(anno){
 			if(annoAttuale === anno){

@@ -8,5 +8,5 @@ use Generator;
 interface UtentiStrutturaRepository{
 	public const TAG_UTENTI_STRUTTURA = 'utentiStruttura';
 
-	public function getUtentiStruttura(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento, string $numeroRecord, string $tipologiaUtenza) : ?Generator;
+	public function getUtentiStruttura(string $filtroGruppoDi, string $filtroNominativo, string $filtroEmail, string $filtroCellulare, string $filtroPeriodo, string $filtroDiretti, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento,  string $tipologiaUtenza, string $items, string $pag) : ?Generator;
 }
