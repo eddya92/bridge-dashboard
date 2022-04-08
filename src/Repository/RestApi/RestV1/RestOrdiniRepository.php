@@ -41,7 +41,6 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 	 * @return callable(ItemInterface): string
 	 */
 	private function apiCallOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine, string $colonna, string $ordinamento, string $items, string $pag) : callable{
-		dd('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&id_utente=' . $clienti . '&id_esito=' . $esito . '&data_inizio=' . $data_dal . '&data_fine=' . $data_al . '&tipologia_ordine=' . $tipolgia_ordine . '&campo_ordine=' . $colonna . '&direzione_ordine=' . $ordinamento . '&items=' . $items . '&pag=' . $pag,'/db-v1/ordini/ordine?sottoposti=&id_utente=&id_esito=2&data_inizio=&data_fine=&tipologia_ordine=&campo_ordine=codice&direzione_ordine=ASC&items=10&pag=0');
 		return function(ItemInterface $item) use ($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento, $items, $pag) : string{
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
