@@ -198,11 +198,11 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('{_locale}/elenco-ordini', name: 'elenco-ordini', methods: ['GET'])]
 	public function elencOrdini($_locale){
-		$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '', '', '');
+		$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '', '', '', '', '');
 
-		if($ordiniGenerator != null && iterator_count($ordiniGenerator) == 0){
-			return $this->render('pages/ordini/nessun-ordine.html.twig');
-		}
+		//if($ordiniGenerator != null && iterator_count($ordiniGenerator) == 0){
+		//	return $this->render('pages/ordini/nessun-ordine.html.twig');
+		//}
 
 		$filtriEsito = $this->filtriRepository->getFiltriEsito($_locale);
 		$filtriTipoOrdine = $this->filtriRepository->getFiltriTipoOrdine($_locale);
@@ -215,7 +215,6 @@ class OrdiniController extends AbstractController{
 			$filtriTipoOrdine = [];
 		}
 
-
 		return $this->render('pages/ordini/elenco_ordini.html.twig', [
 			'filtriEsito'      => $filtriEsito,
 			'filtriTipoOrdine' => $filtriTipoOrdine,
@@ -227,17 +226,55 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('/ordini-ajax', name: 'ordini-ajax', methods: ['GET'])]
 	public function ordiniAjax(Request $request) : JsonResponse{
+		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
 		$sottoposti = $request->query->get('sottoposti', '');
 		$clienti = $request->query->get('ricerca_clienti', '');
 		$esito = $request->query->get('id_esito', '');
 		$data_dal = $request->query->get('data_contratto_inizio', '');
 		$data_al = $request->query->get('data_contratto_fine', '');
 		$tipolgia_ordine = $request->query->get('tipologia_ordine', '');
-		$colonna = $request->query->get('colonna', '');
-		$ordinamento = $request->query->get('ordinamento', '');
+		$pag = ($request->get('start', '0'));
+		$items = ($request->get('length', '0'));
 
-		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento);
-		$count = 0;
+		switch($order[0]['column']){
+			case 0:
+				$filtroColonnaOrdinamento = 'data';
+				break;
+			case 1:
+				$filtroColonnaOrdinamento = 'codice';
+				break;
+			case 2:
+				$filtroColonnaOrdinamento = 'incaricato';
+				break;
+			case 3:
+				$filtroColonnaOrdinamento = 'pc';
+				break;
+			case 4:
+				$filtroColonnaOrdinamento = 'totale';
+				break;
+			case 5:
+				$filtroColonnaOrdinamento = 'tipologia_ordine';
+				break;
+			case 6:
+				$filtroColonnaOrdinamento = 'esito';
+				break;
+			default:
+				$filtroColonnaOrdinamento = 'codice';
+		}
+		switch($order[0]['dir']){
+			case 'asc':
+				$filtroDirezioneOrdinamento = 'asc';
+				break;
+			case 'desc':
+				$filtroDirezioneOrdinamento = 'desc';
+				break;
+			default:
+				$filtroDirezioneOrdinamento = 'asc';
+		}
+
+		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
+		//dd($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items);
+		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $pag);
 		$datatableorders = [];
 		//region se i dati presi dal repository degli ordini sono validi, li dispongo per visualizzarli nel datatable
 		if($ordini != null){
@@ -250,6 +287,7 @@ class OrdiniController extends AbstractController{
 				$ordine[] = $item->getUser();
 				$ordine[] = $item->getPc();
 				$ordine[] = $item->getTotale();
+				$ordine[] = $item->getTipologiaOrdine();
 				$ordine[] = '<span style="color:' . $item->getEsitoColore() . ';">' . $item->getEsito() . '</span>';
 				//if($item->isVisibile() == '1'){
 				//	$ordine[] = '<a href="dettaglio-ordine/' . $item->getId() . '"><button type="button" class="display-inherit btn btn-square btn-outline-light btn-sm text-dark">DETTAGLI <i class="icon-zoom-in"></i></button></a>';
@@ -257,15 +295,14 @@ class OrdiniController extends AbstractController{
 				//	$ordine[] = "";
 				//}
 				$datatableorders[] = $ordine;
-				$count++;
 			}
 		}
 		//endregion
 
 		$elencoOrdini = array(
-			'draw'            => 1,
-			'recordsTotal'    => $count,
-			'recordsFiltered' => $count,
+			'draw'            => time(),
+			'recordsTotal'    => count($datatableorders),
+			'recordsFiltered' => count($datatableorders),
 			'data'            => $datatableorders,
 		);
 

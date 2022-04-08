@@ -151,20 +151,19 @@
                             <table class="row-border hover" id="datatable_responsive_orders">
                                 <thead>
                                 <tr>
-                                    <th id="0-colonna" nomeColonna="data">{% trans %}Data{% endtrans %}</th>
-                                    <th id="1-colonna" nomeColonna="codice">{% trans %}Codice{% endtrans %}</th>
-                                    <th id="2-colonna" nomeColonna="incaricato">{% trans %}Incaricato{% endtrans %}</th>
-                                    <th id="3-colonna" nomeColonna="pc">{% trans %}PC{% endtrans %}</th>
-                                    <th id="4-colonna" nomeColonna="totale">{% trans %}Totale{% endtrans %}</th>
-                                    <th id="5-colonna" nomeColonna="esito">{% trans %}Esito{% endtrans %}</th>
-                                    <th id="6-colonna" nomeColonna="vuoto"></th>
+                                    <th>{% trans %}Data{% endtrans %}</th>
+                                    <th>{% trans %}Codice{% endtrans %}</th>
+                                    <th>{% trans %}Incaricato{% endtrans %}</th>
+                                    <th> {% trans %}PC{% endtrans %}</th>
+                                    <th>{% trans %}Totale{% endtrans %}</th>
+                                    <th>{% trans %}Tipologia ordine{% endtrans %}</th>
+                                    <th>{% trans %}Esito{% endtrans %}</th>
                                 </tr>
                                 </thead>
                             </table>
                         </div>
                         <hr/>
                         <div class="col-xs-12">
-
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -227,45 +226,46 @@
     <script>
 
 		//region inizializzo variabili per datatable
-		var counts = 0;
+		//var counts = 0;
 		var link_ordini = "{{ path('ordini-ajax') }}";
 		var table = '';
-		var colonna = '0';
-		var direzione = 'asc';
-		var length = 10;
-		var sottoposti = document.getElementById('type-sottoposti').value;
+		var items = 10;
+		var sottoposti = $("#idUtenteSelezionato").html();
 		var ricerca_clienti = document.getElementById('type-clienti').value;
 		var iD_esito = document.getElementById('filtriEsito').innerHTML;
 		var data_contratto_inizio = document.getElementById('Data_contratto_dal').value;
 		var data_contratto_fine = document.getElementById('Data_contratto_al').value;
-		var tipologia_ordine = document.getElementById('filtriTipologiaOrdine').innerHTML
+		var tipologia_ordine = document.getElementById('filtriTipologiaOrdine').innerHTML;
 		var requestData = {
-			"sottoposti": sottoposti,
+			"sottoposti": $("#idUtenteSelezionato").html(),
 			"ricerca_clienti": ricerca_clienti,
 			"id_esito": iD_esito,
 			"data_contratto_inizio": data_contratto_inizio,
 			"data_contratto_fine": data_contratto_fine,
 			"tipologia_ordine": tipologia_ordine,
-			"colonna": colonna,
-			"direzione": direzione,
-			"length": length,
+			"items": items,
 		};
 		//endregion
 		function aggiornaRisultati(){
 			requestData = {
-				"sottoposti": sottoposti,
-				"ricerca_clienti": ricerca_clienti,
-				"id_esito": iD_esito,
-				"data_contratto_inizio": data_contratto_inizio,
-				"data_contratto_fine": data_contratto_fine,
-				"tipologia_ordine": tipologia_ordine,
-				"colonna": colonna,
-				"direzione": direzione,
-				"length": length,
+				"sottoposti": $("#idUtenteSelezionato").html(),
+				"ricerca_clienti": document.getElementById('type-clienti').value,
+				"id_esito": document.getElementById('filtriEsito').innerHTML,
+				"data_contratto_inizio": document.getElementById('Data_contratto_dal').value,
+				"data_contratto_fine": document.getElementById('Data_contratto_al').value,
+				"tipologia_ordine": document.getElementById('filtriTipologiaOrdine').innerHTML,
+				"items": items,
 			};
-			table.ajax.url(link_ordini).load();
-		}
 
+			var query = "";
+			for(var key in requestData){
+				if(query != ""){
+					query += "&";
+				}
+				query += key + "=" + encodeURIComponent(requestData[key]);
+			}
+			table.ajax.url("{{ path('ordini-ajax') }}?" + query).load();
+		}
 
 		//region lingua datatable
 		var DueRDataTableLaguages = {
@@ -293,21 +293,52 @@
 		};
 		//endregion
 
+
+		var counts = false;
 		//region Datatable
 		$(document).ready(function(){
+			requestData = {
+				"sottoposti": $("#idUtenteSelezionato").html(),
+				"ricerca_clienti": document.getElementById('type-clienti').value,
+				"id_esito": document.getElementById('filtriEsito').innerHTML,
+				"data_contratto_inizio": document.getElementById('Data_contratto_dal').value,
+				"data_contratto_fine": document.getElementById('Data_contratto_al').value,
+				"tipologia_ordine": document.getElementById('filtriTipologiaOrdine').innerHTML,
+				"items": items,
+			};
+
+			var query = "";
+			for(var key in requestData){
+				if(query != ""){
+					query += "&";
+				}
+				query += key + "=" + encodeURIComponent(requestData[key]);
+			}
+
+
 			table = $('#datatable_responsive_orders').DataTable({
-				language: DueRDataTableLaguages,
 				responsive: true,
-				paging: true,
-				ajax: {
-					method: "GET",
-					url: link_ordini,
-					data: function(){
-						return requestData;
-					}
-				},
+				processing: true,
+				serverSide: true,
+				ordering: true,
+				searching: false,
+				ajax: "{{ path('ordini-ajax') }}?" + query,
+				lengthMenu: [
+					[10, 25, 50, -1],
+					['10', '25', '50', 'Show all']
+				],
+				buttons: [
+					'pageLength'
+				],
+				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
+					{orderable: false, targets: 0},
+					{orderable: true, targets: 1},
+					{orderable: false, targets: 2},
+					{orderable: true, targets: 3},
+					{orderable: false, targets: 4},
+					{orderable: false, targets: 5},
 					{orderable: false, targets: 6},
 					{
 						targets: 5,
@@ -324,60 +355,13 @@
 					{responsivePriority: 1, targets: 0},
 					{responsivePriority: 1, targets: 4},
 					{responsivePriority: 1, targets: 5}
-				]
-			});
-			//endregion
-
-			table.on("order.dt", function(event, settings, ordArr){
-				console.log('order')
-				colonna = ordArr[0].col;
-				direzione = ordArr[0].dir;
-				var tag = document.getElementById(colonna + "-colonna");
-				colonna = tag.getAttribute('nomeColonna');
-
-				if(counts == 0){
-					counts++
-					return;
-				} else{
-					if(counts % 2 == 1){
-						counts++
-						return aggiornaRisultati();
-					} else{
-						counts++;
-						return;
-					}
-				}
-			});
-
-			table.on('length.dt', function(a,b,len){
-				console.log('lenght')
-				length = len;
-				counts++;
-				aggiornaRisultati()
+				],
+				pageSize: items,
+				order: [[1, 'asc']],
+				serverPaging: true,
+				serverFiltering: true,
+				serverSorting: true,
 			})
-
-			//region al click del bottone filtra.prendo tutti i campi e ricarico il datatable
-			$("#button_filtra").click(function(){
-				sottoposti = $("#idUtenteSelezionato").html();
-				ricerca_clienti = $("#type-clienti").val();
-				iD_esito = $("#filtriEsito").html();
-				data_contratto_inizio = modificaData($("#Data_contratto_dal").val());
-				data_contratto_fine = modificaData($("#Data_contratto_al").val());
-				tipologia_ordine = $("#filtriTipologiaOrdine").html();
-				requestData = {
-					"sottoposti": sottoposti,
-					"ricerca_clienti": ricerca_clienti,
-					"id_esito": iD_esito,
-					"data_contratto_inizio": data_contratto_inizio,
-					"data_contratto_fine": data_contratto_fine,
-					"tipologia_ordine": tipologia_ordine,
-					"colonna": colonna,
-					"direzione": direzione,
-					"length": length,
-				};
-
-				table.ajax.url(link_ordini).load();
-			});
 			//endregion
 		})
 		//endregion
@@ -387,7 +371,6 @@
 			mese = data.substr(3, 2);
 			anno = data.substr(6, 4);
 			return anno + "-" + mese + "-" + giorno;
-
 		}
 
 		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
@@ -445,8 +428,9 @@
 				}
 			}
 			//endregion
-			azzeraFiltri()
-			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine)
+			azzeraFiltri();
+			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine);
+			aggiornaRisultati();
 
 			$("#filter_button_datatable").removeClass("visually-hidden");
 			$("#applied_filters_datatable").removeClass("visually-hidden");
@@ -467,9 +451,9 @@
 			var data = e.params.data;
 
 			if(document.getElementById('filtriEsito').innerHTML){
-				document.getElementById('filtriEsito').innerHTML = document.getElementById('filtriEsito').innerHTML + data.id + "|";
+				document.getElementById('filtriEsito').innerHTML = document.getElementById('filtriEsito').innerHTML + "|" + data.id;
 			} else{
-				document.getElementById('filtriEsito').innerHTML = data.id + "|";
+				document.getElementById('filtriEsito').innerHTML = data.id;
 			}
 
 		}).on('select2:unselect', function(e){
@@ -482,15 +466,16 @@
 		$('#Tipologia_ordine').on('select2:select', function(e){
 			var data = e.params.data;
 			if(document.getElementById('filtriTipologiaOrdine').innerHTML){
-				document.getElementById('filtriTipologiaOrdine').innerHTML = document.getElementById('filtriTipologiaOrdine').innerHTML + data.id + "|";
+				document.getElementById('filtriTipologiaOrdine').innerHTML = document.getElementById('filtriTipologiaOrdine').innerHTML + "|" + data.id;
 			} else{
-				document.getElementById('filtriTipologiaOrdine').innerHTML = data.id + "|";
+				document.getElementById('filtriTipologiaOrdine').innerHTML = data.id;
 			}
 		}).on('select2:unselect', function(e){
 			var data = e.params.data;
 			document.getElementById('filtriTipologiaOrdine').innerHTML = document.getElementById('filtriTipologiaOrdine').innerHTML.replace(data.id + "|", '');
 		});
 		//endregion
+
 
 		function open_filters(){
 			$("#filters_datatable").removeClass("visually-hidden");
@@ -502,7 +487,6 @@
 
     <script>
 		var objectNames = [];
-
 
 		function filtroCliente(utente){
 			var userArray = utente.split(' ');
@@ -539,7 +523,6 @@
 									j['displayKey'] = j.nominativo + ' (' + j.codice + ')';
 									elems.push(j);
 								});
-
 								return processAsync(elems);
 							}
 						});
@@ -691,11 +674,11 @@
 			} else{
 				document.getElementById('filter_button_datatable').innerHTML = "Filtri" + "(" + count + ")" + " " + '<i class="fa fa-sliders"></i>';
 			}
+			aggiornaRisultati();
 		}
 		//endregion
 
 		function aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, filtro_esito, data_dal, data_al, filtro_tipologia_ordine){
-
 			if(filtro_gruppoDi){
 				$("#applied_filters_gruppoDi").removeClass("visually-hidden");
 				count = count + 1;
