@@ -378,12 +378,12 @@ class LaTuaReteController extends AbstractController{
 				$struttura[] = array_values($array[0]);
 			}
 		}
-		$countStruttura = count($struttura);
+		 ;
 
 		$jsonDatatableStruttura = array(
 			'draw'            => time(),
-			'recordsTotal'    => $countStruttura,
-			'recordsFiltered' => $countStruttura,
+			'recordsTotal'    => count($struttura),
+			'recordsFiltered' => count($struttura),
 			'data'            => $struttura,
 		);
 
