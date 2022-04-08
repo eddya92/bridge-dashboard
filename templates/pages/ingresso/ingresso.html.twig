@@ -21,56 +21,58 @@
                         <div class="mb-2 d-block d-sm-none"></div>
                     </div>
                     <div class="col-sm-6 order-sm-0">
-                        <div class="float-sm-start">
-                            <h3>{% trans %}Virtual Office di{% endtrans %} {{ account.nome }}</h3>
-                        </div>
-                        <div class="float-sm-start" style="display: none;">
-                            <div id="typehead_ID_utente">
-                                <div id="typehead_sottoposti" class="input-group">
-                                    <input class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="John Doe"><span class="input-group-text"><i class="icofont icofont-user"> </i></span>
+                        <div class="float-sm-start d-flex">
+                            <h3>Virtual Office di </h3>
+                            <div id="idUtenteSelezionato" hidden></div>
+                            <div id="contenutoTypehead" hidden></div>
+                            <div class="float-sm-start">
+                                <div id="typehead_ID_utente">
+                                    <div id="typehead_sottoposti" class="input-group">
+                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"> </i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- endregion Titolo e breadcrumb -->
-        <!-- Container-fluid starts-->
-        <div id="top5_carriera_sponsor" class="container-fluid">
-            <div class="row second-chart-list third-news-update" id="row">
-                <!-- region Totali -->
-                <div class="col-xl-12 xl-100 chart_data_left box-col-12">
-                    {{ totali() }}
-                </div>
-                <!-- endregion Totali -->
-                <!-- region Notizie principali -->
-                <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12" id="notizie_principali_homePage">
-                    {{ notiziePrincipali(app.request.locale) }}
-                </div>
-                <!-- endregion Notizie principali -->
-                <!-- region Grafico -->
-                <div class="col-xl-8 xl-100 dashboard-sec box-col-12" id="grafico_vendite_homePage">
-                    {{ graficoVendite(app.request.locale) }}
-                </div>
-                <!-- endregion Grafico -->
-                <!-- region TOP5 -->
-                <div class="col-xl-4 xl-50 news box-col-6">
-                    {{ top5() }}
-                </div>
-                <!-- endregion TOP5 -->
+            <!-- endregion Titolo e breadcrumb -->
+            <!-- Container-fluid starts-->
+            <div id="top5_carriera_sponsor" class="container-fluid">
+                <div class="row second-chart-list third-news-update" id="row">
+                    <!-- region Totali -->
+                    <div class="col-xl-12 xl-100 chart_data_left box-col-12">
+                        {{ totali() }}
+                    </div>
+                    <!-- endregion Totali -->
+                    <!-- region Notizie principali -->
+                    <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12" id="notizie_principali_homePage">
+                        {{ notiziePrincipali(app.request.locale) }}
+                    </div>
+                    <!-- endregion Notizie principali -->
+                    <!-- region Grafico -->
+                    <div class="col-xl-8 xl-100 dashboard-sec box-col-12" id="grafico_vendite_homePage">
+                        {{ graficoVendite(app.request.locale) }}
+                    </div>
+                    <!-- endregion Grafico -->
+                    <!-- region TOP5 -->
+                    <div class="col-xl-7 xl-50 news box-col-6">
+                        {{ top5() }}
+                    </div>
+                    <!-- endregion TOP5 -->
 
-                <!-- region Carriera -->
-                <div class="col-xl-4 xl-50 news box-col-6">
-                    {{ carriera(app.user.codice(),app.request.locale()) }}
-                </div>
-                <!-- endregion Carriera -->
+                    <!-- region Carriera -->
+                    <!--div class="col-xl-4 xl-50 news box-col-6">
+                        {# {{ carriera(app.user.codice(),app.request.locale()) }} #}
+                    </div-->
+                    <!-- endregion Carriera -->
 
-                <!-- region Sponsor -->
-                <div class="col-xl-4 xl-50 news box-col-6">
-                    {{ account(superiore, 'sponsor',app.request.locale()) }}
+                    <!-- region Sponsor -->
+                    <div class="col-xl-5 xl-50 news box-col-6">
+                        {{ account(superiore, 'sponsor',app.request.locale()) }}
+                    </div>
+                    <!-- endregion Sponsor -->
                 </div>
-                <!-- endregion Sponsor -->
             </div>
         </div>
     </div>
@@ -127,6 +129,80 @@
 				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
 			}
 		}
+
+    </script>
+
+
+    <script>
+		$(document).ready(function(){
+			$('#type-sottoposti').typeahead(
+				{
+					hint: true,
+					highlight: true,
+					minLength: 3
+				},
+				{
+					limit: 50,
+					async: true,
+					name: 'result',
+					displayKey: 'displayKey',
+					source: function(query, processSync, processAsync){
+						//processSync(['This suggestion appears immediately', 'This one too']);
+						return $.ajax({
+							url: '{{ path('utenti-ajax') }}',
+							type: 'GET',
+							data: {query: query},
+							dataType: 'json',
+							success: function(json){
+								var elems = [];
+								$(json).each(function(i, j){
+									j['displayKey'] = j.nominativo;
+									elems.push(j);
+								});
+
+								return processAsync(elems);
+							}
+						});
+					}
+				}
+			).bind('typeahead:select', function(evt, suggestion){
+				//$('[name="idUtente"]').val(suggestion.id);
+				$('#idUtenteSelezionato').html(suggestion.id);
+				$('#contenutoTypehead').html(suggestion.displayKey);
+			}).change(function(){
+				if($('#contenutoTypehead').html() != ""){
+					if($('#contenutoTypehead').html() === $('#type-sottoposti').val()){
+					} else{
+						$('#idUtenteSelezionato').html('');
+						$('#contenutoTypehead').html('');
+						document.getElementById('type-sottoposti').value = "";
+					}
+				}
+			})
+			;
+		});
+
+		//region controllo se cio che scrivo matcha con i record del typehead
+		var substringMatcher = function(strs){
+			// console.log("strs", strs[0].id);
+			return function findMatches(q, cb){
+				// console.log('q', q);
+				var matches, substringRegex;
+				// an array that will be populated with substring matches
+				matches = [];
+				// regex used to determine if a string contains the substring `q`
+				substrRegex = new RegExp(q, 'i');
+				// iterate through the pool of strings and for any string that
+				// contains the substring `q`, add it to the `matches` array
+				$.each(strs, function(i, str){
+					if(substrRegex.test(str)){
+						matches.push(str);
+					}
+				});
+				cb(matches);
+			};
+		};
+		//endregion
 
     </script>
 {% endblock javascript_page %}
