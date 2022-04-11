@@ -10,7 +10,7 @@
 
             <div class="page-title">
                 <div class="row">
-                    <div class="col-sm-6 order-sm-1">
+                    <div class="col-sm-5 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
@@ -20,19 +20,22 @@
                         </ol>
                         <div class="mb-2 d-block d-sm-none"></div>
                     </div>
-                    <div class="col-sm-6 order-sm-0">
-                        <div class="float-sm-start d-flex">
+                    <div class="col-sm-7 order-sm-0">
+						<div class="float-sm-start d-flex">
                             <h3>Virtual Office di </h3>
                             <div id="idUtenteSelezionato" hidden></div>
                             <div id="contenutoTypehead" hidden></div>
                             <div class="float-sm-start">
                                 <div id="typehead_ID_utente">
                                     <div id="typehead_sottoposti" class="input-group">
-                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"> </i></span>
+                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i></span>
+                                        <a href="{{ path('ingresso') }}" id="buttonTornaUtente" class="ms-5 btn btn-primary" hidden>Torna a {{ app.user.nominativo }}
+                                            <i class="icofont icofont-sign-out"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -42,7 +45,7 @@
                 <div class="row second-chart-list third-news-update" id="row">
                     <!-- region Totali -->
                     <div class="col-xl-12 xl-100 chart_data_left box-col-12">
-                        {{ totali() }}
+                        {{ totali(utenza) }}
                     </div>
                     <!-- endregion Totali -->
                     <!-- region Notizie principali -->
@@ -60,13 +63,11 @@
                         {{ top5() }}
                     </div>
                     <!-- endregion TOP5 -->
-
                     <!-- region Carriera -->
                     <!--div class="col-xl-4 xl-50 news box-col-6">
                         {# {{ carriera(app.user.codice(),app.request.locale()) }} #}
                     </div-->
                     <!-- endregion Carriera -->
-
                     <!-- region Sponsor -->
                     <div class="col-xl-5 xl-50 news box-col-6">
                         {{ account(superiore, 'sponsor',app.request.locale()) }}
@@ -117,24 +118,9 @@
 
 {% block javascript_page %}
     <script>
+		var utenza = "";
 		$(document).ready(function(){
 			resize();
-		});
-
-		function resize(){
-			var notiziePrincipali = $('#notizie_principali').height()
-			var graficoVendite = $('#grafico_vendite').height()
-			if(notiziePrincipali > graficoVendite){
-			} else if(notiziePrincipali < graficoVendite){
-				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
-			}
-		}
-
-    </script>
-
-
-    <script>
-		$(document).ready(function(){
 			$('#type-sottoposti').typeahead(
 				{
 					hint: true,
@@ -166,9 +152,17 @@
 					}
 				}
 			).bind('typeahead:select', function(evt, suggestion){
+				let ricaricaPagina = "{{ path('login') }}"
 				//$('[name="idUtente"]').val(suggestion.id);
 				$('#idUtenteSelezionato').html(suggestion.id);
 				$('#contenutoTypehead').html(suggestion.displayKey);
+
+				utenza = suggestion.codice;
+
+				let top5 = "{{ path('ingresso', { utenza:':utenza'}) }}";
+				top5 = top5.replace(':utenza', utenza);
+
+				window.location.href = top5
 			}).change(function(){
 				if($('#contenutoTypehead').html() != ""){
 					if($('#contenutoTypehead').html() === $('#type-sottoposti').val()){
@@ -204,5 +198,13 @@
 		};
 		//endregion
 
+		function resize(){
+			var notiziePrincipali = $('#notizie_principali').height()
+			var graficoVendite = $('#grafico_vendite').height()
+			if(notiziePrincipali > graficoVendite){
+			} else if(notiziePrincipali < graficoVendite){
+				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
+			}
+		}
     </script>
 {% endblock javascript_page %}

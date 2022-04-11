@@ -17,7 +17,7 @@ final class TotaliTwigExtension extends AbstractExtension{
 		];
 	}
 
-	public function main() : Markup{
-		return new Markup($this->widget->main(), 'UTF-8');
+	public function main(string $utenza) : Markup{
+		return new Markup($this->widget->main($utenza), 'UTF-8');
 	}
 }

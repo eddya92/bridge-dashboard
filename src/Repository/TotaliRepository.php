@@ -8,5 +8,5 @@ use Generator;
 interface TotaliRepository{
 	public const TAG_TOTALI = 'totali';
 
-	public function getTotali() : ?Generator;
+	public function getTotali(string $utenza) : ?Generator;
 }

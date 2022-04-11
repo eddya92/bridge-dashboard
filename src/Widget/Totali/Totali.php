@@ -12,8 +12,8 @@ final class Totali{
 	public function __construct(private Environment $twig, private TotaliRepository $repository){
 	}
 
-	public function main() : string{
-		$totali = $this->repository->getTotali();
+	public function main(string $utenza) : string{
+		$totali = $this->repository->getTotali($utenza);
 
 
 		if($totali === null){

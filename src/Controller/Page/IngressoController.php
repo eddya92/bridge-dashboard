@@ -8,6 +8,7 @@ use App\Repository\ArticoliRepository;
 use App\Repository\KitsRepository;
 use App\Repository\RestApi\AuthenticatedConnectionCapability;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,10 +41,13 @@ final class IngressoController extends AbstractController{
 	/**
 	 * Vista della pagina ingresso, controlla se sei un cliente o un incaricato, a seconda di questo ti mostra determinate cose
 	 */
-	#[Route('/{_locale}/ingresso', name: 'ingresso', methods: ['GET'])]
-	public function ingresso(string $_locale) : Response{
-
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+	#[Route('/{_locale}/ingresso{utenza}', name: 'ingresso', methods: ['GET'], defaults: ['utenza' => ''])]
+	public function ingresso(string $_locale, Request $request, string $utenza) : Response{
+		if($utenza){
+			$account = $this->accountRepository->getAccount($utenza, $_locale);
+		}else{
+			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+		}
 
 		if($account == null){
 			return $this->redirectToRoute('logout');
@@ -77,14 +81,16 @@ final class IngressoController extends AbstractController{
 				]
 			);
 		}else{
+			$utenza = $request->get('utenza', '');
+
 			return $this->render(
 				'pages/ingresso/ingresso.html.twig',
 				[
 					'account'   => $account,
 					'superiore' => $this->getUser()->getSuperiore(),
+					'utenza'    => $utenza,
 				]
 			);
 		}
 	}
-
 }
