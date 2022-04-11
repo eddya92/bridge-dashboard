@@ -18,9 +18,10 @@ final class AndamentoController extends AbstractController{
 	/**
 	 * Aggiorna il grafico dell'andamento nella pagina "ingresso", in base ai filtri selezionati
 	 */
-	#[Route('/andamento-grafico/{dato}/{anno}/{mese}', name: 'andamento-grafico', methods: ['GET'])]
-	public function andamentoGrafico($dato, $anno, $mese = '') : JsonResponse{
-		$venditeGenerator = $this->repository->vendite($dato, $anno, $mese);
+	#[Route('/andamento-grafico/{utenza}/{dato}/{anno}/{mese}', name: 'andamento-grafico', methods: ['GET'])]
+	public function andamentoGrafico(string $utenza, $dato, $anno, $mese = '') : JsonResponse{
+
+		$venditeGenerator = $this->repository->vendite($utenza, $dato, $anno, $mese);
 
 		if($venditeGenerator === null){
 			$venditeGenerator = [];

@@ -17,7 +17,7 @@ final class GraficoVenditeTwigExtension extends AbstractExtension{
 		];
 	}
 
-	public function main(string $locale) : Markup{
-		return new Markup($this->widget->main($locale), 'UTF-8');
+	public function main(string $utenza, string $locale) : Markup{
+		return new Markup($this->widget->main($utenza, $locale), 'UTF-8');
 	}
 }

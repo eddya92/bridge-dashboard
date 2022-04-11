@@ -21,7 +21,7 @@
                         <div class="mb-2 d-block d-sm-none"></div>
                     </div>
                     <div class="col-sm-7 order-sm-0">
-						<div class="float-sm-start d-flex">
+                        <div class="float-sm-start d-flex">
                             <h3>Virtual Office di </h3>
                             <div id="idUtenteSelezionato" hidden></div>
                             <div id="contenutoTypehead" hidden></div>
@@ -55,7 +55,11 @@
                     <!-- endregion Notizie principali -->
                     <!-- region Grafico -->
                     <div class="col-xl-8 xl-100 dashboard-sec box-col-12" id="grafico_vendite_homePage">
-                        {{ graficoVendite(app.request.locale) }}
+                        {% if(utenza != '') %}
+                            {{ graficoVendite(utenza,app.request.locale) }}
+                        {% else %}
+                            {{ graficoVendite(app.user.codice,app.request.locale) }}
+                        {% endif %}
                     </div>
                     <!-- endregion Grafico -->
                     <!-- region TOP5 -->

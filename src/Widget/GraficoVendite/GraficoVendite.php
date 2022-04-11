@@ -13,7 +13,7 @@ final class GraficoVendite{
 	){
 	}
 
-	public function main($locale) : string{
+	public function main(string $utenza, $locale) : string{
 		$annoAttuale = date('Y');
 		$meseAttuale = date('m');
 		$dataInizio = date('2020-01-01');
@@ -43,7 +43,6 @@ final class GraficoVendite{
 
 		$arrayAnni = [];
 
-
 		for($i = $anno; (int) $annoAttuale >= $i; $i++){
 			array_push($arrayAnni, $i);
 		}
@@ -53,6 +52,7 @@ final class GraficoVendite{
 			'meseAttuale' => $meseAttuale,
 			'anni'        => $arrayAnni,
 			'mesi'        => $arrayMesi,
+			'utenza'        => $utenza,
 		]);
 	}
 }

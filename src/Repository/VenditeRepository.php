@@ -8,5 +8,5 @@ use Generator;
 interface VenditeRepository{
 	public const TAG_VENDITE = 'vendite';
 
-	public function vendite($dato, $anno, $mese = '') : Generator;
+	public function vendite($utenza, $dato, $anno, $mese = '') : Generator;
 }

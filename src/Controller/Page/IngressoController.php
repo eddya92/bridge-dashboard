@@ -48,6 +48,7 @@ final class IngressoController extends AbstractController{
 		}else{
 			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
 		}
+		$superiore = $account->getSuperiore();
 
 		if($account == null){
 			return $this->redirectToRoute('logout');
@@ -87,7 +88,7 @@ final class IngressoController extends AbstractController{
 				'pages/ingresso/ingresso.html.twig',
 				[
 					'account'   => $account,
-					'superiore' => $this->getUser()->getSuperiore(),
+					'superiore' => $superiore,
 					'utenza'    => $utenza,
 				]
 			);
