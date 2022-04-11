@@ -1,7 +1,7 @@
-<div class="card earning-card " id="grafico_vendite" >
-    <div class="card-body p-0"  >
-        <div class="row m-0" >
-            <div id="div_chart_filters" >
+<div class="card earning-card " id="grafico_vendite">
+    <div class="card-body p-0">
+        <div class="row m-0">
+            <div id="div_chart_filters">
                 <div class="col-md-6">
                     {% trans %}Tipologia filtro{% endtrans %}
                     <div class="clearfix"></div>
@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     {% trans %}Mostra{% endtrans %}
                     <select title="Scegli il dato da mostrare nel grafico" class="form-select" name="Grafico_dato" id="datochart">
-                        <option value="pc" >{% trans %}Punti Carriera{% endtrans %}</option>
+                        <option value="pc">{% trans %}Punti Carriera{% endtrans %}</option>
                         <option value="pv">{% trans %}Punti Volume{% endtrans %}</option>
                         <option value="ordini" selected>{% trans %}Numero ordini{% endtrans %}</option>
                     </select>
@@ -157,7 +157,7 @@
 		$('#legenda').empty();
 		//endregion
 
-		let andamento = "{{ path('andamento-grafico', {anno:':anno',mese:':mese', dato:':dato'}) }}";
+		let andamento = "{{ path('andamento-grafico', {utenza:utenza, anno:':anno', mese:':mese', dato:':dato'}) }}";
 		andamento = andamento.replace(':anno', anno);
 		andamento = andamento.replace(':mese', mese);
 		andamento = andamento.replace(':dato', dato);
