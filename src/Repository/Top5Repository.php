@@ -8,5 +8,5 @@ use Generator;
 interface Top5Repository{
 	public const TAG_TOP5 = 'top5';
 
-	public function getTop5(string $anno, string $mese) : ?Generator;
+	public function getTop5(string $utenza, string $anno, string $mese) : ?Generator;
 }

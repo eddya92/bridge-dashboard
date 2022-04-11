@@ -51,7 +51,7 @@
 			mese = 'generale';
 		}
 
-		let top5 = "{{ path('top5-ajax', { anno:':anno', mese : ':mese'}) }}";
+		let top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
 		top5 = top5.replace(':mese', mese);
 		top5 = top5.replace(':anno', anno);
 		$.ajax({

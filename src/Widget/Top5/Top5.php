@@ -14,7 +14,7 @@ final class Top5{
 	public function __construct(private Environment $twig){
 	}
 
-	public function main() : string{
+	public function main(string $utenza) : string{
 		$annoAttuale = date('Y');
 		$meseAttuale = date('m');
 		$dataInizio = date('2020-01-01');
@@ -50,6 +50,7 @@ final class Top5{
 			'meseAttuale' => $meseAttuale,
 			'anni'        => $arrayAnni,
 			'mesi'        => $arrayMesi,
+			'utenza'      => $utenza,
 		]);
 	}
 }

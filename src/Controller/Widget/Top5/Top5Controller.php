@@ -16,13 +16,13 @@ final class Top5Controller extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/top5-ajax/{anno}/{mese}', name: 'top5-ajax', methods: ['GET'])]
-	public function top5Ajax($anno, $mese){
+	#[Route('/top5-ajax/{utenza}/{anno}/{mese}', name: 'top5-ajax', methods: ['GET'])]
+	public function top5Ajax($utenza, $anno, $mese){
 		$topUltimiIscritti = [];
 		$topReclutatori = [];
 		$topVendite = [];
 
-		$users = $this->repository->getTop5($anno, $mese);
+		$users = $this->repository->getTop5($utenza, $anno, $mese);
 
 		//region i dati presi dal repository li predispongo per la visualizzazione del widget top5(vendite)(reclutatori)(ultimiIscritti)
 		if($users != null){
@@ -40,6 +40,7 @@ final class Top5Controller extends AbstractController{
 				}
 			}
 		}
+
 		//endregion
 		return $this->render('widgets/top5/top5_body_ajax.html.twig', [
 			'year'              => $anno,

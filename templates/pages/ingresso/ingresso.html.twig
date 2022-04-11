@@ -28,9 +28,7 @@
                             <div class="float-sm-start">
                                 <div id="typehead_ID_utente">
                                     <div id="typehead_sottoposti" class="input-group">
-                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i></span>
-                                        <a href="{{ path('ingresso') }}" id="buttonTornaUtente" class="ms-5 btn btn-primary" hidden>Torna a {{ app.user.nominativo }}
-                                            <i class="icofont icofont-sign-out"></i></a>
+                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i><a href="{{ path('ingresso') }}" class="ms-4 text-decoration-none " {{ utenza == '' ? 'hidden' : '' }}><i data-feather="log-out"></i></a> </span>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +62,12 @@
                     <!-- endregion Grafico -->
                     <!-- region TOP5 -->
                     <div class="col-xl-7 xl-50 news box-col-6">
-                        {{ top5() }}
+                        {% if(utenza != '') %}
+                            {{ top5(utenza) }}
+                        {% else %}
+                            {{ top5(app.user.codice) }}
+                        {% endif %}
+
                     </div>
                     <!-- endregion TOP5 -->
                     <!-- region Carriera -->
@@ -156,7 +159,6 @@
 					}
 				}
 			).bind('typeahead:select', function(evt, suggestion){
-				let ricaricaPagina = "{{ path('login') }}"
 				//$('[name="idUtente"]').val(suggestion.id);
 				$('#idUtenteSelezionato').html(suggestion.id);
 				$('#contenutoTypehead').html(suggestion.displayKey);
@@ -210,5 +212,6 @@
 				$('#box_news').height(graficoVendite + (graficoVendite - $('#notizie_principali').height()))
 			}
 		}
+
     </script>
 {% endblock javascript_page %}

@@ -23,9 +23,9 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 	){
 	}
 
-	public function getTop5(string $anno, string $mese) : ?Generator{
+	public function getTop5(string $utenza, string $anno, string $mese) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallListOfTop5($anno, $mese));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallListOfTop5($utenza, $anno, $mese));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -41,15 +41,15 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallListOfTop5(string $anno, string $mese) : callable{
-		return function(ItemInterface $item) use ($anno, $mese){
+	private function apiCallListOfTop5(string $utenza, string $anno, string $mese) : callable{
+		return function(ItemInterface $item) use ($utenza, $anno, $mese){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese);
+				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza);
 
 			$item->expiresAfter($this->ttlForTop5);
-			$item->tag($this->authenticatedCacheTag(self::TAG_TOP5));
+			$item->tag($this->authenticatedCacheTag(self::TAG_TOP5 . $anno . $mese . $utenza));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_TOP5)]);

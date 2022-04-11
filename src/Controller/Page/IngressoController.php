@@ -92,7 +92,6 @@ final class IngressoController extends AbstractController{
 				$account = $this->accountRepository->getAccount($utenza, $_locale);
 			}
 			$superiore = $account->getSuperiore();
-
 			$utenza = $request->get('utenza', '');
 
 			return $this->render(
