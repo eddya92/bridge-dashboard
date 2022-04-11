@@ -55,7 +55,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 
 		$results = $results['data'];
 
-		return new AccountViewModel($results['id'], $results['foto'], $results['nazione_residenza'], $results['ruolo'], $results['nome'], $results['cognome'], $results['nominativo'], $results['qualifica'], $results['codice'], $results['data_iscrizione'], $results['codice_fiscale'], $results['telefono'], $results['email'], $results['carriera'], $results['oblio'], $results['cellulare']);
+		return new AccountViewModel($results['id'], $results['foto'], $results['nazione_residenza'], $results['ruolo'], $results['nome'], $results['cognome'], $results['nominativo'], $results['qualifica'], $results['codice'], $results['data_iscrizione'], $results['codice_fiscale'], $results['telefono'], $results['email'], $results['carriera'], $results['oblio'], $results['cellulare'], $results['superiore']);
 	}
 
 	/**
@@ -425,7 +425,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			->client()
 			->request('POST', '/db-v1/utenti/recupero-password', [
 				'form_params' => [
-					'email' => $email
+					'email' => $email,
 				],
 			]);
 

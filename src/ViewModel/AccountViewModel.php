@@ -21,8 +21,9 @@ final class AccountViewModel{
 	 * @param array  $carriera
 	 * @param array  $oblio
 	 * @param string $cellulare
+	 * @param string $superiore
 	 */
-	public function __construct(private int $id, private string $foto, private string $nazioneResidenza, private string $ruolo, private string $nome, private string $cognome, private string $nominativo, private string $qualifica, private string $codice, private string $dataIscrizione, private string $codiceFiscale, private string $telefono, private string $email, private array $carriera, private array $oblio, private string $cellulare){
+	public function __construct(private int $id, private string $foto, private string $nazioneResidenza, private string $ruolo, private string $nome, private string $cognome, private string $nominativo, private string $qualifica, private string $codice, private string $dataIscrizione, private string $codiceFiscale, private string $telefono, private string $email, private array $carriera, private array $oblio, private string $cellulare, private string $superiore){
 	}
 
 	/**
@@ -33,10 +34,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param int $id
+	 */
+	public function setId(int $id) : void{
+		$this->id = $id;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getFoto() : string{
 		return $this->foto;
+	}
+
+	/**
+	 * @param string $foto
+	 */
+	public function setFoto(string $foto) : void{
+		$this->foto = $foto;
 	}
 
 	/**
@@ -47,10 +62,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $nazioneResidenza
+	 */
+	public function setNazioneResidenza(string $nazioneResidenza) : void{
+		$this->nazioneResidenza = $nazioneResidenza;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getRuolo() : string{
 		return $this->ruolo;
+	}
+
+	/**
+	 * @param string $ruolo
+	 */
+	public function setRuolo(string $ruolo) : void{
+		$this->ruolo = $ruolo;
 	}
 
 	/**
@@ -61,10 +90,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $nome
+	 */
+	public function setNome(string $nome) : void{
+		$this->nome = $nome;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getCognome() : string{
 		return $this->cognome;
+	}
+
+	/**
+	 * @param string $cognome
+	 */
+	public function setCognome(string $cognome) : void{
+		$this->cognome = $cognome;
 	}
 
 	/**
@@ -75,10 +118,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $nominativo
+	 */
+	public function setNominativo(string $nominativo) : void{
+		$this->nominativo = $nominativo;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getQualifica() : string{
 		return $this->qualifica;
+	}
+
+	/**
+	 * @param string $qualifica
+	 */
+	public function setQualifica(string $qualifica) : void{
+		$this->qualifica = $qualifica;
 	}
 
 	/**
@@ -89,10 +146,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $codice
+	 */
+	public function setCodice(string $codice) : void{
+		$this->codice = $codice;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getDataIscrizione() : string{
 		return $this->dataIscrizione;
+	}
+
+	/**
+	 * @param string $dataIscrizione
+	 */
+	public function setDataIscrizione(string $dataIscrizione) : void{
+		$this->dataIscrizione = $dataIscrizione;
 	}
 
 	/**
@@ -103,10 +174,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $codiceFiscale
+	 */
+	public function setCodiceFiscale(string $codiceFiscale) : void{
+		$this->codiceFiscale = $codiceFiscale;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getTelefono() : string{
 		return $this->telefono;
+	}
+
+	/**
+	 * @param string $telefono
+	 */
+	public function setTelefono(string $telefono) : void{
+		$this->telefono = $telefono;
 	}
 
 	/**
@@ -117,10 +202,24 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param string $email
+	 */
+	public function setEmail(string $email) : void{
+		$this->email = $email;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getCarriera() : array{
 		return $this->carriera;
+	}
+
+	/**
+	 * @param array $carriera
+	 */
+	public function setCarriera(array $carriera) : void{
+		$this->carriera = $carriera;
 	}
 
 	/**
@@ -131,11 +230,37 @@ final class AccountViewModel{
 	}
 
 	/**
+	 * @param array $oblio
+	 */
+	public function setOblio(array $oblio) : void{
+		$this->oblio = $oblio;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getCellulare() : string{
 		return $this->cellulare;
 	}
 
+	/**
+	 * @param string $cellulare
+	 */
+	public function setCellulare(string $cellulare) : void{
+		$this->cellulare = $cellulare;
+	}
 
+	/**
+	 * @return string
+	 */
+	public function getSuperiore() : string{
+		return $this->superiore;
+	}
+
+	/**
+	 * @param string $superiore
+	 */
+	public function setSuperiore(string $superiore) : void{
+		$this->superiore = $superiore;
+	}
 }
