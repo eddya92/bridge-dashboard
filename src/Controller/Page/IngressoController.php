@@ -43,12 +43,7 @@ final class IngressoController extends AbstractController{
 	 */
 	#[Route('/{_locale}/ingresso{utenza}', name: 'ingresso', methods: ['GET'], defaults: ['utenza' => ''])]
 	public function ingresso(string $_locale, Request $request, string $utenza) : Response{
-		if($utenza){
-			$account = $this->accountRepository->getAccount($utenza, $_locale);
-		}else{
-			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
-		}
-		$superiore = $account->getSuperiore();
+		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
 
 		if($account == null){
 			return $this->redirectToRoute('logout');
@@ -57,16 +52,27 @@ final class IngressoController extends AbstractController{
 		//region controllo il ruolo dell'utente loggato, se è clinte mostro una pagina con la possibilità di trasformarsi in incaricato
 		if($account->getRuolo() === 'Cliente'){
 			$superiore = $this->getUser()->getSuperiore();
-			$ultimiArticoliVenduti = $this->articleRepository->getArticoliUltimiAcquisti($_locale);
-			$articoliPiuVenduti = $this->articleRepository->getArticoliPiuVenduti($_locale);
+			$ultimiArticoliVendutiGenerator = $this->articleRepository->getArticoliUltimiAcquisti($_locale);
+			$articoliPiuVendutiGenerator = $this->articleRepository->getArticoliPiuVenduti($_locale);
 
-			if($ultimiArticoliVenduti == null){
-				$ultimiArticoliVenduti = [];
+			if($ultimiArticoliVendutiGenerator == null){
+				$ultimiArticoliVendutiGenerator = [];
 			}
 
-			if($articoliPiuVenduti == null){
-				$articoliPiuVenduti = [];
+			if($articoliPiuVendutiGenerator == null){
+				$articoliPiuVendutiGenerator = [];
 			}
+
+			$ultimiArticoliVenduti = [];
+			foreach($ultimiArticoliVendutiGenerator as $ultimi){
+				$ultimiArticoliVenduti[] = $ultimi;
+			}
+
+			$articoliPiuVenduti = [];
+			foreach($articoliPiuVendutiGenerator as $ultimi){
+				$articoliPiuVenduti[] = $ultimi;
+			}
+
 
 			if($superiore == null){
 				$superiore = [];
@@ -82,6 +88,11 @@ final class IngressoController extends AbstractController{
 				]
 			);
 		}else{
+			if($utenza){
+				$account = $this->accountRepository->getAccount($utenza, $_locale);
+			}
+			$superiore = $account->getSuperiore();
+
 			$utenza = $request->get('utenza', '');
 
 			return $this->render(

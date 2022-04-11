@@ -94,36 +94,36 @@
                                         <table id="best-products" class="table table-bordernone table-td-vertical-align-middle">
                                             <div class="m-t-20"></div>
                                             <tbody class="f-w-500">
-                                                {% if articoliPiuVenduti|length > 0 %}
+                                            {% if articoliPiuVenduti | length > 0 %}
                                                 {% for articoloPiuVenduto in articoliPiuVenduti %}
-                                                <tr>
-                                                <td>
-                                                    <div class="media">
-                                                        <img class="img-fluid m-r-15 rounded-circle" src="{{ articoloPiuVenduto.foto }}" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="p-t-0"><span>{{ articoloPiuVenduto.nome }}</span>
-                                                    <p>Cod. {{ articoloPiuVenduto.codice }}</p>
-                                                </td>
-                                                <!--td class="p-t-10"><span>EUR prezzo,00</span>
-                                                </td>
-                                                <td class="p-t-10">
-                                                    <p>punti PC</p>
-                                                </td>-->
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4">
-                                                    <hr/>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="media">
+                                                                <img class="img-fluid m-r-15 rounded-circle" src="{{ articoloPiuVenduto.foto }}" alt="">
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-t-0"><span>{{ articoloPiuVenduto.nome }}</span>
+                                                            <p>Cod. {{ articoloPiuVenduto.codice }}</p>
+                                                        </td>
+                                                        <!--td class="p-t-10"><span>EUR prezzo,00</span>
+                                                        </td>
+                                                        <td class="p-t-10">
+                                                            <p>punti PC</p>
+                                                        </td>-->
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <hr/>
+                                                        </td>
+                                                    </tr>
                                                 {% endfor %}
 
-                                                {% else %}
-                                                    <td class="text-center" >
-                                                        <br>
-                                                        <div>Al momento non è stato possibile mostrare il contenuto!</div>
-                                                    </td>
-                                                {% endif %}
+                                            {% else %}
+                                                <td class="text-center">
+                                                    <br>
+                                                    <div>Al momento non è stato possibile mostrare il contenuto!</div>
+                                                </td>
+                                            {% endif %}
 
                                             </tbody>
                                         </table>
@@ -147,31 +147,31 @@
                                         <table id="reorder-products" class="table table-bordernone table-td-vertical-align-middle">
                                             <div class="m-t-20"></div>
                                             <tbody class="f-w-500">
-                                            {% if ultimiArticoliVenduti|length > 0 %}
-                                            {% for ultimoArticoloVenduto in ultimiArticoliVenduti %}
-                                                <tr>
-                                                    <td>
-                                                        <div class="media">
-                                                            <img class="img-fluid m-r-15 rounded-circle" src="{{ ultimoArticoloVenduto.foto }}" alt="">
-                                                        </div>
-                                                    </td>
-                                                    <td class="p-t-0"><span>{{ ultimoArticoloVenduto.nome }}</span>
-                                                        <p>Cod. {{ ultimoArticoloVenduto.codice }}</p>
-                                                    </td>
-                                                    <!--td class="p-t-10">
-                                                        <span>EUR prezzo,00</span></td>
-                                                    <td class="p-t-10">
-                                                        <p>punti PC</p>
-                                                    </td-->
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <hr/>
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
+                                            {% if ultimiArticoliVenduti | length > 0 %}
+                                                {% for ultimoArticoloVenduto in ultimiArticoliVenduti %}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="media">
+                                                                <img class="img-fluid m-r-15 rounded-circle" src="{{ ultimoArticoloVenduto.foto }}" alt="">
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-t-0"><span>{{ ultimoArticoloVenduto.nome }}</span>
+                                                            <p>Cod. {{ ultimoArticoloVenduto.codice }}</p>
+                                                        </td>
+                                                        <!--td class="p-t-10">
+                                                            <span>EUR prezzo,00</span></td>
+                                                        <td class="p-t-10">
+                                                            <p>punti PC</p>
+                                                        </td-->
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <hr/>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
                                             {% else %}
-                                                <td class="text-center" >
+                                                <td class="text-center">
                                                     <br>
                                                     <div>Al momento non è stato possibile mostrare il contenuto!</div>
                                                 </td>
