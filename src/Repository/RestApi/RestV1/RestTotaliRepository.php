@@ -23,9 +23,9 @@ final class RestTotaliRepository implements TotaliRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getTotali() : ?Generator{
+	public function getTotali(string $utenza) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallTotali());
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallTotali($utenza));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -39,15 +39,16 @@ final class RestTotaliRepository implements TotaliRepository, AuthenticatedRepos
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallTotali() : callable{
-		return function(ItemInterface $item){
+	public function apiCallTotali(string $utenza) : callable{
+
+		return function(ItemInterface $item) use ($utenza){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/totali');
+				->request('GET', '/db-v1/utenti/totali?codice_utente_simulato=' . $utenza);
 
 			$item->expiresAfter($this->ttlForTotali);
-			$item->tag($this->authenticatedCacheTag(self::TAG_TOTALI));
+			$item->tag($this->authenticatedCacheTag(self::TAG_TOTALI . $utenza));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_TOTALI)]);
