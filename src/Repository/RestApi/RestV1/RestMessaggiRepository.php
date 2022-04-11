@@ -40,7 +40,6 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	 * @return callable(ItemInterface): string
 	 */
 	public function apiCallMessaggi(string $_locale) : callable{
-
 		return function(ItemInterface $item) use ($_locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
@@ -62,7 +61,6 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	}
 
 	public function getMessaggio(int $id, string $_locale) : ?MessaggioViewModel{
-
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $_locale));
 			$results = Json::decode($cached);
@@ -78,8 +76,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallMessaggio(int $id,string $_locale) : callable{
-
+	private function apiCallMessaggio(int $id, string $_locale) : callable{
 		return function(ItemInterface $item) use ($id, $_locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
@@ -88,6 +85,40 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 
 			$item->expiresAfter(45);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $id . "[" . $_locale . "]"));
+
+			//per invalidarlo
+			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_MESSAGGGI)]);
+
+			if($response->getStatusCode() != 200){
+				throw new Exception($response->getReasonPhrase());
+			}
+
+			return (string) $response->getBody();
+		};
+	}
+
+	public function getUltimoMessaggio(string $locale) : ?MessaggioViewModel{
+		try{
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallUltimoMessaggio($locale));
+			$results = Json::decode($cached);
+		}catch(Throwable){
+			return null;
+		}
+
+		$data = $results['data'];
+
+		return new MessaggioViewModel($data['id'], $data['data'], $data['mittente'], $data['foto'], $data['da_leggere'], $data['titolo'], $data['testo'], $data['id_messaggio_precedente'], $data['id_messaggio_successivo']);
+	}
+
+	public function apiCallUltimoMessaggio($_locale) : callable{
+		return function(ItemInterface $item) use ($_locale){
+			$response = $this->restApiConnection()
+				->withAuthentication($this->authenticationToken())
+				->client()
+				->request('GET', '/db-v1/messaggi/messaggio/' . '?locale=' . $_locale . '&limit=' . '1' . '&direzione=' . 'desc');
+
+			$item->expiresAfter(45);
+			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . "[" . $_locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_MESSAGGGI)]);

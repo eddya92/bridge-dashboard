@@ -17,22 +17,11 @@ final class NotiziePrincipali extends AbstractController{
 	}
 
 	public function main(string $_locale) : Response{
-		$messaggiGenerator = $this->messaggiRepository->getMessaggi($_locale);
+		$messaggio = $this->messaggiRepository->getUltimoMessaggio($_locale);
 
-		$messaggi = [];
-		if($messaggiGenerator != null){
-			foreach($messaggiGenerator as $messaggioGenerator){
-				$messaggi[] = $messaggioGenerator;
-			}
-			rsort($messaggi);
-		}
-
-		if(count($messaggi) == 0){
+		if($messaggio == null){
 			$messaggio = [];
-		}else{
-			$messaggio = $messaggi[0];
 		}
-
 
 		return $this->render('widgets/notizie_principali/notizie_principali.html.twig', [
 			'messaggio' => $messaggio,

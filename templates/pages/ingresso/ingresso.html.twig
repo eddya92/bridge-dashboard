@@ -28,7 +28,7 @@
                             <div class="float-sm-start">
                                 <div id="typehead_ID_utente">
                                     <div id="typehead_sottoposti" class="input-group">
-                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i><a href="{{ path('ingresso') }}" class="ms-4 text-decoration-none " {{ utenza == '' ? 'hidden' : '' }}><i data-feather="log-out"></i></a> </span>
+                                        <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i><a href="{{ path('ingresso') }}" class="ms-4 text-decoration-none" {{ utenza == '' ? 'hidden' : '' }}><i class="text-dark" data-feather="log-out"></i></a> </span>
                                     </div>
                                 </div>
                             </div>
