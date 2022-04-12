@@ -33,7 +33,8 @@
                     <div class="col-sm-6 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            </li>
                             <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
                             <li class="breadcrumb-item active">{% trans %}La tua carriera{% endtrans %}</li>
                         </ol>
@@ -53,6 +54,8 @@
             {% include 'layouts/partials/session_message.html.twig' %}
 
             <div class="row" id="row_list">
+                <!-- Nascondo provvisoriamente la composizione dinamica della carriera in attesa che sia pronto il piano carriera -->
+                <!--
                 <div class="col-sm-12">
                     <div class=" card">
                         <div class="card-header">
@@ -94,6 +97,82 @@
                         </div>
                     </div>
                 </div>
+                -->
+
+                <div class="col-sm-12">
+                    <div class=" card">
+                        <div class="card-header">
+                            {% trans %}Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle{% endtrans %}
+                        </div>
+                        <div class="card-body">
+                            <div class="owl-carousel owl-theme" id="owl-carousel-2">
+
+                                <!-- PROMOTER -->
+                                <div class="item ">
+                                    <div class="pricingtable" style="background-color:#f2efeb !important; border: none !important;">
+                                        <div class="pricingtable-header">
+                                            <h4 class="title" style="margin-bottom: 10px !important;"><span>Promoter</span></h4>
+                                            <p style="color:#b09750">{% trans %}Qualifica attuale{% endtrans %}</p>
+                                        </div>
+                                        <hr style="margin-top:20px !important; border-top:1px solid white !important; opacity: 0.6 !important;" />
+                                        <div class="description" style="margin:auto; width:60%">
+                                            <p style="margin-top:20px;">Non viene richiesto nessun volume minimo di vendite né d’acquisto</p>
+                                            <p style="margin-top:10px;">Verranno pagate solo le vendite dirette<br /><span style="font-size:11px;">(vale a dire, quelle personalmente promosse dal Promoter)</span></p>
+                                        </div>
+                                        <p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">5% + 20%</span><br /><span style="font-size:11px;">Commissioni Vendite Dirette</span></p>
+                                    </div>
+                                </div>
+                                <!-- END PROMOTER -->
+
+                                <!-- TEAM PROMOTER -->
+                                <div class="item ">
+                                    <div class="pricingtable" style="background-color:#eee9e2 !important; border: none !important;">
+                                        <div class="pricingtable-header">
+                                            <h4 class="title" style="margin-bottom: 10px !important;"><span>Team Promoter</span></h4>
+                                            <p style="color:#b09750">{% trans %}Prossima Qualifica{% endtrans %}</p>
+                                        </div>
+                                        <hr style="margin-top:20px !important; border-top:1px solid white !important; opacity: 0.6 !important;" />
+                                        <div class="description" style="margin:auto; width:60%">
+                                            <p style="margin-top:20px;">E’ richiesto un volume minimo di vendite (”Commitment”)<br />Oltre al margine e alla commissione, verranno remunerati tutti i livelli della propria struttura di Team Promoter</p>
+                                        </div>
+                                        <table style="margin:auto; width: auto;">
+                                            <tr>
+                                                <td style="max-width: 180px;" valign="top"><p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">5% + 20%</span><br /><span style="font-size:11px;">Commissioni Vendite Dirette</span></p></td>
+                                                <td style="padding: 15px;" valign="top">+</td>
+                                                <td style="max-width: 180px;" valign="top"><p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">9 - 15%</span><br /><span style="font-size:11px;">Commissioni su tutti i livelli della propria struttura</span></p></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- END TEAM PROMOTER -->
+
+                                <!-- LEADER -->
+                                <div class="item ">
+                                    <div class="pricingtable" style="background-color:#e5e1dc !important; border: none !important;">
+                                        <div class="pricingtable-header">
+                                            <h4 class="title" style="margin-bottom: 10px !important;"><span>Team Promoter</span></h4>
+                                            <p style="color:#b09750">{% trans %}Prossima Qualifica{% endtrans %}</p>
+                                        </div>
+                                        <hr style="margin-top:20px !important; border-top:1px solid white !important; opacity: 0.6 !important;" />
+                                        <div class="description" style="margin:auto; width:60%">
+                                            <p style="margin-top:20px;">Oltre al Margine, alla commissione, e la %  su tutti i livelli della propria struttura di Team Promoter, verranno remunerati max 3 livelli di Team Promoter</p>
+                                        </div>
+                                        <table style="margin:auto; width: auto;">
+                                            <tr>
+                                                <td style="max-width: 100px;" valign="top"><p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">5% + 20%</span><br /><span style="font-size:11px;">Commissioni Vendite Dirette</span></p></td>
+                                                <td style="padding: 15px;" valign="top">+</td>
+                                                <td style="max-width: 100px;" valign="top"><p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">9 - 15%</span><br /><span style="font-size:11px;">Commissioni su tutti i livelli della propria struttura</span></p></td>
+                                                <td style="padding: 15px;" valign="top">+</td>
+                                                <td style="max-width: 100px;" valign="top"><p style="margin-top:10px; color:#b09750;"><span style="font-size:18px;">3 - 5%</span><br /><span style="font-size:11px;">Commissione addizionale su max 3 livelli</span></p></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- END LEADER -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="m-b-20"></div>
             <div class="col-sm-12">
@@ -105,12 +184,12 @@
                         <div id="datatable_responsive_bonus_container" class="dt-ext table-responsive overflow_x_hidden">
                             <table class="row-border hover" id="datatable_responsive_bonus">
                                 <thead>
-                                    <tr>
-                                        <th>{% trans %}Periodo{% endtrans %}</th>
-                                        <th>{% trans %}Qualifica raggiunta{% endtrans %}</th>
-                                        <th>{% trans %}PCP{% endtrans %}</th>
-                                        <th>{% trans %}PCG{% endtrans %}</th>
-                                    </tr>
+                                <tr>
+                                    <th>{% trans %}Periodo{% endtrans %}</th>
+                                    <th>{% trans %}Qualifica raggiunta{% endtrans %}</th>
+                                    <th>{% trans %}PCP{% endtrans %}</th>
+                                    <th>{% trans %}PCG{% endtrans %}</th>
+                                </tr>
                                 </thead>
                             </table>
                         </div>
@@ -124,11 +203,21 @@
 {% endblock page_body %}
 
 {% block javascript %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js" integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+        integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.5/simplebar.min.js"
+        integrity="sha512-PXNAvB6wWywrk43aV52x7sFuo+m/2cUJYGNGYe+frlHLVMd4vEMEAvHFg1b88wECIk7r/TOejo5xL63Uf/JmHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
 <script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
 <script src="../assets/js/scrollbar/custom.js"></script>
@@ -159,94 +248,105 @@
 {% block javascript_page %}
     <script>
 
-        //region impostazioni datatable
-        var DueRDataTableLaguages = {
-            paginate: {
-                previous: 'precedente',
-                next: 'successivo',
-            },
-            decimal: '',
-            emptyTable: 'nessun dato disponibile',
-            /*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
-            info: '_TOTAL_ risultati | ',
-            infoEmpty: 'visualizzati 0 a 0 di 0 elementi',
-            infoFiltered: '(filtrati da _MAX_ elementi totali)',
-            infoPostFix: '',
-            thousands: ',',
-            lengthMenu: 'mostra _MENU_ per pagina',
-            loadingRecords: 'caricamento...',
-            processing: 'elaborazione...',
-            search: 'Cerca:',
-            zeroRecords: 'nessun_risultato',
-            aria: {
-                'sortAscending': ': attiva_per_ordine_ascendente',
-                'sortDescending': '": attiva_per_ordine_discendente'
-            }
-        };
+		//region impostazioni datatable
+		var DueRDataTableLaguages = {
+			paginate: {
+				previous: 'precedente',
+				next: 'successivo',
+			},
+			decimal: '',
+			emptyTable: 'nessun dato disponibile',
+			/*info: "visualizzati _START_ a _END_ di _TOTAL_ risultati",*/
+			info: '_TOTAL_ risultati | ',
+			infoEmpty: 'visualizzati 0 a 0 di 0 elementi',
+			infoFiltered: '(filtrati da _MAX_ elementi totali)',
+			infoPostFix: '',
+			thousands: ',',
+			lengthMenu: 'mostra _MENU_ per pagina',
+			loadingRecords: 'caricamento...',
+			processing: 'elaborazione...',
+			search: 'Cerca:',
+			zeroRecords: 'nessun_risultato',
+			aria: {
+				'sortAscending': ': attiva_per_ordine_ascendente',
+				'sortDescending': '": attiva_per_ordine_discendente'
+			}
+		};
 		//endregion
 
 		//region popolo il datatable tramite chiamata ajax
-        $('#datatable_responsive_bonus').DataTable({
+		$('#datatable_responsive_bonus').DataTable({
 
-            //serverSide: true,
-            //responsive: true,
-            ajax: {
-				url:"{{ path('carriera-ajax') }}",
-				data:{
-					'locale':"{{ app.request.locale }}"
+			//serverSide: true,
+			//responsive: true,
+			ajax: {
+				url: "{{ path('carriera-ajax') }}",
+				data: {
+					'locale': "{{ app.request.locale }}"
 				}
-            },
-            language: DueRDataTableLaguages,
-            dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
-            order: [4, 'desc'],
-            pageLength:25,
-            columnDefs: [
-                {
-                    targets: 2,
-                    className: 'dt-right'
-                },
-                {
-                    targets: 3,
-                    className: 'dt-right'
-                },
+			},
+			language: DueRDataTableLaguages,
+			dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
+			order: [4, 'desc'],
+			pageLength: 25,
+			columnDefs: [
+				{
+					targets: 2,
+					className: 'dt-right'
+				},
+				{
+					targets: 3,
+					className: 'dt-right'
+				},
 
-                {
-                    targets: 4,
-                    visible: false,
-                    searchable: false
-                },
+				{
+					targets: 4,
+					visible: false,
+					searchable: false
+				},
 
-                {responsivePriority: 1, targets: 0},
-                {responsivePriority: 2, targets: 1},
-                {responsivePriority: 3, targets: 3}
-            ]
-        });
+				{responsivePriority: 1, targets: 0},
+				{responsivePriority: 2, targets: 1},
+				{responsivePriority: 3, targets: 3}
+			]
+		});
 		//endregion
-        $('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');
+		$('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');
 
-        $(document).ready(function(){
-            var maxheight = 0;
-            $('.item').each(function(index) {
-                var cur_height = $(this).height();
-                if(cur_height > maxheight){
-                    maxheight = cur_height;
-                }
-            });
-            $('.item').each(function( index ) {
-                $(this).height(maxheight);
-            });
-            //$('.pricingtable').trigger('to.owl.carousel', 2);
+		$(document).ready(function(){
+			var maxheight = 0;
+			$('.description').each(function(index){
+				var cur_height = $(this).height();
+				if(cur_height > maxheight){
+					maxheight = cur_height;
+				}
+			});
+			$('.description').each(function(index){
+				$(this).height(maxheight);
+			});
 
-            setTimeout(function () {
-                 var item_to_show = 0;
-                 $('#owl-carousel-2 .item').each(function (i,j){
-                     if ($(j).hasClass('current_role_item')) {
-                         item_to_show = i - 7;
+			var maxheight = 0;
+			$('.item').each(function(index){
+				var cur_height = $(this).height();
+				if(cur_height > maxheight){
+					maxheight = cur_height;
+				}
+			});
+			$('.item').each(function(index){
+				$(this).height(maxheight);
+			});
+			//$('.pricingtable').trigger('to.owl.carousel', 2);
 
-                     }
-                 });
-                 $('#owl-carousel-2').trigger('to.owl.carousel', 0);
-             }, 1000);
-        });
+			setTimeout(function(){
+				var item_to_show = 0;
+				$('#owl-carousel-2 .item').each(function(i, j){
+					if($(j).hasClass('current_role_item')){
+						item_to_show = i - 7;
+
+					}
+				});
+				$('#owl-carousel-2').trigger('to.owl.carousel', 0);
+			}, 1000);
+		});
     </script>
 {% endblock javascript_page %}

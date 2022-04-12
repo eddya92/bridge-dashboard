@@ -451,7 +451,9 @@
 					opacityFrom: 1,
 					opacityTo: 1,
 					stops: [0, 100],
-					gradientToColors: ['#489165'],
+					gradientFromColors: ['#efeae9'],
+                    gradientToColors: ['#b09750'],
+					//gradientToColors: ['#489165'],
 					type: 'horizontal'
 				},
 			},
@@ -460,7 +462,7 @@
 				strokecolor: ['#ffffff']
 			},
 			labels: ['Documenti'],
-			colors: [CubaAdminConfig.primary],
+			colors: ['#efeae9'],
 		};
 		var chart4 = new ApexCharts(document.querySelector("#riskfactorchart"),
 			options4
@@ -485,5 +487,3 @@
 
     </script>
 {% endblock javascript_page %}
-
-

@@ -15,8 +15,19 @@ services:
       - ./docker/web/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./docker/web/php/symfony.ini:/usr/local/etc/php/conf.d/symfony.ini
       - ./docker/web/apache/vhosts:/etc/apache2/sites-enabled
-    networks:
-      - bridgexl
-networks:
-  bridgexl:
-    driver: bridge
+    #networks:
+      #- bridgexl
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    #networks:
+    #  - dashboard_bridgexl
+#networks:
+  #bridgexl:
+    #driver: bridge
+volumes:
+  redis-data:
