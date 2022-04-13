@@ -198,7 +198,8 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('{_locale}/elenco-ordini', name: 'elenco-ordini', methods: ['GET'])]
 	public function elencOrdini($_locale){
-		$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '', '', '', '', '');
+		//$ordiniGenerator = $this->ordiniRepository->getOrdini('', '', '', '', '', '', '', '', '', '');
+		//$totali = $ordiniGenerator['metadata'];
 
 		//if($ordiniGenerator != null && iterator_count($ordiniGenerator) == 0){
 		//	return $this->render('pages/ordini/nessun-ordine.html.twig');
@@ -218,6 +219,7 @@ class OrdiniController extends AbstractController{
 		return $this->render('pages/ordini/elenco_ordini.html.twig', [
 			'filtriEsito'      => $filtriEsito,
 			'filtriTipoOrdine' => $filtriTipoOrdine,
+			//'totali'           => $totali,
 		]);
 	}
 
@@ -226,6 +228,7 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('/ordini-ajax', name: 'ordini-ajax', methods: ['GET'])]
 	public function ordiniAjax(Request $request) : JsonResponse{
+
 		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
 		$sottoposti = $request->query->get('sottoposti', '');
 		$clienti = $request->query->get('ricerca_clienti', '');
@@ -276,6 +279,7 @@ class OrdiniController extends AbstractController{
 		//dd($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items);
 		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $pag);
 		$datatableorders = [];
+		$metadata = [];
 		//region se i dati presi dal repository degli ordini sono validi, li dispongo per visualizzarli nel datatable
 		if($ordini != null){
 			foreach($ordini as $item){
@@ -289,6 +293,7 @@ class OrdiniController extends AbstractController{
 				$ordine[] = $item->getTotale();
 				$ordine[] = $item->getTipologiaOrdine();
 				$ordine[] = '<span style="color:' . $item->getEsitoColore() . ';">' . $item->getEsito() . '</span>';
+				$metadata = $item->getMetadata();
 				//if($item->isVisibile() == '1'){
 				//	$ordine[] = '<a href="dettaglio-ordine/' . $item->getId() . '"><button type="button" class="display-inherit btn btn-square btn-outline-light btn-sm text-dark">DETTAGLI <i class="icon-zoom-in"></i></button></a>';
 				//}else{
@@ -301,9 +306,10 @@ class OrdiniController extends AbstractController{
 
 		$elencoOrdini = array(
 			'draw'            => time(),
-			'recordsTotal'    => count($datatableorders),
+			'recordsTotal'    => $metadata['items_totali'] ?? 0,
 			'recordsFiltered' => count($datatableorders),
 			'data'            => $datatableorders,
+			'metadata'        => $metadata,
 		);
 
 		return $this->json($elencoOrdini);
