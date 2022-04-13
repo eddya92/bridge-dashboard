@@ -164,6 +164,10 @@
                         </div>
                         <hr/>
                         <div class="col-xs-12">
+                            <table class="m-auto">
+                                <tr id="totaliDatatable">
+                                </tr>
+                            </table>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -251,8 +255,8 @@
 				"sottoposti": $("#idUtenteSelezionato").html(),
 				"ricerca_clienti": document.getElementById('type-clienti').value,
 				"id_esito": document.getElementById('filtriEsito').innerHTML,
-				"data_contratto_inizio": document.getElementById('Data_contratto_dal').value,
-				"data_contratto_fine": document.getElementById('Data_contratto_al').value,
+				"data_contratto_inizio": modificaData(document.getElementById('Data_contratto_dal').value),
+				"data_contratto_fine": modificaData(document.getElementById('Data_contratto_al').value),
 				"tipologia_ordine": document.getElementById('filtriTipologiaOrdine').innerHTML,
 				"items": items,
 			};
@@ -301,8 +305,8 @@
 				"sottoposti": $("#idUtenteSelezionato").html(),
 				"ricerca_clienti": document.getElementById('type-clienti').value,
 				"id_esito": document.getElementById('filtriEsito').innerHTML,
-				"data_contratto_inizio": document.getElementById('Data_contratto_dal').value,
-				"data_contratto_fine": document.getElementById('Data_contratto_al').value,
+				"data_contratto_inizio": modificaData(document.getElementById('Data_contratto_dal').value),
+				"data_contratto_fine": modificaData(document.getElementById('Data_contratto_al').value),
 				"tipologia_ordine": document.getElementById('filtriTipologiaOrdine').innerHTML,
 				"items": items,
 			};
@@ -361,16 +365,28 @@
 				serverPaging: true,
 				serverFiltering: true,
 				serverSorting: true,
+
+			}).on('init.dt', function(e, settings, json){
+
+				var container = document.getElementById('totaliDatatable');
+				Object.values(json.metadata.totali_ordini).forEach(function(value){
+					container.innerHTML =
+						'<td><span class="txt-primary">' + feather.icons['shopping-cart'].toSvg() + '</span></td>'
+						+ '<td class="p-l-10"><h6 class="txt-dark">' + value + '</h6></td>'
+				});
 			})
 			//endregion
 		})
 		//endregion
 
 		function modificaData(data){
-			giorno = data.substr(0, 2);
-			mese = data.substr(3, 2);
-			anno = data.substr(6, 4);
-			return anno + "-" + mese + "-" + giorno;
+			if(data != ''){
+				giorno = data.substr(0, 2);
+				mese = data.substr(3, 2);
+				anno = data.substr(6, 4);
+				return anno + "-" + mese + "-" + giorno;
+			}
+			return "";
 		}
 
 		$("select[name=datatable_responsive_orders_length]").removeClass("form-control");
@@ -427,6 +443,7 @@
 					alert("non è stato possibile eseguire l'operazione,inserite entrambe le date")
 				}
 			}
+			console.log(data_dal, data_al)
 			//endregion
 			azzeraFiltri();
 			aggiungiFiltro(filtro_gruppoDi, filtro_nominativo, iD_esito, data_dal, data_al, tipologia_ordine);

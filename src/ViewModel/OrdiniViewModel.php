@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\ViewModel;
 
+/**
+ *
+ */
 final class OrdiniViewModel{
 	/**
 	 * @param int    $id
@@ -15,8 +18,23 @@ final class OrdiniViewModel{
 	 * @param string $esitoColore
 	 * @param bool   $visibile
 	 * @param string $tipologiaOrdine
+	 * @param array  $metadata
 	 */
-	public function __construct(private int $id, private string $data, private string $codice, private string $user, private float $pc, private string $totale, private string $esito, private string $esitoColore, private bool $visibile, private string $tipologiaOrdine){
+	public function __construct(private int $id, private string $data, private string $codice, private string $user, private float $pc, private string $totale, private string $esito, private string $esitoColore, private bool $visibile, private string $tipologiaOrdine, private array $metadata){
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMetadata() : array{
+		return $this->metadata;
+	}
+
+	/**
+	 * @param array $metadata
+	 */
+	public function setMetadata(array $metadata) : void{
+		$this->metadata = $metadata;
 	}
 
 	/**
@@ -158,6 +176,4 @@ final class OrdiniViewModel{
 	public function setTipologiaOrdine(string $tipologiaOrdine) : void{
 		$this->tipologiaOrdine = $tipologiaOrdine;
 	}
-
-
 }
