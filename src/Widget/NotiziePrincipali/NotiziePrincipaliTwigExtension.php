@@ -17,7 +17,7 @@ final class NotiziePrincipaliTwigExtension extends AbstractExtension{
 		];
 	}
 
-	public function main(string $_locale) : Markup{
-		return new Markup($this->controller->main($_locale)->getContent(), 'UTF-8');
+	public function main(string $locale) : Markup{
+		return new Markup($this->controller->main($locale)->getContent(), 'UTF-8');
 	}
 }

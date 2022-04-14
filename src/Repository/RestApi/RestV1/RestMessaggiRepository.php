@@ -19,13 +19,14 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForMessaggi
+		private int                    $ttlForMessaggi,
+		private string                 $locales,
 	){
 	}
 
-	public function getMessaggi(string $_locale) : ?Generator{
+	public function getMessaggi(string $locale) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggi($_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggi($locale));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -39,15 +40,15 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallMessaggi(string $_locale) : callable{
-		return function(ItemInterface $item) use ($_locale){
+	public function apiCallMessaggi(string $locale) : callable{
+		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio?locale=' . $_locale);
+				->request('GET', '/db-v1/messaggi/messaggio?locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForMessaggi);
-			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $_locale));
+			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $locale));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_MESSAGGGI . $locale)]);
@@ -60,9 +61,9 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		};
 	}
 
-	public function getMessaggio(int $id, string $_locale) : ?MessaggioViewModel{
+	public function getMessaggio(int $id, string $locale) : ?MessaggioViewModel{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $locale));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -76,15 +77,15 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallMessaggio(int $id, string $_locale) : callable{
-		return function(ItemInterface $item) use ($id, $_locale){
+	private function apiCallMessaggio(int $id, string $locale) : callable{
+		return function(ItemInterface $item) use ($id, $locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio/' . $id . '?locale=' . $_locale);
+				->request('GET', '/db-v1/messaggi/messaggio/' . $id . '?locale=' . $locale);
 
 			$item->expiresAfter(45);
-			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $id . "[" . $_locale . "]"));
+			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $id . "[" . $locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_MESSAGGGI)]);
@@ -110,15 +111,15 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		return new MessaggioViewModel($data['id'], $data['data'], $data['mittente'], $data['foto'], $data['da_leggere'], $data['titolo'], $data['testo'], $data['id_messaggio_precedente'], $data['id_messaggio_successivo']);
 	}
 
-	public function apiCallUltimoMessaggio($_locale) : callable{
-		return function(ItemInterface $item) use ($_locale){
+	public function apiCallUltimoMessaggio($locale) : callable{
+		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio' . '?locale=' . $_locale);
+				->request('GET', '/db-v1/messaggi/messaggio' . '?locale=' . $locale);
 
 			$item->expiresAfter(45);
-			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . "[" . $_locale . "]"));
+			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . "[" . $locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_MESSAGGGI)]);
