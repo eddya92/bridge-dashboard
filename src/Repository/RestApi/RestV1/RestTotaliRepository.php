@@ -19,13 +19,14 @@ final class RestTotaliRepository implements TotaliRepository, AuthenticatedRepos
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForTotali
+		private int                    $ttlForTotali,
+		private string                 $locales,
 	){
 	}
 
-	public function getTotali(string $utenza) : ?Generator{
+	public function getTotali(string $utenza, string $locale) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallTotali($utenza));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallTotali($utenza, $locale));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -39,16 +40,15 @@ final class RestTotaliRepository implements TotaliRepository, AuthenticatedRepos
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallTotali(string $utenza) : callable{
-
-		return function(ItemInterface $item) use ($utenza){
+	public function apiCallTotali(string $utenza, string $locale) : callable{
+		return function(ItemInterface $item) use ($locale, $utenza){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/totali?codice_utente_simulato=' . $utenza);
+				->request('GET', '/db-v1/utenti/totali?codice_utente_simulato=' . $utenza . '&locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForTotali);
-			$item->tag($this->authenticatedCacheTag(self::TAG_TOTALI . $utenza));
+			$item->tag($this->authenticatedCacheTag(self::TAG_TOTALI . $utenza . $locale));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_TOTALI)]);

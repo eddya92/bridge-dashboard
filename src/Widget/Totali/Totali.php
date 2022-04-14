@@ -7,14 +7,11 @@ use App\Repository\TotaliRepository;
 use Twig\Environment;
 
 final class Totali{
-
-
 	public function __construct(private Environment $twig, private TotaliRepository $repository){
 	}
 
-	public function main(string $utenza) : string{
-		$totali = $this->repository->getTotali($utenza);
-
+	public function main(string $utenza, string $locale) : string{
+		$totali = $this->repository->getTotali($utenza, $locale);
 
 		if($totali === null){
 			return $this->twig->render('pages/error_widgets/errore_widget_vuoto.html.twig');
