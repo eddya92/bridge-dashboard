@@ -182,17 +182,17 @@
                             <div id="colonnaDatatable" hidden></div>
                             <div id="direzioneDatatable" hidden></div>
                             <table class="row-border hover" id="datatable_responsive_orders">
-								<thead>
-								<tr>
-									<th>{% trans %}Codice{% endtrans %}</th>
-									<th>{% trans %}Livello{% endtrans %}</th>
-									<th>{% trans %}Incaricato{% endtrans %}</th>
-									<th>{% trans %}Qualifica{% endtrans %}</th>
-									<th>{% trans %}E-mail{% endtrans %}</th>
-									<th>{% trans %}Cellulare{% endtrans %}</th>
-									<th>{% trans %}Sponsor{% endtrans %}</th>
-								</tr>
-								</thead>
+                                <thead>
+                                <tr>
+                                    <th>{% trans %}Codice{% endtrans %}</th>
+                                    <th>{% trans %}Livello{% endtrans %}</th>
+                                    <th>{% trans %}Incaricato{% endtrans %}</th>
+                                    <th>{% trans %}Qualifica{% endtrans %}</th>
+                                    <th>{% trans %}E-mail{% endtrans %}</th>
+                                    <th>{% trans %}Cellulare{% endtrans %}</th>
+                                    <th>{% trans %}Sponsor{% endtrans %}</th>
+                                </tr>
+                                </thead>
                             </table>
                         </div>
                         <div class="clearfix"></div>
@@ -422,7 +422,7 @@
 			};
 
 			var query = "";
-			for (var key in requestData){
+			for(var key in requestData){
 				if(query != ""){
 					query += "&";
 				}
@@ -446,6 +446,13 @@
 				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
+					{orderable: true, targets: 0},
+					{orderable: true, targets: 1},
+					{orderable: false, targets: 2},
+					{orderable: true, targets: 3},
+					{orderable: false, targets: 4},
+					{orderable: false, targets: 5},
+					{orderable: true, targets: 6},
 					{responsivePriority: 1, targets: 0},
 					{responsivePriority: 2, targets: 2}
 				],
@@ -472,8 +479,8 @@
 			};
 
 			var query = "";
-			for (var key in requestData) {
-				if (query != "") {
+			for(var key in requestData){
+				if(query != ""){
 					query += "&";
 				}
 				query += key + "=" + encodeURIComponent(requestData[key]);
