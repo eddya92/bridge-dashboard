@@ -105,7 +105,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			return null;
 		}
 
-		$data = $results['data'];
+		$data = $results['data'][0];
 
 		return new MessaggioViewModel($data['id'], $data['data'], $data['mittente'], $data['foto'], $data['da_leggere'], $data['titolo'], $data['testo'], $data['id_messaggio_precedente'], $data['id_messaggio_successivo']);
 	}
@@ -115,7 +115,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio/' . '?locale=' . $_locale . '&limit=' . '1' . '&direzione=' . 'desc');
+				->request('GET', '/db-v1/messaggi/messaggio' . '?locale=' . $_locale);
 
 			$item->expiresAfter(45);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . "[" . $_locale . "]"));

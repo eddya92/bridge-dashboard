@@ -19,6 +19,7 @@ final class NotiziePrincipali extends AbstractController{
 	public function main(string $_locale) : Response{
 		$messaggio = $this->messaggiRepository->getUltimoMessaggio($_locale);
 
+
 		if($messaggio == null){
 			$messaggio = [];
 		}
