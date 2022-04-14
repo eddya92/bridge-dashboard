@@ -68,6 +68,7 @@ class Authenticator implements RemoteAuthenticator{
 	}
 
 	public function authenticateByTokenSSO(string $token) : Token{
+		$token = urldecode($token);
 		try{
 			$response = $this->connection
 				->client()
