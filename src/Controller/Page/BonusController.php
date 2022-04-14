@@ -33,6 +33,7 @@ class BonusController extends AbstractController{
 	 */
 	#[Route('/{_locale}/bonus/{anno}', name: 'bonus', methods: ['GET'])]
 	public function bonusView(string $_locale, int $anno = 0) : Response{
+
 		//region creo gli anni da '$dataInizio' ad '$annoAttuale'FR
 		$annoAttuale = date('Y');
 		$dataInizio = date('2020-01-01');
@@ -161,7 +162,7 @@ class BonusController extends AbstractController{
 		}
 
 		$elencoBonus = array(
-			'draw'            => 1,
+			'draw'            => time(),
 			'recordsTotal'    => 12,
 			'recordsFiltered' => 12,
 			'data'            => $datatablesBonus,
