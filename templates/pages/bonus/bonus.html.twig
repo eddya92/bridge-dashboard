@@ -245,12 +245,23 @@
 		$(document).ready(function(){
 			$('#datatable_responsive_bonus').DataTable({
 				responsive: true,
+				processing: true,
+				serverSide: true,
+				ordering: true,
+				searching: false,
 				ajax: "{{ path('bonus-ajax') }}/{{ annoSelezionato }}",
 				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"<"clear">>',
 				order: [7, 'desc'],
 				pageLength: 25,
 				columnDefs: [
+					{orderable: true, targets: 0},
+					{orderable: true, targets: 1},
+					{orderable: true, targets: 2},
+					{orderable: true, targets: 3},
+					{orderable: true, targets: 4},
+					{orderable: true, targets: 5},
+					{orderable: true, targets: 6},
 					{
 						targets: 3,
 						className: 'dt-right'
@@ -275,7 +286,11 @@
 					{responsivePriority: 1, targets: 0},
 					{responsivePriority: 2, targets: 6},
 					{responsivePriority: 3, targets: 1}
-				]
+				],
+				pageSize: 12,
+				serverPaging: true,
+				serverFiltering: true,
+				serverSorting: true,
 			});
 			//endregion
 
