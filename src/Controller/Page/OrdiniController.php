@@ -290,6 +290,7 @@ class OrdiniController extends AbstractController{
 				$ordine[] = $item->getCodice();
 				$ordine[] = $item->getUser();
 				$ordine[] = $item->getPc();
+				$ordine[] = $item->getCv();
 				$ordine[] = $item->getTotale();
 				$ordine[] = $item->getTipologiaOrdine();
 				$ordine[] = '<span style="color:' . $item->getEsitoColore() . ';">' . $item->getEsito() . '</span>';

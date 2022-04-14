@@ -155,6 +155,7 @@
                                     <th>{% trans %}Codice{% endtrans %}</th>
                                     <th>{% trans %}Incaricato{% endtrans %}</th>
                                     <th> {% trans %}PC{% endtrans %}</th>
+                                    <th> {% trans %}CV{% endtrans %}</th>
                                     <th>{% trans %}Totale{% endtrans %}</th>
                                     <th>{% trans %}Tipologia ordine{% endtrans %}</th>
                                     <th>{% trans %}Esito{% endtrans %}</th>
@@ -337,13 +338,14 @@
 				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
-					{orderable: false, targets: 0},
-					{orderable: true, targets: 1},
+					{orderable: true, targets: 0},
+					{orderable: false, targets: 1},
 					{orderable: false, targets: 2},
 					{orderable: true, targets: 3},
-					{orderable: false, targets: 4},
-					{orderable: false, targets: 5},
+					{orderable: true, targets: 4},
+					{orderable: true, targets: 5},
 					{orderable: false, targets: 6},
+					{orderable: false, targets: 7},
 					{
 						targets: 5,
 						className: 'dt-right'
@@ -361,7 +363,7 @@
 					{responsivePriority: 1, targets: 5}
 				],
 				pageSize: items,
-				order: [[1, 'asc']],
+				order: [[0, 'desc']],
 				serverPaging: true,
 				serverFiltering: true,
 				serverSorting: true,

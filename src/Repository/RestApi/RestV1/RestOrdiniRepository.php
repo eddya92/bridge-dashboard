@@ -25,7 +25,6 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 	}
 
 	public function getOrdini(string $sottoposti, string $clienti, string $esito, string $data_dal, string $data_al, string $tipolgia_ordine, string $colonna, string $ordinamento, string $items, string $pag) : ?Generator{
-		//dd($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento, $items, $pag);
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento, $items, $pag));
 			$results = Json::decode($cached);
@@ -34,7 +33,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		}
 
 		foreach($results['data'] as $item){
-			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
+			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] = 0.0 ,$item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
 		}
 	}
 
