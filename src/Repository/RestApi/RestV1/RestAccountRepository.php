@@ -71,7 +71,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				->request('GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForAccount);
-			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT . $codice . $locale));
+			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT . $codice . "[" . $locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ACCOUNT)]);
@@ -130,6 +130,11 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$message = $exception->getMessage();
 			$message = Error::format($message);
 			throw new Exception($message);
+		}
+
+		$lingue = explode(',', $this->locales);
+		foreach($lingue as $lingua){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ACCOUNT . "[" . $lingua . "]")]);
 		}
 
 		if($response->getStatusCode() != 200){
@@ -319,7 +324,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				->request('GET', '/db-v1/utenti/residenza' . '?locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForAccount);
-			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT . '[' . $locale . ']'));
+			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT_RESIDENZA . '[' . $locale . ']'));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INDIRIZZI_SPEDIZIONE)]);
@@ -390,7 +395,10 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			throw new Exception($message);
 		}
 
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ACCOUNT)]);
+		$lingue = explode(',', $this->locales);
+		foreach($lingue as $lingua){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ACCOUNT_RESIDENZA . "[" . $lingua . "]")]);
+		}
 
 		if($response->getStatusCode() != 200){
 			throw new Exception($response->getReasonPhrase());
