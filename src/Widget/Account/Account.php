@@ -14,12 +14,17 @@ final class Account{
 	){
 	}
 
-	public function main(string $codice, string $template = '', string $locale) : string{
+	public function main(string $codice, string $template = '', string $locale, bool $simulazione) : string{
 		$template_twig = 'widgets/account/account.html.twig';
 		if($template == 'sponsor'){
 			$template_twig = 'widgets/account/sponsor.html.twig';
 		}
-		$account = $this->repository->getAccount($codice, $locale);
+		if($simulazione){
+			$account = $this->repository->getAccount($codice, $locale);
+			$account = $this->repository->getAccount($account->getSuperiore(), $locale);
+		}else{
+			$account = $this->repository->getAccount($codice, $locale);
+		}
 
 		if($account != null){
 			return $this->twig->render(

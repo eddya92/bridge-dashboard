@@ -17,7 +17,7 @@ final class AccountTwigExtension extends AbstractExtension{
 		];
 	}
 
-	public function main(string $codice, string $template = '',string $locale) : Markup{
-		return new Markup($this->widget->main($codice, $template,$locale), 'UTF-8');
+	public function main(string $codice, string $template = '', string $locale, bool $simulazione) : Markup{
+		return new Markup($this->widget->main($codice, $template, $locale, $simulazione), 'UTF-8');
 	}
 }

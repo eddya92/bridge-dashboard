@@ -76,8 +76,14 @@
                     </div-->
                     <!-- endregion Carriera -->
                     <!-- region Sponsor -->
+
                     <div class="col-xl-5 xl-50 news box-col-6">
-                        {{ account(superiore, 'sponsor',app.request.locale()) }}
+                        {% if(utenza != '') %}
+                            {{ account(utenza, 'sponsor',app.request.locale(),true) }}
+                        {% else %}
+                            {{ account(superiore, 'sponsor',app.request.locale(),false) }}
+                        {% endif %}
+
                     </div>
                     <!-- endregion Sponsor -->
                 </div>

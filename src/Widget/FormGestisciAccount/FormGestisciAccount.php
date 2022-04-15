@@ -18,7 +18,7 @@ final class FormGestisciAccount{
 		$oblio = null;
 		$error_msg = '';
 		try{
-			$account = $this->accountRepository->getAccount($codice, $locale);
+			$account = $this->accountRepository->getAccount($codice, $locale, '');
 			$oblio = $account->getOblio();
 		}catch(\Exception $e){
 			$error_msg = $e->getMessage();

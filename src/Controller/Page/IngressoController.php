@@ -43,7 +43,7 @@ final class IngressoController extends AbstractController{
 	 */
 	#[Route('/{_locale}/ingresso{utenza}', name: 'ingresso', methods: ['GET'], defaults: ['utenza' => ''])]
 	public function ingresso(string $_locale, Request $request, string $utenza) : Response{
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale, '');
 
 		if($account == null){
 			return $this->redirectToRoute('logout');
@@ -73,7 +73,6 @@ final class IngressoController extends AbstractController{
 				$articoliPiuVenduti[] = $ultimi;
 			}
 
-
 			if($superiore == null){
 				$superiore = [];
 			}
@@ -89,7 +88,7 @@ final class IngressoController extends AbstractController{
 			);
 		}else{
 			if($utenza){
-				$account = $this->accountRepository->getAccount($utenza, $_locale);
+				$account = $this->accountRepository->getAccount($utenza, $_locale,'');
 			}
 			$superiore = $account->getSuperiore();
 			$utenza = $request->get('utenza', '');
