@@ -20,13 +20,14 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForSitoPersonale
+		private int                    $ttlForSitoPersonale,
+		private string                 $locales,
 	){
 	}
 
-	public function getSitoPersonale() : ?SitoPersonaleViewModel{
+	public function getSitoPersonale(string $locale) : ?SitoPersonaleViewModel{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSitoPersonale());
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSitoPersonale($locale));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -40,15 +41,15 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallSitoPersonale() : callable{
-		return function(ItemInterface $item){
+	public function apiCallSitoPersonale(string $locale) : callable{
+		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()
-				->withAuthentication($this->authenticationToken())
+				->withAuthentication($this->authenticationToken($locale))
 				->client()
 				->request('GET', '/db-v1/utenti/sito-personale');
 
 			$item->expiresAfter($this->ttlForSitoPersonale);
-			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE));
+			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE . "[" . $locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_SITO_PERSONALE)]);
@@ -78,16 +79,16 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 				->client()
 				->request('POST', '/db-v1/utenti/sito-personale', [
 					'form_params' => [
-						'nominativo'  => $titolo,
-						'descrizione' => $descrizione,
-						'cellulare'   => $telefono,
-						'email'       => $email,
-						'facebook'    => $facebook,
-						'instagram'   => $instagram,
-						'twitter'     => $twitter,
-						'youtube'     => $youtube,
-						'immagine'    => $immagine['content'],
-						'nomeImmagine' => $immagine['name']
+						'nominativo'   => $titolo,
+						'descrizione'  => $descrizione,
+						'cellulare'    => $telefono,
+						'email'        => $email,
+						'facebook'     => $facebook,
+						'instagram'    => $instagram,
+						'twitter'      => $twitter,
+						'youtube'      => $youtube,
+						'immagine'     => $immagine['content'],
+						'nomeImmagine' => $immagine['name'],
 					],
 				]);
 		}catch(Throwable $exception){
@@ -97,7 +98,10 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 		}
 
 		//per invalidarlo
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_SITO_PERSONALE)]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_SITO_PERSONALE . "[" . $locale . "]")]);
+		}
 
 		if($response->getStatusCode() != 200){
 			throw new Exception($response->getReasonPhrase());
@@ -106,9 +110,9 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 		return [true, ''];
 	}
 
-	public function getMinisito(string $uri) : ?SitoPersonaleViewModel{
+	public function getMinisito(string $locale, string $uri) : ?SitoPersonaleViewModel{
 		try{
-			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallMinisito($uri));
+			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallMinisito($locale, $uri));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -122,13 +126,14 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallMinisito(string $uri) : callable{
-		return function(ItemInterface $item) use ($uri){
+	public function apiCallMinisito(string $locale, string $uri) : callable{
+		return function(ItemInterface $item) use ($locale, $uri){
 			$response = $this->restApiConnection()
 				->client()
-				->request('GET', '/db-v1/utenti/minisito?minisito=' . $uri);
+				->request('GET', '/db-v1/utenti/minisito?minisito=' . $uri . '&locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForSitoPersonale);
+			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE  . "[" . $locale . "]"));
 
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());

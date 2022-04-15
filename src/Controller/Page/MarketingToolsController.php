@@ -131,8 +131,8 @@ class MarketingToolsController extends AbstractController{
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 	 */
 	#[Route('/{_locale}/sito-personale', name: 'sito-personale', methods: ['GET'])]
-	public function sitoPersonaleView(){
-		$sitoPersonale = $this->sitoPersonaleRepository->getSitoPersonale();
+	public function sitoPersonaleView(string $_locale){
+		$sitoPersonale = $this->sitoPersonaleRepository->getSitoPersonale($_locale);
 
 		if($sitoPersonale != null){
 			return $this->render('pages/marketing_tools/sito_personale.html.twig',
@@ -188,9 +188,9 @@ class MarketingToolsController extends AbstractController{
 	/**
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/website/{uri}', name: 'minisito', methods: ['GET'])]
-	public function minisito(string $uri){
-		$sitoPersonale = $this->sitoPersonaleRepository->getMinisito($uri);
+	#[Route('/{_locale}/website/{uri}', name: 'minisito', methods: ['GET'])]
+	public function minisito(string $_locale, string $uri){
+		$sitoPersonale = $this->sitoPersonaleRepository->getMinisito($_locale, $uri);
 
 		if($sitoPersonale != null){
 			return $this->render('pages/marketing_tools/minisito.html.twig',
