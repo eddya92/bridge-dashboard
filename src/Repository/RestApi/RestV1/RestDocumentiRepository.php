@@ -21,7 +21,8 @@ final class RestDocumentiRepository implements DocumentiRepository, Authenticate
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForDocumenti
+		private int                    $ttlForDocumenti,
+		private string                 $locales,
 	){
 	}
 

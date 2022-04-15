@@ -19,7 +19,8 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForTop5
+		private int                    $ttlForTop5,
+		private string                 $locales,
 	){
 	}
 

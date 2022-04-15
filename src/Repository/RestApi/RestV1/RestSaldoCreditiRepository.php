@@ -18,7 +18,8 @@ final class RestSaldoCreditiRepository implements SaldoCreditiRepository, Authen
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForSaldoCrediti
+		private int                    $ttlForSaldoCrediti,
+		private string                 $locales,
 
 	){
 	}

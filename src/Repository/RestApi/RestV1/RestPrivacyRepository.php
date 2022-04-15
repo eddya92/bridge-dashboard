@@ -18,7 +18,10 @@ use Throwable;
 final class RestPrivacyRepository implements PrivacyRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
 
-	public function __construct(private TagAwareCacheInterface $cache, private int $ttlForPrivacy){
+	public function __construct(
+		private TagAwareCacheInterface $cache,
+		private int $ttlForPrivacy,
+	){
 	}
 
 	public function getPrivacy() : Generator{

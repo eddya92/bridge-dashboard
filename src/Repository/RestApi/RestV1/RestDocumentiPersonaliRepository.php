@@ -21,7 +21,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForDocumentiPersonali
+		private int                    $ttlForDocumentiPersonali,
+		private string                 $locales,
 	){
 	}
 
@@ -87,6 +88,7 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
 		}
+
 
 		return [true, ''];
 	}

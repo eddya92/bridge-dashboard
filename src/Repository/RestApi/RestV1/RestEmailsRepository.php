@@ -20,7 +20,8 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForEmailInviate
+		private int                    $ttlForEmailInviate,
+		private string                 $locales,
 	){
 	}
 

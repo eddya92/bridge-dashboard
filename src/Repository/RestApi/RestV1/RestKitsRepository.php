@@ -19,7 +19,8 @@ final class RestKitsRepository implements KitsRepository, AuthenticatedRepositor
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForkit
+		private int                    $ttlForkit,
+		private string                 $locales,
 	){
 	}
 

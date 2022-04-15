@@ -18,7 +18,8 @@ final class RestSponsorRepository implements SponsorRepository, AuthenticatedRep
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForSponsor
+		private int                    $ttlForSponsor,
+		private string                 $locales,
 	){
 	}
 

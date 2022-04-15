@@ -21,6 +21,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	public function __construct(
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForCarrieraPersonale,
+		private string                 $locales,
 	){
 	}
 

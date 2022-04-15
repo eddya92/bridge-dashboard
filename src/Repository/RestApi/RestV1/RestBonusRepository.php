@@ -19,7 +19,8 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForBonus
+		private int                    $ttlForBonus,
+		private string                 $locales,
 	){
 	}
 

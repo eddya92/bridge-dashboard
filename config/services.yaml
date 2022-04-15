@@ -152,27 +152,32 @@ services:
     class: App\Repository\RestApi\RestV1\RestDatiFiscaliRepository
     arguments:
       $ttlForDatiFiscali: '%env(int:TTL_REPO_DATIFISCALI)%'
+      $locales: '%env(string:LOCALES)%'
 
 
   App\Repository\ArticoliRepository:
     class: App\Repository\RestApi\RestV1\RestArticoliRepository
     arguments:
       $ttlForArticle: '%env(int:TTL_REPO_ARTICLE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\BonusRepository:
     class: App\Repository\RestApi\RestV1\RestBonusRepository
     arguments:
       $ttlForBonus: '%env(int:TTL_REPO_BONUS)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\CarrelloRepository:
     class: App\Repository\RestApi\RestV1\RestCarrelloRepository
     arguments:
       $ttlForCarrello: '%env(int:TTL_REPO_CARRELLO)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\CarrieraPersonaleRepository:
     class: App\Repository\RestApi\RestV1\RestCarrieraPersonaleRepository
     arguments:
       $ttlForCarrieraPersonale: '%env(int:TTL_REPO_CARRIERAPERSONALE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\ClientiRepository:
     class: App\Repository\RestApi\RestV1\RestClientiRepository
@@ -183,48 +188,57 @@ services:
     class: App\Repository\RestApi\RestV1\RestContattiRepository
     arguments:
       $ttlForContatti: '%env(int:TTL_REPO_CONTATTI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\DocumentiRepository:
     class: App\Repository\RestApi\RestV1\RestDocumentiRepository
     arguments:
       $ttlForDocumenti: '%env(int:TTL_REPO_DOCUMENTI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\FilesRepository:
     class: App\Repository\RestApi\RestV1\RestFilesRepository
     arguments:
       $ttlForDirectories: '%env(int:TTL_REPO_FILE)%'
+      $locales: '%env(string:LOCALES)%'
 
 
   App\Repository\DocumentiPersonaliRepository:
     class: App\Repository\RestApi\RestV1\RestDocumentiPersonaliRepository
     arguments:
       $ttlForDocumentiPersonali: '%env(int:TTL_REPO_DOCUMENTI_PERSONALI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\EmailsRepository:
     class: App\Repository\RestApi\RestV1\RestEmailsRepository
     arguments:
       $ttlForEmailInviate: '%env(int:TTL_REPO_EMAILINVIATE)%'
+      $locales: '%env(string:LOCALES)%'
 
 
   App\Repository\EwalletRepository:
     class: App\Repository\RestApi\RestV1\RestEwalletRepository
     arguments:
       $ttlForEwallet: '%env(int:TTL_REPO_EWALLET)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\FiltriRepository:
     class: App\Repository\RestApi\RestV1\RestFiltriRepository
     arguments:
       $ttlForFiltri: '%env(int:TTL_REPO_FILTRI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\IndirizziRepository:
     class: App\Repository\RestApi\RestV1\RestIndirizziRepository
     arguments:
       $ttlForIndirizzi: '%env(int:TTL_REPO_INDIRIZZISPEDIZIONE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\AndamentoAnnualeRepository:
     class: App\Repository\RestApi\RestV1\RestAndamentoCarrieraAnnualeRepository
     arguments:
       $ttlForAndamentoCarrieraAnnuale: '%env(int:TTL_REPO_ANDAMENTOCARRIERAANNUALE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\InquadramentoFiscaleRepository:
     class: App\Repository\RestApi\RestV1\RestInquadramentoFiscaleRepository
@@ -236,75 +250,90 @@ services:
     class: App\Repository\RestApi\RestV1\RestKitsRepository
     arguments:
       $ttlForkit: '%env(int:TTL_REPO_KIT)%'
+      $locales: '%env(string:LOCALES)%'
 
 
   App\Repository\MessaggiRepository:
     class: App\Repository\RestApi\RestV1\RestMessaggiRepository
     arguments:
       $ttlForMessaggi: '%env(int:TTL_REPO_MESSAGGI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\ModalitaPagamentoRepository:
     class: App\Repository\RestApi\RestV1\RestModalitaPagamentoRepository
     arguments:
       $ttlForMetodoPagamento: '%env(int:TTL_REPO_METODOPAGAMENTO)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\ModalitaSpedizioneRepository:
     class: App\Repository\RestApi\RestV1\RestModalitaSpedizioneRepository
     arguments:
       $ttlForModalitaSpedizione: '%env(int:TTL_REPO_MODALITASPEDIZIONE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\OrdiniRepository:
     class: App\Repository\RestApi\RestV1\RestOrdiniRepository
     arguments:
       $ttlForOrdini: '%env(int:TTL_REPO_ORDINI)%'
+      #$locales: '%env(string:LOCALES)%'
 
   App\Repository\SaldoCreditiRepository:
     class: App\Repository\RestApi\RestV1\RestSaldoCreditiRepository
     arguments:
       $ttlForSaldoCrediti: '%env(int:TTL_REPO_SALDOCREDITI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\StoresRepository:
     class: App\Repository\RestApi\RestV1\RestStoresRepository
     arguments:
       $ttlForStores: '%env(int:TTL_REPO_STORES)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\SitoPersonaleRepository:
     class: App\Repository\RestApi\RestV1\RestSitoPersonaleRepository
     arguments:
       $ttlForSitoPersonale: '%env(int:TTL_REPO_SITOPERSONALE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\SponsorRepository:
     class: App\Repository\RestApi\RestV1\RestSponsorRepository
     arguments:
       $ttlForSponsor: '%env(int:TTL_REPO_SPONSOR)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\Top5Repository:
     class: App\Repository\RestApi\RestV1\RestTop5Repository
     arguments:
       $ttlForTop5: '%env(int:TTL_TOP5)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\TotaliRepository:
     class: App\Repository\RestApi\RestV1\RestTotaliRepository
     arguments:
       $ttlForTotali: '%env(int:TTL_REPO_TOTALI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\UtentiRepository:
     class: App\Repository\RestApi\RestV1\RestUtentiRepository
     arguments:
       $ttlForUtenti: '%env(int:TTL_REPO_UTENTI)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\UtentiStrutturaRepository:
     class: App\Repository\RestApi\RestV1\RestUtentiStrutturaRepository
     arguments:
       $ttlForUtentiStruttura: '%env(int:TTL_REPO_UTENTESTRUTTURA)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\VenditeRepository:
     class: App\Repository\RestApi\RestV1\RestVenditeRepository
     arguments:
       $ttlForVendite: '%env(int:TTL_REPO_VENDITE)%'
+      $locales: '%env(string:LOCALES)%'
 
   App\Repository\ReteRepository:
     class: App\Repository\RestApi\RestV1\RestReteRepository
     arguments:
       $ttlForRete: '%env(int:TTL_REPO_RETE)%'
+      $locales: '%env(string:LOCALES)%'
   #endregion

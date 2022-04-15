@@ -21,7 +21,8 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 	public function __construct(
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForDatiFiscali,
-		private RequestStack           $requestStack
+		private RequestStack           $requestStack,
+		private string                 $locales,
 	){
 	}
 

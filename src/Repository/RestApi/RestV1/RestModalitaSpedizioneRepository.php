@@ -20,7 +20,8 @@ final class RestModalitaSpedizioneRepository implements ModalitaSpedizioneReposi
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForModalitaSpedizione
+		private int                    $ttlForModalitaSpedizione,
+		private string                 $locales,
 	){
 	}
 

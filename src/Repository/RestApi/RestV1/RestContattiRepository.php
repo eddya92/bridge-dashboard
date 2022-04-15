@@ -21,7 +21,8 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 	public function __construct(
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForContatti,
-		private RequestStack           $requestStack
+		private RequestStack           $requestStack,
+		private string                 $locales,
 	){
 	}
 

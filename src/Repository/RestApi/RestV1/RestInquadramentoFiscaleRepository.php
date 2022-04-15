@@ -81,9 +81,9 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 				],
 			]);
 
-		$lingue = explode(',', $this->locales);
-		foreach($lingue as $lingua){
-			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INQUADRAMENTO_FISCALE . "[" . $lingua . "]")]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INQUADRAMENTO_FISCALE . "[" . $locale . "]")]);
 		}
 
 		if($response->getStatusCode() != 200){

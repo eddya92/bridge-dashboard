@@ -19,7 +19,8 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForAndamentoCarrieraAnnuale
+		private int                    $ttlForAndamentoCarrieraAnnuale,
+		private string                 $locales,
 	){
 	}
 

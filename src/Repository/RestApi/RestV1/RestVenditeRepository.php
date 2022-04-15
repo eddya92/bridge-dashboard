@@ -19,7 +19,8 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForVendite
+		private int                    $ttlForVendite,
+		private string $locales,
 	){
 	}
 

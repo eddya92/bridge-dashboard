@@ -18,7 +18,8 @@ final class RestClientiRepository implements ClientiRepository, AuthenticatedRep
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForClienti
+		private int                    $ttlForClienti,
+		private string                 $locales,
 	){
 	}
 

@@ -19,7 +19,8 @@ final class RestFilesRepository implements FilesRepository, AuthenticatedReposit
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForDirectories
+		private int                    $ttlForDirectories,
+		private string                 $locales,
 
 	){
 	}

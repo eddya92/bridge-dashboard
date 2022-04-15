@@ -19,7 +19,8 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForUtentiStruttura
+		private int                    $ttlForUtentiStruttura,
+		private string                 $locales,
 	){
 	}
 

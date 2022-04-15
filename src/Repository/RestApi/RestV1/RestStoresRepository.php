@@ -19,7 +19,8 @@ final class RestStoresRepository implements StoresRepository, AuthenticatedRepos
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForStores
+		private int                    $ttlForStores,
+		private string                 $locales,
 	){
 	}
 

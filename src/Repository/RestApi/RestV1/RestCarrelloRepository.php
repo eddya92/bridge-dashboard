@@ -19,7 +19,8 @@ final class RestCarrelloRepository implements CarrelloRepository, AuthenticatedR
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForCarrello
+		private int                    $ttlForCarrello,
+		private string                 $locales,
 	){
 	}
 

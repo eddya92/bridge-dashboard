@@ -21,7 +21,8 @@ final class RestArticoliRepository implements ArticoliRepository, AuthenticatedR
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForArticle
+		private int                    $ttlForArticle,
+		private string                 $locales,
 	){
 	}
 

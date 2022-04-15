@@ -19,7 +19,8 @@ final class RestUtentiRepository implements UtentiRepository, AuthenticatedRepos
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForUtenti
+		private int                    $ttlForUtenti,
+		private string                 $locales,
 
 	){
 	}

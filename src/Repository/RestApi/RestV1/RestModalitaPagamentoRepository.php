@@ -19,7 +19,8 @@ final class RestModalitaPagamentoRepository implements ModalitaPagamentoReposito
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForMetodoPagamento
+		private int                    $ttlForMetodoPagamento,
+		private string                 $locales,
 	){
 	}
 

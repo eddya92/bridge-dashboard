@@ -19,7 +19,8 @@ final class RestEwalletRepository implements EwalletRepository, AuthenticatedRep
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForEwallet
+		private int                    $ttlForEwallet,
+		private string                 $locales,
 	){
 	}
 

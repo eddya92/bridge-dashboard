@@ -24,7 +24,8 @@ final class RestFiltriRepository implements FiltriRepository, AuthenticatedRepos
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private                        $ttlForFiltri
+		private                        $ttlForFiltri,
+		private string                 $locales,
 
 	){
 	}
