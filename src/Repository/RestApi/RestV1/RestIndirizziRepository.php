@@ -19,7 +19,8 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 
 	public function __construct(
 		private TagAwareCacheInterface $cache,
-		private int                    $ttlForIndirizzi
+		private int                    $ttlForIndirizzi,
+		private string                 $locales,
 	){
 	}
 
@@ -147,8 +148,10 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
 		}
-
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INDIRIZZI)]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INDIRIZZI . "[" . $locale . "]")]);
+		}
 
 		return [true, ''];
 	}
@@ -173,7 +176,10 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 			return [false, $response->getReasonPhrase()];
 		}
 
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INDIRIZZI)]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_INDIRIZZI . "[" . $locale . "]")]);
+		}
 
 		return [true, ''];
 	}
