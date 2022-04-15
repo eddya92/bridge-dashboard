@@ -126,7 +126,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 				->request('GET', '/db-v1/utenti/albero?gruppo_di=' . $idUtente . '&livello=' . $livello . '&mese=' . $mese . '&punti=' . $punti . '&idVista=' . $idVista . '&locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForRete);
-			$item->tag($this->authenticatedCacheTag(self::TAG_ALBERI . $idVista));
+			$item->tag($this->authenticatedCacheTag(self::TAG_ALBERI . $idVista . "[" . $locale . "]"));
 
 			if($response->getStatusCode() != 200){
 				return [false, $response->getReasonPhrase()];
