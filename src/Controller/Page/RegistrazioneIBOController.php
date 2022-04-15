@@ -71,7 +71,7 @@ final class RegistrazioneIBOController extends AbstractController{
 			return $this->redirectToRoute('error404');
 		}
 		$residenza = $this->accountRepository->getResidenza($_locale);
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale, '');
 		$nazione = $account->getNazioneResidenza();
 		$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
 		$contatti = $this->contattiRepository->getContatti($_locale);
