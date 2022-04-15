@@ -34,7 +34,7 @@ class LaTuaReteController extends AbstractController{
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	#[Route('/{_locale}/albero-unilevel', name: 'albero-unilevel', methods: ['GET', 'POST'])]
-	public function alberoUnilevel(Request $request) : Response{
+	public function alberoUnilevel(string $_locale, Request $request) : Response{
 		$id = (int) $request->get('idVista', 0);
 
 		if($request->isMethod('GET')){
@@ -47,7 +47,7 @@ class LaTuaReteController extends AbstractController{
 
 		$viste = [];
 		$vista_richiesta = null;
-		$vista_generator = $this->reteRepository->getAlberoViste();
+		$vista_generator = $this->reteRepository->getAlberoViste($_locale);
 		$count = 0;
 		if($vista_generator != null){
 			foreach($vista_generator as $vista){
@@ -197,14 +197,14 @@ class LaTuaReteController extends AbstractController{
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	#[Route('/{_locale}/albero-unilevel-ajax', name: 'albero-unilevel-ajax', methods: ['GET'])]
-	public function alberoUnilevelAjax(Request $request){
+	public function alberoUnilevelAjax(string $_locale, Request $request){
 		$idUtente = (int) $request->query->get('idUtente', 0);
 		$idVista = (int) $request->query->get('idVista', 0);
 		$livello = (int) $request->query->get('livello', 0);
 		$mese = trim($request->query->get('mese', date('Y-m')));
 		$punti = trim($request->query->get('punti', 'pv_mensili'));
 
-		[$result, $data] = $this->reteRepository->getAlberoUnilevel($idUtente, $livello, $mese, $punti, $idVista);
+		[$result, $data] = $this->reteRepository->getAlberoUnilevel($idUtente, $livello, $mese, $punti, $idVista,$_locale);
 		if($result){
 			return $this->json($data);
 		}else{
@@ -366,7 +366,7 @@ class LaTuaReteController extends AbstractController{
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 
 		//dd($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items,$pag);
-		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items,$pag);
+		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items, $pag);
 		$struttura = [];
 
 		if($strutturaGenerator != null){
@@ -377,8 +377,7 @@ class LaTuaReteController extends AbstractController{
 				//array_push($array, $item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor());
 				$struttura[] = array_values($array[0]);
 			}
-		}
-		 ;
+		};
 
 		$jsonDatatableStruttura = array(
 			'draw'            => time(),
@@ -390,102 +389,102 @@ class LaTuaReteController extends AbstractController{
 		return $this->json($jsonDatatableStruttura);
 	}
 
-//	public function strutturaPersonaleAjaxs(Request $request){
-//		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
-//
-//		$filtroGruppoDi = $request->get('filtro_gruppoDi', '');
-//		$filtroNominativo = $request->get('filtro_nominativo', '');
-//		$filtroEmail = trim($request->get('filtro_email', ''));
-//		$filtroCellulare = trim($request->get('filtro_cellulare', ''));
-//		$filtroPeriodo = trim($request->get('filtro_periodo', ''));
-//		$filtroDiretti = ($request->get('filtro_diretti', 'false'));
-//
-//		switch($order[0]['column']){
-//			case 0:
-//				$filtroColonnaOrdinamento = 'codice';
-//				break;
-//			case 1:
-//				$filtroColonnaOrdinamento = 'livello';
-//				break;
-//			case 2:
-//				$filtroColonnaOrdinamento = 'incaricato';
-//				break;
-//			case 3:
-//				$filtroColonnaOrdinamento = 'qualifica';
-//				break;
-//			case 4:
-//				$filtroColonnaOrdinamento = 'email';
-//				break;
-//			case 5:
-//				$filtroColonnaOrdinamento = 'cellulare';
-//				break;
-//			case 6:
-//				$filtroColonnaOrdinamento = 'sponsor';
-//				break;
-//			default:
-//				$filtroColonnaOrdinamento = 'codice';
-//		}
-//
-//		switch($order[0]['dir']){
-//			case 'asc':
-//				$filtroDirezioneOrdinamento = 'asc';
-//				break;
-//			case 'desc':
-//				$filtroDirezioneOrdinamento = 'desc';
-//				break;
-//			default:
-//				$filtroDirezioneOrdinamento = 'asc';
-//		}
-//
-//		$filtroColonnaOrdinamento = strtoupper($filtroColonnaOrdinamento);
-//		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
-//
-//		$items = $request->get('items', 10);
-//		$tipologiaUtenza = $request->get('filtro_tipoligiaUtente', '');
-//		//dd($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
-//		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
-//		$struttura = [];
-//
-//		if($strutturaGenerator != null){
-//			foreach($strutturaGenerator as $item){
-//				$array = [];
-//
-//				$array[] = [$item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor()];
-//				//array_push($array, $item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor());
-//				$struttura[] = array_values($array[0]);
-//			}
-//		}
-//
-//		for($i = 1; $i <= $items; $i++){
-//			$struttura[] = [
-//				'00000' . $i,
-//				'' . $i,
-//				'Nome' . $i,
-//				'Qualifica' . $i + 10,
-//				'Email' . $i,
-//				'3330000000' . $i,
-//				'Nome' . $i + 20,
-//			];
-//		}
-//
-//		usort($struttura, function($a, $b) use ($order){
-//			if($order[0]['dir'] == 'asc'){
-//				return strcmp($a[$order[0]['column']], $b[$order[0]['column']]);
-//			}else{
-//				return strcmp($b[$order[0]['column']], $a[$order[0]['column']]);
-//			}
-//		});
-//
-//		$countStruttura = count($struttura);
-//		$countStrutturaTotali = 1000;
-//
-//		$jsonDatatableStruttura = array(
-//			'draw'            => time(),
-//			'recordsTotal'    => $countStruttura,
-//			'recordsFiltered' => $countStrutturaTotali,
-//			'data'            => $struttura,
-//		);
-//
-//		return $this->json($jsonDatatableStruttura);
-//	}
+	//	public function strutturaPersonaleAjaxs(Request $request){
+	//		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
+	//
+	//		$filtroGruppoDi = $request->get('filtro_gruppoDi', '');
+	//		$filtroNominativo = $request->get('filtro_nominativo', '');
+	//		$filtroEmail = trim($request->get('filtro_email', ''));
+	//		$filtroCellulare = trim($request->get('filtro_cellulare', ''));
+	//		$filtroPeriodo = trim($request->get('filtro_periodo', ''));
+	//		$filtroDiretti = ($request->get('filtro_diretti', 'false'));
+	//
+	//		switch($order[0]['column']){
+	//			case 0:
+	//				$filtroColonnaOrdinamento = 'codice';
+	//				break;
+	//			case 1:
+	//				$filtroColonnaOrdinamento = 'livello';
+	//				break;
+	//			case 2:
+	//				$filtroColonnaOrdinamento = 'incaricato';
+	//				break;
+	//			case 3:
+	//				$filtroColonnaOrdinamento = 'qualifica';
+	//				break;
+	//			case 4:
+	//				$filtroColonnaOrdinamento = 'email';
+	//				break;
+	//			case 5:
+	//				$filtroColonnaOrdinamento = 'cellulare';
+	//				break;
+	//			case 6:
+	//				$filtroColonnaOrdinamento = 'sponsor';
+	//				break;
+	//			default:
+	//				$filtroColonnaOrdinamento = 'codice';
+	//		}
+	//
+	//		switch($order[0]['dir']){
+	//			case 'asc':
+	//				$filtroDirezioneOrdinamento = 'asc';
+	//				break;
+	//			case 'desc':
+	//				$filtroDirezioneOrdinamento = 'desc';
+	//				break;
+	//			default:
+	//				$filtroDirezioneOrdinamento = 'asc';
+	//		}
+	//
+	//		$filtroColonnaOrdinamento = strtoupper($filtroColonnaOrdinamento);
+	//		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
+	//
+	//		$items = $request->get('items', 10);
+	//		$tipologiaUtenza = $request->get('filtro_tipoligiaUtente', '');
+	//		//dd($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
+	//		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
+	//		$struttura = [];
+	//
+	//		if($strutturaGenerator != null){
+	//			foreach($strutturaGenerator as $item){
+	//				$array = [];
+	//
+	//				$array[] = [$item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor()];
+	//				//array_push($array, $item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor());
+	//				$struttura[] = array_values($array[0]);
+	//			}
+	//		}
+	//
+	//		for($i = 1; $i <= $items; $i++){
+	//			$struttura[] = [
+	//				'00000' . $i,
+	//				'' . $i,
+	//				'Nome' . $i,
+	//				'Qualifica' . $i + 10,
+	//				'Email' . $i,
+	//				'3330000000' . $i,
+	//				'Nome' . $i + 20,
+	//			];
+	//		}
+	//
+	//		usort($struttura, function($a, $b) use ($order){
+	//			if($order[0]['dir'] == 'asc'){
+	//				return strcmp($a[$order[0]['column']], $b[$order[0]['column']]);
+	//			}else{
+	//				return strcmp($b[$order[0]['column']], $a[$order[0]['column']]);
+	//			}
+	//		});
+	//
+	//		$countStruttura = count($struttura);
+	//		$countStrutturaTotali = 1000;
+	//
+	//		$jsonDatatableStruttura = array(
+	//			'draw'            => time(),
+	//			'recordsTotal'    => $countStruttura,
+	//			'recordsFiltered' => $countStrutturaTotali,
+	//			'data'            => $struttura,
+	//		);
+	//
+	//		return $this->json($jsonDatatableStruttura);
+	//	}
 }

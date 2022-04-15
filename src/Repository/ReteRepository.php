@@ -7,10 +7,11 @@ use Generator;
 
 interface ReteRepository{
 	public const TAG_VISTE_ALBERI = 'visteAlbero';
+	public const TAG_ALBERI = 'alberi';
 
-	public function getAlberoViste() : ?Generator;
+	public function getAlberoViste(string $locale) : ?Generator;
 
-	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista) : array;
+	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista, string $locale) : array;
 
 	public function eliminaAlberoVista(int $id);
 

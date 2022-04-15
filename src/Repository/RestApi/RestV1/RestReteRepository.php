@@ -20,12 +20,13 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 	public function __construct(
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForRete,
+		private string                 $locales,
 	){
 	}
 
-	public function getAlberoViste() : ?Generator{
+	public function getAlberoViste($locale) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetAlberoViste());
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetAlberoViste($locale));
 			$results = Json::decode($cached);
 		}catch(Throwable
 		){
@@ -37,15 +38,15 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 		}
 	}
 
-	private function apiCallGetAlberoViste() : callable{
-		return function(ItemInterface $item){
+	private function apiCallGetAlberoViste(string $locale) : callable{
+		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/vista-albero');
+				->request('GET', '/db-v1/utenti/vista-albero?' . 'locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForRete);
-			$item->tag($this->authenticatedCacheTag(self::TAG_VISTE_ALBERI));
+			$item->tag($this->authenticatedCacheTag(self::TAG_VISTE_ALBERI . "[" . $locale . "]"));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_VISTE_ALBERI)]);
@@ -67,8 +68,10 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
 		}
-
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_VISTE_ALBERI)]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_VISTE_ALBERI . "[" . $locale . "]")]);
+		}
 
 		return [true, ''];
 	}
@@ -96,14 +99,17 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 			return [false, $response->getReasonPhrase()];
 		}
 
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_VISTE_ALBERI)]);
+		$locales = explode(',', $this->locales);
+		foreach($locales as $locale){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_VISTE_ALBERI . "[" . $locale . "]")]);
+		}
 
 		return [true, ''];
 	}
 
-	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista) : array{
+	public function getAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista, string $locale) : array{
 		try{
-			$results = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetAlberoUnilevel($idUtente, $livello, $mese, $punti, $idVista));
+			$results = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetAlberoUnilevel($idUtente, $livello, $mese, $punti, $idVista, $locale));
 			$results = json_decode($results, true);
 		}catch(Throwable $exception){
 			return [false, $exception->getMessage()];
@@ -112,14 +118,15 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 		return [true, $results['data']];
 	}
 
-	private function apiCallGetAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista) : callable{
-		return function(ItemInterface $item) use ($idUtente, $livello, $mese, $punti, $idVista){
+	private function apiCallGetAlberoUnilevel(int $idUtente, int $livello, string $mese, string $punti, int $idVista, string $locale) : callable{
+		return function(ItemInterface $item) use ($locale, $idUtente, $livello, $mese, $punti, $idVista){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/albero?gruppo_di=' . $idUtente . '&livello=' . $livello . '&mese=' . $mese . '&punti=' . $punti . '&idVista=' . $idVista );
+				->request('GET', '/db-v1/utenti/albero?gruppo_di=' . $idUtente . '&livello=' . $livello . '&mese=' . $mese . '&punti=' . $punti . '&idVista=' . $idVista . '&locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForRete);
+			$item->tag($this->authenticatedCacheTag(self::TAG_ALBERI . $idVista));
 
 			if($response->getStatusCode() != 200){
 				return [false, $response->getReasonPhrase()];
