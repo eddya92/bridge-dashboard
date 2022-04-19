@@ -74,7 +74,16 @@
                                     <div class="item">
                                         <div class="pricingtable p-t-0">
                                             <div class="pricingtable-header text-center">
-                                                <img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}">
+                                                {% if template.id == '13' %}
+                                                    <img src="/assets/images/invito_venditore_venditore.jpg">
+                                                {% endif %}
+                                                {% if template.id == '3005' %}
+                                                    <img src="/assets/images/invito_venditore_cliente.jpg">
+                                                {% endif %}
+                                                {% if template.id == '3006' %}
+                                                    <img src="/assets/images/invito_conoscere_biokern.jpg">
+                                                {% endif %}
+                                                <!--<img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}"> -->
                                             </div>
                                             <div class="p-15 text-start">
                                                 {{ template.email | replace({'$Nome $Cognome': app.user.nominativo}) | raw }}
