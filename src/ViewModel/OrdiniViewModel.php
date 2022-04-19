@@ -21,7 +21,7 @@ final class OrdiniViewModel{
 	 * @param string $tipologiaOrdine
 	 * @param array  $metadata
 	 */
-	public function __construct(private int $id, private string $data, private string $codice, private string $user, private float $pc, private float $cv, private string $totale, private string $esito, private string $esitoColore, private bool $visibile, private string $tipologiaOrdine, private array $metadata){
+	public function __construct(private int $id, private string $data, private string $codice, private string $user, private float $pc, private float $cv, private string $totale, private string $esito, private string $esitoColore, private bool $visibile, private ?string $tipologiaOrdine, private array $metadata){
 	}
 
 	/**
@@ -95,9 +95,9 @@ final class OrdiniViewModel{
 	}
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
-	public function getTipologiaOrdine() : string{
+	public function getTipologiaOrdine() : ?string{
 		return $this->tipologiaOrdine;
 	}
 

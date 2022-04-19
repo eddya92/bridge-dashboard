@@ -304,7 +304,6 @@ class OrdiniController extends AbstractController{
 			}
 		}
 		//endregion
-
 		$elencoOrdini = array(
 			'draw'            => time(),
 			'recordsTotal'    => $metadata['items_totali'] ?? 0,

@@ -376,6 +376,16 @@
 						'<td><span class="txt-primary">' + feather.icons['shopping-cart'].toSvg() + '</span></td>'
 						+ '<td class="p-l-10"><h6 class="txt-dark">' + value + '</h6></td>'
 				});
+
+				Object.keys(json.metadata.totali_punti).forEach(key => {
+					var td1 = document.createElement('td')
+					var td2 = document.createElement('td')
+					td2.setAttribute('class', ' p-l-10')
+					td1.innerHTML = '<span class="txt-primary">  </span>';
+					td2.innerHTML =	'<h6 class="txt-dark">' + key + ' : ' + json.metadata.totali_punti[key] + '</h6>';
+					container.appendChild(td1)
+					container.appendChild(td2)
+				});
 			})
 			//endregion
 		})
