@@ -89,7 +89,7 @@
                                                 {{ template.email | replace({'$Nome $Cognome': app.user.nominativo}) | raw }}
                                             </div>
                                             <div class="item_footer">
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ template.id }}" data-bs-target="#modalSend" style="">Scegli questo modello ed invia</button>
+                                                <button onclick="assign_id_email({{ template.id }})" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ template.id }}" data-bs-target="#modalSend" style="">Scegli questo modello ed invia</button>
                                             </div>
                                         </div>
 
@@ -347,11 +347,14 @@
 
 
     <script>
+        function assign_id_email(id_email){
+	        $("#id_email").val(id_email);
+        }
 
 		exampleModal.addEventListener('show.bs.modal', function(event){
 			var button = event.relatedTarget
 			var id = button.getAttribute('data-bs-id');
-			var modalButton = exampleModal.querySelector('#id_email');
+			//var modalButton = exampleModal.querySelector('#id_email');
 		})
 
 		var table = $('#datatable_responsive_bonus').DataTable({
