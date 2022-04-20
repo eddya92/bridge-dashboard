@@ -33,7 +33,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		}
 
 		foreach($results['data'] as $item){
-			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] = 0.0 ,$item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
+			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] = 0.0, $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
 		}
 	}
 
@@ -61,6 +61,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ORDINI)]);
 
+			//$this->logger->log('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&id_utente=' . $clienti . '&id_esito=' . $esito . '&data_inizio=' . $data_dal . '&data_fine=' . $data_al . '&tipi_ordine=' . $tipolgia_ordine . '&campo_ordine=' . $colonna . '&direzione_ordine=' . $ordinamento . '&items=' . $items . '&pag=' . $pag);
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());
 			}
