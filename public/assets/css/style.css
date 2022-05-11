@@ -41682,6 +41682,17 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 9px
 }
 
+.mt-custom-n1{
+	margin-top: -10px;
+}
+.mt-custom-n2{
+	margin-top: -18px;
+}
+
+.text-custom-green{
+	color: green;
+}
+
 /*# sourceMappingURL=style.css.map */
 
 /*region Style custom Biokern */
