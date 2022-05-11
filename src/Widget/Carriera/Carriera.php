@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 final class Carriera{
-	public function __construct(private Environment $twig, //private AccountRepository $accountRepository
-		){
+	public function __construct(private Environment $twig, private AccountRepository $accountRepository
+	){
 	}
 
 	/**
@@ -18,23 +18,34 @@ final class Carriera{
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError
 	 */
-	public function main(string $codice,string $locale) : string{
-
-		//$account = $this->accountRepository->getAccount($codice, $locale);
+	public function main(string $codice, string $locale) : string{
+		$account = $this->accountRepository->getAccount($codice, $locale);
 
 		$messaggio = "widget ancora da definire";
 
-		return $this->twig->render('pages/error_widgets/errore_widget_vuoto.html.twig',
-			[
-				'messaggio' => $messaggio,
-			]);
+		$carriera = [];
+		$carriera['qualifica'] = 'AFFILIATO';
+		$carriera['qualificaSuccessiva'] = [
+			'isRaggiunto' => false,
+			'nome'        => 'BUSINESS UNIT',
+			'fast'        => [
+				'idRaggiunto'    => false,
+				'coins'          => 1000,
+				'coinsPersonali' => '',
+			],
+			'low'         => [
+				'idRaggiunto'    => false,
+				'coins'          => '',
+				'coinsPersonali' => '',
+			],
+		];
 
-		//	if($account != null){
-		//  return $this->twig->render('widgets/carriera/carriera.html.twig', [
-		//		//	'carriera' => $account->getCarriera(),
-		//		//]);
-		//	}else{
-		//		return 'Account ' . $codice . ' non trovato.';
-		//	}
+		if($account != null){
+			return $this->twig->render('widgets/carriera/carriera.html.twig', [
+				'carriera' => $carriera,
+			]);
+		}else{
+			return 'Account ' . $codice . ' non trovato.';
+		}
 	}
 }

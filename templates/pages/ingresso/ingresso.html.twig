@@ -61,7 +61,7 @@
                     </div>
                     <!-- endregion Grafico -->
                     <!-- region TOP5 -->
-                    <div class="col-xl-7 xl-50 news box-col-6">
+                    <div class="col-xl-4 xl-50 news box-col-6">
                         {% if(utenza != '') %}
                             {{ top5(utenza) }}
                         {% else %}
@@ -71,19 +71,18 @@
                     </div>
                     <!-- endregion TOP5 -->
                     <!-- region Carriera -->
-                    <!--div class="col-xl-4 xl-50 news box-col-6">
-                        {# {{ carriera(app.user.codice(),app.request.locale()) }} #}
-                    </div-->
+                    <div class="col-xl-4 xl-50 news box-col-6">
+                      {{ carriera(app.user.codice(),app.request.locale()) }}
+                    </div>
                     <!-- endregion Carriera -->
                     <!-- region Sponsor -->
 
-                    <div class="col-xl-5 xl-50 news box-col-6">
+                    <div class="col-xl-4 xl-50 news box-col-6">
                         {% if(utenza != '') %}
                             {{ account(utenza, 'sponsor',app.request.locale(),true) }}
                         {% else %}
                             {{ account(superiore, 'sponsor',app.request.locale(),false) }}
                         {% endif %}
-
                     </div>
                     <!-- endregion Sponsor -->
                 </div>
