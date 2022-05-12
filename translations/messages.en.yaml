@@ -261,6 +261,8 @@ al: at
 Tipologia di ordine: Order type
 Data: Date
 PC: Coins
+PCP: Personal Coins
+PCG: Group Coins
 Tutte le tipologie: All types
 ordini: orders
 Cancella: Delete
