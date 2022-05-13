@@ -142,7 +142,14 @@
                                         <div id="typehead_sottoposti" style="width:100% !important;">
                                             <input id="type-sottoposti" class="typeahead form-control" type="text" placeholder="{% trans %}Cerca per codice nominativo e-mail o telefono{% endtrans %}" aria-label="{% trans %}scegli{% endtrans %}">
                                         </div>
-                                        <input type="hidden" name="idUtente" value="{{ vista.idUtente }}">
+                                        <input type="hidden" name="idUtente"
+                                               value="
+													{% if vista.idUtente is defined%}
+													{{ vista.idUtente }}
+													{% else %}
+													0
+													{% endif %}
+														">
                                         <div>
                                             <table class="width_100">
                                                 <tr>
@@ -505,7 +512,14 @@
 					});
 			}
 
-			nodeEnter.append('svg:circle')
+			nodeEnter.append('svg:image')
+				.attr('x', -9)
+				.attr('y', -12)
+				.attr('width', 20)
+				.attr('height', 24)
+				.attr("xlink:href", function(d){
+					return "../assets/icone_albero/Promoter-Leader.svg";
+				})
 				.attr('r', 1e-6)
 				.on('mouseover', function(d){
 					return tooltip.style('visibility', 'visible').html(populateTooltip(d));
