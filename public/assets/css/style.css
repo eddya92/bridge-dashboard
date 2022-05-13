@@ -10,7 +10,7 @@
  */
 :root {
 	--theme-deafult: #b09750;
-	--theme-secondary: #45b089
+	--theme-secondary: #666666;
 }
 
 .font-roboto {
@@ -16393,7 +16393,7 @@ p.data-attributes svg {
 }
 
 .earning-card.card .card-body .inner-top-right ul li:last-child:before {
-	background-color: #80c9ae
+	background-color: var(--theme-secondary);
 }
 
 .earning-card.card .card-body .border-top {
