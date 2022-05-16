@@ -1,0 +1,29 @@
+<div class="card height_100" id="carriera">
+    <div id="carriera_header" class="card-header">
+        <div class="header-top">
+            <h5 class="m-0">La tua Carriera</h5>
+        </div>
+    </div>
+
+    <div id="carriera_container" class="card-body p-0">
+        <div class="news-update ">
+            La tua qualifica è <span class="span_qualifica_1">{{ carriera.qualifica }}</span>
+        </div>
+        <div class="news-update ">
+            <p>Per mantere la tua qualifica di<span class="span_qualifica_2">{{ carriera.qualifica }}</span> occorre totalizzare 2.000 COINS nel mese.</p>
+            <div class="">
+                <div class="progress ">
+                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ carriera.qualifica }}%" aria-valuenow=" {{ carriera.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="text-danger">Al momento hai 500 COINS,pertanto non stai mantenendo la qualifica.</div>
+            </div>
+
+            <div class="row border mt-2">
+                <div class="col-3 text-center"><i class="  fa fa-5x fa-gift"></i></div>
+                <div class="col-9">Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti</div>
+            </div>
+            <div class="mt-2">La prossima qualifica TEAM BUSINESS UNIT si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit.</div>
+            <div class="text-danger">Al momento non hai collaboratori con qualifica business unit nella tua struttura.</div>
+        </div>
+    </div>
+</div>
