@@ -42,12 +42,12 @@ final class Carriera{
 		];
 
 		if($cariera != null){
-			return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
-				'carriera' => $carriera,
-			]);
-			return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
-				'carriera' => $carriera,
-			]);
+		//	return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
+		//		'carriera' => $carriera,
+		//	]);
+		//	return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
+		//		'carriera' => $carriera,
+		//	]);
 			return $this->twig->render('widgets/carriera/carriera.html.twig', [
 				'carriera' => $carriera,
 			]);
