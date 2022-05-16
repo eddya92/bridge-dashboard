@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace App\Widget\Carriera;
 
 use App\Repository\AccountRepository;
+use App\Repository\CarrieraPersonaleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 final class Carriera{
-	public function __construct(private Environment $twig, private AccountRepository $accountRepository
+	public function __construct(private Environment $twig, private CarrieraPersonaleRepository $carrieraPersonaleRepository
 	){
 	}
 
@@ -19,7 +20,7 @@ final class Carriera{
 	 * @throws \Twig\Error\SyntaxError
 	 */
 	public function main(string $codice, string $locale) : string{
-		$account = $this->accountRepository->getAccount($codice, $locale);
+		$cariera = $this->carrieraPersonaleRepository->getCarriera($locale);
 
 		$messaggio = "widget ancora da definire";
 
@@ -40,12 +41,16 @@ final class Carriera{
 			],
 		];
 
-		if($account != null){
+		if($cariera != null){
+			return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
+				'carriera' => $carriera,
+			]);
+			return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
+				'carriera' => $carriera,
+			]);
 			return $this->twig->render('widgets/carriera/carriera.html.twig', [
 				'carriera' => $carriera,
 			]);
-		}else{
-			return 'Account ' . $codice . ' non trovato.';
 		}
 	}
 }
