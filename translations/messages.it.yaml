@@ -7,7 +7,6 @@ Mostra caratteri: Mostra caratteri
 alle ore: alle ore
 Codice: Codice
 Data di iscrizione: Data di iscrizione
-E.mail: E-mail
 Nome: Nome
 Cognome: Cognome
 Indirizzo: Indirizzo
@@ -829,8 +828,8 @@ Tipologia filtro: Tipologia filtro
 Specifico mese: Specifico mese
 Specifico Anno: Specifico Anno
 Mostra: Mostra
-Punti Carriera: Punti Carriera
-Punti Volume: Punti Volume
+Punti Carriera: Coins
+Punti Volume: CV
 Numero ordini: Numero ordini
 
 #RECUPERO PASSWORD
