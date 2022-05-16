@@ -12,6 +12,7 @@ use App\ViewModel\AccountViewModel;
 use App\ViewModel\ResidenzaViewModel;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -32,7 +33,8 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForAccount,
 		private RequestStack           $requestStack,
-		private string                 $locales
+		private string                 $locales,
+		private LoggerInterface        $logger
 	){
 	}
 
@@ -70,6 +72,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				->client()
 				->request('GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale);
 
+			$this->logger->info('CHIAMATA GET ACCOUNT ', ['GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale, [$response->getBody()]]);
 			$item->expiresAfter($this->ttlForAccount);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT . $codice . "[" . $locale . "]"));
 
@@ -131,6 +134,11 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$message = Error::format($message);
 			throw new Exception($message);
 		}
+		$this->logger->info('CHIAMATA AGGIORNA ACCOUNT ', ['GET', '/db-v1/utenti/dati-account' . 'form_params' => [
+			'password_old'  => $vecchiaPassword,
+			'password_new'  => $nuovaPassword,
+			'password_new2' => $confermaPassword,
+		], [$response->getBody()]]);
 
 		$lingue = explode(',', $this->locales);
 		foreach($lingue as $lingua){
@@ -173,6 +181,9 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 					'user_agent' => $this->requestStack->getCurrentRequest()->headers->get('User-agent'),
 				],
 			]);
+		$this->logger->info('CHIAMATA RICHIESTA OBLIO ', ['GET', 'POST', '/db-v1/utenti/oblio-account', [$response->getBody()]]);
+
+
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
@@ -228,6 +239,16 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 					'agreements' => implode('|', $agreements),
 				],
 			]);
+
+		$this->logger->info('CHIAMATA REGISTRAZIONE UTENTE ', ['POST', '/db-v1/utenti/iscrizione' . 'form_params' => [
+			'codice'     => $codiceSponsor,
+			'nome'       => $nome,
+			'cognome'    => $cognome,
+			'email'      => $email,
+			'password'   => $password,
+			'nazione'    => $nazione,
+			'agreements' => implode('|', $agreements),
+		], [$response->getBody()]]);
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
