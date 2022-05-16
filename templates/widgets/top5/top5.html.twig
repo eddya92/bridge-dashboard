@@ -6,12 +6,9 @@
             </div>
             <div class="col-5">
                 <select title="Modifica Mese" class="form-select" name="Top5_Mese" id="mese">
-                    <option value=""></option>
+                    <option value="">Mese</option>
                     {% for key,value in mesi %}
                         <option value="{{ key }}" id="{{ key }}" class="forselect"
-                                {% if key == meseAttuale %}
-                                    selected
-                                {% endif %}
                         >{{ value }}</option>
                     {% endfor %}
                 </select>
@@ -19,12 +16,9 @@
             <div class="col-1"></div>
             <div class="col-3">
                 <select title="Modifica Anno" class="form-select" name="Top5_Anno" id="anno">
-                    <option value=""></option>
+                    <option value="">Anno</option>
                     {% for anno in anni %}
                         <option value="{{ anno }}"
-                                {% if anno == annoAttuale %}
-                                    selected
-                                {% endif %}
                         >{{ anno }}</option>
                     {% endfor %}
                 </select>
@@ -43,12 +37,12 @@
 	//region1. funzione che fa la chiamata api per la top5
 	function loadData(mese, anno){
 		if(mese === ''){
-			mese = 'generale';
+			mese = 'mese';
 		}
 
 		if(anno === ''){
-			anno = 'generale';
-			mese = 'generale';
+			anno = 'anno';
+			mese = 'mese';
 		}
 
 		let top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
