@@ -25,12 +25,12 @@ class CarrieraController extends AbstractController{
 	}
 
 	/**
-	 * mostra l'elenco delle qulifiche possibili, ed evidenzia la qualifica Attuale
+	 * mostra l'elenco delle qualifiche possibili, ed evidenzia la qualifica Attuale
 	 */
 	#[Route('{_locale}/carriera', name: 'carriera', methods: ['GET'])]
 	public function carrieraView(string $_locale) : Response{
 
-		$carrieraGenerator = $this->carrieraPersonaleRepository->getCarriera($_locale);
+		$carrieraGenerator = $this->carrieraPersonaleRepository->getQualifiche($_locale);
 
 		if($carrieraGenerator != null){
 			return $this->render('pages/carriera/carriera.html.twig', [
@@ -102,5 +102,24 @@ class CarrieraController extends AbstractController{
 
 			return $this->json($andamentoQualifica);
 		}
+	}
+
+
+	/**
+	 *
+	 */
+	#[Route('/conferma-qualifica', name: 'conferma-qualifica', methods: ['GET'])]
+	public function confermaQualifica() : Response{
+
+		$conferma = $this->carrieraPersonaleRepository->confermaQualifica();
+
+		if($conferma === null ){
+			$this->addFlash('error','Errore nella conferma della qualifica,riprovare');
+			return $this->redirectToRoute('ingresso');
+		}
+
+		$this->addFlash('success', 'Qualifica confermata,ora sei un Business');
+
+		return $this->redirectToRoute('ingresso');
 	}
 }
