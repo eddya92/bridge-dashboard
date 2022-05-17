@@ -42,7 +42,8 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&periodo=' . $filtroPeriodo . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag);
+				//->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&periodo=' . $filtroPeriodo . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag);
+				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag);
 			$item->expiresAfter($this->ttlForUtentiStruttura);
 			$item->tag($this->authenticatedCacheTag(self::TAG_UTENTI_STRUTTURA));
 
