@@ -46,7 +46,7 @@ final class RestUtentiRepository implements UtentiRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/utente?cerca=' . $cerca);
+				->request('GET', '/db-v1/utenti/utente?cerca=' . $cerca . '&role_id=ibo');
 
 			$item->expiresAfter($this->ttlForUtenti);
 			$item->tag($this->authenticatedCacheTag(self::TAG_UTENTI));
