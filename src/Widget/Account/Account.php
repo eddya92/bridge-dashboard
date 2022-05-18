@@ -19,11 +19,10 @@ final class Account{
 		if($template == 'sponsor'){
 			$template_twig = 'widgets/account/sponsor.html.twig';
 		}
+
+		$account = $this->repository->getAccount($codice, $locale);
 		if($simulazione){
-			$account = $this->repository->getAccount($codice, $locale);
 			$account = $this->repository->getAccount($account->getSuperiore(), $locale);
-		}else{
-			$account = $this->repository->getAccount($codice, $locale);
 		}
 
 		if($account != null){
