@@ -37,12 +37,12 @@
 	//region1. funzione che fa la chiamata api per la top5
 	function loadData(mese, anno){
 		if(mese === ''){
-			mese = 'mese';
+			mese = '';
 		}
 
 		if(anno === ''){
-			anno = 'anno';
-			mese = 'mese';
+			anno = '';
+			mese = '';
 		}
 
 		let top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
