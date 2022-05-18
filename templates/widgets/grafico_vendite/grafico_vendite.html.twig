@@ -39,8 +39,8 @@
                 <div class="col-md-6">
                     {% trans %}Mostra{% endtrans %}
                     <select title="Scegli il dato da mostrare nel grafico" class="form-select" name="Grafico_dato" id="datochart">
-                        <option value="pc" selected>{% trans %}Punti Carriera{% endtrans %}</option>
-                        <option value="pv">{% trans %}Punti Volume{% endtrans %}</option>
+                        <option value="pc" selected>{% trans %}PC{% endtrans %}</option>
+                        <option value="pv">{% trans %}CV{% endtrans %}</option>
                         <option value="ordini" >{% trans %}Numero ordini{% endtrans %}</option>
                     </select>
                 </div>
@@ -174,7 +174,9 @@
 			.done(function(data){
 				//region3.1 ciclo sui dati e mostro i totali sulla parte sinistra del grafico
 				$.each(data[0].totali, function(i, item){
-					$('#totaliP').append('<h5>' + i.replace('_', ' ').charAt(0).toUpperCase() + i.replace('_', ' ').slice(1) + '</h5>' + '<p class="font-roboto">' + item + '</p>');
+					var label = i.replace('_', ' ').charAt(0).toUpperCase() + i.replace('_', ' ').slice(1);
+					label = $('#label_' + label).val();
+					$('#totaliP').append('<h5>' + label + '</h5>' + '<p class="font-roboto">' + item + '</p>');
 				})
 				//endregion
 				var categories = [];
@@ -301,3 +303,6 @@
 	}
 	//endregion
 </script>
+<input type="hidden" id="label_PC" value="{% trans %}PC{% endtrans %}">
+<input type="hidden" id="label_CV" value="{% trans %}CV{% endtrans %}">
+<input type="hidden" id="label_Ordini" value="{% trans %}Ordini{% endtrans %}">
