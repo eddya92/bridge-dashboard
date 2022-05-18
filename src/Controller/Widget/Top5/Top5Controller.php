@@ -16,7 +16,7 @@ final class Top5Controller extends AbstractController{
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	#[Route('/top5-ajax/{utenza}/{anno}/{mese}', name: 'top5-ajax', methods: ['GET'])]
+	#[Route('/top5-ajax/{utenza}/{anno}/{mese}', name: 'top5-ajax', methods: ['GET'] ,defaults: ['anno' => '', 'mese' => ''])]
 	public function top5Ajax($utenza, $anno, $mese){
 		$topUltimiIscritti = [];
 		$topReclutatori = [];
