@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Widget\Top5;
 
 use Twig\Environment;
+use function getenv;
 
 /**
  *nel primo caricamento della pagina,vengono inseriti dati con chiamata api del mese corrente
@@ -11,7 +12,7 @@ use Twig\Environment;
  * per questo sono stati creati tanti metodi
  */
 final class Top5{
-	public function __construct(private Environment $twig){
+	public function __construct(private Environment $twig, private int $numeroDiTopN){
 	}
 
 	public function main(string $utenza) : string{
@@ -19,10 +20,7 @@ final class Top5{
 		$meseAttuale = date('m');
 		$dataInizio = date('2020-01-01');
 
-		list($anno, $mese, $giorno) = explode('-', $dataInizio);
-		$t_stamp_1 = '';
-		$mese = (int) $mese;
-		$giorno = (int) $giorno;
+		list($anno,) = explode('-', $dataInizio);
 		$anno = (int) $anno;
 
 		$arrayAnni = [];
@@ -46,6 +44,7 @@ final class Top5{
 		}
 
 		return $this->twig->render('widgets/top5/top5.html.twig', [
+			'numero'      => $this->numeroDiTopN,
 			'annoAttuale' => $annoAttuale,
 			'meseAttuale' => $meseAttuale,
 			'anni'        => $arrayAnni,

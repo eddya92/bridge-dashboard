@@ -13,6 +13,8 @@ use Generator;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
+use function dd;
+use function in_array;
 
 final class RestTop5Repository implements Top5Repository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -21,6 +23,7 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForTop5,
 		private string                 $locales,
+		private int                    $numeroDiTopN
 	){
 	}
 
@@ -32,9 +35,13 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 			return null;
 		}
 
+		$keysRichieste = ['top_ultimi_iscritti', 'top_reclutatori', 'top_vendite'];
+
 		foreach($results['data'] as $key => $items){
-			foreach($items as $item){
-				yield new Top5UserViewModel($key, $item['nome'], $item['cognome'], $item['nominativo'], $item['codice'], $item['foto'], $item['data_iscrizione'], $item['num_collaboratori'], $item['num_ordini']);
+			if(in_array($key, $keysRichieste)){
+				foreach($items as $item){
+					yield new Top5UserViewModel($key, $item['nome'], $item['cognome'], $item['nominativo'], $item['codice'], $item['foto'], $item['data_iscrizione'], $item['num_collaboratori'], $item['num_ordini']);
+				}
 			}
 		}
 	}
@@ -47,7 +54,7 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza);
+				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza . '&numero=' . $this->numeroDiTopN);
 
 			$item->expiresAfter($this->ttlForTop5);
 			$item->tag($this->authenticatedCacheTag(self::TAG_TOP5 . $anno . $mese . $utenza));

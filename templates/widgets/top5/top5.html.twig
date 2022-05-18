@@ -2,7 +2,7 @@
     <div id="top5_header" class="card-header">
         <div class="header-top">
             <div class="col-3">
-                <h5 class="m-0">Top 5</h5>
+                <h5 class="m-0">Top {{ numero }}</h5>
             </div>
             <div class="col-5">
                 <select title="Modifica Mese" class="form-select" name="Top5_Mese" id="mese">
@@ -36,13 +36,8 @@
 
 	//region1. funzione che fa la chiamata api per la top5
 	function loadData(mese, anno){
-		if(mese === ''){
-			mese = '';
-		}
-
-		if(anno === ''){
-			anno = '';
-			mese = '';
+		if(mese !== '' && anno === ''){
+			anno = {{ annoAttuale }};
 		}
 
 		let top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
@@ -83,5 +78,3 @@
 		$('#anno').trigger('change');
 	});
 </script>
-
-

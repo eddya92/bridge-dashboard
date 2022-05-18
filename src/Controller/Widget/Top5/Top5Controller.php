@@ -6,6 +6,7 @@ namespace App\Controller\Widget\Top5;
 use App\Repository\Top5Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class Top5Controller extends AbstractController{
@@ -14,9 +15,9 @@ final class Top5Controller extends AbstractController{
 
 	/**
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
-	#[Route('/top5-ajax/{utenza}/{anno}/{mese}', name: 'top5-ajax', methods: ['GET'] ,defaults: ['anno' => '', 'mese' => ''])]
+	#[Route('/top5-ajax/{utenza}/{anno}/{mese}', name: 'top5-ajax', defaults: ['anno' => '', 'mese' => ''], methods: ['GET'])]
 	public function top5Ajax($utenza, $anno, $mese){
 		$topUltimiIscritti = [];
 		$topReclutatori = [];

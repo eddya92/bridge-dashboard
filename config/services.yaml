@@ -308,6 +308,7 @@ services:
     arguments:
       $ttlForTop5: '%env(int:TTL_TOP5)%'
       $locales: '%env(string:LOCALES)%'
+      $numeroDiTopN: '%env(string:NUMERO_TOP_5)%'
 
   App\Repository\TotaliRepository:
     class: App\Repository\RestApi\RestV1\RestTotaliRepository
@@ -339,3 +340,8 @@ services:
       $ttlForRete: '%env(int:TTL_REPO_RETE)%'
       $locales: '%env(string:LOCALES)%'
   #endregion
+
+  App\Widget\Top5\Top5:
+    class: App\Widget\Top5\Top5
+    arguments:
+      $numeroDiTopN: '%env(string:NUMERO_TOP_5)%'
