@@ -5,6 +5,7 @@ namespace App\Controller\Page;
 
 use App\Repository\MessaggiRepository;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,7 +30,13 @@ class MessaggiController extends AbstractController{
 	 */
 	#[Route('/{_locale}/messaggi', name: 'messaggi', methods: ['GET'])]
 	public function messaggi($_locale){
-		$messaggiGenerator = $this->messaggiRepository->getMessaggi($_locale);
+		try{
+			$messaggiGenerator = $this->messaggiRepository->getMessaggi($_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error',$exception->getCode() . " : " . $exception->getMessage());
+
+			return $this->redirectToRoute('ingresso');
+		}
 
 		$messaggi = [];
 		$ultimoMessaggioArrivato = [];
@@ -67,7 +74,13 @@ class MessaggiController extends AbstractController{
 	 */
 	#[Route('/{_locale}/messaggio/{id}', name: 'messaggio', methods: ['GET'])]
 	public function messaggioView(int $id, string $_locale){
-		$messaggio = $this->messaggiRepository->getMessaggio($id, $_locale);
+		try{
+			$messaggio = $this->messaggiRepository->getMessaggio($id, $_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error',$exception->getCode() . " : " . $exception->getMessage());
+
+			return $this->redirectToRoute('messaggi');
+		}
 
 		$ID_messaggio_precedente = 0;
 		$ID_messaggio_successivo = 0;

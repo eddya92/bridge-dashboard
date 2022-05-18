@@ -13,5 +13,5 @@ interface MessaggiRepository{
 
 	public function getMessaggi(string $_locale) : ?Generator;
 
-	public function getMessaggio(int $id, string $_locale) : ?MessaggioViewModel;
+	public function getMessaggio(int $id, string $_locale) : MessaggioViewModel;
 }

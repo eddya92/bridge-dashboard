@@ -28,8 +28,8 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggi($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -61,12 +61,12 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		};
 	}
 
-	public function getMessaggio(int $id, string $locale) : ?MessaggioViewModel{
+	public function getMessaggio(int $id, string $locale) : MessaggioViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$data = $results['data'];
@@ -102,8 +102,8 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallUltimoMessaggio($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$data = $results['data'][0];
