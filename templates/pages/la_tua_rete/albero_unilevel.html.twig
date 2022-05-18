@@ -73,7 +73,6 @@
                                                         {% endif %}
                                                         {% if viste | length > 0 %}
                                                             {% for vistaSingola in viste %}
-
                                                                 {% if vista != null and vistaSingola.id == vista.id %}
                                                                 {% elseif vistaSingola.principale %}
                                                                     <option value="{{ vistaSingola.id }}" selected>{{ vistaSingola.nome }} </option>

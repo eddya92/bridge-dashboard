@@ -88,39 +88,39 @@
                                             <input id="filtro_cellulare" class="form-control" type="text" placeholder="" name="filtro_cellulare">
                                         </div>
                                     </div>
-                                    <div class="col-sm-2 p-t-10">
-                                        {% trans %}Mese{% endtrans %}
-                                        <input id="annoAttuale" hidden value="00">
+{#                                    <div class="col-sm-2 p-t-10">#}
+{#                                        {% trans %}Mese{% endtrans %}#}
+{#                                        <input id="annoAttuale" hidden value="00">#}
 
-                                        <div class="input-group">
-                                            <select id="filtro_mese" class="form-select" name="Mese">
+{#                                        <div class="input-group">#}
+{#                                            <select id="filtro_mese" class="form-select" name="Mese">#}
 
-                                                <option value="01" id="filtro-mese-01" class="meseDaControllare" {{ "now"|date("m") == '01' ? 'selected' : '' }}>{% trans %}Gennaio{% endtrans %}</option>
-                                                <option value="02" id="filtro-mese-02" class="meseDaControllare" {{ "now"|date("m") == '02' ? 'selected' : '' }}>{% trans %}Febbraio{% endtrans %}</option>
-                                                <option value="03" id="filtro-mese-03" class="meseDaControllare" {{ "now"|date("m") == '03' ? 'selected' : '' }}>{% trans %}Marzo{% endtrans %}</option>
-                                                <option value="04" id="filtro-mese-04" class="meseDaControllare" {{ "now"|date("m") == '04' ? 'selected' : '' }}>{% trans %}Aprile{% endtrans %}</option>
-                                                <option value="05" id="filtro-mese-05" class="meseDaControllare" {{ "now"|date("m") == '05' ? 'selected' : '' }}>{% trans %}Maggio{% endtrans %}</option>
-                                                <option value="06" id="filtro-mese-06" class="meseDaControllare" {{ "now"|date("m") == '06' ? 'selected' : '' }}>{% trans %}Giugno{% endtrans %}</option>
-                                                <option value="07" id="filtro-mese-07" class="meseDaControllare" {{ "now"|date("m") == '07' ? 'selected' : '' }}>{% trans %}Luglio{% endtrans %}</option>
-                                                <option value="08" id="filtro-mese-08" class="meseDaControllare" {{ "now"|date("m") == '08' ? 'selected' : '' }}>{% trans %}Agosto{% endtrans %}</option>
-                                                <option value="09" id="filtro-mese-09" class="meseDaControllare" {{ "now"|date("m") == '09' ? 'selected' : '' }}>{% trans %}Settembre{% endtrans %}</option>
-                                                <option value="10" id="filtro-mese-10" class="meseDaControllare" {{ "now"|date("m") == '10' ? 'selected' : '' }}>{% trans %}Ottobre{% endtrans %}</option>
-                                                <option value="11" id="filtro-mese-11" class="meseDaControllare" {{ "now"|date("m") == '11' ? 'selected' : '' }}>{% trans %}Novembre{% endtrans %}</option>
-                                                <option value="12" id="filtro-mese-12" class="meseDaControllare" {{ "now"|date("m") == '12' ? 'selected' : '' }}>{% trans %}Dicembre{% endtrans %}</option>
+{#                                                <option value="01" id="filtro-mese-01" class="meseDaControllare" {{ "now"|date("m") == '01' ? 'selected' : '' }}>{% trans %}Gennaio{% endtrans %}</option>#}
+{#                                                <option value="02" id="filtro-mese-02" class="meseDaControllare" {{ "now"|date("m") == '02' ? 'selected' : '' }}>{% trans %}Febbraio{% endtrans %}</option>#}
+{#                                                <option value="03" id="filtro-mese-03" class="meseDaControllare" {{ "now"|date("m") == '03' ? 'selected' : '' }}>{% trans %}Marzo{% endtrans %}</option>#}
+{#                                                <option value="04" id="filtro-mese-04" class="meseDaControllare" {{ "now"|date("m") == '04' ? 'selected' : '' }}>{% trans %}Aprile{% endtrans %}</option>#}
+{#                                                <option value="05" id="filtro-mese-05" class="meseDaControllare" {{ "now"|date("m") == '05' ? 'selected' : '' }}>{% trans %}Maggio{% endtrans %}</option>#}
+{#                                                <option value="06" id="filtro-mese-06" class="meseDaControllare" {{ "now"|date("m") == '06' ? 'selected' : '' }}>{% trans %}Giugno{% endtrans %}</option>#}
+{#                                                <option value="07" id="filtro-mese-07" class="meseDaControllare" {{ "now"|date("m") == '07' ? 'selected' : '' }}>{% trans %}Luglio{% endtrans %}</option>#}
+{#                                                <option value="08" id="filtro-mese-08" class="meseDaControllare" {{ "now"|date("m") == '08' ? 'selected' : '' }}>{% trans %}Agosto{% endtrans %}</option>#}
+{#                                                <option value="09" id="filtro-mese-09" class="meseDaControllare" {{ "now"|date("m") == '09' ? 'selected' : '' }}>{% trans %}Settembre{% endtrans %}</option>#}
+{#                                                <option value="10" id="filtro-mese-10" class="meseDaControllare" {{ "now"|date("m") == '10' ? 'selected' : '' }}>{% trans %}Ottobre{% endtrans %}</option>#}
+{#                                                <option value="11" id="filtro-mese-11" class="meseDaControllare" {{ "now"|date("m") == '11' ? 'selected' : '' }}>{% trans %}Novembre{% endtrans %}</option>#}
+{#                                                <option value="12" id="filtro-mese-12" class="meseDaControllare" {{ "now"|date("m") == '12' ? 'selected' : '' }}>{% trans %}Dicembre{% endtrans %}</option>#}
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2 p-t-10">
-                                        {% trans %}Anno{% endtrans %}
-                                        <div class="input-group">
-                                            <select id="filtro_anno" class="form-select" name="Anno" onchange="controlloAnnoAttuale(this.value)">
-                                                {% for year in 2020.."now"|date("Y") %}
-                                                    <option value="{{ year }}" {{ "now"|date("Y") == year ? 'selected' : '' }}>{{ year }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
+{#                                            </select>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-sm-2 p-t-10">#}
+{#                                        {% trans %}Anno{% endtrans %}#}
+{#                                        <div class="input-group">#}
+{#                                            <select id="filtro_anno" class="form-select" name="Anno" onchange="controlloAnnoAttuale(this.value)">#}
+{#                                                {% for year in 2020.."now"|date("Y") %}#}
+{#                                                    <option value="{{ year }}" {{ "now"|date("Y") == year ? 'selected' : '' }}>{{ year }}</option>#}
+{#                                                {% endfor %}#}
+{#                                            </select>#}
+{#                                        </div>#}
+{#                                    </div>#}
                                     <div class="col-sm-4 p-t-10">
                                         {% trans %}Tipologia utenza {% endtrans %}
                                         <div class="input-group">
@@ -165,7 +165,7 @@
                                     <td>
                                         <div id="applied_filters_datatable">
                                             <div id="applied_filters_datatable_container">
-                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>
+{#                                                <span id="applied_filters_periodo" idRiferimento="data" class="btn btn-outline-light btn-sm txt-dark visually-hidden">{% trans %}Periodo{% endtrans %} <i class="fa fa-times"></i></span>#}
                                                 <span id="applied_filters_gruppoDi" idRiferimento="type-sottoposti" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Gruppo di{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_nominativo" idRiferimento="filtro_nominativo" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}Nominativo{% endtrans %} <i class="fa fa-times"></i></span>
                                                 <span id="applied_filters_email" idRiferimento="filtro_email" class="btn btn-outline-light btn-sm txt-dark visually-hidden" onclick="rimuovoFiltro(this.id,this.getAttribute('idRiferimento'))">{% trans %}E-mail{% endtrans %} <i class="fa fa-times"></i></span>
