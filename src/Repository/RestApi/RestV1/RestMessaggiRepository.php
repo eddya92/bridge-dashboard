@@ -24,7 +24,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	){
 	}
 
-	public function getMessaggi(string $locale) : ?Generator{
+	public function getMessaggi(string $locale) : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggi($locale));
 			$results = Json::decode($cached);
@@ -98,7 +98,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		};
 	}
 
-	public function getUltimoMessaggio(string $locale) : ?MessaggioViewModel{
+	public function getUltimoMessaggio(string $locale) : MessaggioViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallUltimoMessaggio($locale));
 			$results = Json::decode($cached);

@@ -9,9 +9,9 @@ use Generator;
 interface MessaggiRepository{
 	public const TAG_MESSAGGGI = 'messaggi';
 
-	public function getUltimoMessaggio(string $locale) : ?MessaggioViewModel;
+	public function getUltimoMessaggio(string $locale) : MessaggioViewModel;
 
-	public function getMessaggi(string $_locale) : ?Generator;
+	public function getMessaggi(string $_locale) : Generator;
 
 	public function getMessaggio(int $id, string $_locale) : MessaggioViewModel;
 }
