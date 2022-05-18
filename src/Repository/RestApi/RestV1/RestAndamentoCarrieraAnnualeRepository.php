@@ -10,6 +10,7 @@ use App\Service\Json;
 use App\ViewModel\AndamentoAnnualeCarrieraViewModel;
 use Exception;
 use Generator;
+use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -21,12 +22,13 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForAndamentoCarrieraAnnuale,
 		private string                 $locales,
+		private LoggerInterface        $logger
 	){
 	}
 
-	public function getCarrieraAnnuale(string $locale) : ?Generator{
+	public function getCarrieraAnnuale(string $locale, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento) : ?Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -40,12 +42,12 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallCarriera(string $locale) : callable{
-		return function(ItemInterface $item) use ($locale) : string{
+	private function apiCallCarriera(string $locale,  string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento) : callable{
+		return function(ItemInterface $item) use ($filtroDirezioneOrdinamento, $filtroColonnaOrdinamento, $locale) : string{
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/andamento-annuale');
+				->request('GET', '/db-v1/carriere/andamento-annuale' . '?locale=' . $locale .  '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento);
 
 			$item->expiresAfter($this->ttlForAndamentoCarrieraAnnuale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ANDAMENTO_ANNUALE . "[" . $locale . "]"));

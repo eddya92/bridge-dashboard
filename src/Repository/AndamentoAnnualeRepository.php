@@ -8,5 +8,5 @@ use Generator;
 interface AndamentoAnnualeRepository{
 	public const TAG_ANDAMENTO_ANNUALE = 'andamentoAnnuale';
 
-	public function getCarrieraAnnuale(string $locale) : ?Generator;
+	public function getCarrieraAnnuale(string $locale, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento) : ?Generator;
 }

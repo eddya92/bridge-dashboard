@@ -29,7 +29,6 @@ class CarrieraController extends AbstractController{
 	 */
 	#[Route('{_locale}/carriera', name: 'carriera', methods: ['GET'])]
 	public function carrieraView(string $_locale) : Response{
-
 		$carrieraGenerator = $this->carrieraPersonaleRepository->getQualifiche($_locale);
 
 		if($carrieraGenerator != null){
@@ -48,8 +47,36 @@ class CarrieraController extends AbstractController{
 	public function carrieraAjaxDatatable(Request $request) : Response{
 		$andamentoDatatable = [];
 		$locale = $request->get('locale');
+		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
+		$filtroDirezioneOrdinamento = "";
+		$filtroColonnaOrdinamento = "";
 
-		$carrieraGenerator = $this->andamentoAnnualeRepository->getCarrieraAnnuale($locale);
+		switch($order[0]['column']){
+			case 0:
+				$filtroColonnaOrdinamento = 'periodo';
+				break;
+			case 1:
+				$filtroColonnaOrdinamento = 'qualificaRaggiunta';
+				break;
+			case 2:
+				$filtroColonnaOrdinamento = 'coinsPersonali';
+				break;
+			case 3:
+				$filtroColonnaOrdinamento = 'coinsGruppo';
+				break;
+		}
+		switch($order[0]['dir']){
+			case 'asc':
+				$filtroDirezioneOrdinamento = 'asc';
+				break;
+			case 'desc':
+				$filtroDirezioneOrdinamento = 'desc';
+				break;
+			default:
+				$filtroDirezioneOrdinamento = 'asc';
+		}
+
+		$carrieraGenerator = $this->andamentoAnnualeRepository->getCarrieraAnnuale($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento);
 
 		if($carrieraGenerator != null){
 			foreach($carrieraGenerator as $andamentoMensile){
@@ -83,7 +110,7 @@ class CarrieraController extends AbstractController{
 			$count = count($andamentoDatatable);
 
 			$andamentoQualifica = array(
-				'draw'            => 1,
+				'draw'            => time(),
 				'recordsTotal'    => $count,
 				'recordsFiltered' => $count,
 				'data'            => $andamentoDatatable,
@@ -94,7 +121,7 @@ class CarrieraController extends AbstractController{
 			$count = count($andamentoDatatable);
 			$andamentoDatatable = [];
 			$andamentoQualifica = array(
-				'draw'            => 1,
+				'draw'            => time(),
 				'recordsTotal'    => $count,
 				'recordsFiltered' => $count,
 				'data'            => $andamentoDatatable,
@@ -104,17 +131,16 @@ class CarrieraController extends AbstractController{
 		}
 	}
 
-
 	/**
 	 *
 	 */
 	#[Route('/conferma-qualifica', name: 'conferma-qualifica', methods: ['GET'])]
 	public function confermaQualifica() : Response{
-
 		$conferma = $this->carrieraPersonaleRepository->confermaQualifica();
 
-		if($conferma === null ){
-			$this->addFlash('error','Errore nella conferma della qualifica,riprovare');
+		if($conferma === null){
+			$this->addFlash('error', 'Errore nella conferma della qualifica,riprovare');
+
 			return $this->redirectToRoute('ingresso');
 		}
 
