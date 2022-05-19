@@ -8,7 +8,7 @@ use Twig\Markup;
 use Twig\TwigFunction;
 
 final class CarrieraTwigExtension extends AbstractExtension{
-	public function __construct(private Carriera $widget){
+	public function __construct(private InfoProssimoRank $widget){
 	}
 
 	public function getFunctions() : array{

@@ -63,10 +63,13 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		};
 	}
 
-	public function getCarriera(string $_locale) : ?Generator{
+	/**
+	 * @inheritdoc
+	 */
+	public function infoProssimoRank(string $_locale) : ?Generator{
 		// TODO: Implement getCarriera() method.
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($_locale));
 			$results = Json::decode($cached);
 		}catch(Throwable){
 			return null;
@@ -77,7 +80,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		}
 	}
 
-	private function apiCallCarriera(string $_locale){
+	private function apiCallInfoProssimoRank(string $_locale){
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())

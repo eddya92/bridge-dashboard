@@ -10,7 +10,14 @@ interface CarrieraPersonaleRepository{
 
 	public function getQualifiche(string $_locale) : ?Generator;
 
-	public function getCarriera(string $_locale) : ?Generator;
+	/**
+	 * Cosa cippa fa!
+	 *
+	 * @param string $_locale
+	 *
+	 * @return Generator|null
+	 */
+	public function infoProssimoRank(string $_locale) : ?Generator;
 
 	public function confermaQualifica() : ?Generator;
 }
