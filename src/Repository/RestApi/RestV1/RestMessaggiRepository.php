@@ -66,6 +66,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $locale));
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
+			error_log($exception->getMessage(),1,);
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
