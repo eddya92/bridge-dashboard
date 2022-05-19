@@ -12,22 +12,23 @@ use App\ViewModel\AccountViewModel;
 use App\ViewModel\ResidenzaViewModel;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
 
-/**
- *
- */
 final class RestAccountRepository implements AccountRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
 
 	/**
-	 * @param \Symfony\Contracts\Cache\TagAwareCacheInterface $cache
-	 * @param int                                             $ttlForAccount
-	 * @param \Symfony\Component\HttpFoundation\RequestStack  $requestStack
+	 * @param TagAwareCacheInterface $cache
+	 * @param int                    $ttlForAccount
+	 * @param RequestStack           $requestStack
+	 * @param string                 $locales
+	 * @param LoggerInterface        $logger
 	 */
 	public function __construct(
 		private TagAwareCacheInterface $cache,
@@ -39,13 +40,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * Restituisce un account in base al codice utente che viene passato, nella lingua che viene passata
-	 *
-	 *
-	 * @param string $codice
-	 * @param string $locale
-	 *
-	 * @return \App\ViewModel\AccountViewModel|null
+	 * @inheritdoc
 	 */
 	public function getAccount(string $codice, string $locale) : ?AccountViewModel{
 		try{
@@ -95,7 +90,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $confermaPassword
 	 *
 	 * @return array
-	 * @throws \Exception
+	 * @throws Exception|InvalidArgumentException
 	 */
 	public function aggiornaDatiAccount(string $vecchiaPassword, string $nuovaPassword, string $confermaPassword) : array{
 		try{
@@ -115,7 +110,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $confermaPassword
 	 *
 	 * @return array
-	 * @throws \Exception
+	 * @throws Exception|InvalidArgumentException
 	 */
 	private function apiCallAggiornaDatiAccount(string $vecchiaPassword, string $nuovaPassword, string $confermaPassword) : array{
 		try{
@@ -154,6 +149,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 
 	/**
 	 * @return array
+	 * @throws GuzzleException
 	 */
 	public function richiediOblioAccount() : array{
 		try{
@@ -167,7 +163,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 
 	/**
 	 * @return array
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws GuzzleException
 	 */
 	private function apiCallRichiediOblioAccount() : array{
 		//TODO: passaggio variabili richieste "000.000.000.000"
@@ -182,8 +178,6 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				],
 			]);
 		$this->logger->info('CHIAMATA RICHIESTA OBLIO ', ['GET', 'POST', '/db-v1/utenti/oblio-account', [$response->getBody()]]);
-
-
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
@@ -202,6 +196,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param array  $agreements
 	 *
 	 * @return array
+	 * @throws GuzzleException
 	 */
 	public function registrazioneUtente(string $codiceSponsor, string $nome, string $cognome, string $email, string $password, string $nazione, array $agreements) : array{
 		try{
@@ -223,7 +218,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param array  $agreements
 	 *
 	 * @return array
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws GuzzleException
 	 */
 	private function apiCallRegistrazioneUtente(string $codiceSponsor, string $nome, string $cognome, string $email, string $password, string $nazione, array $agreements) : array{
 		$response = $this->restApiConnection()
@@ -269,6 +264,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param array  $agreements
 	 *
 	 * @return array
+	 * @throws GuzzleException
 	 */
 	public function registrazioneCliente(string $codiceSponsor, string $nome, string $cognome, string $ragioneSociale, string $naturaGiuridica, string $email, string $password, string $nazione, array $agreements) : array{
 		try{
@@ -292,7 +288,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param array  $agreements
 	 *
 	 * @return array
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws GuzzleException
 	 */
 	private function apiCallRegistrazioneCliente(string $codiceSponsor, string $nome, string $cognome, string $ragioneSociale, string $naturaGiuridica, string $email, string $password, string $nazione, array $agreements) : array{
 		$response = $this->restApiConnection()
@@ -335,6 +331,8 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
+	 * @param string $locale
+	 *
 	 * @return callable
 	 */
 	private function apiCallResidenza(string $locale) : callable{
@@ -369,6 +367,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $nazione
 	 *
 	 * @return array
+	 * @throws InvalidArgumentException
 	 */
 	public function aggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione) : array{
 		try{
@@ -391,7 +390,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $nazione
 	 *
 	 * @return array
-	 * @throws \Psr\Cache\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	private function apiCallAggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione) : array{
 		try{
@@ -432,6 +431,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $email
 	 *
 	 * @return array
+	 * @throws InvalidArgumentException|GuzzleException
 	 */
 	public function inviaMailRecuperoPassword(string $email) : array{
 		try{
@@ -447,7 +447,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	 * @param string $email
 	 *
 	 * @return array
-	 * @throws \Psr\Cache\InvalidArgumentException
+	 * @throws GuzzleException
 	 */
 	private function apiCallInviaMailRecuperoPassword(string $email) : array{
 		$response = $this->restApiConnection()
