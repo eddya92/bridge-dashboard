@@ -9,6 +9,7 @@ use App\Repository\RestApi\AuthenticatedRepository;
 use App\Service\Json;
 use App\ViewModel\InquadramentoFiscaleViewModel;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -20,6 +21,7 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForInquadramentoFiscale,
 		private string                 $locales,
+		private LoggerInterface        $logger
 	){
 	}
 
@@ -80,6 +82,10 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 					'bankCode' => $bankCode,
 				],
 			]);
+		$this->logger->info('CHIAMATA PUT AGGIORNA PAGAMENTI ', ['PUT', '/db-v1/utenti/dati-pagamento' . 'form_params' => [
+			'iban'     => $iban,
+			'bankCode' => $bankCode,
+		], [$response->getBody()]]);
 
 		$locales = explode(',', $this->locales);
 		foreach($locales as $locale){

@@ -42,12 +42,12 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	/**
 	 * @inheritdoc
 	 */
-	public function getAccount(string $codice, string $locale) : ?AccountViewModel{
+	public function getAccount(string $codice, string $locale) : AccountViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallAccount($codice, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$results = $results['data'];

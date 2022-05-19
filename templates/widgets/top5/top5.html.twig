@@ -33,10 +33,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+	var element = document.getElementById('anno');
 
 	//region1. funzione che fa la chiamata api per la top5
 	function loadData(mese, anno){
 		if(mese !== '' && anno === ''){
+			element.value = {{ annoAttuale }};
 			anno = {{ annoAttuale }};
 		}
 
