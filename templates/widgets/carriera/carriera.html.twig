@@ -10,38 +10,42 @@
             La tua qualifica è <span class="span_qualifica_1">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update mt-custom-n1">
-            <p>La prossima qualifica è<span class="span_qualifica_2">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
-            </p>
-            {% for soglia in info.rankSuccessivo.soglie %}
-                {% if soglia.nome != '' %}
-                    <p>&bull; <strong>{{ soglia.nome }}</strong></p>
-                {% endif %}
-                {% if soglia.descrizione != '' %}
-                    <p class="indent_15 mt-custom-n1">{{ soglia.descrizione }}</p>
-                {% endif %}
-            {% endfor %}
+            {% if info.rankSuccessivo.soglie is not empty %}
+                <p>La prossima qualifica è<span class="span_qualifica_2">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
+                </p>
+                {% for soglia in info.rankSuccessivo.soglie %}
+                    {% if soglia.nome != '' %}
+                        <p>&bull; <strong>{{ soglia.nome }}</strong></p>
+                    {% endif %}
+                    {% if soglia.descrizione != '' %}
+                        <p class="indent_15 mt-custom-n1">{{ soglia.descrizione }}</p>
+                    {% endif %}
+                {% endfor %}
 
-            {#
-            {#            <div class="indent_15"> #}
-            {#                <div class="progress mt-custom-n1"> #}
-            {#                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
-            {#                </div> #}
-            {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
-            {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
-            {#            </div> #}
+                {#
+                {#            <div class="indent_15"> #}
+                {#                <div class="progress mt-custom-n1"> #}
+                {#                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
+                {#                </div> #}
+                {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
+                {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
+                {#            </div> #}
 
-            {#            <p class="mt-2">&bull; <strong>Modalità SLOW</strong></p> #}
-            {#            <p class="indent_15 mt-custom-n1">1.000 COINS personali a Gennaio.</p> #}
-            {#            <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p> #}
-            {#            <hr /> #}
-            {#            <div class="indent_15"> #}
-            {#                <p class=" ">4.000 COINS di cui 2.000 personali periodo Gennaio / Marzo.</p> #}
-            {#                <div class="progress mt-custom-n1"> #}
-            {#                    <div class="progress-bar-animated bg-primary progress-bar-striped " role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
-            {#                </div> #}
-            {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
-            {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
-            {#            </div> #}
+                {#            <p class="mt-2">&bull; <strong>Modalità SLOW</strong></p> #}
+                {#            <p class="indent_15 mt-custom-n1">1.000 COINS personali a Gennaio.</p> #}
+                {#            <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p> #}
+                {#            <hr /> #}
+                {#            <div class="indent_15"> #}
+                {#                <p class=" ">4.000 COINS di cui 2.000 personali periodo Gennaio / Marzo.</p> #}
+                {#                <div class="progress mt-custom-n1"> #}
+                {#                    <div class="progress-bar-animated bg-primary progress-bar-striped " role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
+                {#                </div> #}
+                {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
+                {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
+                {#            </div> #}
+            {% else %}
+                <p>Hai raggiunto la QUALIFICA MASSIMA del Piano Marketing!</p>
+            {% endif %}
         </div>
     </div>
 </div>
