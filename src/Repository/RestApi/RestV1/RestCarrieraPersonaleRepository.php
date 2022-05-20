@@ -65,7 +65,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	/**
 	 * @inheritdoc
 	 */
-	public function infoProssimoRank(string $codice, string $locale) : ?Generator{
+	public function infoProssimoRank(string $codice, string $locale) : array{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($codice, $locale));
 			$results = Json::decode($cached);

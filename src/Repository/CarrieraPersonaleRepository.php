@@ -16,9 +16,9 @@ interface CarrieraPersonaleRepository{
 	 * @param string $codice
 	 * @param string $locale
 	 *
-	 * @return Generator|null
+	 * @return array
 	 */
-	public function infoProssimoRank(string $codice, string $locale) : ?Generator;
+	public function infoProssimoRank(string $codice, string $locale) : array;
 
 	public function confermaQualifica() : ?Generator;
 }
