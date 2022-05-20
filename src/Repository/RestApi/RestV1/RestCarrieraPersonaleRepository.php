@@ -67,7 +67,6 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	 * @inheritdoc
 	 */
 	public function infoProssimoRank(string $codice, string $locale) : ?Generator{
-		// TODO: Implement getCarriera() method.
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($codice, $locale));
 			$results = Json::decode($cached);
@@ -81,12 +80,11 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	}
 
 	private function apiCallInfoProssimoRank(string $codice, string $locale){
-		return function(ItemInterface $item){
+		return function(ItemInterface $item) use ($codice, $locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/qualifiche');
-			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
+				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice=' . $codice);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));
