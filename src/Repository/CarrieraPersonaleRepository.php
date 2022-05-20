@@ -11,13 +11,13 @@ interface CarrieraPersonaleRepository{
 	public function getQualifiche(string $_locale) : ?Generator;
 
 	/**
-	 * Cosa cippa fa!
+	 * Chiamata che restituisce le informazioni riguardanti il raggiungimento del prossimo rank e il mantenimento di quello attuale
 	 *
-	 * @param string $_locale
+	 * @param string $locale
 	 *
 	 * @return Generator|null
 	 */
-	public function infoProssimoRank(string $_locale) : ?Generator;
+	public function infoProssimoRank(string $codice, string $locale) : ?Generator;
 
 	public function confermaQualifica() : ?Generator;
 }

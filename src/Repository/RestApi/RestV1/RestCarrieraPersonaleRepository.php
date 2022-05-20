@@ -47,7 +47,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->request('GET', '/db-v1/carriere/qualifiche');
-				//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
+			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));
@@ -66,13 +66,13 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	/**
 	 * @inheritdoc
 	 */
-	public function infoProssimoRank(string $_locale) : ?Generator{
+	public function infoProssimoRank(string $codice, string $locale) : ?Generator{
 		// TODO: Implement getCarriera() method.
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($codice, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -80,7 +80,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		}
 	}
 
-	private function apiCallInfoProssimoRank(string $_locale){
+	private function apiCallInfoProssimoRank(string $codice, string $locale){
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())

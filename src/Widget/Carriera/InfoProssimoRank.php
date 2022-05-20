@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Widget\Carriera;
 
 use App\Repository\CarrieraPersonaleRepository;
+use Exception;
 use Twig\Environment;
 
 final class InfoProssimoRank{
@@ -18,7 +19,13 @@ final class InfoProssimoRank{
 	 * @throws \Twig\Error\SyntaxError
 	 */
 	public function main(string $codice, string $locale) : string{
-		$cariera = $this->carrieraPersonaleRepository->infoProssimoRank($locale);
+		try{
+			$cariera = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
+		}catch(Exception $exception){
+			return $this->twig->render('widgets/carriera/carriera.html.twig', [
+				'messaggio' => $exception->getCode() . " : " . $exception->getMessage(),
+			]);
+		}
 
 		$messaggio = "widget ancora da definire";
 
