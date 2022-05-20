@@ -6,6 +6,10 @@ namespace App\Widget\Carriera;
 use App\Repository\CarrieraPersonaleRepository;
 use Exception;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use function dd;
 
 final class InfoProssimoRank{
 	public function __construct(private Environment $twig, private CarrieraPersonaleRepository $carrieraPersonaleRepository
@@ -13,49 +17,23 @@ final class InfoProssimoRank{
 	}
 
 	/**
+	 * @param string $codice
+	 * @param string $locale
+	 *
 	 * @return string
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError|RuntimeError|SyntaxError
 	 */
 	public function main(string $codice, string $locale) : string{
 		try{
-			$cariera = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
+			$info = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
 		}catch(Exception $exception){
 			return $this->twig->render('widgets/carriera/carriera.html.twig', [
 				'messaggio' => $exception->getCode() . " : " . $exception->getMessage(),
 			]);
 		}
 
-		$messaggio = "widget ancora da definire";
-
-		$carriera = [];
-		$carriera['qualifica'] = 'AFFILIATO';
-		$carriera['qualificaSuccessiva'] = [
-			'isRaggiunto' => false,
-			'nome'        => 'BUSINESS UNIT',
-			'fast'        => [
-				'idRaggiunto'    => false,
-				'coins'          => 1000,
-				'coinsPersonali' => '',
-			],
-			'low'         => [
-				'idRaggiunto'    => false,
-				'coins'          => '',
-				'coinsPersonali' => '',
-			],
-		];
-
-		if($cariera != null){
-			//return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
-			//	'carriera' => $carriera,
-			//]);
-			//return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
-			//	'carriera' => $carriera,
-			//]);
-			return $this->twig->render('widgets/carriera/carriera.html.twig', [
-				'carriera' => $carriera,
-			]);
-		}
+		return $this->twig->render('widgets/carriera/carriera.html.twig', [
+			'info' => $info,
+		]);
 	}
 }

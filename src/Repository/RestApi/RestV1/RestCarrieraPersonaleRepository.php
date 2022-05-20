@@ -10,7 +10,6 @@ use App\Service\Json;
 use App\ViewModel\QualificaViewModel;
 use Exception;
 use Generator;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -74,9 +73,11 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
-		foreach($results['data'] as $item){
-			yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
-		}
+		return $results['data'];
+
+		//foreach($results['data'] as $item){
+		//	yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
+		//}
 	}
 
 	private function apiCallInfoProssimoRank(string $codice, string $locale){
@@ -84,7 +85,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice=' . $codice);
+				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice_utente_simulato=' . $codice);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));

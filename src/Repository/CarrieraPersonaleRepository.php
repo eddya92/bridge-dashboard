@@ -13,6 +13,7 @@ interface CarrieraPersonaleRepository{
 	/**
 	 * Chiamata che restituisce le informazioni riguardanti il raggiungimento del prossimo rank e il mantenimento di quello attuale
 	 *
+	 * @param string $codice
 	 * @param string $locale
 	 *
 	 * @return Generator|null
