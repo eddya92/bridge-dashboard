@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Widget\Carriera;
+namespace App\Widget\InfoProssimoRank;
 
 use Twig\Extension\AbstractExtension;
 use Twig\Markup;

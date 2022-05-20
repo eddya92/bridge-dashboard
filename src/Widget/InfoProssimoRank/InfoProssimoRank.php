@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Widget\Carriera;
+namespace App\Widget\InfoProssimoRank;
 
 use App\Repository\CarrieraPersonaleRepository;
 use Exception;
@@ -28,7 +28,7 @@ final class InfoProssimoRank{
 		try{
 			$info = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
 		}catch(Exception $exception){
-			return $this->twig->render('widgets/carriera/carriera.html.twig', [
+			return $this->twig->render('widgets/carriera/carriera_error.html.twig', [
 				'messaggio' => $exception->getCode() . " : " . $exception->getMessage(),
 			]);
 		}
