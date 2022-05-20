@@ -32,9 +32,6 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 			}catch(Throwable){
 				return null;
 			}
-			foreach($results as $item){
-				yield new VenditeViewModel($item['totali'], $item['andamento']);
-			}
 		}else{
 			try{
 				$cached = $this->cache->get($this->authenticatedCacheKey(), $this->callVenditeMese($utenza, $dato, $anno, $mese));
@@ -42,10 +39,9 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 			}catch(Throwable){
 				return null;
 			}
-
-			foreach($results as $item){
-				yield new VenditeViewModel($item['totali'], $item['andamento']);
-			}
+		}
+		foreach($results as $item){
+			yield new VenditeViewModel($item['totali'], $item['andamento']);
 		}
 	}
 

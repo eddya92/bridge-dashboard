@@ -10,7 +10,6 @@
          $('.js-getvalue').on('click', function () {
             const element = $(this).closest('.js-parent').find('.js-tilt');
             const test = element.tilt.getValues.call(element);
-            console.log(test[0]);
          });
          $('.js-reset').on('click', function () {
             const element = $(this).closest('.js-parent').find('.js-tilt');

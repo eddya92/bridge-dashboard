@@ -276,9 +276,11 @@
 
 		//region popolo il datatable tramite chiamata ajax
 		$('#datatable_responsive_bonus').DataTable({
-
-			//serverSide: true,
-			//responsive: true,
+			responsive: true,
+			processing: true,
+			serverSide: true,
+			ordering: true,
+			searching: false,
 			ajax: {
 				url: "{{ path('carriera-ajax') }}",
 				data: {
@@ -287,28 +289,20 @@
 			},
 			language: DueRDataTableLaguages,
 			dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
-			order: [4, 'desc'],
+			order: [0, 'desc'],
 			pageLength: 25,
 			columnDefs: [
-				{
-					targets: 2,
-					className: 'dt-right'
-				},
-				{
-					targets: 3,
-					className: 'dt-right'
-				},
-
-				{
-					targets: 4,
-					visible: false,
-					searchable: false
-				},
-
+				{orderable: true, targets: 0},
+				{orderable: true, targets: 1},
+				{orderable: true, targets: 2},
+				{orderable: true, targets: 3},
 				{responsivePriority: 1, targets: 0},
 				{responsivePriority: 2, targets: 1},
 				{responsivePriority: 3, targets: 3}
-			]
+			],
+			serverPaging: true,
+			serverFiltering: true,
+			serverSorting: true,
 		});
 		//endregion
 		$('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');

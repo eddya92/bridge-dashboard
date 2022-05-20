@@ -24,12 +24,18 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 	){
 	}
 
-	public function getMessaggi(string $locale) : ?Generator{
+	/**
+	 * @param string $locale
+	 *
+	 * @return \Generator
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
+	public function getMessaggi(string $locale) : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggi($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -61,12 +67,20 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		};
 	}
 
-	public function getMessaggio(int $id, string $locale) : ?MessaggioViewModel{
+	/**
+	 * @param int    $id
+	 * @param string $locale
+	 *
+	 * @return \App\ViewModel\MessaggioViewModel
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
+	public function getMessaggio(int $id, string $locale) : MessaggioViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMessaggio($id, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage(),1,);
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$data = $results['data'];
@@ -98,19 +112,33 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		};
 	}
 
+	/**
+	 * @inheritDoc
+	 *
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
 	public function getUltimoMessaggio(string $locale) : ?MessaggioViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallUltimoMessaggio($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+		}
+		if($results['data']){
+			$data = $results['data'][0];
+
+			return new MessaggioViewModel($data['id'], $data['data'], $data['mittente'], $data['foto'], $data['da_leggere'], $data['titolo'], $data['testo'], $data['id_messaggio_precedente'], $data['id_messaggio_successivo']);
+		}else{
 			return null;
 		}
 
-		$data = $results['data'][0];
-
-		return new MessaggioViewModel($data['id'], $data['data'], $data['mittente'], $data['foto'], $data['da_leggere'], $data['titolo'], $data['testo'], $data['id_messaggio_precedente'], $data['id_messaggio_successivo']);
 	}
 
+	/**
+	 *
+	 *
+	 * @return callable
+	 */
 	public function apiCallUltimoMessaggio($locale) : callable{
 		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()

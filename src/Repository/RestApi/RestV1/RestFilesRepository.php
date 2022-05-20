@@ -25,12 +25,16 @@ final class RestFilesRepository implements FilesRepository, AuthenticatedReposit
 	){
 	}
 
-	public function getDocumenti(string $locale) : ?Generator{
+	/**
+	 * @inheritDoc
+	 * @throws Exception
+	 */
+	public function getDocumenti(string $locale) : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumenti($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());;
 		}
 
 		foreach($results['data']['files'] as $item){

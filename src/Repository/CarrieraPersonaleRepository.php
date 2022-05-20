@@ -10,7 +10,15 @@ interface CarrieraPersonaleRepository{
 
 	public function getQualifiche(string $_locale) : ?Generator;
 
-	public function getCarriera(string $_locale) : ?Generator;
+	/**
+	 * Chiamata che restituisce le informazioni riguardanti il raggiungimento del prossimo rank e il mantenimento di quello attuale
+	 *
+	 * @param string $codice
+	 * @param string $locale
+	 *
+	 * @return array
+	 */
+	public function infoProssimoRank(string $codice, string $locale) : array;
 
 	public function confermaQualifica() : ?Generator;
 }

@@ -11,6 +11,14 @@ interface AccountRepository{
 	public const TAG_ACCOUNT = 'account';
 	public const TAG_ACCOUNT_RESIDENZA = 'residenza';
 
+	/**
+	 * Restituisce un entità AccountViewModel in base al codice utente che viene passato, nella lingua che viene passata
+	 *
+	 * @param string $codice
+	 * @param string $locale
+	 *
+	 * @return AccountViewModel|null
+	 */
 	public function getAccount(string $codice, string $locale) : ?AccountViewModel;
 
 	public function aggiornaDatiAccount(string $vecchiaPassword, string $nuovaPassword, string $confermaPassword) : array;

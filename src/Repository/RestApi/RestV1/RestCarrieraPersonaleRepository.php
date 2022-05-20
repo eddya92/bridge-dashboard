@@ -10,7 +10,6 @@ use App\Service\Json;
 use App\ViewModel\QualificaViewModel;
 use Exception;
 use Generator;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -47,7 +46,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->request('GET', '/db-v1/carriere/qualifiche');
-				//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
+			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));
@@ -63,27 +62,30 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		};
 	}
 
-	public function getCarriera(string $_locale) : ?Generator{
-		// TODO: Implement getCarriera() method.
+	/**
+	 * @inheritdoc
+	 */
+	public function infoProssimoRank(string $codice, string $locale) : array{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($codice, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
-		foreach($results['data'] as $item){
-			yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
-		}
+		return $results['data'];
+
+		//foreach($results['data'] as $item){
+		//	yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
+		//}
 	}
 
-	private function apiCallCarriera(string $_locale){
-		return function(ItemInterface $item){
+	private function apiCallInfoProssimoRank(string $codice, string $locale){
+		return function(ItemInterface $item) use ($codice, $locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/qualifiche');
-			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
+				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice_utente_simulato=' . $codice);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));

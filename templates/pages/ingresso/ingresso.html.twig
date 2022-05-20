@@ -72,7 +72,11 @@
                     <!-- endregion TOP5 -->
                     <!-- region Carriera -->
                     <div class="col-xl-4 xl-50 news box-col-6">
-                      {{ carriera(app.user.codice(),app.request.locale()) }}
+						{% if(utenza != '') %}
+							{{ infoProssimoRank(utenza,app.request.locale()) }}
+						{% else %}
+							{{ infoProssimoRank(app.user.codice(),app.request.locale()) }}
+						{% endif %}
                     </div>
                     <!-- endregion Carriera -->
                     <!-- region Sponsor -->

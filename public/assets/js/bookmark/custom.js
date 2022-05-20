@@ -82,9 +82,7 @@ function setFavourite(index_var){
 	var desc = $(".desc_"+index_var).html();
 	var collection = $(".collection_"+index_var).html();
 	var n = fav_arr.includes(index_var);
-	
-	console.log(fav_arr);
-	console.log(n);
+
 	if(n){
 		for( var i = 0; i < fav_arr.length; i++){ 
 		   if ( fav_arr[i] === index_var) {
