@@ -26,6 +26,11 @@ final class NotiziePrincipali extends AbstractController{
 			]);
 		}
 
+		if($messaggio === null){
+			return $this->render('widgets/notizie_principali/notizie_principali_vuoto.html.twig', [
+				'messaggio' => $messaggio,
+			]);
+		}
 		return $this->render('widgets/notizie_principali/notizie_principali.html.twig', [
 			'messaggio' => $messaggio,
 		]);

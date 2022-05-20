@@ -24,6 +24,7 @@ final class InfoProssimoRank{
 	 * @throws LoaderError|RuntimeError|SyntaxError
 	 */
 	public function main(string $codice, string $locale) : string{
+
 		try{
 			$info = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
 		}catch(Exception $exception){
