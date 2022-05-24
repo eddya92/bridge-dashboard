@@ -7,8 +7,8 @@ final class AlberoUnilevelVistaViewModel{
 	/**
 	 * @param int    $id
 	 * @param string $nome
-	 * @param bool   $principale
-	 * @param int    $idUtente
+	 * @param bool   $default
+	 * @param int    $idUtenteAlbero
 	 * @param string $nomeUtente
 	 * @param int    $livelli
 	 * @param string $mese
@@ -17,7 +17,7 @@ final class AlberoUnilevelVistaViewModel{
 	 * @param string $orientamento
 	 * @param string $punti
 	 */
-	public function __construct(private int $id, private string $nome, private bool $principale, private int $idUtente, private string $nomeUtente, private int $livelli, private string $mese, private string $altezza, private string $larghezza, private string $orientamento, private string $punti){
+	public function __construct(private int $id, private string $nome, private bool $default, private int $idUtenteAlbero, private string $nomeUtente, private int $livelli, private string $mese, private string $altezza, private string $larghezza, private string $orientamento, private string $punti){
 	}
 
 	/**
@@ -37,15 +37,15 @@ final class AlberoUnilevelVistaViewModel{
 	/**
 	 * @return bool
 	 */
-	public function isPrincipale() : bool{
-		return $this->principale;
+	public function isDefault() : bool{
+		return $this->default;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getIdUtente() : int{
-		return $this->idUtente;
+	public function getIdUtenteAlbero() : int{
+		return $this->idUtenteAlbero;
 	}
 
 	/**
@@ -95,5 +95,12 @@ final class AlberoUnilevelVistaViewModel{
 	 */
 	public function getPunti() : string{
 		return $this->punti;
+	}
+
+	/**
+	 * @param int $id
+	 */
+	public function setId(int $id) : void{
+		$this->id = $id;
 	}
 }

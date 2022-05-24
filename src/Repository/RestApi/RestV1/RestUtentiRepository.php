@@ -25,13 +25,12 @@ final class RestUtentiRepository implements UtentiRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getUtente(string $cerca = '') : Generator{
-		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetUtente($cerca));
-			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
-		}
+	/**
+	 * @inheritdoc
+	 */
+	public function allOfSearch(string $search = '') : Generator{
+		$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallGetUtente($search));
+		$results = Json::decode($cached);
 
 		foreach($results['data'] as $item){
 			yield new UtenteViewModel($item['id'], $item['codice'], $item['nominativo']);

@@ -12,6 +12,7 @@ use App\Repository\UtentiRepository;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,7 +54,7 @@ class OrdiniController extends AbstractController{
 				foreach($sellingZones as $chiave => $valore){
 					$arrayTipiOrdineSellingZone = $valore["tipiOrdine"];
 					$i = 0;
-					foreach($arrayTipiOrdineSellingZone as $posizione => $items){
+					foreach($arrayTipiOrdineSellingZone as $items){
 						if($items['id'] == 2){
 							unset($sellingZones[$chiave]["tipiOrdine"][$i]);
 						}
@@ -65,7 +66,7 @@ class OrdiniController extends AbstractController{
 				foreach($sellingZones as $chiave => $valore){
 					$arrayTipiOrdineSellingZone = $valore["tipiOrdine"];
 					$i = 0;
-					foreach($arrayTipiOrdineSellingZone as $posizione => $items){
+					foreach($arrayTipiOrdineSellingZone as $items){
 						if($items['id'] != 2){
 							unset($sellingZones[$chiave]["tipiOrdine"][$i]);
 						}
@@ -119,21 +120,21 @@ class OrdiniController extends AbstractController{
 	/**
 	 *
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	#[
 		Route('/ordine-creato-contoTerzi', name: 'ordine-creato-conto-terzi', methods: ['GET', 'POST'])]
 	public function ordineCreatoContoTerzi(Request $request){
 		$request->request->all();
 
-		//////todo inviare una port a carrello/crea con tipo di ordine
+		//TODO: inviare una port a carrello/crea con tipo di ordine
 		return $this->redirectToRoute('shop');
 	}
 
 	/**
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	#[Route('/ordine-creato', name: 'ordine-creato', methods: ['POST'])]
 	public function ordineCreato(){
@@ -141,16 +142,17 @@ class OrdiniController extends AbstractController{
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @return JsonResponse
 	 */
 	#[Route('/utenti-ajax', name: 'utenti-ajax', methods: ['GET'])]
 	public function utentiAjax(Request $request){
 		$cerca = trim($request->query->get('query', ''));
 
-		$utenti = $this->utentiRepository->getUtente($cerca);
-		if($utenti === null){
+		try{
+			$utenti = $this->utentiRepository->allOfSearch($cerca);
+		}catch(Exception){
 			$utenti = [];
 		}
 
@@ -158,16 +160,17 @@ class OrdiniController extends AbstractController{
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @return JsonResponse
 	 */
 	#[Route('/utenti-ordine-gruppo-ajax', name: 'utenti-ordine-gruppo-ajax', methods: ['GET'])]
 	public function utentiOrdineGruppo(Request $request){
 		$cerca = trim($request->query->get('query', ''));
 
-		$utenti = $this->utentiRepository->getUtente($cerca);
-		if($utenti === null){
+		try{
+			$utenti = $this->utentiRepository->allOfSearch($cerca);
+		}catch(Exception){
 			$utenti = [];
 		}
 
@@ -175,16 +178,17 @@ class OrdiniController extends AbstractController{
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @return JsonResponse
 	 */
 	#[Route('/utenti-cliente-ajax', name: 'utenti-cliente-ajax', methods: ['GET'])]
 	public function utentiOrdineClienteAjax(Request $request){
 		$cerca = trim($request->query->get('query', ''));
 
-		$utenti = $this->utentiRepository->getUtente($cerca);
-		if($utenti === null){
+		try{
+			$utenti = $this->utentiRepository->allOfSearch($cerca);
+		}catch(Exception){
 			$utenti = [];
 		}
 
@@ -194,7 +198,7 @@ class OrdiniController extends AbstractController{
 	/**
 	 * Vista elenco ordini
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
 	#[Route('{_locale}/elenco-ordini', name: 'elenco-ordini', methods: ['GET'])]
 	public function elencOrdini($_locale){
@@ -228,7 +232,6 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('/ordini-ajax', name: 'ordini-ajax', methods: ['GET'])]
 	public function ordiniAjax(Request $request) : JsonResponse{
-
 		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
 		$sottoposti = $request->query->get('sottoposti', '');
 		$clienti = $request->query->get('ricerca_clienti', '');
@@ -239,44 +242,21 @@ class OrdiniController extends AbstractController{
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
 
-		switch($order[0]['column']){
-			case 0:
-				$filtroColonnaOrdinamento = 'data';
-				break;
-			case 1:
-				$filtroColonnaOrdinamento = 'codice';
-				break;
-			case 2:
-				$filtroColonnaOrdinamento = 'incaricato';
-				break;
-			case 3:
-				$filtroColonnaOrdinamento = 'pc';
-				break;
-			case 4:
-				$filtroColonnaOrdinamento = 'totale';
-				break;
-			case 5:
-				$filtroColonnaOrdinamento = 'tipologia_ordine';
-				break;
-			case 6:
-				$filtroColonnaOrdinamento = 'esito';
-				break;
-			default:
-				$filtroColonnaOrdinamento = 'codice';
-		}
-		switch($order[0]['dir']){
-			case 'asc':
-				$filtroDirezioneOrdinamento = 'asc';
-				break;
-			case 'desc':
-				$filtroDirezioneOrdinamento = 'desc';
-				break;
-			default:
-				$filtroDirezioneOrdinamento = 'asc';
-		}
+		$filtroColonnaOrdinamento = match ($order[0]['column']) {
+			0 => 'data',
+			2 => 'incaricato',
+			3 => 'pc',
+			4 => 'totale',
+			5 => 'tipologia_ordine',
+			6 => 'esito',
+			default => 'codice',
+		};
+		$filtroDirezioneOrdinamento = match ($order[0]['dir']) {
+			'desc' => 'desc',
+			default => 'asc',
+		};
 
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
-		//dd($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items);
 		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $pag);
 		$datatableorders = [];
 		$metadata = [];
@@ -316,7 +296,7 @@ class OrdiniController extends AbstractController{
 	}
 
 	/**
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
 	#[Route('/{_locale}dettaglio-ordine/{id}', name: 'dettaglio-ordine', methods: ['GET'])]
 	public function dettaglioOrdine(int $id){
@@ -326,7 +306,7 @@ class OrdiniController extends AbstractController{
 	}
 
 	/**
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
 	#[Route('/ordine-concluso/{id}', name: 'ordine-concluso', methods: ['GET'])]
 	public function ordineConcluso(int $id){

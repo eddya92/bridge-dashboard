@@ -5,19 +5,26 @@ namespace App\Controller\Page;
 
 use App\Repository\ReteRepository;
 use App\Repository\UtentiStrutturaRepository;
+use App\ViewModel\AlberoUnilevelVistaViewModel;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function array_reverse;
+use function date;
+use function dd;
+use function trim;
 
 /**
  * Controller della tua rete
  */
 class LaTuaReteController extends AbstractController{
 	/**
-	 * @param \App\Repository\ReteRepository            $reteRepository
-	 * @param \App\Repository\UtentiStrutturaRepository $utentiStrutturaRepository
+	 * @param ReteRepository            $reteRepository
+	 * @param UtentiStrutturaRepository $utentiStrutturaRepository
 	 */
 	public function __construct(
 		private ReteRepository            $reteRepository,
@@ -27,50 +34,23 @@ class LaTuaReteController extends AbstractController{
 
 	/**
 	 * Mostra la vista dell'albero unilevel, i campi visualizzativi nei filtri vengono innestati da questo controller
-	 * Se il la chiamata al repository delle viste non va a buon fine, fa il redirect "ingresso"
+	 * Se la chiamata al repository delle viste non va a buon fine, fa il redirect "ingresso"
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param string  $_locale
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
 	#[Route('/{_locale}/albero-unilevel', name: 'albero-unilevel', methods: ['GET', 'POST'])]
 	public function alberoUnilevel(string $_locale, Request $request) : Response{
-		$id = (int) $request->get('idVista', 0);
-
-		if($request->isMethod('GET')){
-			if($id != 0){
-				$this->addFlash('error', 'Vista non accessibile.');
-
-				return $this->redirectToRoute('albero-unilevel');
-			}
+		$idVista = (int) $request->get('idVista', 0);
+		if($request->isMethod('GET') && $idVista > 0){
+			$this->addFlash('error', 'Vista non accessibile.');
+			return $this->redirectToRoute('albero-unilevel');
 		}
 
-		$viste = [];
-		$vista_richiesta = null;
-		$vista_generator = $this->reteRepository->getAlberoViste($_locale);
-		$count = 0;
-		if($vista_generator != null){
-			foreach($vista_generator as $vista){
-				$viste[] = $vista;
-				if($id > 0){
-					if($vista->getId() == $id){
-						$vista_richiesta = $vista;
-					}
-				}else{
-					if($count == 0){
-						$vista_richiesta = $vista;
-					}
-					if($vista->isPrincipale()){
-						$vista_richiesta = $vista;
-					}
-				}
-			}
-			if($request->isMethod('POST') && $vista_richiesta == null){
-				$this->addFlash('error', 'Vista non accessibile.');
-
-				return $this->redirectToRoute('albero-unilevel');
-			}
-
+		try{
+			//region mesi
 			$mesi = [];
 			for($anno = 2021; $anno <= date('Y'); $anno++){
 				if($anno == date('Y')){
@@ -93,97 +73,86 @@ class LaTuaReteController extends AbstractController{
 					}
 				}
 			}
-
 			$mesi = array_reverse($mesi);
+			//endregion
 
+			//region livelli
 			$livelli = [];
+			for($i = 1; $i <= 10; $i++){
+				$livelli[] = [
+					'label' => $i,
+					'value' => $i,
+				];
+			}
+			for($i = 20; $i <= 50; $i = $i + 10){
+				$livelli[] = [
+					'label' => $i,
+					'value' => $i,
+				];
+			}
 			$livelli[] = [
 				'label' => 'Tutti',
-				'value' => '0',
+				'value' => '99999',
 			];
-			$livelli[] = [
-				'label' => '1',
-				'value' => '1',
-			];
-			$livelli[] = [
-				'label' => '2',
-				'value' => '2',
-			];
-			$livelli[] = [
-				'label' => '5',
-				'value' => '5',
-			];
-			$livelli[] = [
-				'label' => '10',
-				'value' => '10',
-			];
-			$livelli[] = [
-				'label' => '50',
-				'value' => '50',
-			];
+			//endregion
 
+			//region altezze & larghezze
 			$altezze = [];
 			$altezze[] = [
 				'label' => 'Auto',
 				'value' => 'auto',
 			];
-			$altezze[] = [
-				'label' => '900',
-				'value' => '900',
-			];
-			$altezze[] = [
-				'label' => '1000',
-				'value' => '1000',
-			];
-			$altezze[] = [
-				'label' => '1100',
-				'value' => '1100',
-			];
-			$altezze[] = [
-				'label' => '1200',
-				'value' => '1200',
-			];
-			$altezze[] = [
-				'label' => '4000',
-				'value' => '4000',
-			];
+			for($i = 600; $i <= 10000; $i += 100){
+				$altezze[] = [
+					'label' => $i,
+					'value' => $i,
+				];
+			}
 
 			$larghezze = [];
 			$larghezze[] = [
 				'label' => 'Auto',
 				'value' => 'auto',
 			];
-			$larghezze[] = [
-				'label' => '900',
-				'value' => '900',
-			];
-			$larghezze[] = [
-				'label' => '1000',
-				'value' => '1000',
-			];
-			$larghezze[] = [
-				'label' => '1100',
-				'value' => '1100',
-			];
-			$larghezze[] = [
-				'label' => '1200',
-				'value' => '1200',
-			];
-			$larghezze[] = [
-				'label' => '4000',
-				'value' => '4000',
-			];
+			for($i = 600; $i <= 10000; $i += 100){
+				$larghezze[] = [
+					'label' => $i,
+					'value' => $i,
+				];
+			}
+			//endregion
+
+			//region elencoViste
+			$elencoViste = [];
+			$vistaRichiesta = null;
+			foreach($this->reteRepository->allVisteUnilevelOfIdUtente($_locale) as $vista){
+				if($vista->isDefault()){
+					$vista->setId(0);
+				}
+				$elencoViste[] = $vista;
+				if($vista->getId() === $idVista){
+					$vistaRichiesta = $vista;
+				}
+			}
+			if($vistaRichiesta === null){
+				if($elencoViste[0] instanceof AlberoUnilevelVistaViewModel){
+					$vistaRichiesta = $elencoViste[0];
+				}else{
+					throw new Exception('Non è stato possibile trovare la vistaRichiesta e non è presente neppure quella di Default!');
+				}
+			}
+			//endregion
 
 			return $this->render('pages/la_tua_rete/albero_unilevel.html.twig', [
-				'mesi'      => $mesi,
-				'livelli'   => $livelli,
-				'altezze'   => $altezze,
-				'larghezze' => $larghezze,
-				'viste'     => $viste,
-				'vista'     => $vista_richiesta,
+				'mesi'           => $mesi,
+				'livelli'        => $livelli,
+				'altezze'        => $altezze,
+				'larghezze'      => $larghezze,
+				'elencoViste'    => $elencoViste,
+				'vistaRichiesta' => $vistaRichiesta,
 			]);
-		}else{
-			$this->addFlash('error', 'Errore nel caricamento delle viste.');
+		}catch(Exception $exception){
+			$this->addFlash('error', 'Errore nel caricamento delle viste: ' . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
@@ -192,47 +161,58 @@ class LaTuaReteController extends AbstractController{
 	/**
 	 * Chiamata api, restituisce il json che crea l'albero
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param string  $_locale
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @return JsonResponse
 	 */
 	#[Route('/{_locale}/albero-unilevel-ajax', name: 'albero-unilevel-ajax', methods: ['GET'])]
 	public function alberoUnilevelAjax(string $_locale, Request $request){
 		$idUtente = (int) $request->query->get('idUtente', 0);
-		$idVista = (int) $request->query->get('idVista', 0);
-		$livello = (int) $request->query->get('livello', 0);
 		$mese = trim($request->query->get('mese', date('Y-m')));
 		$punti = trim($request->query->get('punti', 'pv_mensili'));
 
-		[$result, $data] = $this->reteRepository->getAlberoUnilevel($idUtente, $livello, $mese, $punti, $idVista,$_locale);
-		if($result){
-			return $this->json($data);
-		}else{
-			return $this->json($data);
-		}
+		[, $data] = $this->reteRepository->unilevelTreeOfIdUtente($idUtente, $mese, $punti, 'ranks', false, false, $_locale);
+		return $this->json($data);
 	}
 
 	/**
 	 * Salvataggio nuova vista albero
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	#[Route('/{_locale}/salva-albero-unilevel', name: 'salva-albero-unilevel', methods: ['POST'])]
 	public function salvaAlberoUnilevel(Request $request){
-		$idVista = (int) $request->get('idVista', 0);
-		$idUtente = (int) $request->get('idUtente', 0);
-		$livello = (int) $request->get('livello', 0);
-		$nome = trim($request->get('nome', ''));
-		$mese = trim($request->get('mese', ''));
-		$altezza = trim($request->get('altezza', ''));
-		$larghezza = trim($request->get('larghezza', ''));
+		//region Preparazione VistaUnilevelTree
+		if($request->get('isNew', 0) == 1){
+			$ID_vista = 0;
+			$isDefault = false;
+			$Nome = trim($request->get('nomeNuovaVista', ''));
+		}else{
+			$ID_vista = (int) $request->get('idVista', 0);
+			$isDefault = ($ID_vista == 0);
+			$Nome = trim($request->get('nomeVista', ''));
+		}
+		$ID_utente_albero = (int) $request->get('idUtente', 0);
+		$max_livelli = (int) $request->get('livello', 0);
+		$Mese = trim($request->get('mese', ''));
+		$height = trim($request->get('altezza', ''));
+		if($height == 'auto'){
+			$height = 0;
+		}
+		$width = trim($request->get('larghezza', ''));
+		if($width == 'auto'){
+			$width = 0;
+		}
 		$orientamento = trim($request->get('orientamento', ''));
+		$icon = 'ranks';
 		$punti = trim($request->get('punti', ''));
-
+		//endregion
+		//dd($isDefault, $ID_vista, $Nome, $ID_utente_albero, $max_livelli, $Mese, (int) $height, (int) $width, $orientamento, $icon, $punti);
 		try{
-			[$result, $error_msg] = $this->reteRepository->salvaAlberoVista(0, $nome, $idUtente, $livello, $mese, $altezza, $larghezza, $orientamento, $punti, $idVista);
+			[$result, $error_msg] = $this->reteRepository->salvaAlberoVista($isDefault, $ID_vista, $Nome, $ID_utente_albero, $max_livelli, $Mese, (int) $height, (int) $width, $orientamento, $icon, $punti);
 			if($result){
 				$this->addFlash('success', 'Informazioni aggiornate correttamente.');
 			}else{
@@ -248,9 +228,9 @@ class LaTuaReteController extends AbstractController{
 	/**
 	 * Elimina una vista Albero
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	#[Route('/{_locale}/elimina-albero-unilevel', name: 'elimina-albero-unilevel', methods: ['POST'])]
 	public function eliminaAlberoUnilevel(Request $request){
@@ -286,9 +266,9 @@ class LaTuaReteController extends AbstractController{
 	 *
 	 * se la rotta vieene chiamata struttura-unilevel/clienti ->filtri preimpostati su tipologia utenza = clienti
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
-	#[Route('/{_locale}/struttura-unilevel/{utenza}/{diretti}', name: 'struttura-unilevel', methods: ['GET'], defaults: ['utenza' => '', 'diretti' => ''])]
+	#[Route('/{_locale}/struttura-unilevel/{utenza}/{diretti}', name: 'struttura-unilevel', defaults: ['utenza' => '', 'diretti' => ''], methods: ['GET'])]
 	public function strutturaUnilevel(Request $request){
 		$tipologiaUtenza = $request->get('utenza', '');
 		$diretti = $request->get('diretti', '');
@@ -310,9 +290,9 @@ class LaTuaReteController extends AbstractController{
 	/**
 	 * Chiamata api, restituisce il json che popola il datatable della tua struttura
 	 *
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
 	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @return JsonResponse
 	 */
 	#[Route('/{_locale}/struttura-ajax', name: 'struttura-personale-ajax', methods: ['GET'])]
 	public function strutturaPersonaleAjax(Request $request){
@@ -327,45 +307,22 @@ class LaTuaReteController extends AbstractController{
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
 
-		switch($order[0]['column']){
-			case 0:
-				$filtroColonnaOrdinamento = 'codice';
-				break;
-			case 1:
-				$filtroColonnaOrdinamento = 'livello';
-				break;
-			case 2:
-				$filtroColonnaOrdinamento = 'incaricato';
-				break;
-			case 3:
-				$filtroColonnaOrdinamento = 'qualifica';
-				break;
-			case 4:
-				$filtroColonnaOrdinamento = 'email';
-				break;
-			case 5:
-				$filtroColonnaOrdinamento = 'cellulare';
-				break;
-			case 6:
-				$filtroColonnaOrdinamento = 'sponsor';
-				break;
-			default:
-				$filtroColonnaOrdinamento = 'codice';
-		}
-		switch($order[0]['dir']){
-			case 'asc':
-				$filtroDirezioneOrdinamento = 'asc';
-				break;
-			case 'desc':
-				$filtroDirezioneOrdinamento = 'desc';
-				break;
-			default:
-				$filtroDirezioneOrdinamento = 'asc';
-		}
+		$filtroColonnaOrdinamento = match ($order[0]['column']) {
+			1 => 'livello',
+			2 => 'incaricato',
+			3 => 'qualifica',
+			4 => 'email',
+			5 => 'cellulare',
+			6 => 'sponsor',
+			default => 'codice',
+		};
+		$filtroDirezioneOrdinamento = match ($order[0]['dir']) {
+			'desc' => 'desc',
+			default => 'asc',
+		};
 
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 
-		//dd($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items,$pag);
 		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items, $pag);
 		$struttura = [];
 
@@ -374,10 +331,9 @@ class LaTuaReteController extends AbstractController{
 				$array = [];
 
 				$array[] = [$item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor()];
-				//array_push($array, $item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor());
 				$struttura[] = array_values($array[0]);
 			}
-		};
+		}
 
 		$jsonDatatableStruttura = array(
 			'draw'            => time(),
@@ -388,103 +344,4 @@ class LaTuaReteController extends AbstractController{
 
 		return $this->json($jsonDatatableStruttura);
 	}
-
-	//	public function strutturaPersonaleAjaxs(Request $request){
-	//		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
-	//
-	//		$filtroGruppoDi = $request->get('filtro_gruppoDi', '');
-	//		$filtroNominativo = $request->get('filtro_nominativo', '');
-	//		$filtroEmail = trim($request->get('filtro_email', ''));
-	//		$filtroCellulare = trim($request->get('filtro_cellulare', ''));
-	//		$filtroPeriodo = trim($request->get('filtro_periodo', ''));
-	//		$filtroDiretti = ($request->get('filtro_diretti', 'false'));
-	//
-	//		switch($order[0]['column']){
-	//			case 0:
-	//				$filtroColonnaOrdinamento = 'codice';
-	//				break;
-	//			case 1:
-	//				$filtroColonnaOrdinamento = 'livello';
-	//				break;
-	//			case 2:
-	//				$filtroColonnaOrdinamento = 'incaricato';
-	//				break;
-	//			case 3:
-	//				$filtroColonnaOrdinamento = 'qualifica';
-	//				break;
-	//			case 4:
-	//				$filtroColonnaOrdinamento = 'email';
-	//				break;
-	//			case 5:
-	//				$filtroColonnaOrdinamento = 'cellulare';
-	//				break;
-	//			case 6:
-	//				$filtroColonnaOrdinamento = 'sponsor';
-	//				break;
-	//			default:
-	//				$filtroColonnaOrdinamento = 'codice';
-	//		}
-	//
-	//		switch($order[0]['dir']){
-	//			case 'asc':
-	//				$filtroDirezioneOrdinamento = 'asc';
-	//				break;
-	//			case 'desc':
-	//				$filtroDirezioneOrdinamento = 'desc';
-	//				break;
-	//			default:
-	//				$filtroDirezioneOrdinamento = 'asc';
-	//		}
-	//
-	//		$filtroColonnaOrdinamento = strtoupper($filtroColonnaOrdinamento);
-	//		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
-	//
-	//		$items = $request->get('items', 10);
-	//		$tipologiaUtenza = $request->get('filtro_tipoligiaUtente', '');
-	//		//dd($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
-	//		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $tipologiaUtenza);
-	//		$struttura = [];
-	//
-	//		if($strutturaGenerator != null){
-	//			foreach($strutturaGenerator as $item){
-	//				$array = [];
-	//
-	//				$array[] = [$item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor()];
-	//				//array_push($array, $item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor());
-	//				$struttura[] = array_values($array[0]);
-	//			}
-	//		}
-	//
-	//		for($i = 1; $i <= $items; $i++){
-	//			$struttura[] = [
-	//				'00000' . $i,
-	//				'' . $i,
-	//				'Nome' . $i,
-	//				'Qualifica' . $i + 10,
-	//				'Email' . $i,
-	//				'3330000000' . $i,
-	//				'Nome' . $i + 20,
-	//			];
-	//		}
-	//
-	//		usort($struttura, function($a, $b) use ($order){
-	//			if($order[0]['dir'] == 'asc'){
-	//				return strcmp($a[$order[0]['column']], $b[$order[0]['column']]);
-	//			}else{
-	//				return strcmp($b[$order[0]['column']], $a[$order[0]['column']]);
-	//			}
-	//		});
-	//
-	//		$countStruttura = count($struttura);
-	//		$countStrutturaTotali = 1000;
-	//
-	//		$jsonDatatableStruttura = array(
-	//			'draw'            => time(),
-	//			'recordsTotal'    => $countStruttura,
-	//			'recordsFiltered' => $countStrutturaTotali,
-	//			'data'            => $struttura,
-	//		);
-	//
-	//		return $this->json($jsonDatatableStruttura);
-	//	}
 }

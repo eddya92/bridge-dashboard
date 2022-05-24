@@ -35,7 +35,8 @@
                     <div class="col-sm-6 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">
+                                <a title="Home" href="{{ path('ingresso') }}"><i data-feather="home"></i></a></li>
                             <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
                             <li class="breadcrumb-item active">{% trans %}Albero Unilevel{% endtrans %}</li>
                         </ol>
@@ -50,7 +51,7 @@
             </div>
         </div>
         <!-- endregion Titolo e breadcrumb -->
-        <!-- Container-fluid starts-->
+        <!-- region Container-fluid starts-->
         <div class="container-fluid">
             <div class="edit-profile">
                 {% include 'layouts/partials/session_message.html.twig' %}
@@ -68,29 +69,25 @@
                                             <td>
                                                 <form id="form_vista" name="form_vista" class="form" novalidate="" method="post" action="{{ path('albero-unilevel') }}">
                                                     <select name="idVista" class="form-select" onchange="document.form_vista.submit();">
-                                                        {% if vista != null %}
-                                                            <option value="{{ vista.id }}" selected>{{ vista.nome }}</option>
-                                                        {% endif %}
-                                                        {% if viste | length > 0 %}
-                                                            {% for vistaSingola in viste %}
-                                                                {% if vista != null and vistaSingola.id == vista.id %}
-                                                                {% elseif vistaSingola.principale %}
-                                                                    <option value="{{ vistaSingola.id }}" selected>{{ vistaSingola.nome }} </option>
+                                                        {% if elencoViste | length > 0 %}
+                                                            {% for vistaCorrente in elencoViste %}
+                                                                {% if vistaCorrente.id == vistaRichiesta.id %}
+                                                                    <option value="{{ vistaCorrente.id }}" selected>{{ vistaCorrente.nome }} </option>
                                                                 {% else %}
-                                                                    <option value="{{ vistaSingola.id }}">{{ vistaSingola.nome }}</option>
+                                                                    <option value="{{ vistaCorrente.id }}">{{ vistaCorrente.nome }}</option>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% else %}
                                                             <option value="" selected>{% trans %}Vista default{% endtrans %}</option>
                                                         {% endif %}
                                                     </select>
+                                                    <input type="hidden" name="isDefault" value="{{ vistaRichiesta.isDefault }}">
                                                 </form>
                                             </td>
                                             <td class="text-start">
-                                                {% if viste | length > 0 %}
+                                                {% if not vistaRichiesta.isDefault %}
                                                     <form id="form_vista_elimina" name="form_vista_elimina" class="form" novalidate="" method="post" action="{{ path('elimina-albero-unilevel') }}">
                                                         <input type="hidden" name="idVistaElimina" value="0">
-
                                                         <button id="btn-delete-view" class="btn btn-outline-light txt-dark" type="button" onclick="elimina_vista();">
                                                             <i class="fa fa-trash"></i> {% trans %}Elimina questa vista{% endtrans %}
                                                         </button>
@@ -117,7 +114,7 @@
                         </div>
                     </div>
                     <div class="not-printable col-xl-4 col-xxl-3">
-                        <!-- region Dati generali -->
+                        <!-- region Filtri Albero -->
                         <form id="form_vista_salva" name="form_vista_salva" class="form card needs-validation" novalidate="" method="post" action="{{ path('salva-albero-unilevel') }}">
                             <input type="hidden" name="idVistaSalva" value="0">
 
@@ -125,10 +122,10 @@
                                 <div class="card-header">
                                     <h5 class="card-title mb-0">{% trans %}Filtri di ricerca{% endtrans %}</h5>
                                     <div class="card-options">
-                                        <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
+                                        <a title="..." class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
                                             <i class="fe fe-chevron-up"></i>
                                         </a>
-                                        <a class="card-options-remove" href="#" data-bs-toggle="card-remove">
+                                        <a title="... ..." class="card-options-remove" href="#" data-bs-toggle="card-remove">
                                             <i class="fe fe-x"></i>
                                         </a>
                                     </div>
@@ -139,16 +136,9 @@
 
                                         <label class="form-label">{% trans %}Albero di{% endtrans %}</label>
                                         <div id="typehead_sottoposti" style="width:100% !important;">
-                                            <input id="type-sottoposti" class="typeahead form-control" type="text" placeholder="{% trans %}Cerca per codice nominativo e-mail o telefono{% endtrans %}" aria-label="{% trans %}scegli{% endtrans %}">
+                                            <input id="type-sottoposti" class="typeahead form-control" type="text" placeholder="{% trans %}Cerca per codice nominativo e-mail o telefono{% endtrans %}" aria-label="{% trans %}scegli{% endtrans %}" value="{{ vistaRichiesta.nomeUtente }}">
                                         </div>
-                                        <input type="hidden" name="idUtente"
-                                               value="
-													{% if vista.idUtente is defined%}
-													{{ vista.idUtente }}
-													{% else %}
-													0
-													{% endif %}
-														">
+                                        <input type="hidden" name="idUtente" value="{{ vistaRichiesta.idUtenteAlbero }}">
                                         <div>
                                             <table class="width_100">
                                                 <tr>
@@ -157,7 +147,7 @@
                                                         <label class="form-label">{% trans %}Livelli{% endtrans %}</label>
                                                         <select class="form-select" name="livello" onchange="aggiorna_albero();">
                                                             {% for livello in livelli %}
-                                                                <option value="{{ livello.value }}" {% if vista is not null and vista.livelli == livello.value %} selected="selected" {% endif %}>{{ livello.label }}</option>
+                                                                <option value="{{ livello.value }}" {% if vistaRichiesta.livelli == livello.value %} selected="selected" {% endif %}>{{ livello.label }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </td>
@@ -166,7 +156,7 @@
                                                         <label class="form-label">{% trans %}Mese{% endtrans %}</label>
                                                         <select class="form-select" name="mese" onchange="aggiorna_albero();">
                                                             {% for mese in mesi %}
-                                                                <option value="{{ mese.value }}">{{ mese.label }}</option>
+                                                                <option value="{{ mese.value }}" {% if vistaRichiesta.mese == mese.value %} selected="selected" {% endif %}>{{ mese.label }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </td>
@@ -177,7 +167,7 @@
                                                         <label class="form-label">{% trans %}Altezza{% endtrans %}</label>
                                                         <select class="form-select" name="altezza" onchange="aggiorna_albero();">
                                                             {% for altezza in altezze %}
-                                                                <option value="{{ altezza.value }}" {% if vista is not null and vista.altezza == altezza.value %} selected="selected" {% endif %}>{{ altezza.label }}</option>
+                                                                <option value="{{ altezza.value }}" {% if vistaRichiesta is not null and vistaRichiesta.altezza == altezza.value %} selected="selected" {% endif %}>{{ altezza.label }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </td>
@@ -186,7 +176,7 @@
                                                         <label class="form-label">{% trans %}Larghezza{% endtrans %}</label>
                                                         <select class="form-select" name="larghezza" onchange="aggiorna_albero();">
                                                             {% for larghezza in larghezze %}
-                                                                <option value="{{ larghezza.value }}" {% if vista is not null and vista.larghezza == larghezza.value %} selected="selected" {% endif %}>{{ larghezza.label }}</option>
+                                                                <option value="{{ larghezza.value }}" {% if vistaRichiesta is not null and vistaRichiesta.larghezza == larghezza.value %} selected="selected" {% endif %}>{{ larghezza.label }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </td>
@@ -196,23 +186,23 @@
                                                         <div class="m-b-30"></div>
                                                         <label class="form-label">{% trans %}Orientamento{% endtrans %}</label>
                                                         <select class="form-select" name="orientamento" onchange="aggiorna_albero();">
-                                                            <option value="orizzontale" {% if vista is not null and vista.orientamento == 'orizzontale' %} selected="selected" {% endif %}>{% trans %}Orizzontale{% endtrans %}</option>
-                                                            <option value="verticale" {% if vista is not null and vista.orientamento == 'verticale' %} selected="selected" {% endif %}>{% trans %}Verticale{% endtrans %}</option>
+                                                            <option value="orizzontale" {% if vistaRichiesta is not null and vistaRichiesta.orientamento == 'orizzontale' %} selected="selected" {% endif %}>{% trans %}Orizzontale{% endtrans %}</option>
+                                                            <option value="verticale" {% if vistaRichiesta is not null and vistaRichiesta.orientamento == 'verticale' %} selected="selected" {% endif %}>{% trans %}Verticale{% endtrans %}</option>
                                                         </select>
                                                     </td>
                                                     <td class="width_50">
                                                         <div class="m-b-30"></div>
-                                                        <label class="form-label">Punti Volume</label>
+                                                        <label class="form-label">{% trans %}PC{% endtrans %}</label>
                                                         <select class="form-select" name="punti" onchange="aggiorna_albero();">
-                                                            <option value="mese">PC mensili</option>
+                                                            <option value="mese">{% trans %}PC{% endtrans %} mensili</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <input type="hidden" id="idVista" name="idVista" value="{% if vista is not null %}{{ vista.id }}{% else %}0{% endif %}">
-                                            <input type="hidden" id="nomeVista" name="nomeVista" value="{% if vista is not null %}{{ vista.nome }}{% endif %}">
+                                            <input type="hidden" id="idVista" name="idVista" value="{{ vistaRichiesta.id }}">
+                                            <input type="hidden" id="nomeVista" name="nomeVista" value="{{ vistaRichiesta.nome }}">
                                             <div class="m-t-30"></div>
-                                            <button class="btn btn-primary" type="submit">{% trans %}Salva come vista principale{% endtrans %}</button>
+                                            <button class="btn btn-primary" type="submit">{% trans %}Salva vista corrente{% endtrans %}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -221,18 +211,19 @@
                                     <div class="m-t-20"></div>
                                     {% trans %}Crea una vista personalizzata{% endtrans %}
                                     <div class="m-t-10"></div>
-                                    <input class="form-control" id="input_nuovo_filtro" type="text" placeholder="{% trans %}Scrivi qui il nome del nuovo filtro{% endtrans %}" name="nome">
-                                    <div class="m-t-10"></div>
-                                    <button id="button_nuovo_filtro" type="submit" onclick="salva_nuova_vista()" class="btn btn-primary">{% trans %}Salva la nuova vista{% endtrans %}</button>
+                                    <input class="form-control" id="nomeNuovaVista" type="text" placeholder="{% trans %}Scrivi qui il nome del nuovo filtro{% endtrans %}" name="nomeNuovaVista">
+									<input type="hidden" id="isNew" name="isNew" value="">
+									<div class="m-t-10"></div>
+                                    <button id="button_nuovo_filtro" type="button" onclick="salva_nuova_vista()" class="btn btn-primary">{% trans %}Salva la nuova vista{% endtrans %}</button>
                                 </div>
                             </div>
                         </form>
-                        <!-- endregion Dati generali -->
+                        <!-- endregion endregion Dati generali -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Container-fluid Ends-->
+        <!--endregion Container-fluid Ends-->
     </div>
 
 {% endblock page_body %}
@@ -278,7 +269,14 @@
 
 		function salva_nuova_vista(){
 			$('#idVista').val(0);
-			document.form.submit();
+			$('#isNew').val(1);
+			if($('#nomeNuovaVista').val() == ''){
+				alert('Si prega di specificare un Nome per la nuova Vista!');
+				$('#nomeNuovaVista').focus();
+			}else{
+				$('#form_vista_salva').submit();
+				//document.form.submit();
+			}
 		}
 
 		//region zoom sulla vsita dell'albero
@@ -353,6 +351,7 @@
 		var tooltip;
 
 		function aggiorna_albero(){
+			//region Filtri
 			$('#body_albero').empty();
 			$('.tooltip-albero').remove();
 
@@ -388,8 +387,7 @@
 			if(height == 'auto'){
 				height = 900;
 			}
-
-			// --------------------
+			//endregion
 
 			var hsvg = $('#body_albero').height() - 0;
 
@@ -398,7 +396,7 @@
 				var wsvg = $('#body_albero').width() - 20;
 			}
 
-			var m = [20, 170, 20, 170];
+			var m = [20, 120, 20, 120];
 			var w = wsvg - m[1] - m[3];
 			if(width > 0){
 				w = width - m[1] - m[3];
@@ -407,6 +405,8 @@
 			if(height > 0){
 				h = height - m[0] - m[2];
 			}
+
+			i = 0;
 
 			tree = d3.layout.tree().size([h, w]);
 			diagonal = d3.svg.diagonal().projection(function(d){
@@ -435,7 +435,7 @@
 				.attr('class', 'tooltip-albero')
 				.text('');
 
-			var url = '{{ path('albero-unilevel-ajax') }}?idUtente=' + idUtente + '&mese=' + mese + '&livello=' + livello + '&punti=' + punti + '&idVista=' + idVista;
+			var url = '{{ path('albero-unilevel-ajax') }}?idUtente=' + idUtente + '&mese=' + mese + '&punti=' + punti + '&idVista=' + idVista;
 			d3.json(url, function(json){
 				root = json;
 				if(root == 'error'){
@@ -448,12 +448,31 @@
 						root.y0 = 10;
 					}
 
-					if(utenteConnesso != root.name){
-						$('#type-sottoposti').val(root.name)
+					// E perché?!?!?!?!? => Chi ci dice che l'etichetta dell'albero sia lo stesso nominativo connesso? E gli omonimi?
+					// if(utenteConnesso != root.name){
+					// 	$('#type-sottoposti').val(root.name)
+					// }
+
+					function toggleAll(d){
+						if(d.children){
+							d.children.forEach(toggleAll);
+							toggle(d);
+						}
 					}
 
+					function toggleAllLevels(d){
+						if(d.livello < livello){
+							toggle(d);
+							if(d.children){
+								d.children.forEach(toggleAllLevels);
+							}
+						}
+					}
+
+					// Initialize the display to show a few nodes.
 					root.children.forEach(toggleAll);
 					root.children.forEach(toggleAllLevels);
+
 					update(root);
 				}
 			});
@@ -464,11 +483,14 @@
 		}
 
 		function update(source){
-			var i = 0;
+			//var i = 0; // Perché???????????????????????????????
 
 			var duration = d3.event && d3.event.altKey ? 5000 : 500;
 
+			// Compute the new tree layout.
 			var nodes = tree.nodes(root).reverse();
+
+			//region Normalize for fixed-depth.
 			if(orientamento == 'verticale'){
 				nodes.forEach(function(d){
 					d.y = d.depth * 100;
@@ -478,229 +500,232 @@
 					d.y = d.depth * 180;
 				});
 			}
+			//endregion
 
-			var node = vis.selectAll('g.node').data(nodes, function(d){
-				return d.id || (d.id = ++i);
-			});
+			//region Update the nodes…
+			var node = vis.selectAll("g.node")
+				.data(nodes, function(d){
+					return d.id || (d.id = ++i);
+				});
+			//endregion
 
+			//region Enter any new nodes at the parent's previous position.
 			if(orientamento == 'verticale'){
-				var nodeEnter = node.enter().append('svg:g')
-					.attr('class', 'node')
-					.attr('transform', function(d){
-						return 'translate(' + source.x0 + ',' + source.y0 + ')';
+				var nodeEnter = node.enter().append("svg:g")
+					.attr("class", "node")
+					.attr("transform", function(d){
+						return "translate(" + source.x0 + "," + source.y0 + ")";
 					})
-					.on('click', function(d){
+					.on("click", function(d){
 						toggle(d);
 						update(d);
 					})
-					.on('contextmenu', function(d){
+					.on("contextmenu", function(d){
+
 						d3.event.preventDefault();
 					});
 			} else{
-				var nodeEnter = node.enter().append('svg:g')
-					.attr('class', 'node')
-					.attr('transform', function(d){
-						return 'translate(' + source.y0 + ',' + source.x0 + ')';
+				var nodeEnter = node.enter().append("svg:g")
+					.attr("class", "node")
+					.attr("transform", function(d){
+						return "translate(" + source.y0 + "," + source.x0 + ")";
 					})
-					.on('click', function(d){
+					.on("click", function(d){
 						toggle(d);
 						update(d);
 					})
-					.on('contextmenu', function(d){
+					.on("contextmenu", function(d){
+
 						d3.event.preventDefault();
 					});
 			}
+			//endregion
 
-			nodeEnter.append('svg:image')
-				.attr('x', -9)
-				.attr('y', -12)
-				.attr('width', 20)
-				.attr('height', 24)
-				.attr("xlink:href", function(d){
-					return "../assets/icone_albero/Promoter-Leader.svg";
-				})
-				.attr('r', 1e-6)
-				.on('mouseover', function(d){
-					return tooltip.style('visibility', 'visible').html(populateTooltip(d));
-				})
-				.on('mousemove', function(){
-					return tooltip.style('top', (d3.event.pageY - 10) + 'px').style('left', (d3.event.pageX + 10) + 'px');
-				})
-				.on('mouseout', function(){
-					return tooltip.style('visibility', 'hidden');
-				})
-				.style('fill', function(d){
-					return d._children ? 'lightsteelblue' : "#fff";
-				})
-
+			//region Icona del Rank
 			if(orientamento == 'verticale'){
-				nodeEnter.append('svg:text')
-					.attr("y", function(d){
-						return d.children || d._children ? 14 : 14;
+				nodeEnter.append("svg:image")
+					.attr("xlink:href", function(d){
+						return d.icona;
 					})
-					.attr('dy', '.35em')
-					.attr('text-anchor', function(d){
-						return d.children || d._children ? 'start' : 'start';
+					.attr("x", "-12px")
+					.attr("y", "-12px")
+					.attr("width", "28px")
+					.attr("height", "28px")
+					.on("mouseover", function(d){
+						return tooltip.style("visibility", "visible").html(populateTooltip(d));
+					})
+					.on("mousemove", function(){
+						return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mouseout", function(){
+						return tooltip.style("visibility", "hidden");
+					})
+			} else{
+				nodeEnter.append("svg:image")
+					.attr("xlink:href", function(d){
+						return d.icona;
+					})
+					.attr("x", "-12px")
+					.attr("y", "-12px")
+					.attr("width", "24px")
+					.attr("height", "24px")
+					.on("mouseover", function(d){
+						return tooltip.style("visibility", "visible").html(populateTooltip(d));
+					})
+					.on("mousemove", function(){
+						return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mouseout", function(){
+						return tooltip.style("visibility", "hidden");
+					})
+			}
+			//endregion
+
+			//region Testo del Nome e dei punti
+			if(orientamento == 'verticale'){
+				nodeEnter.append("svg:text")
+					.attr("x", function(d){
+						return d.children || d._children ? -30 : -30;
+					})
+					.attr("y", function(d){
+						return d.children || d._children ? 18 : 18;
+					})
+					.attr("dy", ".35em")
+					.attr("text-anchor", function(d){
+						return d.children || d._children ? "start" : "start";
 					})
 					.text(function(d){
-						var txt = '';
-						txt = txt + d.name;
-						if(d.punti != 'assenti'){
-							txt = txt + ' [' + d.punti + ']';
-						}
-						return txt;
+						return d.name + ' [' + d.punti + ']';
 					})
-					.style('fill-opacity', 1e-6)
-					.style('font-style', 'normal')
-					.style('fill', function(d){
-						return d.children || d._children ? '000000' : 'blue';
-					});
 
-				nodeEnter.append('svg:image')
-					.attr('width', '19px')
-					.attr('height', '19px')
-					.attr('text-anchor', function(d){
-						return d.children || d._children ? 'end' : 'start';
-					})
-					.attr('y', '15px')
-					.style('opacity', function(d){
-						if(d.icona_guida === '1'){
-							if(d.Qualificato === '1'){
-								return 1;
-							} else{
-								return 0.2;
-							}
-						} else{
-							return 0;
-						}
-					});
-
-				var nodeUpdate = node.transition()
-					.duration(duration)
-					.attr('transform', function(d){
-						return 'translate(' + d.x + ',' + d.y + ')';
+					.style("fill-opacity", 1e-6)
+					.style("font-style", "normal")
+					.style("fill", function(d){
+						return d.children || d._children ? "000000" : "blue";
 					});
 			} else{
-				nodeEnter.append('svg:text')
-					.attr('x', function(d){
+				nodeEnter.append("svg:text")
+					.attr("x", function(d){
 						return d.children || d._children ? -10 : 10;
 					})
-					.attr('dy', '.35em')
-					.attr('text-anchor', function(d){
-						return d.children || d._children ? 'end' : 'start';
+					.attr("dy", ".35em")
+					.attr("text-anchor", function(d){
+						return d.children || d._children ? "end" : "start";
 					})
 					.text(function(d){
-						var txt = '';
+						var txt = "";
 						txt = txt + d.name;
 						if(d.punti != 'assenti'){
 							txt = txt + ' [' + d.punti + ']';
 						}
 						return txt;
 					})
-					.style('fill-opacity', 1e-6)
-					.style('font-style', 'normal')
-					.style('fill', function(d){
-						return d.children || d._children ? '000000' : 'blue';
-					});
-
-				nodeEnter.append('svg:image')
-					.attr('width', '19px')
-					.attr('height', '19px')
-					.attr('text-anchor', function(d){
-						return d.children || d._children ? 'start' : 'start';
-					})
-					.attr('y', '15px')
-					.style('opacity', function(d){
-						if(d.icona_guida === '1'){
-							if(d.Qualificato === '1'){
-								return 1;
-							} else{
-								return 0.2;
-							}
-						} else{
-							return 0;
-						}
-					});
-
-				var nodeUpdate = node.transition()
-					.duration(duration)
-					.attr('transform', function(d){
-						return 'translate(' + d.y + ',' + d.x + ')';
+					.style("fill-opacity", 1e-6)
+					.style("font-style", "normal")
+					.style("fill", function(d){
+						return d.children || d._children ? "000000" : "blue";
 					});
 			}
+			//endregion
 
-			nodeUpdate.select('circle')
-				.attr('r', 4.5)
-				.style('fill', function(d){
-					return d._children ? 'lightsteelblue' : '#fff';
+			//region Transition nodes to their new position
+			if(orientamento == 'verticale'){
+				var nodeUpdate = node.transition()
+					.duration(duration)
+					.attr("transform", function(d){
+						return "translate(" + d.x + "," + d.y + ")";
+					});
+			} else{
+				var nodeUpdate = node.transition()
+					.duration(duration)
+					.attr("transform", function(d){
+						return "translate(" + d.y + "," + d.x + ")";
+					});
+			}
+			//endregion
+
+			//region Opacità per Ibo non Attivi
+			nodeUpdate.select("image")
+				.style("opacity", function(d){
+					if(d.qualificato == 1){
+						return 1;
+					} else{
+						return 0.3;
+					}
 				});
-
-			nodeUpdate.select('image').style('opacity', function(d){
-				if(d.Qualificato === '1'){
-					return 1;
-				} else{
-					return 0.2;
-				}
-			});
 
 			nodeUpdate.select("text")
 				.style("fill-opacity", 1);
+			//endregion
 
+			//region Transition exiting nodes to the parent's new position
 			if(orientamento == 'verticale'){
 				var nodeExit = node.exit().transition()
 					.duration(duration)
-					.attr('transform', function(d){
-						return 'translate(' + source.x + ',' + source.y + ')';
+					.attr("transform", function(d){
+						return "translate(" + source.x + "," + source.y + ")";
 					})
 					.remove();
 			} else{
 				var nodeExit = node.exit().transition()
 					.duration(duration)
-					.attr('transform', function(d){
-						return 'translate(' + source.y + ',' + source.x + ')';
+					.attr("transform", function(d){
+						return "translate(" + source.y + "," + source.x + ")";
 					})
 					.remove();
 			}
+			//endregion
 
-			nodeExit.select('circle')
-				.attr('r', 1e-6);
+			nodeExit.select("circle")
+				.attr("r", 1e-6);
 
-			nodeExit.select('text')
-				.style('fill-opacity', 1e-6);
+			nodeExit.select("text")
+				.style("fill-opacity", 1e-6);
 
-			var link = vis.selectAll('path.link')
+			//region Update the links…
+			var link = vis.selectAll("path.link")
 				.data(tree.links(nodes), function(d){
 					return d.target.id;
 				});
+			//endregion
 
-			link.enter().insert('svg:path', 'g')
-				.attr('class', 'link')
-				.attr('d', function(d){
+			//region Enter any new links at the parent's previous position.
+			link.enter().insert("svg:path", "g")
+				.attr("class", "link")
+				.attr("d", function(d){
 					var o = {x: source.x0, y: source.y0};
 					return diagonal({source: o, target: o});
 				})
 				.transition()
 				.duration(duration)
-				.attr('d', diagonal);
+				.attr("d", diagonal);
+			//endregion
 
+			//region Transition links to their new position.
 			link.transition()
 				.duration(duration)
-				.attr('d', diagonal);
+				.attr("d", diagonal);
+			//endregion
 
+			//region Transition exiting nodes to the parent's new position.
 			link.exit().transition()
 				.duration(duration)
-				.attr('d', function(d){
+				.attr("d", function(d){
 					var o = {x: source.x, y: source.y};
 					return diagonal({source: o, target: o});
 				})
 				.remove();
+			//endregion
 
+			//region Stash the old positions for transition.
 			nodes.forEach(function(d){
 				d.x0 = d.x;
 				d.y0 = d.y;
 			});
+			//endregion
 		}
 
+		// Toggle children.
 		function toggle(d){
 			if(d.children){
 				d._children = d.children;
@@ -710,23 +735,6 @@
 				d._children = null;
 			}
 		}
-
-		function toggleAll(d){
-			if(d.children){
-				d.children.forEach(toggleAll);
-				toggle(d);
-			}
-		}
-
-		function toggleAllLevels(d){
-			if(d.livello < livello){
-				toggle(d);
-				if(d.children){
-					d.children.forEach(toggleAllLevels);
-				}
-			}
-		}
-
     </script>
 
 {% endblock javascript_page %}
