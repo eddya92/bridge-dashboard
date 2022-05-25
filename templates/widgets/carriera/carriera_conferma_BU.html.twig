@@ -10,10 +10,19 @@
             La tua qualifica è <span class="span_qualifica_1"> {{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update mt-custom-n1">
-            <p>Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica<span class="span_qualifica_2"> {{ info.rankSuccessivo.Nome }}</span> .<br>
-            Ricorda di cliccare su "CONFERMA QUALIFICA" per ottenere la qualifica di Business unit dal prossimo mese
+            <p>Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica<span class="span_qualifica_2"> {{ info.rankSuccessivo.Nome }}</span> .
             </p>
-                <div class="text-center"><a href="{{ path('conferma-qualifica') }}" class="btn btn-primary m-auto col-10">Conferma qualifica</a></div>
+            {% if info.mostraTastoConferma %}
+                Ricorda di cliccare su "CONFERMA QUALIFICA" per ottenere la qualifica di Business unit dal prossimo mese
+                <br>
+                <div class="text-center">
+                    <a title="" href="{{ path('conferma-qualifica') }}" class="btn btn-primary m-auto col-10">Conferma qualifica</a>
+                </div>
+            {% else %}
+                <p>Hai confermato la qualifica <span class="span_qualifica_2"> {{ info.rankSuccessivo.Nome }}</span> .
+                </p>
+            {% endif %}
+
         </div>
     </div>
 </div>
