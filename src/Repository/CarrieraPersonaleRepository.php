@@ -20,5 +20,5 @@ interface CarrieraPersonaleRepository{
 	 */
 	public function infoProssimoRank(string $codice, string $locale) : array;
 
-	public function confermaQualifica() : ?Generator;
+	public function confermaQualificaBU();
 }

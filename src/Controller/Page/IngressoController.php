@@ -7,6 +7,7 @@ use App\Repository\AccountRepository;
 use App\Repository\ArticoliRepository;
 use App\Repository\KitsRepository;
 use App\Repository\RestApi\AuthenticatedConnectionCapability;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,19 +44,20 @@ final class IngressoController extends AbstractController{
 	 */
 	#[Route('/{_locale}/ingresso{utenza}', name: 'ingresso', methods: ['GET'], defaults: ['utenza' => ''])]
 	public function ingresso(string $_locale, Request $request, string $utenza) : Response{
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale, '');
-
-		if($account == null){
+		try{
+			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error',$exception->getCode() . " : " . $exception->getMessage());
 			return $this->redirectToRoute('logout');
 		}
 
 		//region controllo il ruolo dell'utente loggato, se è clinte mostro una pagina con la possibilità di trasformarsi in incaricato
 		if($account->getRuolo() === 'Cliente'){
 			$superiore = $this->getUser()->getSuperiore();
-			$ultimiArticoliVendutiGenerator = $this->articleRepository->getArticoliUltimiAcquisti($_locale);
 			$articoliPiuVendutiGenerator = $this->articleRepository->getArticoliPiuVenduti($_locale);
-
-			if($ultimiArticoliVendutiGenerator == null){
+			try{
+				$ultimiArticoliVendutiGenerator = $this->articleRepository->getArticoliUltimiAcquisti($_locale);
+			}catch(Exception $exception){
 				$ultimiArticoliVendutiGenerator = [];
 			}
 
@@ -88,7 +90,7 @@ final class IngressoController extends AbstractController{
 			);
 		}else{
 			if($utenza){
-				$account = $this->accountRepository->getAccount($utenza, $_locale,'');
+				$account = $this->accountRepository->getAccount($utenza, $_locale, '');
 			}
 			$superiore = $account->getSuperiore();
 			$utenza = $request->get('utenza', '');

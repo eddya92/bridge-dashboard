@@ -74,10 +74,6 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		}
 
 		return $results['data'];
-
-		//foreach($results['data'] as $item){
-		//	yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
-		//}
 	}
 
 	private function apiCallInfoProssimoRank(string $codice, string $locale){
@@ -101,39 +97,26 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		};
 	}
 
-	public function confermaQualifica() : ?Generator{
-		// TODO: Implement getCarriera() method.
+	public function confermaQualificaBU(){
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallConfermaQualifica());
-			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+			$results = $this->apiCallConfermaQualificaBU();
+		}catch(Exception $exception){
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
-		foreach($results['data'] as $item){
-			yield new QualificaViewModel($item['id'], $item['nome'], $item['colore'], $item['qualifica_attuale'], $item['descrizione'], $item['regole']);
-		}
+		return $results;
 	}
 
-	private function apiCallConfermaQualifica(){
-		return function(ItemInterface $item){
-			$response = $this->restApiConnection()
-				->withAuthentication($this->authenticationToken())
-				->client()
-				->request('GET', '/db-v1/carriere/conferma-qualifica');
-			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
+	private function apiCallConfermaQualificaBU(){
+		$response = $this->restApiConnection()
+			->withAuthentication($this->authenticationToken())
+			->client()
+			->request('POST', '/db-v1/carriere/conferma-qualifica-BU');
 
-			$item->expiresAfter($this->ttlForCarrieraPersonale);
-			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));
+		if($response->getStatusCode() != 200){
+			return [false, $response->getReasonPhrase()];
+		}
 
-			//per invalidarlo
-			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE)]);
-
-			if($response->getStatusCode() != 200){
-				throw new Exception($response->getReasonPhrase());
-			}
-
-			return (string) $response->getBody();
-		};
+		return [true, ''];
 	}
 }

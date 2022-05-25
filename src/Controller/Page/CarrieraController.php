@@ -5,6 +5,7 @@ namespace App\Controller\Page;
 
 use App\Repository\AndamentoAnnualeRepository;
 use App\Repository\CarrieraPersonaleRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,16 +137,15 @@ class CarrieraController extends AbstractController{
 	 */
 	#[Route('/conferma-qualifica', name: 'conferma-qualifica', methods: ['GET'])]
 	public function confermaQualifica() : Response{
-		$conferma = $this->carrieraPersonaleRepository->confermaQualifica();
+		try{
+			$conferma = $this->carrieraPersonaleRepository->confermaQualificaBU();
+			$this->addFlash('success', 'Qualifica confermata,ora sei un Business');
 
-		if($conferma === null){
-			$this->addFlash('error', 'Errore nella conferma della qualifica,riprovare');
+			return $this->redirectToRoute('ingresso');
+		}catch(Exception $exception){
+			$this->addFlash('error', 'Errore nella conferma della qualifica: ' . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
-
-		$this->addFlash('success', 'Qualifica confermata,ora sei un Business');
-
-		return $this->redirectToRoute('ingresso');
 	}
 }

@@ -33,6 +33,12 @@ final class InfoProssimoRank{
 			]);
 		}
 
+		if($info['rankSuccessivo']['soglie'][0]['obiettivoRaggiunto'] || $info['rankSuccessivo']['soglie'][0]['obiettivoRaggiunto']){
+			return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
+				'info' => $info,
+			]);
+		}
+
 		return $this->twig->render('widgets/carriera/carriera.html.twig', [
 			'info' => $info,
 		]);

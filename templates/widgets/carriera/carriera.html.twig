@@ -9,43 +9,43 @@
         <div class="news-update ">
             La tua qualifica è <span class="span_qualifica_1">{{ info.rankAttuale.Nome }}</span>
         </div>
-        <div class="news-update mt-custom-n1">
-            {% if info.rankSuccessivo.soglie is not empty %}
-                <p>La prossima qualifica è<span class="span_qualifica_2">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
-                </p>
-                {% for soglia in info.rankSuccessivo.soglie %}
-                    {% if soglia.nome != '' %}
-                        <p>&bull; <strong>{{ soglia.nome }}</strong></p>
+        <div class="news-update">
+            <p>La prossima qualifica è<span class="span_qualifica_2">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
+            </p>
+            {% for soglia in info.rankSuccessivo.soglie %}
+                {% if soglia.nome == '' %}
+                    <p>&bull; <strong>Modalità SLOW</strong></p>
+                {% endif %}
+                {% if soglia.descrizione == '' %}
+                    <p class="indent_15 ">2.000 COINS in un mese di cui 1.000 personali.</p>
+                {% endif %}
+                {% if soglia.obiettivoRaggiunto %}
+                    <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p>
+                {% endif %}
+                <div class="indent_15">
+                    <div class="progress mt-custom-n1">
+                        <div class="progress-bar-animated bg-secondary progress-bar-striped" role="progressbar" aria-valuenow="1000" style="width: {{ soglia.avanzamento.0 / soglia.avanzamento.1 * 100 }}%" aria-valuemin="50" aria-valuemax="{{ soglia.avanzamento.1 }}"></div>
+                    </div>
+                    <div class="mt-2">Al momento hai {{ soglia.alMomentoHai }} coins di cui {{ soglia.diCuiPersonali }} personali.</div>
+                    {% if soglia.obiettivoRaggiunto == false %}
+                        {% if soglia.avanzamento.0 < soglia.avanzamento.1  and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
+                            <div class="text-danger">
+                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS per raggiungere l'obbiettivo di cui {{ soglia.diCuiPersonaliPerObiettivo }} personali.
+                            </div>
+                        {% endif %}
+                        {% if soglia.avanzamento.0 > soglia.avanzamento.1 and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
+                            <div class="text-danger">
+                                Ti mancano {{ soglia.diCuiPersonaliPerObiettivo }} COINS personali per raggiungere l'obbiettivo.
+                            </div>
+                        {% endif %}
+                        {% if soglia.avanzamento.0 < soglia.avanzamento.1 and info.rankSuccessivo.soglie.0.diCuiPersonali >= 1000 %}
+                            <div class="text-danger">
+                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS per raggiungere l'obbiettivo.
+                            </div>
+                        {% endif %}
                     {% endif %}
-                    {% if soglia.descrizione != '' %}
-                        <p class="indent_15 mt-custom-n1">{{ soglia.descrizione }}</p>
-                    {% endif %}
-                {% endfor %}
-
-                {#
-                {#            <div class="indent_15"> #}
-                {#                <div class="progress mt-custom-n1"> #}
-                {#                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
-                {#                </div> #}
-                {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
-                {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
-                {#            </div> #}
-
-                {#            <p class="mt-2">&bull; <strong>Modalità SLOW</strong></p> #}
-                {#            <p class="indent_15 mt-custom-n1">1.000 COINS personali a Gennaio.</p> #}
-                {#            <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p> #}
-                {#            <hr /> #}
-                {#            <div class="indent_15"> #}
-                {#                <p class=" ">4.000 COINS di cui 2.000 personali periodo Gennaio / Marzo.</p> #}
-                {#                <div class="progress mt-custom-n1"> #}
-                {#                    <div class="progress-bar-animated bg-primary progress-bar-striped " role="progressbar" style="width: {{ info.qualifica }}%" aria-valuenow=" {{ info.qualifica }} " aria-valuemin="0" aria-valuemax="100"></div> #}
-                {#                </div> #}
-                {#                <div class="mt-2">Al momento hai 1.500 coins di cui 900 personali.</div> #}
-                {#                <div class="text-danger">Ti mancano 500 COINS per raggiungere l'obbiettivo di cui 100 personali.</div> #}
-                {#            </div> #}
-            {% else %}
-                <p>Hai raggiunto la QUALIFICA MASSIMA del Piano Marketing!</p>
-            {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
