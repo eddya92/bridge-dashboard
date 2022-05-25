@@ -9,7 +9,6 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-use function dd;
 
 final class InfoProssimoRank{
 	public function __construct(private Environment $twig, private CarrieraPersonaleRepository $carrieraPersonaleRepository
@@ -24,7 +23,6 @@ final class InfoProssimoRank{
 	 * @throws LoaderError|RuntimeError|SyntaxError
 	 */
 	public function main(string $codice, string $locale) : string{
-
 		try{
 			$info = $this->carrieraPersonaleRepository->infoProssimoRank($codice, $locale);
 		}catch(Exception $exception){
@@ -33,14 +31,42 @@ final class InfoProssimoRank{
 			]);
 		}
 
-		if($info['rankSuccessivo']['soglie'][0]['obiettivoRaggiunto'] || $info['rankSuccessivo']['soglie'][0]['obiettivoRaggiunto']){
+		//region Controllo se ci sono obbiettiviRaggoiunti
+		$almenoUnobbiettivoRaggiunto = false;
+		foreach($info['rankSuccessivo']['soglie'] as $soglia){
+			if($soglia['obiettivoRaggiunto']){
+				$almenoUnobbiettivoRaggiunto = true;
+				break;
+			}
+		}
+		//endregion
+
+		//region Qualifica PROMOTER(Che deve confermare la BU)
+		if($info['rankAttuale']['Id'] === 49 && $almenoUnobbiettivoRaggiunto){
 			return $this->twig->render('widgets/carriera/carriera_conferma_BU.html.twig', [
 				'info' => $info,
 			]);
 		}
+		//endregion
 
-		return $this->twig->render('widgets/carriera/carriera.html.twig', [
-			'info' => $info,
+		//region Qualifica PROMOTER
+		if($info['rankAttuale']['Id'] === 49){
+			return $this->twig->render('widgets/carriera/carriera.html.twig', [
+				'info' => $info,
+			]);
+		}
+		//endregion
+
+		//region Mantenimanto Qualifiche
+		if($info['rankAttuale']['Id'] === 86 || $info['rankAttuale']['Id'] === 95){
+			return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
+				'info' => $info,
+			]);
+		}
+		//endregion
+
+		return $this->twig->render('widgets/carriera/carriera_error.html.twig', [
+			'messaggio' => 'Errore nel calcolo della qualifica,riprovare!',
 		]);
 	}
 }
