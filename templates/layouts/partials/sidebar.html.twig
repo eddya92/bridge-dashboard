@@ -116,18 +116,18 @@
 
                     {% if app.user.idRuolo == 'ibo' %}
                         <!--region guadagni e bonus-->
-                        <!--<li class="sidebar-main-title">
+                        <li class="sidebar-main-title">
                             <div>
                                 <h6>{% trans %}Guadagni{% endtrans %}</h6>
                                 <p>{% trans %}Consulta e richiedi le provvigioni{% endtrans %}</p>
                             </div>
                         </li>
                         <li class="sidebar-list ">
-                            <a class="sidebar-link sidebar-title link-nav " href="{{ path('bonus') }}"><i data-feather="award"></i><span>{% trans %}Bonus{% endtrans %}</span></a>
+                            <a title="{% trans %}Bonus{% endtrans %}" class="sidebar-link sidebar-title link-nav " href="{{ path('bonus') }}"><i data-feather="award"></i><span>{% trans %}Bonus{% endtrans %}</span></a>
                         </li>
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>{% trans %}eWallet{% endtrans %}</span></a>
-                        </li>-->
+{#                        <li class="sidebar-list">#}
+{#                            <a class="sidebar-link sidebar-title link-nav" href=""><i data-feather="download"></i><span>{% trans %}eWallet{% endtrans %}</span></a>#}
+{#                        </li>#}
                         <!--endregion guadagni e bonus-->
                     {% endif %}
 

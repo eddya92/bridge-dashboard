@@ -41,7 +41,8 @@
                     <div class="col-sm-6 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
+                            <li class="breadcrumb-item">
+                                <a title="Home" href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
                             </li>
                             <li class="breadcrumb-item">{% trans %}Virtual Office{% endtrans %}</li>
                             <li class="breadcrumb-item active">{% trans %}Bonus{% endtrans %}</li>
@@ -364,7 +365,11 @@
 
 				xaxis: {
 					type: 'string',
-					categories: ["{% trans %}Gen{% endtrans %}", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+					categories: [
+                        {% for etichettaMese in etichetteMesi %}
+						"{{ etichettaMese }}",
+                        {% endfor %}
+					],
 				},
 				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
 			}
@@ -380,4 +385,3 @@
 		});
     </script>
 {% endblock javascript_page %}
-
