@@ -24,7 +24,10 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 	){
 	}
 
-	public function listaBonus(int $anno,string $locale) : ?Generator{
+	/**
+	 * @inheritdoc
+	 */
+	public function listaBonus(int $anno, string $locale) : ?Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallListaBonus($anno, $locale));
 			$results = Json::decode($cached);
@@ -40,7 +43,7 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallListaBonus(int $anno,string $locale) : callable{
+	private function apiCallListaBonus(int $anno, string $locale) : callable{
 		if($anno == 0){
 			$anno = date('Y');
 		}
@@ -50,10 +53,9 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->request('GET', '/db-v1/guadagni/bonus?anno=' . $anno);
-				//->request('GET', '/db-v1/guadagni/bonus?anno=' . $anno . '&locale=' . $locale );
 
 			$item->expiresAfter($this->ttlForBonus);
-			$item->tag($this->authenticatedCacheTag(self::TAG_BONUS ));
+			$item->tag($this->authenticatedCacheTag(self::TAG_BONUS));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_BONUS)]);
@@ -66,5 +68,3 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 		};
 	}
 }
-
-

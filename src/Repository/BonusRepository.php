@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use Generator;
+use App\ViewModel\BonusViewModel;
 
 interface BonusRepository{
 	public const TAG_BONUS = 'bonus';
 
-	public function listaBonus(int $anno,string $locale) : ?Generator;
+	/**
+	 * @param int    $anno
+	 * @param string $locale
+	 *
+	 * @return iterable<BonusViewModel>|null
+	 */
+	public function listaBonus(int $anno,string $locale) : ?iterable;
 }
