@@ -83,11 +83,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * Aggiorna la password di un utente
-	 *
-	 * @param string $vecchiaPassword
-	 * @param string $nuovaPassword
-	 * @param string $confermaPassword
+	 * @inheritDoc
 	 *
 	 * @return array
 	 * @throws Exception|InvalidArgumentException
@@ -129,16 +125,12 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$message = Error::format($message);
 			throw new Exception($message);
 		}
+
 		$this->logger->info('CHIAMATA AGGIORNA ACCOUNT ', ['GET', '/db-v1/utenti/dati-account' . 'form_params' => [
 			'password_old'  => $vecchiaPassword,
 			'password_new'  => $nuovaPassword,
 			'password_new2' => $confermaPassword,
 		], [$response->getBody()]]);
-
-		$lingue = explode(',', $this->locales);
-		foreach($lingue as $lingua){
-			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_ACCOUNT . "[" . $lingua . "]")]);
-		}
 
 		if($response->getStatusCode() != 200){
 			throw new Exception($response->getReasonPhrase());
@@ -148,6 +140,8 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
+	 * @inheritDoc
+	 *
 	 * @return array
 	 * @throws GuzzleException
 	 */
@@ -187,13 +181,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $codiceSponsor
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $email
-	 * @param string $password
-	 * @param string $nazione
-	 * @param array  $agreements
+	 * @inheritDoc
 	 *
 	 * @return array
 	 * @throws GuzzleException
@@ -209,13 +197,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $codiceSponsor
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $email
-	 * @param string $password
-	 * @param string $nazione
-	 * @param array  $agreements
+	 * Chiamata api per la registrazione Incaricato
 	 *
 	 * @return array
 	 * @throws GuzzleException
@@ -253,15 +235,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $codiceSponsor
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $ragioneSociale
-	 * @param string $naturaGiuridica
-	 * @param string $email
-	 * @param string $password
-	 * @param string $nazione
-	 * @param array  $agreements
+	 * @inheritDoc
 	 *
 	 * @return array
 	 * @throws GuzzleException
@@ -277,15 +251,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $codiceSponsor
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $ragioneSociale
-	 * @param string $naturaGiuridica
-	 * @param string $email
-	 * @param string $password
-	 * @param string $nazione
-	 * @param array  $agreements
+	 * Chiamata api per la registrazione Cliente
 	 *
 	 * @return array
 	 * @throws GuzzleException
@@ -315,14 +281,18 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @return \App\ViewModel\ResidenzaViewModel|null
+	 * @inheritDoc
+	 *
+	 * @return \App\ViewModel\ResidenzaViewModel
+	 * @throws \Psr\Cache\InvalidArgumentException
 	 */
-	public function getResidenza(string $locale) : ?ResidenzaViewModel{
+	public function getResidenza(string $locale) : ResidenzaViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallResidenza($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage(), 1,);
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -357,19 +327,11 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $indirizzo
-	 * @param string $numeroCivico
-	 * @param string $cap
-	 * @param string $comune
-	 * @param string $provincia
-	 * @param string $nazione
+	 * @inheritDoc
 	 *
-	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public function aggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione) : array{
+	public function aggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione){
 		try{
 			$results = $this->apiCallAggiornaDatiResidenza($nome, $cognome, $indirizzo, $numeroCivico, $cap, $comune, $provincia, $nazione);
 		}catch(Exception $exception){
@@ -380,19 +342,11 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	}
 
 	/**
-	 * @param string $nome
-	 * @param string $cognome
-	 * @param string $indirizzo
-	 * @param string $numeroCivico
-	 * @param string $cap
-	 * @param string $comune
-	 * @param string $provincia
-	 * @param string $nazione
+	 * Chiamata api per aggiornare la i dati di residenza
 	 *
-	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	private function apiCallAggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione) : array{
+	private function apiCallAggiornaDatiResidenza(string $nome, string $cognome, string $indirizzo, string $numeroCivico, string $cap, string $comune, string $provincia, string $nazione){
 		try{
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
@@ -424,16 +378,15 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			throw new Exception($response->getReasonPhrase());
 		}
 
-		return [true, ''];
+		return $response;
 	}
 
 	/**
-	 * @param string $email
+	 * @inheritDoc
 	 *
-	 * @return array
 	 * @throws InvalidArgumentException|GuzzleException
 	 */
-	public function inviaMailRecuperoPassword(string $email) : array{
+	public function inviaMailRecuperoPassword(string $email){
 		try{
 			$results = $this->apiCallInviaMailRecuperoPassword($email);
 		}catch(Exception $exception){
@@ -446,10 +399,9 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	/**
 	 * @param string $email
 	 *
-	 * @return array
 	 * @throws GuzzleException
 	 */
-	private function apiCallInviaMailRecuperoPassword(string $email) : array{
+	private function apiCallInviaMailRecuperoPassword(string $email){
 		$response = $this->restApiConnection()
 			->client()
 			->request('POST', '/db-v1/utenti/recupero-password', [
@@ -459,9 +411,9 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			]);
 
 		if($response->getStatusCode() != 200){
-			return [false, $response->getReasonPhrase()];
+			throw new Exception($response->getReasonPhrase());
 		}
 
-		return [true, ''];
+		return $response;
 	}
 }

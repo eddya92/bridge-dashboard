@@ -242,19 +242,41 @@ class OrdiniController extends AbstractController{
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
 
-		$filtroColonnaOrdinamento = match ($order[0]['column']) {
-			0 => 'data',
-			2 => 'incaricato',
-			3 => 'pc',
-			4 => 'totale',
-			5 => 'tipologia_ordine',
-			6 => 'esito',
-			default => 'codice',
-		};
-		$filtroDirezioneOrdinamento = match ($order[0]['dir']) {
-			'desc' => 'desc',
-			default => 'asc',
-		};
+		switch($order[0]['column']){
+			case 0:
+				$filtroColonnaOrdinamento = 'data';
+				break;
+			case 1:
+				$filtroColonnaOrdinamento = 'codice';
+				break;
+			case 2:
+				$filtroColonnaOrdinamento = 'incaricato';
+				break;
+			case 3:
+				$filtroColonnaOrdinamento = 'pc';
+				break;
+			case 4:
+				$filtroColonnaOrdinamento = 'totale';
+				break;
+			case 5:
+				$filtroColonnaOrdinamento = 'tipologia_ordine';
+				break;
+			case 6:
+				$filtroColonnaOrdinamento = 'esito';
+				break;
+			default:
+				$filtroColonnaOrdinamento = 'codice';
+		}
+		switch($order[0]['dir']){
+			case 'asc':
+				$filtroDirezioneOrdinamento = 'asc';
+				break;
+			case 'desc':
+				$filtroDirezioneOrdinamento = 'desc';
+				break;
+			default:
+				$filtroDirezioneOrdinamento = 'asc';
+		}
 
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $pag);

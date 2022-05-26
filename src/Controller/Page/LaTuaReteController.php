@@ -307,19 +307,41 @@ class LaTuaReteController extends AbstractController{
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
 
-		$filtroColonnaOrdinamento = match ($order[0]['column']) {
-			1 => 'livello',
-			2 => 'incaricato',
-			3 => 'qualifica',
-			4 => 'email',
-			5 => 'cellulare',
-			6 => 'sponsor',
-			default => 'codice',
-		};
-		$filtroDirezioneOrdinamento = match ($order[0]['dir']) {
-			'desc' => 'desc',
-			default => 'asc',
-		};
+		switch($order[0]['column']){
+			case 0:
+				$filtroColonnaOrdinamento = 'codice';
+				break;
+			case 1:
+				$filtroColonnaOrdinamento = 'livello';
+				break;
+			case 2:
+				$filtroColonnaOrdinamento = 'incaricato';
+				break;
+			case 3:
+				$filtroColonnaOrdinamento = 'qualifica';
+				break;
+			case 4:
+				$filtroColonnaOrdinamento = 'email';
+				break;
+			case 5:
+				$filtroColonnaOrdinamento = 'cellulare';
+				break;
+			case 6:
+				$filtroColonnaOrdinamento = 'sponsor';
+				break;
+			default:
+				$filtroColonnaOrdinamento = 'codice';
+		}
+		switch($order[0]['dir']){
+			case 'asc':
+				$filtroDirezioneOrdinamento = 'asc';
+				break;
+			case 'desc':
+				$filtroDirezioneOrdinamento = 'desc';
+				break;
+			default:
+				$filtroDirezioneOrdinamento = 'asc';
+		}
 
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 

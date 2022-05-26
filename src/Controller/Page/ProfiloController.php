@@ -382,23 +382,16 @@ class ProfiloController extends AbstractController{
 	 */
 	#[Route('/{_locale}/dati-personali', name: 'dati-personali', methods: ['GET'])]
 	public function datiResidenza(Request $request, $_locale){
-		$locale = $request->getLocale();
-		$residenza = $this->accountRepository->getResidenza($locale);
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
-		$nazione = $account->getNazioneResidenza();
-		$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
-		$contatti = $this->contattiRepository->getContatti($_locale);
+		try{
+			$residenza = $this->accountRepository->getResidenza($_locale);
+			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+			$nazione = $account->getNazioneResidenza();
+			$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
+			$contatti = $this->contattiRepository->getContatti($_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
 
-		if($datiFiscali == null){
-			$datiFiscali = [];
-		}
-
-		if($residenza == null){
-			$residenza = [];
-		}
-
-		if($contatti == null){
-			$contatti = [];
+			return $this->redirectToRoute('ingresso');
 		}
 
 		//é false quando non viene gestito da noi(.env)
@@ -448,24 +441,9 @@ class ProfiloController extends AbstractController{
 		$cellulare = trim($request->request->get('cellulare', ''));
 
 		try{
-			[$result, $error_msg] = $this->accountRepository->aggiornaDatiResidenza($nome, $cognome, $indirizzo, $numeroCivico, $cap, $comune, $provincia, $nazione);
-			if($result){
-				$this->addFlash('success', 'Informazioni aggiornate correttamente.');
-			}else{
-				throw new Exception($error_msg);
-			}
-			[$result, $error_msg] = $this->datiFiscaliRepository->aggiornaDatiFiscali($codice_fiscale, $piva, $pec, $codice_univoco);
-			if($result){
-				$this->addFlash('success', 'Aggiornamento dati fiscali avvenuto con successo');
-			}else{
-				throw new Exception($error_msg);
-			}
-			//	[$result, $error_msg] = $this->contattiRepository->aggiornaContatti($telefono, $cellulare);
-			//	if($result){
-			//		$this->addFlash('success', 'Aggiornamento contatti avvenuto con successo');
-			//	}else{
-			//		throw new Exception($error_msg);
-			//	}
+			$this->accountRepository->aggiornaDatiResidenza($nome, $cognome, $indirizzo, $numeroCivico, $cap, $comune, $provincia, $nazione);
+			$this->datiFiscaliRepository->aggiornaDatiFiscali($codice_fiscale, $piva, $pec, $codice_univoco);
+			$this->addFlash('success', 'dati aggiornati corrrettamente!');
 		}catch(Exception $e){
 			$this->addFlash('error', $e->getMessage());
 		}

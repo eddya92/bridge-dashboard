@@ -77,14 +77,10 @@ class Security extends AbstractController{
 		}
 
 		try{
-			[$result, $error_msg] = $this->accountRepository->inviaMailRecuperoPassword($request->get('code_or_email', ''));
-			if($result){
-				$this->addFlash('success', 'Informazioni aggiornate correttamente.');
+			$this->accountRepository->inviaMailRecuperoPassword($request->get('code_or_email', ''));
+			$this->addFlash('success', 'Richiesta inviata correttamente.');
 
-				return $this->redirectToRoute('forgotPasswordSent');
-			}else{
-				throw new Exception($error_msg);
-			}
+			return $this->redirectToRoute('forgotPasswordSent');
 		}catch(Exception $e){
 			$this->addFlash('error', $e->getMessage());
 
@@ -92,7 +88,8 @@ class Security extends AbstractController{
 		}
 	}
 
-	#[Route('/forgot-password-sent', name: 'forgotPasswordSent', methods: ['GET'])]
+	#[
+		Route('/forgot-password-sent', name: 'forgotPasswordSent', methods: ['GET'])]
 	public function forgotPasswordSent(Request $request) : Response{
 		if($this->getUser()){
 			return $this->redirectToRoute('ingresso');

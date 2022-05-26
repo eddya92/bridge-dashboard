@@ -70,11 +70,18 @@ final class RegistrazioneIBOController extends AbstractController{
 		if($this->getParameter('enable_trasformazione_ibo') === 'false'){
 			return $this->redirectToRoute('error404');
 		}
-		$residenza = $this->accountRepository->getResidenza($_locale);
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale, '');
-		$nazione = $account->getNazioneResidenza();
-		$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
-		$contatti = $this->contattiRepository->getContatti($_locale);
+
+		try{
+			$residenza = $this->accountRepository->getResidenza($_locale);
+			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale, '');
+			$nazione = $account->getNazioneResidenza();
+			$datiFiscali = $this->datiFiscaliRepository->getDatiFiscali($_locale);
+			$contatti = $this->contattiRepository->getContatti($_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
+
+			return $this->redirectToRoute('ingresso');
+		}
 
 		if($datiFiscali == null){
 			$datiFiscali = [];

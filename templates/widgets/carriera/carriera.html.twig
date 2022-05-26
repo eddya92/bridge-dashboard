@@ -7,21 +7,18 @@
 
     <div id="info_container" class="card-body p-0">
         <div class="news-update ">
-            La tua qualifica è <span class="span_qualifica_1">{{ info.rankAttuale.Nome }}</span>
+            La tua qualifica è
+            <span class="span_qualifica_1" style="border: 1px solid {{ info.rankSuccessivo.Colore }};">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update">
-            <p>La prossima qualifica è<span class="span_qualifica_2">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
+            <p>La prossima qualifica è<span class="span_qualifica_1" style="border: 1px solid {{ info.rankSuccessivo.Colore }};">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
             </p>
             {% for soglia in info.rankSuccessivo.soglie %}
-                {% if soglia.nome == '' %}
-                    <p>&bull; <strong>Modalità SLOW</strong></p>
-                {% endif %}
-                {% if soglia.descrizione == '' %}
-                    <p class="indent_15 ">2.000 COINS in un mese di cui 1.000 personali.</p>
-                {% endif %}
-                {% if soglia.obiettivoRaggiunto %}
-                    <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p>
-                {% endif %}
+                    <p>&bull; <strong>{{ soglia.nome }}</strong></p>
+                    <p class="indent_15 ">{{ soglia.descrizione }}.</p>
+{#                {% if soglia.obiettivoRaggiunto %}#}
+{#                    <p class="indent_15 mt-custom-n2 text-custom-green">Obbiettivo raggiunto con 1.200 personali.</p>#}
+{#                {% endif %}#}
                 <div class="indent_15">
                     <div class="progress mt-custom-n1">
                         <div class="progress-bar-animated bg-secondary progress-bar-striped" role="progressbar" aria-valuenow="1000" style="width: {{ soglia.avanzamento.0 / soglia.avanzamento.1 * 100 }}%" aria-valuemin="50" aria-valuemax="{{ soglia.avanzamento.1 }}"></div>
@@ -30,7 +27,7 @@
                     {% if soglia.obiettivoRaggiunto == false %}
                         {% if soglia.avanzamento.0 < soglia.avanzamento.1  and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
                             <div class="text-danger">
-                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS per raggiungere l'obbiettivo di cui {{ soglia.diCuiPersonaliPerObiettivo }} personali.
+                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS di cui {{ soglia.diCuiPersonaliPerObiettivo }} personali, per raggiungere l'obbiettivo .
                             </div>
                         {% endif %}
                         {% if soglia.avanzamento.0 > soglia.avanzamento.1 and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
