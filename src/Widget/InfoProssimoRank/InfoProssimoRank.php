@@ -57,7 +57,7 @@ final class InfoProssimoRank{
 		}
 		//endregion
 
-		//region Mantenimanto Qualifiche
+		//region Mantenimento Qualifiche
 		if($info['rankAttuale']['Id'] === 86 || $info['rankAttuale']['Id'] === 95){
 			return $this->twig->render('widgets/carriera/carriera_BU.html.twig', [
 				'info' => $info,
