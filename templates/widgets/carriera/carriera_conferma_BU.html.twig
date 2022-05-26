@@ -7,19 +7,20 @@
 
     <div id="carriera_container" class="card-body p-0">
         <div class="news-update ">
-            La tua qualifica è <span class="span_qualifica_1"> {{ info.rankAttuale.Nome }}</span>
+            La tua qualifica è <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}"> {{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update mt-custom-n1">
-            <p>Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica<span class="span_qualifica_2"> {{ info.rankSuccessivo.Nome }}</span> .
+            <p>Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankSuccessivo.Colore }}"> {{ info.rankSuccessivo.Nome }}</span> .
             </p>
             {% if info.mostraTastoConferma %}
                 Ricorda di cliccare su "CONFERMA QUALIFICA" per ottenere la qualifica di Business unit dal prossimo mese
+                <br>
                 <br>
                 <div class="text-center">
                     <a title="" href="{{ path('conferma-qualifica') }}" class="btn btn-primary m-auto col-10">Conferma qualifica</a>
                 </div>
             {% else %}
-                <p>Hai confermato la qualifica <span class="span_qualifica_2"> {{ info.rankSuccessivo.Nome }}</span> .
+                <p>Hai confermato la qualifica <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}"> {{ info.rankAttuale.Nome }}</span> .
                 </p>
             {% endif %}
 

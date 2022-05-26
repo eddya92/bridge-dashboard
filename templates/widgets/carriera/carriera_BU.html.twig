@@ -7,17 +7,17 @@
 
     <div id="carriera_container" class="card-body p-0">
         <div class="news-update ">
-            La tua qualifica è <span class="span_qualifica_1">{{ info.rankAttuale.Nome }}</span>
+            La tua qualifica è <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update ">
-            <p>Per mantere la tua qualifica di<span class="span_qualifica_2">{{ info.rankAttuale.Nome }}</span> occorre totalizzare {{ info.mantenimento.puntiMantenimentoNecessari }} COINS nel mese.
+            <p>Per mantere la tua qualifica di<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span> occorre totalizzare {{ info.mantenimento.puntiMantenimentoNecessari }} COINS nel mese.
             </p>
             <div class="">
                 <div class="progress ">
                     <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ info.mantenimento.avanzamento.0 / info.mantenimento.avanzamento.1 * 100 }}%" aria-valuenow=" TEAM LEADEr " aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 {% if not info.mantenimento.rankMantenuto %}
-                    <div class="text-danger mt-1">Al momento hai {{ info.mantenimento.alMomentoHai }} COINS,pertanto non stai mantenendo la qualifica.</div>
+                    <div class="text-danger mt-1">Al momento hai {{ info.mantenimento.alMomentoHai }} COINS, pertanto non stai mantenendo la qualifica.</div>
                 {% else %}
                     <div class="mt-1">Hai mantenuto la qualifica con {{ info.mantenimento.haiMantenutoRankCon }} COINS.</div>
                 {% endif %}
@@ -25,16 +25,14 @@
 
             <div class="row border mt-2">
                 {% if info.mantenimento.isRegalato and info.mantenimento.isRegalatoPerUltimaVolta  %}
-                    <div class="col-3 text-center text-danger"><i class="  fa fa-5x fa-gift"></i></div>
-                    <div class="col-9 text-danger">Attenzione! Questo mese non avrai diritto al mantenimento della Business unit in assenza dei requisiti</div>
                 {% else %}
                 <div class="col-3 text-center"><i class="  fa fa-5x fa-gift"></i></div>
                 <div class="col-9">Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti</div>
                 {% endif %}
             </div>
-            {% if info.rankSuccessivo.Nome != 'HAI RAGGIUNTO LA QUALIFICA MASSIMA!' %}
-                 <div class="mt-2">La prossima qualifica TEAM BUSINESS UNIT si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit.</div>
-                 <div class="text-danger">Al momento non hai collaboratori con qualifica business unit nella tua struttura.</div>
+            {% if info.rankAttuale.Id != 95 %}
+                 <div class="mt-2">La prossima qualifica {{ info.rankSuccessivo.Nome }} si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit.</div>
+                 <div class="text-danger">Al momento non hai collaboratori con qualifica {{ info.rankSuccessivo.Nome }} nella tua struttura.</div>
             {% else %}
                 <div class="mt-2" style="{{ info.rankSuccessivo.Colore }}"> Hai raggiunto la qualifica massima {{ info.rankSuccessivo.Nome }}</div>
             {% endif %}

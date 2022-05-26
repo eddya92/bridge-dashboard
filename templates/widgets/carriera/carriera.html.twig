@@ -8,10 +8,10 @@
     <div id="info_container" class="card-body p-0">
         <div class="news-update ">
             La tua qualifica è
-            <span class="span_qualifica_1" style="border: 1px solid {{ info.rankSuccessivo.Colore }};">{{ info.rankAttuale.Nome }}</span>
+            <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update">
-            <p>La prossima qualifica è<span class="span_qualifica_1" style="border: 1px solid {{ info.rankSuccessivo.Colore }};">{{ info.rankSuccessivo.Nome }}</span> si ottiene con:
+            <p>La prossima qualifica è<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankSuccessivo.Colore }}">{{ info.rankSuccessivo.Nome }}</span> e si ottiene con:
             </p>
             {% for soglia in info.rankSuccessivo.soglie %}
                     <p>&bull; <strong>{{ soglia.nome }}</strong></p>
