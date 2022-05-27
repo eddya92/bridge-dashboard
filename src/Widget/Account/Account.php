@@ -20,7 +20,7 @@ final class Account{
 			$template_twig = 'widgets/account/sponsor.html.twig';
 		}
 		try{
-			$account = $this->accountRepository->getAccount('0000000', $locale);
+			$account = $this->accountRepository->getAccount($codice, $locale);
 			if($simulazione){
 				$account = $this->accountRepository->getAccount($account->getSuperiore(), $locale);
 			}
