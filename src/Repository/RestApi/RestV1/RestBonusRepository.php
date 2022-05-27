@@ -31,8 +31,9 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallListaBonus($anno, $locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage(), 1,);
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $mese){

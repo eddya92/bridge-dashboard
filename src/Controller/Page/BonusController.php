@@ -5,6 +5,7 @@ namespace App\Controller\Page;
 
 use App\Repository\AccountRepository;
 use App\Repository\BonusRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -113,6 +114,7 @@ class BonusController extends AbstractController{
 				'etichetteMesi'   => $etichetteMesi, // array di anni a partire dalla data scelta a oggi
 			]);
 		}
+
 		//endregion
 		return $this->render('error_pages/error_404.html.twig');
 	}
@@ -128,8 +130,11 @@ class BonusController extends AbstractController{
 		}
 		$anno = intval($anno);
 
-		$bonusAnnui = $this->repository->listaBonus($anno, $request->getLocale());
-
+		try{
+			$bonusAnnui = $this->repository->listaBonus($anno, $request->getLocale());
+		}catch(Exception $exception){
+			$bonusAnnui = [];
+		}
 		//region 1.0 se la risposta dall'api è valida, prendo i dati dall'api e creo i dati per il datatable
 		$datatablesBonus = [];
 		if($bonusAnnui != null){
@@ -144,7 +149,7 @@ class BonusController extends AbstractController{
 					$attivo = '<span style="color:#922043;">' . "NO" . '</span>';
 				}
 
-				array_push($array, $item->getMeseTesto(), $item->getQualifica(), $attivo);
+				array_push($array, $item->getMeseTestoEsteso(), $item->getQualifica(), $attivo);
 
 				foreach($item->getBonus() as $bonus){
 					$array[] = $bonus['totale'];
@@ -152,16 +157,16 @@ class BonusController extends AbstractController{
 
 				$array[] = $item->getTotale();
 
-				$array[] = substr($item->getMese(), 5, 2);
+				$array[] = substr($item->getMeseTestoEsteso(), 5, 2);
 				$datatablesBonus[] = array_values($array);
 			}
 			//endregion
 		}
-
+		$countItems = count($datatablesBonus);
 		$elencoBonus = array(
 			'draw'            => time(),
-			'recordsTotal'    => 12,
-			'recordsFiltered' => 12,
+			'recordsTotal'    => $countItems,
+			'recordsFiltered' => $countItems,
 			'data'            => $datatablesBonus,
 		);
 
