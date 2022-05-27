@@ -2,18 +2,20 @@
     <div class="card-header">
         <img class="img-fluid" src="{{ asset('assets/images/sponsor_background_test.jpg') }}" alt=""></div>
     <div class="card-profile">
-        <img class="rounded-circle" src="{{ account.foto != '' ? account.foto : '/assets/images/foto_profilobase_minisito.jpg' }}" alt=""></div>
+        <img class="rounded-circle" src="{{ account.foto != '' ? account.foto : '/assets/images/foto_profilobase_minisito.jpg' }}" alt="">
+    </div>
     <div class="text-center profile-details">
 
         <h6>Il tuo Sponsor è</h6>
         <h4>{{ account.nominativo }}</h4>
         <h6>{{ account.qualifica }}</h6>
     </div>
-    <div class="m-3"></div>
     <p class="text-center">Codice {{ account.codice }}
+        {% if account.telefono %}
         <br/>
         {{ account.telefono }}
+        {% endif %}
         <br/>
-        {{ account.email }}
+         {{ account.email }}
     </p>
 </div>

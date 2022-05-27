@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace App\Widget\Account;
 
 use App\Repository\AccountRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Exception;
 use Twig\Environment;
-use function dd;
 
 final class Account{
 	public function __construct(
@@ -20,18 +19,23 @@ final class Account{
 		if($template == 'sponsor'){
 			$template_twig = 'widgets/account/sponsor.html.twig';
 		}
-		$account = $this->accountRepository->getAccount($codice, $locale);
-		if($simulazione){
-			$account = $this->accountRepository->getAccount($account->getSuperiore(), $locale);
-		}
+		try{
+			$account = $this->accountRepository->getAccount('0000000', $locale);
+			if($simulazione){
+				$account = $this->accountRepository->getAccount($account->getSuperiore(), $locale);
+			}
+		}catch(Exception $exception){
+			$template_twig = 'widgets/account/account_error.html.twig';
 
-		if($account !== null){
 			return $this->twig->render(
 				$template_twig, [
-				'account' => $account,
+				'message' => 'Problemi nel caricamento dei dati dell\'account con codice: ' . $codice . '<br>' . 'Error ' . $exception->getCode() . ': ' . $exception->getMessage(),
 			]);
-		}else{
-			return 'Account ' . $codice . ' non trovato.';
 		}
+
+		return $this->twig->render(
+			$template_twig, [
+			'account' => $account,
+		]);
 	}
 }
