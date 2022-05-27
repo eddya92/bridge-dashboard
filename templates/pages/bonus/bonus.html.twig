@@ -256,13 +256,13 @@
 				order: [7, 'desc'],
 				pageLength: 25,
 				columnDefs: [
-					{orderable: true, targets: 0},
-					{orderable: true, targets: 1},
-					{orderable: true, targets: 2},
-					{orderable: true, targets: 3},
-					{orderable: true, targets: 4},
-					{orderable: true, targets: 5},
-					{orderable: true, targets: 6},
+					{orderable: false, targets: 0},
+					{orderable: false, targets: 1},
+					{orderable: false, targets: 2},
+					{orderable: false, targets: 3},
+					{orderable: false, targets: 4},
+					{orderable: false, targets: 5},
+					{orderable: false, targets: 6},
 					{
 						targets: 3,
 						className: 'dt-right'
@@ -285,8 +285,8 @@
 						searchable: false
 					},
 					{responsivePriority: 1, targets: 0},
-					{responsivePriority: 2, targets: 6},
-					{responsivePriority: 3, targets: 1}
+					{responsivePriority: 2, targets: 3},
+					{responsivePriority: 3, targets: 6},
 				],
 				pageSize: 12,
 				serverPaging: true,
