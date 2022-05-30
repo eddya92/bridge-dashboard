@@ -86,7 +86,7 @@
                                                 <!--<img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}"> -->
                                             </div>
                                             <div class="p-15 text-start">
-                                                {{ template.email | replace({'$Nome $Cognome': app.user.nominativo}) | raw }}
+                                                {{ template.email | replace({'$Nome $Cognome': app.user.nominativo, "$codice_utente_mlm": app.user.codice }) | raw }}
                                             </div>
                                             <div class="item_footer">
                                                 <button onclick="assign_id_email({{ template.id }})" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ template.id }}" data-bs-target="#modalSend" style="">Scegli questo modello ed invia</button>
@@ -347,9 +347,9 @@
 
 
     <script>
-        function assign_id_email(id_email){
-	        $("#id_email").val(id_email);
-        }
+		function assign_id_email(id_email){
+			$("#id_email").val(id_email);
+		}
 
 		exampleModal.addEventListener('show.bs.modal', function(event){
 			var button = event.relatedTarget
@@ -396,7 +396,7 @@
 		table.on("search.dt", function(){
 			if(table.search().length >= 3){
 				if(table.search() !== searchbar){
-					aggiornaRisultatiDatatable(colInterno,dirInterno, table.search(),lenInterno)
+					aggiornaRisultatiDatatable(colInterno, dirInterno, table.search(), lenInterno)
 				}
 				searchbar = table.search();
 			}
