@@ -26,12 +26,13 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 	){
 	}
 
-	public function getCarrieraAnnuale(string $locale, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento) : ?Generator{
+	public function getCarrieraAnnuale(string $locale, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento, string $pag, string $items) : Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallCarriera($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage(), 1,);
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -42,12 +43,12 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	private function apiCallCarriera(string $locale,  string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento) : callable{
-		return function(ItemInterface $item) use ($filtroDirezioneOrdinamento, $filtroColonnaOrdinamento, $locale) : string{
+	private function apiCallCarriera(string $locale, string $filtroColonnaOrdinamento, string $filtroDirezioneOrdinamento, string $pag, string $items) : callable{
+		return function(ItemInterface $item) use ($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items) : string{
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/andamento-annuale' . '?locale=' . $locale .  '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento);
+				->request('GET', '/db-v1/carriere/andamento-annuale' . '?locale=' . $locale . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&pag=' . $pag);
 
 			$item->expiresAfter($this->ttlForAndamentoCarrieraAnnuale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ANDAMENTO_ANNUALE . "[" . $locale . "]"));

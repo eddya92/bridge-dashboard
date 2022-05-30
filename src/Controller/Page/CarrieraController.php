@@ -26,7 +26,7 @@ class CarrieraController extends AbstractController{
 	}
 
 	/**
-	 * mostra l'elenco delle qualifiche possibili, ed evidenzia la qualifica Attuale
+	 * Mostra l'elenco delle qualifiche possibili, ed evidenzia la qualifica Attuale
 	 */
 	#[Route('{_locale}/carriera', name: 'carriera', methods: ['GET'])]
 	public function carrieraView(string $_locale) : Response{
@@ -49,8 +49,10 @@ class CarrieraController extends AbstractController{
 		$andamentoDatatable = [];
 		$locale = $request->get('locale');
 		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
-		$filtroDirezioneOrdinamento = "";
-		$filtroColonnaOrdinamento = "";
+		$filtroDirezioneOrdinamento = "periodo";
+		$filtroColonnaOrdinamento = "ASC";
+		$pag = ($request->get('start', '0'));
+		$items = ($request->get('length', '0'));
 
 		switch($order[0]['column']){
 			case 0:
@@ -68,57 +70,16 @@ class CarrieraController extends AbstractController{
 		}
 		switch($order[0]['dir']){
 			case 'asc':
-				$filtroDirezioneOrdinamento = 'asc';
+				$filtroDirezioneOrdinamento = 'ASC';
 				break;
 			case 'desc':
-				$filtroDirezioneOrdinamento = 'desc';
+				$filtroDirezioneOrdinamento = 'DESC';
 				break;
-			default:
-				$filtroDirezioneOrdinamento = 'asc';
 		}
 
-		$carrieraGenerator = $this->andamentoAnnualeRepository->getCarrieraAnnuale($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento);
-
-		if($carrieraGenerator != null){
-			foreach($carrieraGenerator as $andamentoMensile){
-				$array = [];
-				$andamentoMensile->getQualifica = '<span class="' . $andamentoMensile->getStyle() . '">' . $andamentoMensile->getQualifica() . '</span>';
-				$array[] = $andamentoMensile->getMese();
-				$array[] = $andamentoMensile->getQualifica();
-
-				foreach($andamentoMensile->getPunti() as $punti){
-					$punti['punti'] = '<span>' . $punti['punti'] . '</span>';
-					$array[] = $punti['punti'];
-				}
-
-				//	foreach($andamentoMensile->getCondizioni() as $condizione){
-				//		$condizione = '<span style="color:#33b18a;">' . $condizione . '</span>';
-				//
-				//		$array[] = $condizione;
-				//	}
-
-				//	if($andamentoMensile->isAttivo()){
-				//		$attivo = '<span style="color:#33b18a;">SI</span>';
-				//	}else{
-				//		$attivo = '<span style="color:#922043;">NO</span>';
-				//	}
-
-				//$array[] = $attivo;
-				$array[] = $andamentoMensile->getId();
-				$andamentoDatatable[] = array_values($array);
-			}
-
-			$count = count($andamentoDatatable);
-
-			$andamentoQualifica = array(
-				'draw'            => time(),
-				'recordsTotal'    => $count,
-				'recordsFiltered' => $count,
-				'data'            => $andamentoDatatable,
-			);
-
-			return $this->json($andamentoQualifica);
-		}else{
+		try{
+			$carrieraGenerator = $this->andamentoAnnualeRepository->getCarrieraAnnuale($locale, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $pag, $items);
+		}catch(Exception $exception){
 			$count = count($andamentoDatatable);
 			$andamentoDatatable = [];
 			$andamentoQualifica = array(
@@ -130,6 +91,31 @@ class CarrieraController extends AbstractController{
 
 			return $this->json($andamentoQualifica);
 		}
+
+		foreach($carrieraGenerator as $andamentoMensile){
+			$array = [];
+			$andamentoMensile->getQualifica = '<span class="' . $andamentoMensile->getStyle() . '">' . $andamentoMensile->getQualifica() . '</span>';
+			$array[] = $andamentoMensile->getMese();
+			$array[] = $andamentoMensile->getQualifica();
+
+			foreach($andamentoMensile->getPunti() as $punti){
+				$punti['punti'] = '<span>' . $punti['punti'] . '</span>';
+				$array[] = $punti['punti'];
+			}
+
+			$array[] = $andamentoMensile->getId();
+			$andamentoDatatable[] = array_values($array);
+		}
+		$count = count($andamentoDatatable);
+
+		$andamentoQualifica = array(
+			'draw'            => time(),
+			'recordsTotal'    => $count,
+			'recordsFiltered' => $count,
+			'data'            => $andamentoDatatable,
+		);
+
+		return $this->json($andamentoQualifica);
 	}
 
 	/**
