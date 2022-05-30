@@ -94,16 +94,17 @@ class BonusController extends AbstractController{
 
 					$arrayTotali[$i] = [
 						'name'   => $item->bonus[$i]->nome,
-						'totale' => $bonus->importo + $arrayTotali[$i]['totale'],
+						'totale' => $bonus->importo / 100 + $arrayTotali[$i]['totale'],
 					];
 
 					$bonusMensili[$i]['name'] = $item->bonus[$i]->nome;
-					$bonusMensili[$i]['bonusMensile'][] = $bonus->importo;
+
+					$bonusMensili[$i]['bonusMensile'][] = number_format($bonus->importo / 100, 2, '.', '');
 				}
 				//endregion
-
 				$totaleDeiBonus = $totaleDeiBonus + $totale;
 			}
+			$totaleDeiBonus = $totaleDeiBonus / 100;
 
 			return $this->render('pages/bonus/bonus.html.twig', [
 				'arrayTotali'     => $arrayTotali, // array di oggetti contenenti i vari bonus (con importo totale per ogni singolo bonus nel periodo scelto)
@@ -152,10 +153,12 @@ class BonusController extends AbstractController{
 				array_push($array, $item->getMeseTestoEsteso(), $item->getQualifica(), $attivo);
 
 				foreach($item->getBonus() as $bonus){
-					$array[] = $bonus['totale'];
+					$importo = $bonus['importo'] / 100;
+					$array[] = number_format($importo, 2, ',', ' ');
 				}
 
-				$array[] = $item->getTotale();
+				$importo = $item->getImporto() / 100;
+				$array[] = number_format($importo, 2, ',', ' ');
 
 				$array[] = substr($item->getMeseTestoEsteso(), 5, 2);
 				$datatablesBonus[] = array_values($array);

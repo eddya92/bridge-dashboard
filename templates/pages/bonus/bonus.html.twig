@@ -80,7 +80,7 @@
                     <div class=" card">
                         <div class="card-header">
                             {% trans %}Nel{% endtrans %} {{ annoSelezionato }} {% trans %}hai totalizzato Bonus per un totale di{% endtrans %}
-                            <strong>&euro; {{ totaleDeiBonus|number_format(2, ',', '.') }}</strong>.
+                            <strong>&euro; {{ totaleDeiBonus|number_format(2, ',', ' ') }}</strong>.
                         </div>
                         <div class="card-body">
                             <table class="d-block d-sm-none d-md-none d-lg-none d-xl-none d-xxl-none">
@@ -88,7 +88,7 @@
                                 {% for totale in arrayTotali %}
                                     <tr>
                                         <td>{{ totale.name }}</td>
-                                        <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', '.') }}</td>
+                                        <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', ' ') }}</td>
                                     </tr>
                                 {% endfor %}
 
@@ -103,7 +103,7 @@
                                     {% for totale in arrayTotali %}
                                         <tr>
                                             <td>{{ totale.name }}</td>
-                                            <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', '.') }}</td>
+                                            <td class="text-right f-w-600">&euro; {{ totale.totale|number_format(2, ',', ' ') }}</td>
                                         </tr>
                                     {% endfor %}
 
@@ -141,10 +141,10 @@
                                     <th></th>
                                     <th></th>
                                     {% for totale in arrayTotali %}
-                                        <th>EUR {{ totale.totale|number_format(2, ',', '.') }}</th>
+                                        <th>EUR {{ totale.totale|number_format(2, ',', ' ') }}</th>
                                     {% endfor %}
 
-                                    <th>EUR {{ totaleDeiBonus|number_format(2, ',', '.') }}</th>
+                                    <th>EUR {{ totaleDeiBonus|number_format(2, ',', ' ') }}</th>
                                     <th></th>
                                 </tr>
                                 </tfoot>
@@ -309,12 +309,12 @@
 					width: 380,
 					type: 'pie',
 				},
-				labels: nomiBonus,
+				labels: nomiBonus,//nomi sulla chart a forma di torta
 				series: [
                     {% for totale in arrayTotali %}
-                    {{ totale.totale }},
+                   {{ totale.totale }},
                     {% endfor %}
-				],
+				],// valori sulla chart a forma di torta
 				responsive: [{
 					breakpoint: 480,
 					options: {
@@ -353,7 +353,6 @@
 				},
 
 				series: [
-
                     {% for bonusMensile in bonusMensili %}
 					{
 						name: "{{ bonusMensile.name }}",
@@ -371,6 +370,7 @@
                         {% endfor %}
 					],
 				},
+
 				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
 			}
 
