@@ -86,7 +86,7 @@
                                                 <!--<img src="{% if template.intestazione != '' %}{{ template.intestazione }}{% else %}/{{ ('assets/images/bg_preview_mail.png') }}{% endif %}"> -->
                                             </div>
                                             <div class="p-15 text-start">
-                                                {{ template.email | replace({'$Nome $Cognome': app.user.nominativo, "$codice_utente_mlm": app.user.codice }) | raw }}
+                                                {{ template.email | replace({'$Nome $Cognome': app.user.nominativo }) | raw }}
                                             </div>
                                             <div class="item_footer">
                                                 <button onclick="assign_id_email({{ template.id }})" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ template.id }}" data-bs-target="#modalSend" style="">Scegli questo modello ed invia</button>
@@ -359,6 +359,7 @@
 
 		var table = $('#datatable_responsive_bonus').DataTable({
 			responsive: true,
+			orderable: false,
 			ajax: {
 				method: "GET",
 				url: email,
@@ -368,9 +369,12 @@
 			},
 			language: DueRDataTableLaguages,
 			dom: '<"top"f<"clear">>rt<"bottom"ilp<"clear">>',
-			order: [0, 'desc'],
 			pageLength: 25,
 			columnDefs: [
+				{orderable: false, targets: 0},
+				{orderable: false, targets: 1},
+				{orderable: false, targets: 2},
+				{orderable: false, targets: 3},
 				{
 					targets: 3,
 					className: 'dt-right'
