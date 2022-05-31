@@ -41,10 +41,16 @@
 			element.value = {{ annoAttuale }};
 			anno = {{ annoAttuale }};
 		}
+		let top5 = '';
 
-		let top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
-		top5 = top5.replace(':mese', mese);
-		top5 = top5.replace(':anno', anno);
+		if(mese === '' && anno === ''){
+            top5 = "{{ path('top5-ajax', { utenza:utenza}) }}";
+        }else{
+			top5 = "{{ path('top5-ajax', { utenza:utenza, anno:':anno', mese : ':mese'}) }}";
+			top5 = top5.replace(':mese', mese);
+			top5 = top5.replace(':anno', anno);
+        }
+
 		$.ajax({
 			'url': top5,
 			'method': 'GET',
