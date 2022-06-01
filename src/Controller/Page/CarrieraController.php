@@ -30,15 +30,9 @@ class CarrieraController extends AbstractController{
 	 */
 	#[Route('{_locale}/carriera', name: 'carriera', methods: ['GET'])]
 	public function carrieraView(string $_locale) : Response{
-		$carrieraGenerator = $this->carrieraPersonaleRepository->getQualifiche($_locale);
+		//$carrieraGenerator = $this->carrieraPersonaleRepository->getQualifiche($_locale);
 
-		if($carrieraGenerator != null){
-			return $this->render('pages/carriera/carriera.html.twig', [
-				'qualifiche' => $carrieraGenerator,
-			]);
-		}
-
-		return $this->render('error_pages/error_404.html.twig');
+		return $this->render('pages/carriera/carriera.html.twig');
 	}
 
 	/**
@@ -124,14 +118,14 @@ class CarrieraController extends AbstractController{
 	#[Route('/conferma-qualifica', name: 'conferma-qualifica', methods: ['GET'])]
 	public function confermaQualifica() : Response{
 		try{
-			$conferma = $this->carrieraPersonaleRepository->confermaQualificaBU();
-			$this->addFlash('success', 'Qualifica confermata,ora sei un Business');
-
-			return $this->redirectToRoute('ingresso');
+			$this->carrieraPersonaleRepository->confermaQualificaBU();
 		}catch(Exception $exception){
-			$this->addFlash('error', 'Errore nella conferma della qualifica: ' . $exception->getMessage());
+			$this->addFlash('error', 'Errore nella conferma della qualifica: ' . $exception->getCode() . ' ' . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
+		$this->addFlash('success', 'Qualifica confermata.');
+
+		return $this->redirectToRoute('ingresso');
 	}
 }

@@ -8,7 +8,12 @@ use Generator;
 interface CarrieraPersonaleRepository{
 	public const TAG_CARRIERA_PERSONALE = 'carrieraPersonale';
 
-	public function getQualifiche(string $_locale) : ?Generator;
+	/**
+	 * @param string $_locale
+	 *
+	 * @return \Generator|null
+	 */
+	public function getQualifiche(string $_locale) : Generator;
 
 	/**
 	 * Chiamata che restituisce le informazioni riguardanti il raggiungimento del prossimo rank e il mantenimento di quello attuale
@@ -20,5 +25,10 @@ interface CarrieraPersonaleRepository{
 	 */
 	public function infoProssimoRank(string $codice, string $locale) : array;
 
+	/**
+	 * Chiamata per la conferma della qualifica BU
+	 *
+	 * @return mixed
+	 */
 	public function confermaQualificaBU();
 }

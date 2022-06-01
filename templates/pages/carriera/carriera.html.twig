@@ -63,36 +63,36 @@
                         </div>
                         <div class="card-body">
                             <div class="owl-carousel owl-theme" id="owl-carousel-2">
-                            {% set qualificaNumber = 0 %}
-                            {% for qualifica in qualifiche %}
-                                {% if qualificaNumber == 0 and qualifica.qualificaAttuale == false %}
+{#                            {% set qualificaNumber = 0 %}#}
+{#                            {% for qualifica in qualifiche %}#}
+{#                                {% if qualificaNumber == 0 and qualifica.qualificaAttuale == false %}#}
                             <div class="item ">
                                 <div class="pricingtable">
                                      <div class="pricingtable-header">
-                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>
+{#                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>#}
                                             <p>{% trans %}Qualifica precedente{% endtrans %}</p>
                                         </div>
-                                 {% elseif  qualifica.qualificaAttuale == true %}
-                            {% set qualificaNumber = loop.index %}
+{#                                 {% elseif  qualifica.qualificaAttuale == true %}#}
+{#                            {% set qualificaNumber = loop.index %}#}
                             <div class="item current_role_item">
                                  <div class="pricingtable current_role ">
                                     <div class="pricingtable-header">
-                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>
+{#                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>#}
                                             <p class="text-primary">{% trans %}Qualifica attuale{% endtrans %} </p>
                                         </div>
-                                {% else %}
-                             <div class="item">
+{#                                {% else %}#}
+{#                             <div class="item">#}
                                 <div class="pricingtable">
                                      <div class="pricingtable-header">
-                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>
+{#                                            <h4 class="title"><span class="{{ qualifica.colore }}">{{ qualifica.nome }}</span></h4>#}
                                             <p>{% trans %}Qualifica successiva{% endtrans %}</p>
                                         </div>
-                                {% endif %}
-                                        <hr />
-                                        {{ qualifica.descrizione | raw }}
+{#                                {% endif %}#}
+{#                                        <hr />#}
+{#                                        {{ qualifica.descrizione | raw }}#}
                                     </div>
                                 </div>
-                            {% endfor %}
+{#                            {% endfor %}#}
                             </div>
                         </div>
                     </div>

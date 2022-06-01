@@ -24,12 +24,13 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 	){
 	}
 
-	public function getQualifiche(string $_locale) : ?Generator{
+	public function getQualifiche(string $_locale) : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallQualifiche($_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage(), 1,);
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -70,6 +71,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInfoProssimoRank($codice, $locale));
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
+			error_log($exception->getMessage());
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
@@ -101,6 +103,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		try{
 			$results = $this->apiCallConfermaQualificaBU();
 		}catch(Exception $exception){
+			error_log($exception->getMessage(), 1,);
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
