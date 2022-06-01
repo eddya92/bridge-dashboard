@@ -242,8 +242,9 @@
 		};
 		//endregion
 
-		//region creazione del datatable
+
 		$(document).ready(function(){
+			//region creazione del datatable
 			$('#datatable_responsive_bonus').DataTable({
 				responsive: true,
 				processing: true,
@@ -326,7 +327,20 @@
 						}
 					}
 				}],
-				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
+				dataLabels: {
+					enabled: true,
+					formatter: function (val) {
+						return val.toFixed(2).replace(".", ",") + "%"
+					}
+				},
+				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00'],
+				yaxis: {
+					labels: {
+						formatter: function (val) {
+							return "€" + parseFloat(val).toFixed(2).replace(".", ",");
+						}
+					},
+				}
 			}
 
 			var chart8 = new ApexCharts(
@@ -359,7 +373,6 @@
 						data: [{{ bonusMensile.bonusMensile|join(',') }}]
 					},
                     {% endfor %}
-
 				],
 
 				xaxis: {
@@ -370,6 +383,13 @@
                         {% endfor %}
 					],
 				},
+				yaxis: [{
+					labels: {
+						formatter: function(val){
+							return "€" + val.toFixed(2).replace(".", ",");
+						}
+					}
+				}],
 
 				colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#ffcc00']
 			}
