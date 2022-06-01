@@ -47,6 +47,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallAccount($codice, $locale));
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
+			error_log($exception->getMessage());
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
@@ -91,7 +92,8 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 	public function aggiornaDatiAccount(string $vecchiaPassword, string $nuovaPassword, string $confermaPassword) : array{
 		try{
 			$results = $this->apiCallAggiornaDatiAccount($vecchiaPassword, $nuovaPassword, $confermaPassword);
-		}catch(BadResponseException $exception){
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
 			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
 		}
 
