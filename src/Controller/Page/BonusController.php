@@ -42,7 +42,7 @@ class BonusController extends AbstractController{
 			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
 			$dataInizio = date($account->getDataIscrizione());
 		}catch(Exception $exception){
-			$this->addFlash('error', $exception->getMessage());
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
@@ -66,7 +66,7 @@ class BonusController extends AbstractController{
 		try{
 			$bonusAnnui = json_decode($this->json($this->repository->listaBonus($anno, $_locale))->getContent());
 		}catch(Exception $exception){
-			$this->addFlash('error', $exception->getMessage());
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
