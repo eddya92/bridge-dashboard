@@ -47,7 +47,8 @@ final class IngressoController extends AbstractController{
 		try{
 			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
 		}catch(Exception $exception){
-			$this->addFlash('error',$exception->getCode() . " : " . $exception->getMessage());
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
+
 			return $this->redirectToRoute('logout');
 		}
 
@@ -90,7 +91,13 @@ final class IngressoController extends AbstractController{
 			);
 		}else{
 			if($utenza){
-				$account = $this->accountRepository->getAccount($utenza, $_locale, '');
+				try{
+					$account = $this->accountRepository->getAccount($utenza, $_locale, '');
+				}catch(Exception $exception){
+					$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
+
+					return $this->redirectToRoute('ingresso');
+				}
 			}
 			$superiore = $account->getSuperiore();
 			$utenza = $request->get('utenza', '');
