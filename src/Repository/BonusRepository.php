@@ -14,5 +14,5 @@ interface BonusRepository{
 	 *
 	 * @return iterable<BonusViewModel>|null
 	 */
-	public function listaBonus(int $anno,string $locale) : ?iterable;
+	public function listaBonus(int $anno,string $locale) : iterable;
 }

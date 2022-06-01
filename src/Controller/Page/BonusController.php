@@ -38,8 +38,14 @@ class BonusController extends AbstractController{
 	public function bonusView(string $_locale, int $anno = 0) : Response{
 		//region Creo gli anni da $dataInizio ad $annoAttuale
 		$annoAttuale = date('Y');
-		$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
-		$dataInizio = date($account->getDataIscrizione());
+		try{
+			$account = $this->accountRepository->getAccount($this->getUser()->getCodice(), $_locale);
+			$dataInizio = date($account->getDataIscrizione());
+		}catch(Exception $exception){
+			$this->addFlash('error', $exception->getMessage());
+
+			return $this->redirectToRoute('ingresso');
+		}
 
 		list($annoIniziale, ,) = explode('-', $dataInizio);
 		$annoIniziale = (int) $annoIniziale;
@@ -57,7 +63,13 @@ class BonusController extends AbstractController{
 		//endregion
 
 		//region 2. prendo i dati dall'api con l'anno di riferimento
-		$bonusAnnui = json_decode($this->json($this->repository->listaBonus($anno, $_locale))->getContent());
+		try{
+			$bonusAnnui = json_decode($this->json($this->repository->listaBonus($anno, $_locale))->getContent());
+		}catch(Exception $exception){
+			$this->addFlash('error', $exception->getMessage());
+
+			return $this->redirectToRoute('ingresso');
+		}
 		//endregion
 
 		//region 3 se la risposta api è diversa da null, lavoro i valori che mi arrivano dall'api
