@@ -26,12 +26,16 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 	){
 	}
 
-	public function getDatiFiscali(string $_locale) : ?DatiFiscaliViewModel{
+	/**
+	 * @inheritDoc
+	 */
+	public function getDatiFiscali(string $_locale) : DatiFiscaliViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDatiFiscali($_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -60,6 +64,9 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 		};
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function aggiornaDatiFiscali(string $codiceFiscale, string $PIVA, string $PEC, string $codiceUnivoco) : array{
 		try{
 			$results = $this->apiCallAggiornaDatiFiscali($codiceFiscale, $PIVA, $PEC, $codiceUnivoco);
@@ -70,6 +77,11 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 		return $results;
 	}
 
+	/**
+	 *
+	 * @return array
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
 	private function apiCallAggiornaDatiFiscali(string $codiceFiscale, string $PIVA, string $PEC, string $codiceUnivoco) : array{
 		try{
 			$response = $this->restApiConnection()
