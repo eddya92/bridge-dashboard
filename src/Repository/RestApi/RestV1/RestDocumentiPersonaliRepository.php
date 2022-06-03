@@ -10,6 +10,9 @@ use App\Service\Json;
 use App\ViewModel\DocumentoPersonaleViewModel;
 use Exception;
 use Generator;
+use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
+use JsonException;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -29,8 +32,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	/**
 	 * @inheritDoc
 	 *
-	 * @throws \JsonException
-	 * @throws \Psr\Cache\InvalidArgumentException
+	 * @throws JsonException,
+	 * @throws InvalidArgumentException
 	 */
 	public function getDocumentiPersonali(string $locale) : Generator{
 		//try{
@@ -70,11 +73,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	}
 
 	/**
-	 * @param string $iddoc
-	 * @param string $base64doc
-	 * @param string $namedoc
-	 *
-	 * @return array
+	 * @inheritDoc
+	 * @throws GuzzleException
 	 */
 	public function caricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array{
 		try{

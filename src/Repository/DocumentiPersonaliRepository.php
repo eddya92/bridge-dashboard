@@ -18,6 +18,8 @@ interface DocumentiPersonaliRepository{
 	public function getDocumentiPersonali(string $locale) : Generator;
 
 	/**
+	 * Api che permette all'utente di caricare un doumento
+	 *
 	 * @param string $iddoc
 	 * @param string $base64doc
 	 * @param string $namedoc
