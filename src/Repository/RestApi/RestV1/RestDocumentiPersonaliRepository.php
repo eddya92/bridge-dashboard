@@ -74,7 +74,6 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 
 	/**
 	 * @inheritDoc
-	 * @throws GuzzleException
 	 */
 	public function caricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array{
 		try{
