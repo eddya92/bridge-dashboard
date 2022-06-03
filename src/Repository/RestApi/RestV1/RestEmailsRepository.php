@@ -11,6 +11,7 @@ use App\ViewModel\EmailTemplateViewModel;
 use App\ViewModel\EmailViewModel;
 use Exception;
 use Generator;
+use InvalidArgumentException;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Throwable;
@@ -25,12 +26,19 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getEmailTemplates(string $_locale) : ?Generator{
+	/**
+	 * @inheritDoc
+	 *
+	 * @return Generator
+	 * @throws InvalidArgumentException
+	 */
+	public function getEmailTemplates(string $locale) : Generator{
 		try{
-			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallEmail($_locale));
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallEmail($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $result){
@@ -38,15 +46,20 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 		}
 	}
 
-	public function apiCallEmail(string $_locale) : callable{
-		return function(ItemInterface $item) use ($_locale){
+	/**
+	 * @param string $_locale
+	 *
+	 * @return callable
+	 */
+	private function apiCallEmail(string $locale) : callable{
+		return function(ItemInterface $item) use ($locale){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/email/template-disponibili');
+				->request('GET', '/db-v1/email/template-disponibili?locale=' . $locale);
 
 			$item->expiresAfter($this->ttlForEmailInviate);
-			$item->tag($this->authenticatedCacheTag(self::TAG_EMAILS));
+			$item->tag($this->authenticatedCacheTag(self::TAG_EMAILS . $locale));
 
 			//per invalidarlo
 			//$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_EMAILS)]);
@@ -59,6 +72,13 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 		};
 	}
 
+	/**
+	 * @param string $nome
+	 * @param string $email
+	 * @param int    $idEmail
+	 *
+	 * @return array
+	 */
 	public function inviaInvito(string $nome, string $email, int $idEmail) : array{
 		try{
 			$results = $this->apiCallInviaInvito($nome, $email, $idEmail);
@@ -69,6 +89,14 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 		return $results;
 	}
 
+	/**
+	 * @param string $nome
+	 * @param string $email
+	 * @param int    $idEmail
+	 *
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	private function apiCallInviaInvito(string $nome, string $email, int $idEmail) : array{
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
@@ -88,12 +116,17 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 		return [true, ''];
 	}
 
-	public function getElencoEmailInviate() : ?Generator{
+	/**
+	 * @inheritDoc
+	 *
+	 * @return Generator
+	 */
+	public function getElencoEmailInviate() : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallEmails());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			throw new Exception($exception->getMessage());
 		}
 
 		foreach($results['data'] as $item){
@@ -104,7 +137,7 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallEmails() : callable{
+	private function apiCallEmails() : callable{
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())

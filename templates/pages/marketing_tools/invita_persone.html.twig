@@ -357,55 +357,55 @@
 			//var modalButton = exampleModal.querySelector('#id_email');
 		})
 
-		var table = $('#datatable_responsive_bonus').DataTable({
-			responsive: true,
-			orderable: false,
-			ajax: {
-				method: "GET",
-				url: email,
-				data: function(){
-					return requestData;
-				}
-			},
-			language: DueRDataTableLaguages,
-			dom: '<"top"f<"clear">>rt<"bottom"ilp<"clear">>',
-			pageLength: 25,
-			columnDefs: [
-				{orderable: false, targets: 0},
-				{orderable: false, targets: 1},
-				{orderable: false, targets: 2},
-				{orderable: false, targets: 3},
-				{
-					targets: 3,
-					className: 'dt-right'
+		$(document).ready(function(){
+			var table = $('#datatable_responsive_bonus').DataTable({
+				responsive: true,
+				orderable: false,
+				ajax: {
+					method: "GET",
+					url: email,
+					data: function(){
+						return requestData;
+					}
 				},
-				{responsivePriority: 1, targets: 0},
-				{responsivePriority: 2, targets: 1},
-				{responsivePriority: 3, targets: 2}
-			]
-		});
+				language: DueRDataTableLaguages,
+				dom: '<"top"f<"clear">>rt<"bottom"ilp<"clear">>',
+				pageLength: 25,
+				columnDefs: [
+					{orderable: false, targets: 0},
+					{orderable: false, targets: 1},
+					{orderable: false, targets: 2},
+					{orderable: false, targets: 3},
+					{
+						targets: 3,
+						className: 'dt-right'
+					},
+					{responsivePriority: 1, targets: 0},
+					{responsivePriority: 2, targets: 1},
+					{responsivePriority: 3, targets: 2}
+				]
+			});
 
-		table.on('length.dt', function(e, settings, len){
-			aggiornaRisultatiDatatable(colInterno, dirInterno, searchInterno, len)
-		});
+			table.on('length.dt', function(e, settings, len){
+				aggiornaRisultatiDatatable(colInterno, dirInterno, searchInterno, len)
+			});
 
 
-		table.on("order.dt", function(event, settings, ordArr){
-			var col = ordArr[0].col;
-			var dir = ordArr[0].dir;
-			aggiornaRisultatiDatatable(col, dir, searchInterno, lenInterno)
-		});
+			table.on("order.dt", function(event, settings, ordArr){
+				var col = ordArr[0].col;
+				var dir = ordArr[0].dir;
+				aggiornaRisultatiDatatable(col, dir, searchInterno, lenInterno)
+			});
 
-
-		table.on("search.dt", function(){
-			if(table.search().length >= 3){
-				if(table.search() !== searchbar){
-					aggiornaRisultatiDatatable(colInterno, dirInterno, table.search(), lenInterno)
+			table.on("search.dt", function(){
+				if(table.search().length >= 3){
+					if(table.search() !== searchbar){
+						aggiornaRisultatiDatatable(colInterno, dirInterno, table.search(), lenInterno)
+					}
+					searchbar = table.search();
 				}
-				searchbar = table.search();
-			}
+			});
 		});
-
 		$('select[name="datatable_responsive_bonus_length"]').removeClass('form-control');
 
 		$(document).ready(function(){

@@ -10,6 +10,7 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,36 +34,36 @@ class MarketingToolsController extends AbstractController{
 	 */
 	#[Route('/{_locale}/invita-persone', name: 'invita-persone', methods: ['GET'])]
 	public function invitaPersone(string $_locale){
-		$templatesGenerator = $this->emailRepository->getEmailTemplates($_locale);
-
-		$templates = [];
-		if($templatesGenerator != null){
-			$email = [];
-
-			foreach($templatesGenerator as $i => $template){
-				/** @var $template \App\ViewModel\EmailTemplateViewModel */
-				if($i == 0){
-					$email['email_1h'] = $template->getEmail1h();
-					$email['email_1d'] = $template->getEmail1d();
-					$email['email_1w'] = $template->getEmail1w();
-					$email['email_1m'] = $template->getEmail1m();
-					$email['email_1h_totali'] = $template->getEmail1hTotali();
-					$email['email_1d_totali'] = $template->getEmail1dTotali();
-					$email['email_1w_totali'] = $template->getEmail1wTotali();
-					$email['email_1m_totali'] = $template->getEmail1mTotali();
-				}
-				$templates[] = $template;
-			}
-
-			return $this->render('pages/marketing_tools/invita_persone.html.twig', [
-				'email'     => $email,
-				'templates' => $templates,
-			]);
-		}else{
-			$this->addFlash('error', 'Non sono state trovate mail, riprovare più tardi.');
+		try{
+			$templatesGenerator = $this->emailRepository->getEmailTemplates($_locale);
+		}catch(Exception $exception){
+			$this->addFlash('error', $exception->getCode() . " : " . $exception->getMessage());
 
 			return $this->redirectToRoute('ingresso');
 		}
+
+		$templates = [];
+		$email = [];
+
+		foreach($templatesGenerator as $i => $template){
+			/** @var $template \App\ViewModel\EmailTemplateViewModel */
+			if($i == 0){
+				$email['email_1h'] = $template->getEmail1h();
+				$email['email_1d'] = $template->getEmail1d();
+				$email['email_1w'] = $template->getEmail1w();
+				$email['email_1m'] = $template->getEmail1m();
+				$email['email_1h_totali'] = $template->getEmail1hTotali();
+				$email['email_1d_totali'] = $template->getEmail1dTotali();
+				$email['email_1w_totali'] = $template->getEmail1wTotali();
+				$email['email_1m_totali'] = $template->getEmail1mTotali();
+			}
+			$templates[] = $template;
+		}
+
+		return $this->render('pages/marketing_tools/invita_persone.html.twig', [
+			'email'     => $email,
+			'templates' => $templates,
+		]);
 	}
 
 	/**
@@ -102,10 +103,10 @@ class MarketingToolsController extends AbstractController{
 	 */
 	#[Route('/email-ajax', name: 'email-ajax', methods: ['GET'])]
 	public function emailAjax() : JsonResponse{
-		$emailsGenerator = $this->emailRepository->getElencoEmailInviate();
+		try{
+			$emailsGenerator = $this->emailRepository->getElencoEmailInviate();
+			$emailsInviate = [];
 
-		$emailsInviate = [];
-		if($emailsGenerator != null){
 			/** @var $email \App\ViewModel\EmailViewModel */
 			foreach($emailsGenerator as $email){
 				$item = [];
@@ -115,20 +116,28 @@ class MarketingToolsController extends AbstractController{
 				$item[] = '<a href=""><button type="button" class="btn btn-light color-black">Invia di nuovo</button></a>';
 				$emailsInviate[] = $item;
 			}
+
+			$count = count($emailsInviate);
+
+			return $this->json([
+				'draw'            => time(),
+				'recordsTotal'    => $count,
+				'recordsFiltered' => $count,
+				'data'            => $emailsInviate,
+			]);
+		}catch(Exception $exception){
+
+			return $this->json([
+				'draw'            => time(),
+				'recordsTotal'    => 0,
+				'recordsFiltered' => 0,
+				'data'            => [],
+			]);
 		}
-
-		$count = count($emailsInviate);
-
-		return $this->json([
-			'draw'            => 1,
-			'recordsTotal'    => $count,
-			'recordsFiltered' => $count,
-			'data'            => $emailsInviate,
-		]);
 	}
 
 	/**
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
 	#[Route('/{_locale}/sito-personale', name: 'sito-personale', methods: ['GET'])]
 	public function sitoPersonaleView(string $_locale){
