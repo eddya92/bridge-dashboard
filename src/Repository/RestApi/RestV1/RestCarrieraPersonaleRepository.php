@@ -116,6 +116,8 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			->client()
 			->request('POST', '/db-v1/carriere/conferma-qualifica-BU');
 
+		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE)]);
+
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
 		}
