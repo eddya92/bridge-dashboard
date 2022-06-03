@@ -8,7 +8,22 @@ use App\ViewModel\ContattiViewModel;
 interface ContattiRepository{
 	public const TAG_CONTATTI = 'contatti';
 
-	public function getContatti(string $_locale) : ?ContattiViewModel;
+	/**
+	 * Api che restituisce i contatti di un utente(telefono e cellulare)
+	 *
+	 * @param string $_locale
+	 *
+	 * @return ContattiViewModel
+	 */
+	public function getContatti(string $_locale) : ContattiViewModel;
 
+	/**
+	 * Api per aggiornare i contatti
+	 *
+	 * @param string $telefono
+	 * @param string $cellulare
+	 *
+	 * @return array
+	 */
 	public function aggiornaContatti(string $telefono, string $cellulare) : array;
 }

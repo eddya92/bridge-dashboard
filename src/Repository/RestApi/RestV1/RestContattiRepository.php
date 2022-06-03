@@ -26,12 +26,18 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 	){
 	}
 
-	public function getContatti(string $_locale) : ?ContattiViewModel{
+	/**
+	 * @inheritDoc
+	 *
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
+	public function getContatti(string $_locale) : ContattiViewModel{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallContatti($_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -47,7 +53,7 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/contatti' );
+				->request('GET', '/db-v1/utenti/contatti');
 
 			if($response->getStatusCode() != 200){
 				return $response->getReasonPhrase();
@@ -60,6 +66,11 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 		};
 	}
 
+	/**
+	 * @inheritDoc
+	 *
+	 * @return array
+	 */
 	public function aggiornaContatti(string $telefono, string $cellulare) : array{
 		try{
 			$results = $this->apiCallAggiornaContatti($telefono, $cellulare);
@@ -87,7 +98,10 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 			throw new Exception($message);
 		}
 
-		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_CONTATTI)]);
+		$lingue = explode(',', $this->locales);
+		foreach($lingue as $lingua){
+			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_CONTATTI . "[" . $lingua . "]")]);
+		}
 
 		if($response->getStatusCode() != 200){
 			throw new Exception($response->getReasonPhrase());
