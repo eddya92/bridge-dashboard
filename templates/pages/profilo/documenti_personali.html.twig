@@ -476,9 +476,10 @@
 		}
 
 		function creaTesserino(){
+
 			let text = "sei sicuro di voler generare un nuovo tesserino?";
 			if(confirm(text) == true){
-				window.location.href = "{{ path('documenti-personali') }}";
+				window.location.href = "{{ path('crea-tesserino') }}";
 					//imposto l'azione in caso di insuccesso
 			} else{
 

@@ -29,7 +29,7 @@ class DocumentiPersonaliController extends AbstractController{
 		$documentiObbligatori = [];
 		$documentiFacoltativi = [];
 		$documenti = [];
-		
+
 		try{
 			$documentiGenerator = $this->repository->getDocumentiPersonali($_locale);
 			foreach($documentiGenerator as $documento){
@@ -46,7 +46,7 @@ class DocumentiPersonaliController extends AbstractController{
 			}
 		}catch(\Throwable $exception){
 			error_log($exception->getMessage());
-			$this->addFlash('error', 'non siamo riusciti a scaricare i documenti,ripovare piu tardi');
+			$this->addFlash('error', 'Non siamo riusciti a scaricare i documenti: ' . $exception->getCode() . '=' . $exception->getMessage());
 			$countObbligatori = 0;
 			$documentiObbligatoriCaricati = 0;
 			$documentiObbligatori = [];
@@ -100,7 +100,7 @@ class DocumentiPersonaliController extends AbstractController{
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	#[Route('/crea-tesserino', name: 'crea-tesserino', methods: ['GET'])]
-	public function creaTesserino(Request $request) : Response{
+	public function creaTesserino() : Response{
 		try{
 			[$result, $error_msg] = $this->repository->creaTesserino();
 			if($result){
@@ -114,5 +114,4 @@ class DocumentiPersonaliController extends AbstractController{
 
 		return $this->redirectToRoute('documenti-personali');
 	}
-
 }

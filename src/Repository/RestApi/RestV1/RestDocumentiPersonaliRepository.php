@@ -26,6 +26,12 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	){
 	}
 
+	/**
+	 * @inheritDoc
+	 *
+	 * @throws \JsonException
+	 * @throws \Psr\Cache\InvalidArgumentException
+	 */
 	public function getDocumentiPersonali(string $locale) : Generator{
 		//try{
 		$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumentiPersonali($locale));
@@ -63,6 +69,13 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		};
 	}
 
+	/**
+	 * @param string $iddoc
+	 * @param string $base64doc
+	 * @param string $namedoc
+	 *
+	 * @return array
+	 */
 	public function caricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array{
 		try{
 			$results = $this->apiCallCaricaDocumentoPersonale($iddoc, $base64doc, $namedoc);
@@ -73,6 +86,14 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		return $results;
 	}
 
+	/**
+	 * @param string $iddoc
+	 * @param string $base64doc
+	 * @param string $namedoc
+	 *
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	private function apiCallCaricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array{
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
@@ -89,10 +110,12 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 			return [false, $response->getReasonPhrase()];
 		}
 
-
 		return [true, ''];
 	}
 
+	/**
+	 * @return array
+	 */
 	public function creaTesserino() : array{
 		try{
 			$results = $this->apiCallCreaTesserino();
@@ -103,11 +126,15 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		return $results;
 	}
 
+	/**
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	public function apiCallCreaTesserino() : array{
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
 			->client()
-			->request('POST', '/db-v1/utenti/documento-crea-tesserino');
+			->request('POST', '/db-v1/utenti/genera-tesserino');
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
@@ -115,5 +142,4 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 
 		return [true, ''];
 	}
-
 }
