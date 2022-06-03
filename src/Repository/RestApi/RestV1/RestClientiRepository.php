@@ -8,6 +8,7 @@ use App\Repository\RestApi\AuthenticatedConnectionCapability;
 use App\Repository\RestApi\AuthenticatedRepository;
 use App\Service\Json;
 use App\ViewModel\ClientiViewModel;
+use Exception;
 use Generator;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -23,12 +24,18 @@ final class RestClientiRepository implements ClientiRepository, AuthenticatedRep
 	){
 	}
 
-	public function getClienti(string $_locale, string $ricercaGenerica, string $dataDal, string $dataAl) : ?Generator{
+	/**
+	 * @inheritDoc
+	 *
+	 * @return Generator
+	 */
+	public function getClienti(string $_locale, string $ricercaGenerica, string $dataDal, string $dataAl) : Generator{
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallClienti($_locale, $ricercaGenerica, $dataDal, $dataAl));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
