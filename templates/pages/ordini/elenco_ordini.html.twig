@@ -385,7 +385,7 @@
 						var td2 = document.createElement('td')
 						td2.setAttribute('class', ' p-l-10')
 						td1.innerHTML = '<span class="txt-primary">  </span>';
-						td2.innerHTML = '<h6 class="txt-dark">' + key + ' : ' + json.metadata.totali_punti[key] + '</h6>';
+						td2.innerHTML = '<h6 class="txt-dark">' + key + ' : ' + parseFloat(json.metadata.totali_punti[key]).toFixed(2).replace('.',',') + '</h6>';
 						container.appendChild(td1)
 						container.appendChild(td2)
 					});

@@ -33,7 +33,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		}
 
 		foreach($results['data'] as $item){
-			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] = 0.0, $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
+			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] , $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
 		}
 	}
 
