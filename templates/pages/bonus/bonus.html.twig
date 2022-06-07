@@ -249,7 +249,7 @@
 				responsive: true,
 				processing: true,
 				serverSide: true,
-				ordering: true,
+				ordering: false,
 				searching: false,
 				ajax: "{{ path('bonus-ajax') }}/{{ annoSelezionato }}",
 				language: DueRDataTableLaguages,
@@ -283,7 +283,8 @@
 					{
 						targets: 7,
 						visible: false,
-						searchable: false
+						searchable: false,
+						orderable: false
 					},
 					{responsivePriority: 1, targets: 0},
 					{responsivePriority: 2, targets: 3},

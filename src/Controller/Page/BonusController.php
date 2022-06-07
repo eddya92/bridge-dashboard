@@ -172,7 +172,10 @@ class BonusController extends AbstractController{
 				$importo = $item->getImporto() / 100;
 				$array[] = number_format($importo, 2, ',', ' ');
 
-				$array[] = substr($item->getMeseTestoEsteso(), 5, 2);
+
+				$array[] = '';
+					//substr($item->getMeseTestoEsteso(), 5, 2);
+
 				$datatablesBonus[] = array_values($array);
 			}
 			//endregion
