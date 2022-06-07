@@ -256,12 +256,15 @@ class OrdiniController extends AbstractController{
 				$filtroColonnaOrdinamento = 'pc';
 				break;
 			case 4:
-				$filtroColonnaOrdinamento = 'totale';
+				$filtroColonnaOrdinamento = 'cv';
 				break;
 			case 5:
-				$filtroColonnaOrdinamento = 'tipologia_ordine';
+				$filtroColonnaOrdinamento = 'totale';
 				break;
 			case 6:
+				$filtroColonnaOrdinamento = 'tipologia_ordine';
+				break;
+			case 7:
 				$filtroColonnaOrdinamento = 'esito';
 				break;
 			default:
@@ -277,7 +280,6 @@ class OrdiniController extends AbstractController{
 			default:
 				$filtroDirezioneOrdinamento = 'asc';
 		}
-
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, $pag);
 		$datatableorders = [];

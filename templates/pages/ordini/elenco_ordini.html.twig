@@ -339,13 +339,13 @@
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
 				columnDefs: [
 					{orderable: true, targets: 0},
-					{orderable: false, targets: 1},
-					{orderable: false, targets: 2},
+					{orderable: true, targets: 1},
+					{orderable: true, targets: 2},
 					{orderable: true, targets: 3},
 					{orderable: true, targets: 4},
 					{orderable: true, targets: 5},
-					{orderable: false, targets: 6},
-					{orderable: false, targets: 7},
+					{orderable: true, targets: 6},
+					{orderable: true, targets: 7},
 					{
 						targets: 5,
 						className: 'dt-right'
@@ -390,6 +390,8 @@
 						container.appendChild(td2)
 					});
 				}
+
+
 			})
 			//endregion
 		})
