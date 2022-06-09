@@ -10,7 +10,7 @@
 
             <div class="page-title">
                 <div class="row">
-                    <div class="col-sm-5 order-sm-1">
+                    <div class="col-sm-4 order-sm-1">
                         <div class="mb-3 d-block d-sm-none"></div>
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="{{ path('ingresso') }}"><i data-feather="home"></i></a>
@@ -20,20 +20,21 @@
                         </ol>
                         <div class="mb-2 d-block d-sm-none"></div>
                     </div>
-                    <div class="col-sm-7 order-sm-0">
+                    <div class="col-sm-8 order-sm-0">
                         <div class="float-sm-start d-flex">
                             <h3>{% trans %}Virtual Office di{% endtrans %}</h3>
                             <div id="idUtenteSelezionato" hidden></div>
                             <div id="contenutoTypehead" hidden></div>
-                            <div class="float-sm-start">
+                            <div class="float-sm-start row">
                                 <div id="typehead_ID_utente">
                                     <div id="typehead_sottoposti" class="input-group">
                                         <input id="type-sottoposti" class="typeahead form-control typehead_utente_dashboard" type="text" placeholder="{% trans %}cerca un incaricato{% endtrans %}..." value="{{ utenza != '' ? account.nominativo : app.user.nominativo }}"><span class="input-group-text"><i class="icofont icofont-user"></i><a href="{{ path('ingresso') }}" class="ms-4 text-decoration-none" {{ utenza == '' ? 'hidden' : '' }}><i class="text-dark" data-feather="log-out"></i></a> </span>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-
+						<div class="m-1 ms-1"><h3> Codice promoter: <span id="codicePromoter">{{ utenza != '' ? account.codice : app.user.codice }}</span> <i data-feather="copy" onclick="copiaCodicePromoter()" class="ms-1 " role="button"></i></h3> </div>
                     </div>
                 </div>
             </div>
@@ -221,5 +222,8 @@
 			}
 		}
 
+		function copiaCodicePromoter(){
+			console.log(document.getElementById('codicePromoter').innerHTML);
+		}
     </script>
 {% endblock javascript_page %}
