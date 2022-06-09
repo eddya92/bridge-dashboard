@@ -23,12 +23,13 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getLingue() : ?Generator{
+	public function getLingue() : Generator{
 		try{
 			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallLingue());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -39,7 +40,8 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 	/**
 	 * @return callable(ItemInterface): string
 	 */
-	public function apiCallLingue() : callable{
+	public
+	function apiCallLingue() : callable{
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->client()
