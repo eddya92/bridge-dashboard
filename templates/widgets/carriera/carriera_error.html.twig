@@ -1,13 +1,13 @@
 <div class="card height_100" id="carriera">
     <div id="info_header" class="card-header">
         <div class="header-top">
-            <h5 class="m-0">La tua Carriera</h5>
+            <h5 class="m-0">{% trans %}La tua Carriera{% endtrans %}</h5>
         </div>
     </div>
 
     <div id="info_container" class="card-body p-0">
         <div class="news-update ">
-           Non è stato possibile determinare la tua qualifica:
+            {% trans %}Non è stato possibile determinare la tua qualifica{% endtrans %}:
             <div class="text-danger" >{{ messaggio }}</div>
         </div>
         <div class="news-update mt-custom-n1">

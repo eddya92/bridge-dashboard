@@ -1,38 +1,38 @@
 <div class="card height_100" id="carriera">
     <div id="carriera_header" class="card-header">
         <div class="header-top">
-            <h5 class="m-0">La tua Carriera</h5>
+            <h5 class="m-0">{% trans %}La tua Carriera{% endtrans %}</h5>
         </div>
     </div>
 
     <div id="carriera_container" class="card-body p-0">
         <div class="news-update ">
-            La tua qualifica è
+            {% trans %}La tua qualifica è{% endtrans %}
             <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update ">
-            <p>Per mantere la tua qualifica di<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span> occorre totalizzare {{ info.mantenimento.puntiMantenimentoNecessari }} COINS nel mese.
+            <p>{% trans %}Per mantere la tua qualifica di{% endtrans %}<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span> {% trans %}occorre totalizzare{% endtrans %} {{ info.mantenimento.puntiMantenimentoNecessari }} {% trans %}COINS nel mese{% endtrans %}.
             </p>
             <div class="">
                 <div class="progress ">
                     <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ info.mantenimento.avanzamento.0 / info.mantenimento.avanzamento.1 * 100 }}%" aria-valuenow=" TEAM LEADEr " aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 {% if not info.mantenimento.rankMantenuto %}
-                    <div class="text-danger mt-1">Al momento hai {{ info.mantenimento.alMomentoHai }} COINS, pertanto non stai mantenendo la qualifica.</div>
+                    <div class="text-danger mt-1">{% trans %}Al momento hai{% endtrans %} {{ info.mantenimento.alMomentoHai }} {% trans %}COINS{% endtrans %}, {% trans %}pertanto non stai mantenendo la qualifica{% endtrans %}.</div>
                     <div class="row border mt-2">
                         {% if info.mantenimento.isRegalato and info.mantenimento.isRegalatoPerUltimaVolta %}
                         {% else %}
                             <div class="col-3 text-center"><i class="  fa fa-5x fa-gift"></i></div>
-                            <div class="col-9">Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti</div>
+                            <div class="col-9">{% trans %}Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti{% endtrans %}</div>
                         {% endif %}
                     </div>
                 {% else %}
-                    <div class="mt-1">Hai mantenuto la qualifica con {{ info.mantenimento.haiMantenutoRankCon }} COINS.</div>
+                    <div class="mt-1">{% trans %}Hai mantenuto la qualifica con{% endtrans %} {{ info.mantenimento.haiMantenutoRankCon }} {% trans %}COINS{% endtrans %}.</div>
                 {% endif %}
             </div>
             {% if info.rankAttuale.Id != 95 %}
-                <div class="mt-2">La prossima qualifica {{ info.rankSuccessivo.Nome }} si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit.</div>
-                <div class="text-danger">Al momento non hai collaboratori con qualifica {{ info.rankSuccessivo.Nome }} nella tua struttura.</div>
+                <div class="mt-2">{% trans %}La prossima qualifica{% endtrans %} {{ info.rankSuccessivo.Nome }} {% trans %}si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit{% endtrans %}.</div>
+                <div class="text-danger">{% trans %}Al momento non hai collaboratori con qualifica{% endtrans %} {{ info.rankSuccessivo.Nome }} {% trans %}nella tua struttura{% endtrans %}.</div>
             {% else %}
                 <div class="mt-2" style="{{ info.rankSuccessivo.Colore }}">{{ info.rankSuccessivo.Nome }}</div>
             {% endif %}

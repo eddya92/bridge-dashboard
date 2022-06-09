@@ -1,17 +1,17 @@
 <div class="card height_100" id="carriera">
     <div id="info_header" class="card-header">
         <div class="header-top">
-            <h5 class="m-0">La tua Carriera</h5>
+            <h5 class="m-0">{% trans %}La tua Carriera{% endtrans %}</h5>
         </div>
     </div>
 
     <div id="info_container" class="card-body p-0">
         <div class="news-update ">
-            La tua qualifica è
+            {% trans %}La tua qualifica è{% endtrans %}
             <span class="span_qualifica_1" style="border: 1px solid #{{ info.rankAttuale.Colore }}">{{ info.rankAttuale.Nome }}</span>
         </div>
         <div class="news-update">
-            <p>La prossima qualifica è<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankSuccessivo.Colore }}">{{ info.rankSuccessivo.Nome }}</span> e si ottiene con:
+            <p>{% trans %}La prossima qualifica è{% endtrans %}<span class="span_qualifica_1" style="border: 1px solid #{{ info.rankSuccessivo.Colore }}">{{ info.rankSuccessivo.Nome }}</span> {% trans %}e si ottiene con{% endtrans %}:
             </p>
             {% for soglia in info.rankSuccessivo.soglie %}
                     <p>&bull; <strong>{{ soglia.nome }}</strong></p>
@@ -23,21 +23,21 @@
                     <div class="progress mt-custom-n1">
                         <div class="progress-bar-animated bg-secondary progress-bar-striped" role="progressbar" aria-valuenow="1000" style="width: {{ soglia.avanzamento.0 / soglia.avanzamento.1 * 100 }}%" aria-valuemin="50" aria-valuemax="{{ soglia.avanzamento.1 }}"></div>
                     </div>
-                    <div class="mt-2">Al momento hai {{ soglia.alMomentoHai }} coins di cui {{ soglia.diCuiPersonali }} personali.</div>
+                    <div class="mt-2">{% trans %}Al momento hai{% endtrans %} {{ soglia.alMomentoHai }} {% trans %}coins di cui{% endtrans %} {{ soglia.diCuiPersonali }} {% trans %}personali{% endtrans %}.</div>
                     {% if soglia.obiettivoRaggiunto == false %}
                         {% if soglia.avanzamento.0 < soglia.avanzamento.1  and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
                             <div class="text-danger">
-                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS di cui {{ soglia.diCuiPersonaliPerObiettivo }} personali, per raggiungere l'obbiettivo .
+                                {% trans %}Ti mancano{% endtrans %} {{ soglia.tiMancanoPerObiettivo }} {% trans %}COINS di cui{% endtrans %} {{ soglia.diCuiPersonaliPerObiettivo }} {% trans %}personali, per raggiungere l'obbiettivo{% endtrans %} .
                             </div>
                         {% endif %}
                         {% if soglia.avanzamento.0 > soglia.avanzamento.1 and info.rankSuccessivo.soglie.0.diCuiPersonali < 1000 %}
                             <div class="text-danger">
-                                Ti mancano {{ soglia.diCuiPersonaliPerObiettivo }} COINS personali per raggiungere l'obbiettivo.
+                                {% trans %}Ti mancano{% endtrans %} {{ soglia.diCuiPersonaliPerObiettivo }} {% trans %}COINS personali per raggiungere l'obbiettivo{% endtrans %}.
                             </div>
                         {% endif %}
                         {% if soglia.avanzamento.0 < soglia.avanzamento.1 and info.rankSuccessivo.soglie.0.diCuiPersonali >= 1000 %}
                             <div class="text-danger">
-                                Ti mancano {{ soglia.tiMancanoPerObiettivo }} COINS per raggiungere l'obbiettivo.
+                                {% trans %}Ti mancano{% endtrans %} {{ soglia.tiMancanoPerObiettivo }} {% trans %}COINS per raggiungere l'obbiettivo{% endtrans %}.
                             </div>
                         {% endif %}
                     {% endif %}
