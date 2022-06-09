@@ -1,0 +1,494 @@
+# COMMONS	# COMMONS
+# Termini utilizzati in più pagine	# Termes employés dans plusieurs pages
+Virtual Office:	Virtual Office
+Profilo:	Profil
+Aggiorna dati:	Mettez les données à jour
+Mostra caratteri:	Montrez les caractères
+alle ore:	à heures
+Codice:	Code
+Data di iscrizione:	Date d’inscription
+E.mail:	E.mail
+Nome:	Prénom
+Cognome:	Nom
+Indirizzo:	Adresse
+Numero civico:	Numéro de rue
+Nazione:	Nation
+CAP:	CP
+Comune:	Commune
+Provincia:	Province
+Note:	Remarques
+Modifica:	Modifiez
+Elimina:	Éliminez
+Specificare il nome:	Indiquer le prénom
+Specificare il cognome:	Indiquer le nom
+Specificare l indirizzo:	Indiquer l’adresse
+Specificare il numero civico:	Indiquer le numéro de rue
+Specificare il CAP:	Indiquer le CP
+Specificare il comune:	Indiquer la commune
+Specificare il numero di partita IVA:	Indiquer le numéro de TVA
+Specificare la PEC:	Indiquer le PEC
+Specificare il codice univoco:	Indiquer le code univoque
+Email:	Email
+Telefono:	Téléphone
+Specificare il numero di cellulare:	Indiquer le numéro de portable
+Specificare la provincia:	Indiquer la province
+Specificare il numero di telefono:	Indiquer le numéro de téléphone
+Specificare un indirizzo email valido:	Indiquer une adresse électronique valide
+Nominativo:	Nominatif
+Cellulare:	Portable
+filtra:	filtrez
+chiudi:	fermez
+Filtri:	Filtres
+Periodo:	Période
+Qualifica:	Qualification
+Sponsor:	Sponsor
+Incaricato:	Chargé
+Livello:	Niveau
+E-mail:	E-mail
+Anno:	Année
+precedente:	précédente
+successivo:	suivante
+nessun dato disponibile:	pas de donnée disponible
+visualizzati 0 a 0 di 0 elementi:	affichés 0 à 0 sur 0 éléments
+filtrati da:	filtrés par
+elementi totali:	éléments totaux
+nessun_risultato:	aucun_résultat
+attiva_per_ordine_ascendente:	activez_par_ordre_croissant
+attiva_per_ordine_discendente:	activez_par_ordre_décroissant
+utenti:	utilisateurs
+visualizzati:	affichés
+mostra:	montrez
+per pagina:	par page
+caricamento:	chargement
+elaborazione:	élaboration
+Cerca:	Cherchez
+Gennaio:	Janvier
+Febbraio:	Février
+Marzo:	Mars
+Aprile:	Avril
+Maggio:	Mai
+Giugno:	Juin
+Luglio:	Juillet
+Agosto:	Août
+Settembre:	Septembre
+Ottobre:	Octobre
+Novembre:	Novembre
+Dicembre:	Décembre
+Torna a:	Retournez à
+Gen:	Jan
+Feb:	Fév
+Mar:	Mar
+Apr:	Avr
+Mag:	Mai
+Giu:	Juin
+Lug:	Juil
+Ago:	Août
+Set:	Sept
+Ott:	Oct
+Nov:	Nov
+Dic:	Déc
+Domenica:	Dimanche
+Lunedì:	Lundi
+Martedì:	Mardi
+Mercoledì:	Mercredi
+Giovedì:	Jeudi
+Venerdì:	Vendredi
+Sabato:	Samedi
+D:	D
+L:	L
+Ma:	Ma
+Me:	Me
+G:	J
+V:	V
+S:	S
+e:	et
+Riepilogo:	Récapitulatif
+Chiudi:	Fermez
+Salva e prosegui:	Sauvegardez et continuez
+Torna indietro:	Retournez en arrière
+Un'azienda:	Une entreprise
+Ragione sociale:	Raison sociale
+Specificare la ragione sociale:	Indiquer la raison sociale
+Specificare l'indirizzo:	Indiquer l’adresse
+Codice fiscale:	Code fiscal
+Specificare il codice fiscale:	Indiquer le code fiscal
+Partita IVA:	Numéro de TVA
+PEC:	PEC
+Specificare la PEC o il codice univoco:	Indiquer le PEC ou le code univoque
+Codice univoco:	Code univoque
+Accetto:	J’accepte
+Non accetto:	Je n’accepte pas
+# PROFILO - PAGAMENTI	# PROFIL - PAIEMENTS
+Pagamenti:	Paiements
+Inquadramento fiscale:	Cadre fiscal
+Inquadramento fiscale descrizione:	Cadre fiscal description
+Pagamento delle commissioni:	Paiement des commissions
+Dati bancari:	Coordonnées bancaires
+Dati bancari descrizione:	Coordonnées bancaires description
+IBAN:	IBAN
+Specificare IBAN:	Indiquer IBAN
+BIC SWIFT:	BIC SWIFT
+Specificare BIC SWIFT:	Indiquer BIC SWIFT
+# PROFILO - ACCOUNT	# PROFIL - COMPTE
+Account:	Compte
+Gestisci i dati del tuo account:	Gérez les données de votre compte
+Vecchia password:	Ancien mot de passe
+Specificare la vecchia password:	Indiquer l’ancien mot de passe
+Nuova password:	Nouveau mot de passe
+Specificare la nuova password:	Indiquer le nouveau mot de passe
+Conferma password:	Confirmation du mot de passe
+Le password immesse non corrispondono:	Les mots de passe saisis ne correspondent pas
+Desideri effettuare la richiesta di oblio dei dati:	Vous souhaitez effectuer la demande d’oubli des données
+Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione:	Avant d’effectuer la demande d’oubli, assurez-vous d’avoir compris ce que cette opération comporte
+Per approfondimenti clicca qui:	Pour en savoir plus, cliquez ici
+Richiedi oblio:	Demandez l’oubli
+La tua richiesta di oblio e stata registrata il:	Votre demande d’oubli a été enregistrée le
+ALERT_JS_Sei sicuro di voler richiedere loblio del tuo account:	ALERTE_JS_Voulez-vous vraiment demander l’oubli de votre compte
+# PROFILO - SPEDIZIONI	# PROFIL - EXPÉDITIONS
+Dati di spedizione:	Données d’expédition
+Aggiungi i dati di spedizione:	Ajoutez les données d’expédition
+Informazioni utili per la consegna:	Informations utiles pour la livraison
+Numero di telefono:	Numéro de téléphone
+E-mail di notifica spedizione:	E-mail d’avis d’expédition
+Consegna anche di sabato:	Livraison même le samedi
+Indirizzo predefinito:	Adresse prédéfinie
+Aggiungi nuovo indirizzo:	Ajoutez une nouvelle adresse
+es consegna al secondo piano:	ex. livraison au deuxième étage
+Altri indirizzi salvati:	Autres adresses sauvegardées
+ALERT_JS_sei sicuro di voler eliminare questo indirizzo:	ALERTE_JS_voulez-vous vraiment supprimer cette adresse
+La modifica della nazione di spedizione potrebbe comportare variazioni:	La modification de la nation d’expédition peut comporter des variations
+La nazione di spedizione indicata e:	La nation d’expédition indiquée est
+Modifica i dati di spedizione:	Modifiez les données d’expédition
+I tuoi indirizzi:	Vos adresses
+# PROFILO - DOCUMENTI	# PROFIL - DOCUMENTS
+Documenti:	Documents
+Documenti obbligatori:	Documents obligatoires
+Altri documenti facoltativi:	Autres documents facultatifs
+Puoi richiedere le provvigioni:	Vous pouvez demander les honoraires
+Reminder documenti obbligatori provvigioni:	Rappel documents obligatoires honoraires
+crea tesserino:	créez un badge
+aggiorna tesserino:	mettez le badge à jour
+carica file:	chargez le fichier
+sostituisci file:	remplacez le fichier
+Scarica il file:	Téléchargez le fichier
+Hai caricato il file il:	Vous avez chargé le fichier le
+# RETE - ALBERO UNILEVEL	# RÉSEAU - ARBRE UNILEVEL
+Albero Unilevel:	Arbre Unilevel
+Le impostazioni sono state salvate correttamente:	Les paramètres ont été enregistrés correctement
+Vista default:	Vue par défaut
+Elimina questa vista:	Éliminez cette vue
+Zoom:	Zoom
+Stampa:	Imprimez
+Filtri di ricerca:	Filtres de recherche
+Albero di:	Arbre de
+Livelli:	Niveaux
+Mese:	Mois
+Altezza:	Hauteur
+Larghezza:	Largeur
+Orientamento:	Orientation
+Orizzontale:	Horizontale
+Verticale:	Verticale
+Salva come vista principale:	Sauvegardez comme vue principale
+Cerca per codice nominativo e-mail o telefono:	Cherchez par code nominatif, e-mail ou téléphone
+scegli:	choisissez
+Crea una vista personalizzata:	Créez une vue personnalisée
+Salva la nuova vista:	Sauvegardez la nouvelle vue
+Scrivi qui il nome del nuovo filtro:	Écrivez ici le nom du nouveau filtre
+# RETE - LA TUA STRUTTURA	# RÉSEAU - VOTRE STRUCTURE
+La tua struttura:	Votre structure
+Consulta elenco clienti e collaboratori presenti nella struttura:	Consultez la liste des clients et collaborateurs présents dans la structure
+Gruppo di:	Groupe de
+Nome cognome o ragione sociale:	Nom, prénom ou raison sociale
+Mostra solo clienti e collaboratori direttamente sponsorizzati:	Montrez seulement les clients et collaborateurs directement sponsorisés
+Solo diretti:	Seuls les directs
+# RETE - INSERISCI NUOVO CLIENTE	# RÉSEAU - SAISISSEZ NOUVEAU CLIENT
+Inserisci un nuovo cliente:	Saisissez un nouveau client
+Nuovo Cliente:	Nouveau Client
+Nuovo cliente alert autorizzazioni:	Nouveau client alerte autorisations
+Inserisci i dati del nuovo cliente:	Saisissez les données du nouveau client
+Il nuovo cliente e:	Le nouveau client est
+Un privato:	Un particulier
+Un azienda:	Une entreprise
+La nazione di residenza è:	La nation de résidence est
+Inserisci cliente:	Saisissez client
+# MESSAGGI - MESSAGGIO	# MESSAGES - MESSAGE
+Messaggi:	Messages
+Non ci sono ancora messaggi da leggere.:	Il n’y pas encore de messages à lire
+da:	de
+da leggere:	à lire
+già letto:	déjà lu
+Dettaglio messaggio:	Détail du message
+torna alla pagina dei messaggi:	retournez à la page des messages
+Scritto da:	Écrit par
+# DOCUMENTI	# DOCUMENTS
+Cartella precedente:	Dossier précédent
+# BONUS	# BONUS
+Bonus:	Bonus
+Bonus dell'anno:	Bonus de l’année
+Nel:	En
+hai totalizzato Bonus per un totale di:	vous avez totalisé des Bonus pour un total de
+Consulta lo storico di tutti i bonus accumulati nel:	Consultez l’historique de tous les bonus cumulés au
+mese per mese:	mois par mois
+I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni:	Les mois en gris sont ceux pour lesquels les honoraires n’ont pas encore été crédités
+Qualifica raggiunta:	Qualification obtenue
+Attivo:	Actif
+Totale:	Total
+# ELENCO ORDINI	# LISTE COMMANDES
+Nuovo ordine:	Nouvelle commande
+Ordini:	Commandes
+Elenco degli ordini:	Liste des commandes
+Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti:	Consultez la liste des commandes, vous pourrez voir l’historique de vos commandes, des commandes de votre réseau et de celles de vos clients
+Cliente:	Client
+Esito:	Résultat
+Ordini dal:	Commandes depuis le
+al:	au
+Tipologia di ordine:	Type de commande
+Data:	Date
+PC:	PC
+Tutte le tipologie:	Tous les types
+ordini:	commandes
+Cancella:	Annulez
+Oggi:	Aujourd’hui
+# NESSUN ORDINE	# PAS DE COMMANDE
+Non hai ancora ordini da consultare:	Vous n’avez pas encore de commande à consulter
+  In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline.	Cette page montre toutes vos commandes, et toutes les commandes effectuées par vos subordonnés.
+Al momento non ci sono ordini né tuoi né della tua rete:	Il n’y a pas de commandes de votre part, ni de votre réseau pour l’instant
+# CREA NUOVO ORDINE	# CRÉEZ NOUVELLE COMMANDE
+Crea nuovo ordine:	Créez nouvelle commande
+Scegli il negozio nel quale vuoi acquistare:	Choisissez le magasin où vous voulez faire des achats
+Scegli negozio:	Choisissez le magasin
+Cambia store:	Changez de boutique
+Crea un ordine:	Créez une commande
+Cerca un cliente o un collaboratore:	Cherchez un client ou un collaborateur
+Crea ordine:	Créez commande
+# SHOP	# SHOP
+Shop:	Shop
+Crea un nuovo ordine:	Créez une nouvelle commande
+Filtra:	Filtrez
+Filtri abilitati:	Filtres activés
+Previous:	Previous
+current:	current
+Next:	Next
+Quantità:	Quantité
+Dettagli del prodotto:	Détails du produit
+Non sono state fornite ulteriori informazioni sul prodotto:	Il n’y a pas d’autres informations fournies sur le produit
+Acquista:	Achetez
+Vedi dettagli:	Voir les détails
+#INGRESSO	#ENTRÉE
+Ingresso:	Entrée
+Virtual Office di:	Virtual Office de
+cerca un incaricato:	créez un chargé
+# ARTICOLO SHOP	# ARTICLE SHOP
+Disponibilità:	Disponibilité
+Categoria:	Catégorie
+In stock:	En stock
+Non disponibile:	Indisponible
+Al momento non hai articoli nel carrello.:	Vous n’avez pas d’articles dans le panier pour l’instant
+Inizia ora i tuoi acquisti!:	Commencez maintenant vos achats !
+Concludi il tuo ordine!:	Terminez votre commande !
+Al momento hai:	Vous avez pour l’instant
+articoli nel carrello per un totale di:	articles dans le panier pour un total de
+Al momento hai 1 articolo nel carrello per un totale di:	Vous avez pour l’instant 1 article dans le panier pour un total de
+Descrizione:	Description
+# CARRELLO	# PANIER
+Carrello:	Panier
+Controlla la merce inserita nel carrello prima di concludere l'ordine:	Contrôlez la marchandise introduite dans le panier avant de terminer la commande
+Articolo:	Article
+Punti:	Points
+Prezzo:	Prix
+Totale Punti:	Total Points
+Continua con lo shopping:	Poursuivez le shopping
+Vai al checkout:	Passez à la caisse
+Non hai articoli nel carrello:	Vous n’avez pas d’articles dans le panier
+  In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello.	Cette page montre tous les articles présents dans le panier.
+Al momento non ci sono articoli:	Il n’y a pas d’articles pour l’instant.
+Fai il tuo primo ordine:	Passez votre première commande
+# CHECKOUT	# PASSAGE EN CAISSE
+Checkout:	Passage en caisse
+Compila i dati di residenza:	Renseignez les données de résidence
+La nazione di fatturazione è:	La nation de facturation est
+Compila i dati fiscali:	Renseignez les données fiscales
+Subtotale:	Sous-total
+Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione:	Saisissez les données de résidence et d’expédition, après quoi vous pourrez choisir le moyen de paiement et le mode de livraison
+Completa l'acquisto:	Finalisez l’achat
+Intestatario ordine:	Titulaire commande
+Spedizione:	Expédition
+Indirizzo incompleto:	Adresse incomplète
+Aggiungi un nuovo indirizzo di spedizione:	Ajoutez une nouvelle adresse d’expédition
+Note per la consegna:	Remarques pour la livraison
+Seleziona un indirizzo per scoprire le modalità di spedizione disponibili:	Sélectionnez une adresse pour découvrir les modes de livraison disponibles
+Pagamento:	Paiement
+Gratis:	Gratuit
+Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili:	Sélectionnez une adresse et un mode de livraison pour découvrir les moyens de paiement disponibles
+Spese Amministrative:	Frais administratifs
+Conferma ordine:	Confirmation de la commande
+Dati spedizione:	Données d’expédition
+# Dettaglio Ordine	# Détail Commande
+Dettaglio Ordine:	Détail Commande
+Ordine Cod.:	Ordre Code
+Creato il:	Créé le
+Stato:	État
+Cod.:	Code
+Spese modalità di pagamento:	Frais moyens de paiement
+Spese di spedizione:	Frais de port
+Modalità di spedizione:	Mode de livraison
+Spedire presso:	Expédier auprès de
+Modalità di pagamento:	Moyens de paiement
+Questo ordine risulta pagato:	Cette commande a été payée
+Questo ordine non risulta ancora pagato:	Cette commande n’a pas encore été payée
+Torna allo shop:	Retournez au shop
+# INVITA PERSONE	# INVITEZ DES PERSONNES
+Invita Persone:	Invitez des Personnes
+Marketing Tools:	Outils de marketing
+Scegli un modello di e-mail da inviare:	Choisissez un modèle d’e-mail à envoyer
+Consulta lo storico degli inviti che hai inviato:	Consultez l’historique des invitations que vous avez envoyées
+Data di invio:	Données d’envoi
+Invia il tuo invito:	Envoyez votre invitation
+Specificare il nome del destinatario:	Indiquer le nom du destinataire
+Specificare l'indirizzo e-mail del destinatario:	Indiquer l’adresse électronique du destinataire
+Ultima ora:	Dernière heure
+Hai ancora:	Vous avez encore
+inviti:	invitations
+Ultime 24 ore:	24 dernières heures
+Ultima settimana:	Dernière semaine
+Ultimo mese:	Dernier mois
+Spedisci invito:	Expédiez l’invitation
+# SITO PERSONALE	# SITE PERSONNEL
+Titolo:	Titre
+Sito personale:	Site personnel
+Copia il link del tuo sito personale per condividerlo:	Copiez le lien de votre site personnel pour le partager
+copia il link:	copiez le lien
+Contattami al:	Contactez-moi au
+Scrivimi a:	Écrivez-moi à
+Facebook:	Facebook
+Instagram:	Instagram
+Twitter:	Twitter
+Youtube:	Youtube
+#LOGIN	#CONNEXION
+Login:	Connexion
+Accedi al tuo account:	Accédez à votre compte
+Inserisci le tue credenziali per accedere:	Saisissez les identifiants pour accéder
+Username:	Nom d’utilisateur
+Password:	Mot de passe
+Ricorda password:	Se souvenir du mot de passe
+Password dimenticata:	Mot de passe oublié
+Non hai un account:	Vous n’avez pas de compte
+Registrati adesso:	Inscrivez-vous maintenant
+#REGISTRAZIONE	#INSCRIPTION
+Crea il tuo account:	Créez votre compte.
+Compila il modulo sottostante per iscriverti:	Renseignez le formulaire ci-dessous pour vous inscrire
+Codice Sponsor:	Code Sponsor
+Scrivi il codice del tuo sponsor:	Écrivez le code de votre sponsor
+Desidero iscrivermi come:	Je souhaite m’inscrire en tant que
+privato:	particulier
+azienda:	entreprise
+Scrivi il tuo indirizzo e-mail:	Écrivez votre adresse électronique
+Specifica la nazione di residenza:	Indiquez la nation de résidence
+Crea account:	Créez compte
+Hai già un account:	Vous avez déjà un compte
+#REGISTRAZIONE SUCCESS	#INSCRIPTION RÉUSSIE
+Account creato correttamente:	Compte créé correctement
+Grazie per esserti iscritto a:	Merci de votre inscription à
+Ti abbiamo inviato una e-mail di benvenuto:	Nous vous avons envoyé un e-mail de bienvenue
+Vai al login:	Allez à la connexion
+#FORGOT PASSWORD	#FORGOT PASSWORD
+Recupera password:	Récupérez le mot de passe
+Rigenera la tua password:	Restaurez votre mot de passe
+Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password:	Saisissez votre code ou votre adresse électronique à laquelle le lien pour générer un nouveau mot de passe sera envoyé
+Richiedi il link:	Demandez le lien
+Codice o e-mail:	Code ou e-mail
+#INGRESSO CLIENTE	#ENTRÉE CLIENT
+Area riservata:	Espace réservé
+Benvenuto:	Bienvenue
+Guadagna con noi:	Gagnez avec nous
+Diventa un distributore indipendente:	Devenez distributeur indépendant
+e scopri le opportunità di guadagno a te riservate aderendo al nostro team:	et découvrez les opportunités de gain qui vous sont réservées en rejoignant notre équipe
+html guadagna con noi:	html gagnez avec nous
+Diventa un collaboratore:	Devenez collaborateur
+I più venduti:	Les plus vendus
+Acquistati di recente:	Achetez récemment
+#WIDGET NOTIZIE	#WIDGET NOUVELLES
+Ultime notizie:	Dernières nouvelles
+continua a leggere...:	continuez à lire...
+Nessuna novità per adesso:	Pas de nouveauté pour l’instant
+#CARRIERA	#CARRIÈRE
+Carriera:	Carrière
+La tua carriera:	Votre carrière
+Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle:	Consultez toutes les qualifications du plan de carrière et découvrez comment les obtenir
+Qualifica precedente:	Qualification précédente
+Qualifica attuale:	Qualification actuelle
+Qualifica successiva:	Qualification suivante
+Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi:	Historique des qualifications obtenues au début de votre carrière jusqu’à ce jour
+# DATI PERSONALI	# DONNÉES PERSONNELLES
+Dati personali:	Données personnelles
+Contatti:	Contacts
+Dati fiscali:	Données fiscales
+Dati di residenza:	Données de résidence
+Sede Legale:	Siège social
+#GRAFICO VENDITE	#GRAPHIQUE VENTES
+Tipologia filtro:	Type de filtre
+Specifico mese:	Mois spécifique
+Specifico Anno:	Année spécifique
+Mostra:	Montrez
+Punti Carriera:	Points de Carrière
+Punti Volume:	Points Volume
+Numero ordini:	Nombre de commandes
+#RECUPERO PASSWORD	#RÉCUPÉRATION DU MOT DE PASSE
+Richiesta di rigenerazione password:	Demande de restauration de mot de passe
+Link inviato correttamente:	Lien envoyé correctement
+Consulta la tua casella email:	Consultez votre boîte de réception
+Ti abbiamo inviato il likn con il quale potrai generare la tua nuova password:	Nous vous avons envoyé le lien qui vous permettra de générer le nouveau mot de passe
+L indirizzo digitato non è stato trovato:	L’adresse saisie est introuvable
+Assicurati di avere scritto correttamente l indirizzo e riprova:	Assurez-vous d’avoir écrit correctement l’adresse et retentez
+riprova:	retentez
+#PRIVACY	#PRIVACY
+Privacy:	Confidentialité
+Permessi:	Permis
+Privacy Policy:	Politique de confidentialité
+Visualizza i dati in nostro possesso:	Affichez les données en notre possession
+# WIDGET	# WIDGET
+# SIDEBAR	# BARRE LATÉRALE
+Diventa collaboratore:	Devenez collaborateur
+Spedizioni:	Expéditions
+Attività:	Activités
+Gestisci la tua rete:	Gérez votre réseau
+La tua rete:	Votre réseau
+Invita persone:	Invitez des personnes
+Guadagni:	Gains
+Consulta e richiedi le provvigioni:	Consultez et demandez les provisions
+Utilities:	Utilities
+Strumenti utili per la tua attività:	Outils utiles pour votre activité
+Logout:	Déconnexion
+# REGISTRAZIONE-IBO	#INSCRIPTION- IBO
+Scopri una nuova opportunità di guadagno:	Découvrez une nouvelle opportunité de gain
+Scegli la modalità di iscrizione che preferisci:	Sélectionnez la modalité d’inscription que vous préférez
+
+#CUSTOM BIOKERN
+Area personale: Espace personnel
+Log in e documenti: Connexion et documents
+La tua Carriera: Votre carrière
+La tua qualifica è: Votre qualification est
+Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica: Hai soddisfatto i requisiti della modalità FAST per ottenedere la qualifica
+Ricorda di cliccare su "CONFERMA QUALIFICA" per ottenere la qualifica di Business unit dal prossimo mese: Ricorda di cliccare su "CONFERMA QUALIFICA" per ottenere la qualifica di Business unit dal prossimo mese
+Conferma qualifica: Conferma qualifica
+Hai confermato la qualifica: Hai confermato la qualifica
+Per mantere la tua qualifica di: Per mantere la tua qualifica di
+occorre totalizzare: occorre totalizzare
+COINS nel mese: COINS nel mese
+COINS: COINS
+pertanto non stai mantenendo la qualifica: pertanto non stai mantenendo la qualifica
+Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti: Attenzione! Questo mese potrai aver diritto a mantenere la Business Unit anche in assenza dei requisiti
+Hai mantenuto la qualifica con: Hai mantenuto la qualifica con
+La prossima qualifica: La prossima qualifica
+si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit: si ottiene con 1 collaboratore all'interno della propria struttura avente la qualifica Business unit
+Al momento non hai collaboratori con qualifica: Al momento non hai collaboratori con qualifica
+nella tua struttura: nella tua struttura
+Non è stato possibile determinare la tua qualifica: Non è stato possibile determinare la tua qualifica
+La prossima qualifica è: La prossima qualifica è
+e si ottiene con: e si ottiene con
+coins di cui: coins di cui
+personali: personali
+personali, per raggiungere l'obbiettivo: personali, per raggiungere l'obbiettivo
+Ti mancano: Ti mancano
+COINS di cui: COINS di cui
+COINS personali per raggiungere l'obbiettivo: COINS personali per raggiungere l'obbiettivo
