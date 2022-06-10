@@ -36,7 +36,10 @@ final class IngressoController extends AbstractController{
 	 */
 	#[Route('/', name: 'index')]
 	public function index() : Response{
-		return $this->redirectToRoute('ingresso');
+		//return $this->redirectToRoute('ingresso');
+		$locale = $this->getUser()->getLocale();
+		$url_ingresso = '/' . $locale . '/ingresso';
+		return $this->redirect($url_ingresso);
 	}
 
 	/**
