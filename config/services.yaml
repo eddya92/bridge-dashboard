@@ -89,7 +89,7 @@ services:
   CustomAuthenticationSuccessHandler:
     class: Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler
     arguments:
-      $options: { always_use_default_target_path: false, default_target_path: /it/ingresso, login_path: /login, target_path_parameter: goTo, use_referer: true }
+      $options: { always_use_default_target_path: false, default_target_path: /, login_path: /login, target_path_parameter: goTo, use_referer: true }
 
   CustomAuthenticationFailureHandler:
     class: Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler
@@ -112,7 +112,7 @@ services:
   CustomSSOAuthenticationSuccessHandler:
     class: App\Security\SSOAuthenticationSuccessHandler
     arguments:
-      $options: { always_use_default_target_path: false, default_target_path: /it/ingresso, login_path: /login, target_path_parameter: goTo, use_referer: true }
+      $options: { always_use_default_target_path: false, default_target_path: /, login_path: /login, target_path_parameter: goTo, use_referer: true }
 
   CustomSSOAuthenticationFailureHandler:
     class: App\Security\SSOAuthenticationFailureHandler
@@ -345,3 +345,9 @@ services:
     class: App\Widget\Top5\Top5
     arguments:
       $numeroDiTopN: '%env(string:NUMERO_TOP_5)%'
+
+  App\Controller\Page\MarketingToolsController:
+    class: App\Controller\Page\MarketingToolsController
+    arguments:
+      $locales: '%env(string:LOCALES)%'
+

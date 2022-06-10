@@ -89,6 +89,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, 
 			$userData['id_ruolo'] ?? '',
 			$userData['foto'] ?? '',
 			$userData['articoli_nel_carrello'] ?? 0,
+			$userData['locale'] ?? 'it',
 		);
 	}
 

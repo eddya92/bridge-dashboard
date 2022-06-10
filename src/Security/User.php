@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use function array_unique;
 
 final class User implements UserInterface{
-	public function __construct(private string $token, private array $roles, private string $superiore, private string $codice, private string $nominativo, private string $qualifica, private string $id_ruolo, private string $foto, private int $articoliCarrello){
+	public function __construct(private string $token, private array $roles, private string $superiore, private string $codice, private string $nominativo, private string $qualifica, private string $id_ruolo, private string $foto, private int $articoliCarrello, private string $locale){
 	}
 
 	/**
@@ -67,6 +67,10 @@ final class User implements UserInterface{
 
 	public function getSalt() : ?string{
 		return null;
+	}
+
+	public function getLocale() : string{
+		return $this->locale;
 	}
 
 	public function eraseCredentials(){

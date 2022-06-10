@@ -35,7 +35,7 @@ class SSOAuthenticationSuccessHandler implements AuthenticationSuccessHandlerInt
 	 * {@inheritdoc}
 	 */
 	public function onAuthenticationSuccess(Request $request, TokenInterface $token){
-		$successl_url = $this->router->generate('ingresso');
+		$successl_url = $this->router->generate('index');
 		if($request->query->has('success_url') && $request->query->get('success_url', '') != ''){
 			$successl_url = $request->query->get('success_url');
 		}
