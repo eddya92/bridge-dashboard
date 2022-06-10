@@ -223,7 +223,8 @@
 		}
 
 		function copiaCodicePromoter(){
-			console.log(document.getElementById('codicePromoter').innerHTML);
+			document.getElementById('codicePromoter').innerHTML;
+			navigator.clipboard.writeText(document.getElementById('codicePromoter').innerHTML)
 		}
     </script>
 {% endblock javascript_page %}
