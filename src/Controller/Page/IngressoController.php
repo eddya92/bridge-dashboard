@@ -35,9 +35,10 @@ final class IngressoController extends AbstractController{
 	 * Vista della pagina ingresso, controlla se sei un cliente o un incaricato, a seconda di questo ti mostra determinate cose
 	 */
 	#[Route('/', name: 'index')]
-	public function index() : Response{
+	public function index(Request $request) : Response{
 		//return $this->redirectToRoute('ingresso');
 		$locale = $this->getUser()->getLocale();
+		$request->setLocale($locale);
 		$url_ingresso = '/' . $locale . '/ingresso';
 		return $this->redirect($url_ingresso);
 	}

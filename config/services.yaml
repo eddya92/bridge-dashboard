@@ -346,4 +346,8 @@ services:
     arguments:
       $numeroDiTopN: '%env(string:NUMERO_TOP_5)%'
 
+  App\Controller\Page\MarketingToolsController:
+    class: App\Controller\Page\MarketingToolsController
+    arguments:
+      $locales: '%env(string:LOCALES)%'
 
