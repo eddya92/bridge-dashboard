@@ -1,0 +1,466 @@
+# COMMONS	# ALLGEMEINES
+# Termini utilizzati in più pagine	# Begriffe, die auf mehreren Seiten verwendet werden
+Virtual Office: Virtuelles Büro
+Profilo: Profil
+Aggiorna dati: Daten aktualisieren
+Mostra caratteri: Zeichen anzeigen
+alle ore: Uhrzeit
+Codice: Code
+Data di iscrizione: Registrierungsdatum
+E.mail: E-Mail
+Nome: Vorname
+Cognome: Nachname
+Indirizzo: Adresse
+Numero civico: Hausnummer
+Nazione: Nation
+CAP: PLZ
+Comune: Gemeinde
+Provincia: Provinz
+Note: Vermerke
+Modifica: Daten umändern
+Elimina: Löschen
+Specificare il nome: Vornamen angeben
+Specificare il cognome: Zunamen angeben
+Specificare l indirizzo: Adresse angeben
+Specificare il numero civico: Hausnummer angeben
+Specificare il CAP: PLZ angeben
+Specificare il comune: Gemeinde angeben
+Specificare il numero di partita IVA: USt-ID angeben
+Specificare la PEC: PEC-Adresse angeben
+Specificare il codice univoco: Einmaligen Code angeben
+Email: E-Mail
+Telefono: Telefon
+Specificare il numero di cellulare: Mobiltelefonnummer angeben
+Specificare la provincia: Provinz angeben
+Specificare il numero di telefono: Mobiltelefonnummer angeben
+Specificare un indirizzo email valido: Gültige Emailadresse angeben
+Nominativo: Name
+Cellulare: Mobiltelefon
+filtra: filtern
+chiudi: schließen
+Filtri: Filter
+Periodo: Zeitraum
+Qualifica: Qualifizierung
+Sponsor: Sponsor
+Incaricato: Beauftragter
+Livello: Level
+E-mail: E-Mail
+Anno: Jahr
+precedente: früher
+successivo: später
+nessun dato disponibile: keine Daten verfügbar
+visualizzati 0 a 0 di 0 elementi: 0 von 0 Elementen gezeigt
+filtrati da: gefiltert von
+elementi totali: Summe der Elemente
+nessun_risultato: kein_Ergebnis
+attiva_per_ordine_ascendente: in_aufsteigender_Reihenfolge_aktivieren
+attiva_per_ordine_discendente: in_absteigender_Reihenfolge_aktivieren
+utenti: Nutzer
+visualizzati: angezeigt
+mostra: zeigen
+per pagina: pro Seite
+caricamento: Aufladung
+elaborazione: Verarbeitung
+Cerca: Suche
+Gennaio: Januar
+Febbraio: Februar
+Marzo: März
+Aprile: April
+Maggio: Mai
+Giugno: Juni
+Luglio: Juli
+Agosto: August
+Settembre: September
+Ottobre: Oktober
+Novembre: November
+Dicembre: Dezember
+Torna a: zurück zu
+Gen: Jan
+Feb: Feb
+Mar: Mär
+Apr: Apr
+Mag: Mai
+Giu: Jun
+Lug: Jul
+Ago: Aug
+Set: Sep
+Ott: Okt
+Nov: Nov
+Dic: Dez
+Domenica: Sonntag
+Lunedì: Montag
+Martedì: Dienstag
+Mercoledì: Mittwoch
+Giovedì: Donnerstag
+Venerdì: Freitag
+Sabato: Samstag
+
+D: SO
+L: MO
+Ma: DI
+Me: MI
+G: DO
+V: FR
+S: SA
+
+e: und
+Riepilogo: Zusammenfassung
+Chiudi: Schließen
+Salva e prosegui: Speichern und weiter
+Torna indietro: Zurück
+
+Un'azienda: Ein Unternehmen
+Ragione sociale: Firmenbezeichnung
+Specificare la ragione sociale: Firmenbezeichnung
+Specificare l'indirizzo: Adresse angeben
+Codice fiscale: Steuernummer
+Specificare il codice fiscale: Steuernummer angeben
+Partita IVA: USt,ID
+PEC: PEC
+Specificare la PEC o il codice univoco: PEC-Adresse oder einmaligen Code angeben
+Codice univoco: Einmaligen Code angeben
+
+Accetto: Ich akzeptiere
+Non accetto: Ich akzeptiere nicht
+
+# PROFILO - PAGAMENTI	# PROFIL - ZAHLUNGEN
+Pagamenti: Zahlungen
+Inquadramento fiscale: Einstufung in Steuerklasse
+Inquadramento fiscale descrizione: Einstufung in Steuerklasse Beschreibung
+Pagamento delle commissioni: Bezahlung der Kommissionen
+Dati bancari: Bankdaten
+Dati bancari descrizione: Beschreibung der Bankdaten
+IBAN: IBAN
+Specificare IBAN: IBAN angeben
+BIC SWIFT: BIC SWIFT
+Specificare BIC SWIFT: BIC SWIFT angeben
+
+# PROFILO - 	# PROFIL -
+Account: Konto
+Gestisci i dati del tuo account: Ihre Kontodaten verwalten
+Vecchia password: Altes Passwort
+Specificare la vecchia password: Altes Passwort angeben
+Nuova password: Neues Passwort
+Specificare la nuova password: Neues Passwort angeben
+Conferma password: Passwort bestätigen
+Le password immesse non corrispondono: Die eingegebenen Passwörter stimmen nicht überein
+Desideri effettuare la richiesta di oblio dei dati: Möchten Sie einen Antrag auf Datenlöschung stellen?
+Prima di effettuare la richiesta di oblio assicurati di aver compreso cosa comporta tale operazione: Bevor Sie den Antrag auf Datenlöschung stellen, vergewissern Sie sich, dass sie die Tragweite dieser Aktion verstanden haben
+Per approfondimenti clicca qui: Für weitere Erklärungen hier klicken
+Richiedi oblio: Löschung beantragen
+La tua richiesta di oblio e stata registrata il: Ihr Löschungsantrag wurde registriert am
+ALERT_JS_Sei sicuro di voler richiedere loblio del tuo account: ALERT_JS_Sind Sie sicher, dass Sie Ihr Konto löschen möchten
+
+# PROFILO - SPEDIZIONI	# PROFIL - VERSAND
+Dati di spedizione: Versanddaten
+Aggiungi i dati di spedizione: Versanddaten hinzufügen
+Informazioni utili per la consegna: Nützliche Informationen für die Lieferung
+Numero di telefono: Telefonnummer
+E-mail di notifica spedizione: Benachrichtigungs-Email über den Versand
+Consegna anche di sabato: Lieferung auch am Samstag
+Indirizzo predefinito: Standardadresse
+Aggiungi nuovo indirizzo: Neue Adresse hinzufügen
+es consegna al secondo piano: z.B. Lieferung im zweiten Stock
+Altri indirizzi salvati: Weitere gespeicherte Adressen
+ALERT_JS_sei sicuro di voler eliminare questo indirizzo: ALERT_JS_Sind Sie sicher, dass Sie diese Adresse entfernen möchten
+La modifica della nazione di spedizione potrebbe comportare variazioni: Bei der Änderung des Versandlandes kann es zu Abweichungen kommen
+La nazione di spedizione indicata e: Das angegebene Versandland ist
+Modifica i dati di spedizione: Versanddaten ändern
+I tuoi indirizzi: Ihre Adressen
+
+# PROFILO - DOCUMENTI	# PROFIL - DOKUMENTE
+Documenti: Weitere Dokumente
+Documenti obbligatori: Obligatorische Dokumente
+Altri documenti facoltativi: Weitere fakultative Dokumente
+Puoi richiedere le provvigioni: Sie können Provisionen beantragen
+Reminder documenti obbligatori provvigioni: Erinnerung an die obligatorischen Dokumente
+crea tesserino: Ausweis erstellen
+aggiorna tesserino: Ausweis aktualisieren
+carica file: Datei hochladen
+sostituisci file: Datei ersetzen
+Scarica il file: Datei herunterladen
+Hai caricato il file il: Sie haben die Datei aufgeladen am
+
+# RETE - ALBERO UNILEVEL	# NETZ - UNILEVEL-BAUM
+Albero Unilevel: Unilevel-Baum
+Le impostazioni sono state salvate correttamente: Die Einstellungen wurden korrekt gespeichert
+Vista default: Standardansicht
+Elimina questa vista: Diese Ansicht entfernen
+Zoom: Zoom
+Stampa: Drucken
+Filtri di ricerca: Suchfilter
+Albero di: Baum
+Livelli: Levels
+Mese: Monat
+Altezza: Höhe
+Larghezza: Breite
+Orientamento: Ausrichtung
+Orizzontale: Horizontal
+Verticale: Vertikal
+Salva come vista principale: Als Hauptansicht speichern
+Cerca per codice nominativo e-mail o telefono: Nach Name, Email oder Telefonnummer suchen
+scegli: wählen
+Crea una vista personalizzata: Personalisierte Ansicht erstellen
+Salva la nuova vista: Neue Ansicht speichern
+Scrivi qui il nome del nuovo filtro: Fügen Sie hier die Bezeichnung des neuen Filters ein
+
+# RETE - LA TUA STRUTTURA	# NETZWERK - IHR UNTERNEHMEN
+La tua struttura: Ihr Unternehmen
+Consulta elenco clienti e collaboratori presenti nella struttura: Das Verzeichnis der Kunden und Mitarbeiter des Unternehmens konsultieren
+Gruppo di: Gruppe
+Nome cognome o ragione sociale: Vor- und Zuname und/oder Firmenbezeichnung
+Mostra solo clienti e collaboratori direttamente sponsorizzati: Nur direkt gesponserte Kunden und Mitarbeiter anzeigen
+Solo diretti: Nur direkte
+
+# RETE - INSERISCI NUOVO CLIENTE	# NETZWERK - NEUEN KUNDEN EINFÜGEN
+Inserisci un nuovo cliente: Neuen Kunden einfügen
+Nuovo Cliente: Neuer Kunde
+Nuovo cliente alert autorizzazioni: Neuer Kunde Alert Autorisierungen
+Inserisci i dati del nuovo cliente: Daten des neuen Kunden einfügen
+Il nuovo cliente e: Der neue Kunde ist
+Un privato: Eine Privatperson
+Un azienda: Ein Unternehmen
+La nazione di residenza è: Wohnland
+Inserisci cliente: Kunden einfügen
+
+# MESSAGGI - MESSAGGIO	# NACHRICHTEN - NACHRICHT
+Messaggi: Nachrichten
+Non ci sono ancora messaggi da leggere.: Es sind noch keine ungelesenen Nachrichten vorhanden
+da: von
+da leggere: noch zu lesen
+già letto: bereits gelesen
+Dettaglio messaggio: Einzelheiten der Nachricht
+torna alla pagina dei messaggi: zurück zur Nachrichtenseite
+Scritto da: geschrieben von
+
+# DOCUMENTI	# DOKUMENTE
+Cartella precedente: Frühere Kartei
+
+# BONUS	# BONUS
+Bonus: Bonus
+Bonus dell'anno: Jahresbonus
+Nel: Im Jahr
+hai totalizzato Bonus per un totale di: haben Sie Bonunszahlungen totalisiert in Höhe von
+Consulta lo storico di tutti i bonus accumulati nel: Historie aller im Zeitraum.....angesammelter Bonuszahlungen konsultieren
+mese per mese: pro Monat
+I mesi in grigio sono quelli per i quali non è ancora stato effettuato l'accredito delle provvigioni: In den grau gedruckten Monaten wurden noch keine Provisionen gutgeschrieben
+Qualifica raggiunta: Erzielte Qualifizierung
+Attivo: Aktiv
+Totale: Gesamt
+
+# ELENCO ORDINI	# VERZEICHNIS DER BESTELLUNGEN
+Nuovo ordine: Neue Bestellung
+Ordini: Bestellungen
+Elenco degli ordini: Liste der Bestellungen
+Consulta l'elenco degli ordini. potrai vedere lo storico dei tuoi ordini, degli ordini della tua rete e di quelli dei tuoi clienti: Liste der Bestellungen konsultieren. Hier sehen sie die Historie Ihrer Bestellungen, die Bestellungen Ihres Netzwerks und die Ihrer Kunden
+Cliente: Kunde
+Esito: Ergebnis
+Ordini dal: Bestellungen von
+al: bis
+Tipologia di ordine: Art der Bestellung
+Data: Datum
+PC: PC
+Tutte le tipologie: Alle Typologien
+ordini: Bestellungen
+Cancella: Löschen
+Oggi: Heute
+
+# NESSUN ORDINE	# KEINE BESTELLUNG
+Non hai ancora ordini da consultare: Sie haben noch keine zu konsultierenden Bestellungen
+In questa pagina vengono mostrati tutti i tuoi ordini e tutti gli ordini effettuati dalle tue downline. Al momento non ci sono ordini né tuoi né della tua rete: Auf dieser Seite werden alle Bestellungen gezeigt, die von Ihnen oder Ihren Downlines durchgeführt wurde. Derzeit liegen keine Bestellungen vor, weder Ihre noch von Ihrem Netzwerk
+
+# CREA NUOVO ORDINE	# NEUE BESTELLUNG GENERIEREN
+Crea nuovo ordine: Neue Bestellung generieren
+Scegli il negozio nel quale vuoi acquistare: Wählen Sie das Geschäft, in dem Sie kaufen möchten
+Scegli negozio: Geschäft wählen
+Cambia store: Geschäft wechseln
+Crea un ordine: Bestellung generieren
+Cerca un cliente o un collaboratore: Kunden oder Mitarbeiter generieren
+Crea ordine: Bestellung generieren
+
+# SHOP	# SHOP
+Shop: Shop
+Crea un nuovo ordine: Neue Bestellung generieren
+Filtra: Filtern
+Filtri abilitati: aktivierte Filter
+Previous: früher
+current: derzeit
+Next: nächste
+Quantità: Menge
+Dettagli del prodotto: Angaben zum Produkt
+Non sono state fornite ulteriori informazioni sul prodotto: Es wurden keine weiteren Informationen über das Produkt erteilt
+Acquista: Kaufen
+Vedi dettagli: Details sehen
+
+#INGRESSO	EINGANG
+Ingresso: Eingang
+Virtual Office di: Virtuelles Büro von
+cerca un incaricato: Beauftragten suchen
+
+# ARTICOLO SHOP	# ARTIKEL SHOP
+Disponibilità: Verfügbarkeit
+Categoria: Kategorie
+In stock: auf Lager
+Non disponibile: Nicht verfügbar
+Al momento non hai articoli nel carrello.: Derzeit ist Ihr Warenkorb leer
+Inizia ora i tuoi acquisti!: Beginnen Sie mit dem Einkauf
+Concludi il tuo ordine!: !    Schließen Sie Ihre Bestellung ab!
+Al momento hai: Derzeit haben Sie
+articoli nel carrello per un totale di: Artikel in Ihrem Warenkorb für einen Betrag von
+Al momento hai 1 articolo nel carrello per un totale di: Derzeit befindet sich 1 Artikel im Warenkorb für einen Betrag von
+Descrizione: Beschreibung
+
+# CARRELLO	# WARENKOERB
+Carrello: Warenkorb
+Controlla la merce inserita nel carrello prima di concludere l'ordine: Kontrollieren Sie die Artikel in Ihrem Warenkorb, bevor Sie die Bestellung abschließen
+Articolo: Artikel
+Punti: Punkte
+Prezzo: Preis
+Totale Punti: Punkte insgesamt
+Continua con lo shopping: Weiter shoppen
+Vai al checkout: zum Checkout
+Non hai articoli nel carrello: Derzeit ist Ihr Warenkorb leer
+In questa pagina vengono mostrati tutti i tuoi articoli presenti nel carrello. Al momento non ci sono articoli: Auf dieser Seite werden alle Artikel gezeigt, die sich in Ihrem Warenkorb befinden. Derzeit sind keine Artikel im Warenkorb
+Fai il tuo primo ordine: Machen Sie Ihre erste Bestellung
+
+# CHECKOUT	# CHECKOUT
+Checkout: Checkout
+Compila i dati di residenza: Wohndaten einfügen
+La nazione di fatturazione è: Rechnungsland ist
+Compila i dati fiscali: Steuerdaten einfügen
+Subtotale: Zwischensumme
+Inserisci i dati di residenza e di spedizione, dopodiché sarà possibile scegliere le modalità di pagamento e di spedizione: Fügen Sie die Wohndaten und Versanddaten ein. Danach können Sie die Zahlungsmodalität und die Versandmodalität wählen
+Completa l'acquisto: Kauf fertigstellen
+Intestatario ordine: Bestellung ausgestellt auf
+Spedizione: Versand
+Indirizzo incompleto: Anschrift unvollständig
+Aggiungi un nuovo indirizzo di spedizione: Neue Anschrift hinzufügen
+Note per la consegna: Vermerke für die Lieferung
+Seleziona un indirizzo per scoprire le modalità di spedizione disponibili: Adresse auswählen, um die verfügbaren Versandmodalitäten zu entdecken
+Pagamento: Zahlung
+Gratis: Gratis
+Seleziona un indirizzo e una modalità di spedizione per scoprire le modalità di pagamento disponibili: Adresse und Versandart auswählen, um die verfügbaren Zahlungsmodalitäten zu entdecken
+Spese Amministrative: Bearbeitungskosten
+Conferma ordine: Bestellung bestätigen
+Dati spedizione: Versanddaten
+
+# Dettaglio Ordine	# Details der Bestellung
+Dettaglio Ordine: Details der Bestellung
+Ordine Cod.: Bestellnummer
+Creato il: erstellt am
+Stato: Staat
+Cod.: Cod.
+Spese modalità di pagamento: Spesen Zahlungsmodalitäten
+Spese di spedizione: Versandkosten
+Modalità di spedizione: Versandmöglichkeiten
+Spedire presso: Versand an
+Modalità di pagamento: Zahlungsmodalitäten
+Questo ordine risulta pagato: Diese Bestellung resultiert als bezahlt
+Questo ordine non risulta ancora pagato: Diese Bestellung resultiert als noch nicht bezahlt
+Torna allo shop: Zurück zum Shop
+
+# INVITA PERSONE	# PERSONEN EINLADEN
+Invita Persone: Personen einladen
+Marketing Tools: Marketing Tools
+Scegli un modello di e-mail da inviare: Email-Vorlage zum Versenden wählen
+Consulta lo storico degli inviti che hai inviato: Historie Ihrer versandten Einladungen konsultieren
+Data di invio: Versanddatum
+Invia il tuo invito: Versenden Sie Ihre Einladung
+Specificare il nome del destinatario: Namen des Empfängers angeben
+Specificare l'indirizzo e-mail del destinatario: Email-Adresse des Empfängers angeben
+Ultima ora: Letzte Stunde
+Hai ancora: Sie haben noch
+inviti: Einladungen
+Ultime 24 ore: Letzte 24 Stunden
+Ultima settimana: Letzte Woche
+Ultimo mese: Letzter Monat
+Spedisci invito: Einladung versenden
+
+# SITO PERSONALE	# PERSÖNLICHE WEBSEITE
+Titolo: Titel
+Sito personale: Persönliche Webseite
+Copia il link del tuo sito personale per condividerlo: Link zu Ihrer Webseite kopieren, um sie zu teilen
+copia il link: Link kopieren
+Contattami al: Kontaktieren Sie mich unter
+Scrivimi a: Schreiben Sie mir auf
+Facebook: Facebook
+Instragram: Instragram
+Twitter: Twitter
+Youtube: Youtube
+
+#LOGIN	#LOGIN
+Login: Login
+Accedi al tuo account: Auf Ihr Konto zugreifen
+Inserisci le tue credenziali per accedere: Geben Sie Ihre Kennwörter für den Zugriff ein
+Username: Benutzername
+Password: Passwort
+Ricorda password: Password merken
+Password dimenticata: Passwort vergessen
+Non hai un account: Sie haben kein Konto
+Registrati adesso: Registrieren Sie sich jetzt
+
+#REGISTRAZIONE	#REGISTRIERUNG
+Crea il tuo account: Erstellen Sie Ihr Konto
+Compila il modulo sottostante per iscriverti: Für Ihre Registrierung das Formular unten ausfüllen
+Codice Sponsor: Code des Sponsors
+Scrivi il codice del tuo sponsor: Code Ihres Sponsors eintragen
+Desidero iscrivermi come: Ich möchte mich einschreiben als
+privato: Privatperson
+azienda: Unternehmen
+Scrivi il tuo indirizzo e-mail: Ihre E-Mail Adresse eintragen
+Specifica la nazione di residenza: Wohnland angeben
+Crea account: Konto erstellen
+Hai già un account: Sie haben bereits ein Konto
+
+#REGISTRAZIONE SUCCESS	#REGISTRIERUNG ERFOLGREICH
+Account creato correttamente: Konto korrekt erstellt
+Grazie per esserti iscritto a: Danke, dass Sie sich registriert haben bei
+Ti abbiamo inviato una e-mail di benvenuto: Wir haben Ihnen ein Begrüßungs-Email zugesandt
+Vai al login: zum Login
+
+#FORGOT PASSWORD	#PASSWORT VERGESSEN
+Recupera password: Passwort abrufen
+Rigenera la tua password: Neues Passwort erstellen
+Inserisci il tuo codice o il tuo indirizzo e-mail al quale inviare il link per generare una nuova password: Geben Sie Ihren Code oder Ihre Email-Adresse ein, an die wir den Link zur Erstellung eines neuen Passworts senden
+Richiedi il link: Link beantragen
+Codice o e-mail: Code oder Email-Adresse
+
+#INGRESSO CLIENTE	#ZUGANG KUNDE
+Area riservata: Reservierter Bereich
+Benvenuto: Willkommen
+Guadagna con noi: Verdienen Sie mit uns
+Diventa un distributore indipendente: Werden Sie ein freier Verkäufer
+e scopri le opportunità di guadagno a te riservate aderendo al nostro team: und entdecken Sie die Verdienstmöglichkeiten, die Sie als Mitglied unseres Team erwarten
+html guadagna con noi: <p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Earn 15 to 25% on directly promoted sales</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Porta almeno tre persone ed ottieni guadagni indiretti fino al 45%</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Entra a far parte di un tem si successo!</p>	html guadagna con noi <p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Earn 15 to 25% on directly promoted sales</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Porta almeno tre persone ed ottieni guadagni indiretti fino al 45%</p><p><i class="fa fa-check-square fa-2x" aria-hidden="true"></i>&nbsp; Entra a far parte di un tem si successo!</p>
+Diventa un collaboratore: Werden Sie unser Mitarbeiter
+I più venduti: am meisten verkauft
+Acquistati di recente: kürzlich gekauft
+
+#WIDGET NOTIZIE	#WIDGET NACHRICHTEN
+Ultime notizie: Letzte Nachrichten
+continua a leggere...: weiterlesen....
+Nessuna novità per adesso: Derzeit keine neuen Nachrichten
+
+#CARRIERA	#KARRIERE
+Carriera: Karriere
+La tua carriera: Ihre Karriere
+Consulta tutte le qualifiche del piano carriera e scopri come raggiungerle: Alle Qualifikationen des Karriereplans konsultieren und erfahren, wie man sie erreichen kann
+Qualifica precedente: Frühere Qualifizierung
+Qualifica attuale: Derzeitige Qualifizierung
+Qualifica successiva: Nächste Qualifizierung
+Storico delle qualifiche ottenute dall'inizio della tua carriera ad oggi: Historie aller Ihrer Qualifizierungen seit dem Beginn Ihrer Karriere bis heute
+
+# DATI PERSONALI	# PERSONENBEZOGENE DATEN
+Dati personali: Personenbezogene Daten
+Contatti: Kontakte
+Dati fiscali: Steuerdaten
+Dati di residenza: Wohnsitzdaten
+Sede Legale: Rechtssitz
+
+
+#GRAFICO VENDITE	#TABELLE DER VERKÄUFE
+Tipologia filtro: Art des Filters
+Specifico mese: bestimmter Monat
+Specifico Anno: bestimmtes Jahr
+Mostra: Zeigen
+Punti Carriera: Karrierepunkte
