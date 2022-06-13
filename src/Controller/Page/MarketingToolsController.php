@@ -60,9 +60,13 @@ class MarketingToolsController extends AbstractController{
 			$templates[] = $template;
 		}
 
+		$elencoLingueDisponibili = ['it','en'];
+
 		return $this->render('pages/marketing_tools/invita_persone.html.twig', [
-			'email'     => $email,
-			'templates' => $templates,
+			'email'                   => $email,
+			'templates'               => $templates,
+			'elencoLingueDisponibili' => $elencoLingueDisponibili,
+
 		]);
 	}
 
@@ -79,9 +83,10 @@ class MarketingToolsController extends AbstractController{
 		$nome = trim($request->get('nome'));
 		$email = trim($request->get('email'));
 		$idEmail = (int) trim($request->get('id_email'));
+		$linguaEmail = trim($request->get('lang'));
 
 		try{
-			[$result, $error_msg] = $this->emailRepository->inviaInvito($nome, $email, $idEmail);
+			[$result, $error_msg] = $this->emailRepository->inviaInvito($nome, $email, $idEmail, $linguaEmail);
 			if($result){
 				$this->addFlash('success', 'email inviata correttamente');
 			}else{
@@ -126,7 +131,6 @@ class MarketingToolsController extends AbstractController{
 				'data'            => $emailsInviate,
 			]);
 		}catch(Exception $exception){
-
 			return $this->json([
 				'draw'            => time(),
 				'recordsTotal'    => 0,
