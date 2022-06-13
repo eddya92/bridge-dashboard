@@ -327,13 +327,14 @@
 				serverSide: true,
 				ordering: true,
 				searching: false,
+				paging: true,
 				ajax: "{{ path('ordini-ajax') }}?" + query,
 				lengthMenu: [
-					[10, 25, 50, -1],
-					['10', '25', '50', 'Show all']
+					[10, 25, 50, 999999],
+					['10', '25', '50', 'Tutti']
 				],
 				buttons: [
-					'pageLength'
+					'pageLength',
 				],
 				language: DueRDataTableLaguages,
 				dom: '<"top"<"clear">>rt<"bottom"ilp<"clear">>',
@@ -390,10 +391,7 @@
 						container.appendChild(td2)
 					});
 				}
-
-
 			})
-			//endregion
 		})
 		//endregion
 
