@@ -63,8 +63,8 @@
                                 <div class="img_circle_centered">
                                     <!-- <img class="rounded-circle" src="{{ sito.fotoProfilo }}" alt=""> -->
                                     <img class="rounded-circle" src="{{ sito.fotoProfilo != '' ? sito.fotoProfilo : '/assets/images/foto_profilobase_minisito.jpg' }}" alt="">
-                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()">
-                                        <i class="fa fa-pencil"></i></div>
+{#                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()">#}
+{#                                        <i class="fa fa-pencil"></i></div>#}
                                     <input id="foto_profilo" hidden name="immagine" type="file">
                                 </div>
                                 <div class="blog-details">
@@ -79,17 +79,23 @@
                                     <div class="col-sm-6 float-start">
                                         <div class="single-blog-content-top">
                                             <h4>
-                                                <input type="text" class="form-control bg-transparent f-w-600" name="titolo" placeholder="{% trans %}Titolo{% endtrans %}" value="{{ sito.titolo }}">
+                                                <input type="text" class="form-control bg-transparent f-w-600" name="titolo" placeholder="{% trans %}Titolo{% endtrans %}" value="{{ sito.titolo }}" disabled>
                                             </h4>
                                             <div class="m-b-20"></div>
-                                            <textarea class="form-control bg-transparent" placeholder="{% trans %}Descrizione{% endtrans %} . . ." name="descrizione">{{ sito.descrizione }}</textarea>
+                                            <textarea class="form-control bg-transparent" placeholder="{% trans %}Descrizione{% endtrans %} . . ." name="descrizione" disabled>{{ sito.descrizione }}</textarea>
                                             <div class="m-b-20"></div>
                                             <hr>
                                             <br>
                                             <br>
-                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</h6>
+{#                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</-h6>#}
+{#                                            <div class="input-group">#}
+{#                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}">#}
+{#                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span>#}
+{#                                            </div>#}
+{#                                            <div class="m-b-20"></div>#}
+                                            <h6>{% trans %}Copia il link dello shop per condividerlo sui social{% endtrans %}.</h6>
                                             <div class="input-group">
-                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}">
+                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="https://www.biokern.com/prodotti?code={{ app.user.codice }}">
                                                 <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span>
                                             </div>
                                             <div class="m-b-20"></div>
@@ -103,7 +109,7 @@
                                                 <td>
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                                                        <input type="text" class="form-control bg-transparent" name="telefono" value="{{ sito.telefono }}" placeholder="inserisci il tuo numero di telefono">
+                                                        <input disabled type="text" class="form-control bg-transparent" name="telefono" value="{{ sito.telefono }}" placeholder="inserisci il tuo numero di telefono">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -112,7 +118,7 @@
                                                 <td class=" p-t-20">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                        <input type="email" class="form-control bg-transparent" name="email" value="{{ sito.email }}" placeholder="Inserisci la tua email">
+                                                        <input disabled type="email" class="form-control bg-transparent" name="email" value="{{ sito.email }}" placeholder="Inserisci la tua email">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -121,7 +127,7 @@
                                                 <td class=" p-t-20">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-facebook">  </i></span>
-                                                        <input class="form-control bg-transparent" type="text" name="facebook" value="{{ sito.facebook }}" placeholder="indirizzo della tua pagina Facebook">
+                                                        <input disabled class="form-control bg-transparent" type="text" name="facebook" value="{{ sito.facebook }}" placeholder="indirizzo della tua pagina Facebook">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -130,7 +136,7 @@
                                                 <td class=" p-t-20">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-instagram"></i></span>
-                                                        <input class="form-control bg-transparent" type="text" name="instagram" value="{{ sito.instagram }}" placeholder="indirizzo della tua pagina Instagram">
+                                                        <input disabled class="form-control bg-transparent" type="text" name="instagram" value="{{ sito.instagram }}" placeholder="indirizzo della tua pagina Instagram">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -139,7 +145,7 @@
                                                 <td class=" p-t-20">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-twitter"></i></span>
-                                                        <input class="form-control bg-transparent" type="text" name="twitter" value="{{ sito.twitter }}" placeholder="indirizzo della tua pagina Twitter">
+                                                        <input disabled class="form-control bg-transparent" type="text" name="twitter" value="{{ sito.twitter }}" placeholder="indirizzo della tua pagina Twitter">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -148,7 +154,7 @@
                                                 <td class=" p-t-20">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-youtube"></i></span>
-                                                        <input class="form-control bg-transparent" type="text" name="youtube" value="{{ sito.youtube }}" placeholder="indirizzo della tua pagina Youtube">
+                                                        <input disabled class="form-control bg-transparent" type="text" name="youtube" value="{{ sito.youtube }}" placeholder="indirizzo della tua pagina Youtube">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -157,7 +163,7 @@
                                     <div class="clearfix"></div>
                                     <div class="m-b-40"></div>
                                     <div class="m-auto w-auto text-center">
-                                        <button id="idpo" type="submit" class="btn btn-primary">{% trans %}Aggiorna dati{% endtrans %}</button>
+{#                                        <button id="idpo" type="submit" class="btn btn-primary">{% trans %}Aggiorna dati{% endtrans %}</button>#}
                                     </div>
                                     <div class="m-b-40"></div>
                                 </div>
