@@ -1,7 +1,7 @@
 var owl_carousel_custom = {
 	init: function() {
 		$('#owl-carousel-2').owlCarousel({
-			loop:true,
+			loop:false,
 			margin:10,
 			items:1,
 			nav:false,
