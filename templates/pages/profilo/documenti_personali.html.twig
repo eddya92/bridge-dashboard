@@ -183,6 +183,7 @@
                                     <div class="clear"></div>
                                     <div class="m-b-20"></div>
                                 </div>
+                                {% if documentiFacoltativi | length > 0 %}
                                 <div class="card-header" style="border-top: 1px solid #ecf3fa;">
                                     <h5 class="card-title mb-0">{% trans %}Altri documenti facoltativi{% endtrans %}</h5>
                                     <div class="card-options">
@@ -242,6 +243,7 @@
                                 </div>
                                 <div class="card-footer">
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
