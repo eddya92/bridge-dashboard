@@ -8,6 +8,6 @@ use Generator;
 interface LingueRepository{
 	public const TAG_LINGUE = 'lingue';
 
-	public function getLingue() : Generator;
+	public function getLingue() : array;
 }
 

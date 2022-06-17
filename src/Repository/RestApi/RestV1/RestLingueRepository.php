@@ -13,7 +13,6 @@ use Exception;
 use Generator;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Throwable;
 
 final class RestLingueRepository implements LingueRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -23,18 +22,20 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 	){
 	}
 
-	public function getLingue() : Generator{
+	public function getLingue() : array{
 		try{
-			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallLingue());
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallLingue());
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
 			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
+		$lingue = [];
 		foreach($results['data'] as $item){
-			yield new LingueViewModel($item['ID_lingua'], $item['Sigla'], $item['isAttiva']);
+			$lingue[] = new LingueViewModel($item['ID_lingua'], $item['Sigla'], $item['isAttiva']);
 		}
+		return $lingue;
 	}
 
 	/**
@@ -46,9 +47,6 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->client()
 				->request('GET', '/db-v1/lingue/lingue');
-
-			//$item->expiresAfter($this->ttlForMetodoPagamento);
-			//$item->tag($this->authenticatedCacheTag(self::TAG_LINGUE));
 
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());
