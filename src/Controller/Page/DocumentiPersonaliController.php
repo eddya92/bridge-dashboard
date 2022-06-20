@@ -102,12 +102,8 @@ class DocumentiPersonaliController extends AbstractController{
 	#[Route('/crea-tesserino', name: 'crea-tesserino', methods: ['GET'])]
 	public function creaTesserino() : Response{
 		try{
-			[$result, $error_msg] = $this->repository->creaTesserino();
-			if($result){
-				$this->addFlash('success', 'Il tuo tesserino è stato aggiornato correttamente.');
-			}else{
-				throw new Exception($error_msg);
-			}
+			$this->repository->creaTesserino();
+			$this->addFlash('success', 'Il tuo tesserino è stato aggiornato correttamente.');
 		}catch(Exception $e){
 			$this->addFlash('error', $e->getMessage());
 		}

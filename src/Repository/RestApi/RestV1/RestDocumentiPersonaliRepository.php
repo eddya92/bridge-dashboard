@@ -115,21 +115,21 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	/**
 	 * @return array
 	 */
-	public function creaTesserino() : array{
-		try{
-			$results = $this->apiCallCreaTesserino();
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+	public function creaTesserino(){
+		$results = $this->apiCallCreaTesserino();
+		$results = (string) Json::decode($results)['errors'];
+		if($results != ''){
+			throw new Exception($results);
 		}
+		$results = Json::decode($results);
 
 		return $results;
 	}
 
 	/**
-	 * @return array
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function apiCallCreaTesserino() : array{
+	public function apiCallCreaTesserino(){
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
 			->client()
@@ -139,6 +139,6 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 			return [false, $response->getReasonPhrase()];
 		}
 
-		return [true, ''];
+		return (string) $response->getBody();
 	}
 }
