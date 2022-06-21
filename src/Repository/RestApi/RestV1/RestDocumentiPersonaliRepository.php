@@ -105,6 +105,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 				],
 			]);
 
+		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI)]);
+
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
 		}
@@ -134,6 +136,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request('POST', '/db-v1/utenti/genera-tesserino');
+
+		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI)]);
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
