@@ -86,7 +86,7 @@ class MarketingToolsController extends AbstractController{
 		$linguaEmail = trim($request->get('lang'));
 
 		try{
-			[$result, $error_msg] = $this->emailRepository->inviaInvito($nome, $email, $idEmail, $linguaEmail);
+			[$result, $error_msg] = $this->emailRepository->inviaInvito($nome, $email, $idEmail);
 			if($result){
 				$this->addFlash('success', 'email inviata correttamente');
 			}else{
