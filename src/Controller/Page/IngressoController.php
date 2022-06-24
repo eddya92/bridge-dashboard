@@ -39,6 +39,7 @@ final class IngressoController extends AbstractController{
 		//return $this->redirectToRoute('ingresso');
 		$locale = $this->getUser()->getLocale();
 		$request->setLocale($locale);
+		$this->accountRepository->getAccount($this->getUser()->getCodice(),$locale);
 		$url_ingresso = '/' . $locale . '/ingresso';
 		return $this->redirect($url_ingresso);
 	}

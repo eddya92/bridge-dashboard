@@ -48,13 +48,13 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			echo 'Error: ' . $exception->getCode() . 'Message: ' . $exception->getMessage() . 'File: ' . $exception->getFile() . 'Line: '. $exception->getLine() ;
+			echo 'Error: ' . $exception->getCode() . 'Message: ' . $exception->getMessage() . 'File: ' . $exception->getFile() . 'Line: ' . $exception->getLine();
 			//throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
 		}
 
 		$results = $results['data'];
 
-		return new AccountViewModel($results['id'], $results['foto'], $results['nazione_residenza'], $results['ruolo'], $results['nome'], $results['cognome'], $results['nominativo'], $results['qualifica'], $results['codice'], $results['data_iscrizione'], $results['codice_fiscale'], $results['telefono'], $results['email'], $results['carriera'], $results['oblio'], $results['cellulare'], $results['superiore']);
+		return new AccountViewModel($results['id'], $results['foto'], $results['nazione_residenza'], $results['ruolo'], $results['nome'], $results['cognome'], $results['nominativo'], $results['qualifica'], $results['codice'], $results['data_iscrizione'], $results['codice_fiscale'], $results['telefono'], $results['email'], $results['carriera'], $results['oblio'], $results['cellulare'], $results['superiore'], $results['locale']);
 	}
 
 	/**
@@ -95,6 +95,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$results = $this->apiCallAggiornaDatiAccount($vecchiaPassword, $nuovaPassword, $confermaPassword);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
+
 			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
 		}
 

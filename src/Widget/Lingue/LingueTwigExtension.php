@@ -17,8 +17,8 @@ final class LingueTwigExtension extends AbstractExtension{
 		];
 	}
 
-	public function main() : Markup{
-		return new Markup($this->widget->main(), 'UTF-8');
+	public function main(string $codice, string $locale) : Markup{
+		return new Markup($this->widget->main($codice, $locale), 'UTF-8');
 	}
 
 }

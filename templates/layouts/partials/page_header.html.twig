@@ -43,7 +43,7 @@
         <div class="nav-right col-8 pull-right right-header p-0">
             <ul class="nav-menus">
                 <!-- region Select cambio lingua -->
-                {{ lingue() }}
+                {{ lingue(app.user.codice, app.request.locale) }}
                 <!-- endregion Select cambio lingua -->
                 <!-- region Profilo -->
                 <li class="profile-nav onhover-dropdown p-0 me-0">

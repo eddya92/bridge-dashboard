@@ -22,8 +22,9 @@ final class AccountViewModel{
 	 * @param array  $oblio
 	 * @param string $cellulare
 	 * @param string $superiore
+	 * @param string $locale
 	 */
-	public function __construct(private int $id, private string $foto, private string $nazioneResidenza, private string $ruolo, private string $nome, private string $cognome, private string $nominativo, private string $qualifica, private string $codice, private string $dataIscrizione, private string $codiceFiscale, private string $telefono, private string $email, private array $carriera, private array $oblio, private string $cellulare, private string $superiore){
+	public function __construct(private int $id, private string $foto, private string $nazioneResidenza, private string $ruolo, private string $nome, private string $cognome, private string $nominativo, private string $qualifica, private string $codice, private string $dataIscrizione, private string $codiceFiscale, private string $telefono, private string $email, private array $carriera, private array $oblio, private string $cellulare, private string $superiore, private string $locale){
 	}
 
 	/**
@@ -262,5 +263,12 @@ final class AccountViewModel{
 	 */
 	public function setSuperiore(string $superiore) : void{
 		$this->superiore = $superiore;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLocale() : string{
+		return $this->locale;
 	}
 }

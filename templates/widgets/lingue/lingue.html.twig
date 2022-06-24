@@ -3,13 +3,13 @@
         <div class="current_lang">
             <div class="lang">
                 <i class="flag-icon
-            {% if app.user.locale|lower == 'en' %}
+            {% if locale|lower == 'en' %}
             flag-icon-gb
             {% else %}
-             flag-icon-{{ app.user.locale|lower }}
+             flag-icon-{{ locale|lower }}
             {% endif %}
             "></i>
-                <span class="lang-txt">{{ app.user.locale }}</span>
+                <span class="lang-txt">{{ locale }}</span>
             </div>
         </div>
         <div class="more_lang" style="width:100px;">
