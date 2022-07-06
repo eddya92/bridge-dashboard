@@ -16,8 +16,7 @@ final class ShopTwigExtension extends AbstractExtension{
 			new TwigFunction('shop', [$this, 'main']),
 			new TwigFunction('shop_ajax', [$this, 'ajax']),
 			new TwigFunction('articolo_shop', [$this, 'articoloShop']),
-			new TwigFunction('', [$this, 'filtriShop']),
-			new TwigFunction('filtriShopAjax', [$this, 'filtriShopAjax']),
+			new TwigFunction('filtriShop', [$this, 'filtriShop']),
 
 		];
 	}
