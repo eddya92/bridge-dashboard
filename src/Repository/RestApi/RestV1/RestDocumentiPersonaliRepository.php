@@ -121,14 +121,19 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		try{
 			$results = $this->apiCallCreaTesserino();
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['errors']];
+		}
+
+		$results = Json::decode($results);
+
+		if(array_key_exists('errors', $results) && $results['errors'] != ''){
+			throw new Exception($results['errors']);
 		}
 
 		return $results;
 	}
 
 	/**
-	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public function apiCallCreaTesserino(){
 		$response = $this->restApiConnection()
@@ -139,7 +144,7 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI)]);
 
 		if($response->getStatusCode() != 200){
-			return [false, $response->getReasonPhrase()];
+			throw new Exception($response->getReasonPhrase());
 		}
 
 		return (string) $response->getBody();
