@@ -118,12 +118,11 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	 * @return array
 	 */
 	public function creaTesserino(){
-		$results = $this->apiCallCreaTesserino();
-		$results = (string) Json::decode($results)['errors'];
-		if($results != ''){
-			throw new Exception($results);
+		try{
+			$results = $this->apiCallCreaTesserino();
+		}catch(Exception $exception){
+			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
 		}
-		$results = Json::decode($results);
 
 		return $results;
 	}
