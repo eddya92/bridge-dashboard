@@ -46,7 +46,7 @@ final class RestSponsorRepository implements SponsorRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/sponsor');
+				->request('GET', '/db-v1/utenti/sponsor', [c]);
 
 			$item->expiresAfter($this->ttlForSponsor);
 			$item->tag($this->authenticatedCacheTag(self::TAG_SPONSOR));

@@ -52,7 +52,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio?locale=' . $locale);
+				->request('GET', '/db-v1/messaggi/messaggio?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForMessaggi);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $locale));
@@ -97,7 +97,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio/' . $id . '?locale=' . $locale);
+				->request('GET', '/db-v1/messaggi/messaggio/' . $id . '?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter(45);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . $id . "[" . $locale . "]"));
@@ -133,7 +133,6 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 		}else{
 			return null;
 		}
-
 	}
 
 	/**
@@ -146,7 +145,7 @@ final class RestMessaggiRepository implements MessaggiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/messaggi/messaggio' . '?locale=' . $locale);
+				->request('GET', '/db-v1/messaggi/messaggio' . '?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter(45);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MESSAGGGI . "[" . $locale . "]"));

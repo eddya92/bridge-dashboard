@@ -47,7 +47,7 @@ final class RestModalitaSpedizioneRepository implements ModalitaSpedizioneReposi
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/modalita-spedizioni/modalita-spedizione?id_spedizione=' . $id_spedizione);
+				->request('GET', '/db-v1/modalita-spedizioni/modalita-spedizione?id_spedizione=' . $id_spedizione, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForModalitaSpedizione);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MODALITA_SPEDIZIONE));

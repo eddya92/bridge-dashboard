@@ -28,8 +28,9 @@ final class RestStoresRepository implements StoresRepository, AuthenticatedRepos
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSellingzone());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -45,7 +46,7 @@ final class RestStoresRepository implements StoresRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/store');
+				->request('GET', '/db-v1/utenti/store', ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForStores);
 			$item->tag($this->authenticatedCacheTag(self::TAG_STORES));

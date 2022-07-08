@@ -32,7 +32,8 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception($exception->getMessage(), $exception->getCode());}
+			throw new Exception($exception->getMessage(), $exception->getCode());
+		}
 
 		foreach($results['data'] as $item){
 			yield new AndamentoAnnualeCarrieraViewModel($item['id'], $item['mese'], $item['qualifica'], $item['style'], $item['attivo'], $item['condizioni'], $item['punti']);
@@ -47,7 +48,7 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/andamento-annuale' . '?locale=' . $locale . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&pag=' . $pag);
+				->request('GET', '/db-v1/carriere/andamento-annuale' . '?locale=' . $locale . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&pag=' . $pag, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForAndamentoCarrieraAnnuale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ANDAMENTO_ANNUALE . "[" . $locale . "]"));

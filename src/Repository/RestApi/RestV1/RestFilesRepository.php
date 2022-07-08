@@ -51,8 +51,8 @@ final class RestFilesRepository implements FilesRepository, AuthenticatedReposit
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/documenti/cartella' );
-				//->request('GET', '/db-v1/documenti/cartella?locale=' . $locale );
+				->request('GET', '/db-v1/documenti/cartella', ['connect_timeout' => 10.00]);
+			//->request('GET', '/db-v1/documenti/cartella?locale=' . $locale );
 
 			$item->expiresAfter($this->ttlForDirectories);
 			$item->tag($this->authenticatedCacheTag(self::TAG_FILES));

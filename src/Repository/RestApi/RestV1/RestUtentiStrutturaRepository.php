@@ -12,7 +12,6 @@ use Exception;
 use Generator;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Throwable;
 
 final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -44,7 +43,7 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 				->withAuthentication($this->authenticationToken())
 				->client()
 				//->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&periodo=' . $filtroPeriodo . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag);
-				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag);
+				->request('GET', '/db-v1/utenti/struttura' . '?gruppo_di=' . $filtroGruppoDi . '&nominativo=' . $filtroNominativo . '&email=' . $filtroEmail . '&cellulare=' . $filtroCellulare . '&solo_diretti=' . $filtroDiretti . '&ordinamento=' . $filtroColonnaOrdinamento . '&direzione=' . $filtroDirezioneOrdinamento . '&items=' . $items . '&tipologia_utenza=' . $tipologiaUtenza . '&pag=' . $pag, ['connect_timeout' => 10.00]);
 			$item->expiresAfter($this->ttlForUtentiStruttura);
 			$item->tag($this->authenticatedCacheTag(self::TAG_UTENTI_STRUTTURA));
 

@@ -46,7 +46,7 @@ final class RestTotaliRepository implements TotaliRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/totali?codice_utente_simulato=' . $utenza . '&locale=' . $locale);
+				->request('GET', '/db-v1/utenti/totali?codice_utente_simulato=' . $utenza . '&locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForTotali);
 			$item->tag($this->authenticatedCacheTag(self::TAG_TOTALI . $utenza . $locale));

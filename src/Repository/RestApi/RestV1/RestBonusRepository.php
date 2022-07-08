@@ -33,7 +33,8 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception($exception->getMessage(), $exception->getCode());}
+			throw new Exception($exception->getMessage(), $exception->getCode());
+		}
 
 		foreach($results['data'] as $mese){
 			yield new BonusViewModel($mese['mese'], $mese['mese_testo'], $mese['mese_testo_esteso'], $mese['qualifica'], $mese['colore'], $mese['livello'], $mese['qualificato'], $mese['bonus'], $mese['totale'], $mese['importo']);
@@ -52,7 +53,7 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/guadagni/bonus?anno=' . $anno . '&locale=' . $locale);
+				->request('GET', '/db-v1/guadagni/bonus?anno=' . $anno . '&locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForBonus);
 			$item->tag($this->authenticatedCacheTag(self::TAG_BONUS . $anno . $locale));

@@ -45,7 +45,7 @@ final class RestNazioniRepository implements NazioniRepository, AuthenticatedRep
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->client()
-				->request('GET', '/db-v1/nazioni/nazione');
+				->request('GET', '/db-v1/nazioni/nazione', ['connect_timeout' => 10.00]);
 
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());
@@ -90,7 +90,7 @@ final class RestNazioniRepository implements NazioniRepository, AuthenticatedRep
 		return function(ItemInterface $item) use ($idNazione){
 			$response = $this->restApiConnection()
 				->client()
-				->request('GET', '/db-v1/nazioni/agreements?country_code=' . $idNazione);
+				->request('GET', '/db-v1/nazioni/agreements?country_code=' . $idNazione, ['connect_timeout' => 10.00]);
 
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());

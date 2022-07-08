@@ -12,7 +12,7 @@ use Exception;
 use Generator;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Throwable;
+
 
 final class RestVenditeRepository implements VenditeRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -20,7 +20,7 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 	public function __construct(
 		private TagAwareCacheInterface $cache,
 		private int                    $ttlForVendite,
-		private string $locales,
+		private string                 $locales,
 	){
 	}
 
@@ -55,7 +55,7 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/vendite/andamento-grafico?tipo=' . $dato . '&anno=' . $anno . '&codice_utente_simulato=' . $utenza);
+				->request('GET', '/db-v1/vendite/andamento-grafico?tipo=' . $dato . '&anno=' . $anno . '&codice_utente_simulato=' . $utenza, ['connect_timeout' => 10.00,]);
 
 			$item->expiresAfter($this->ttlForVendite);
 			$item->tag($this->authenticatedCacheTag(self::TAG_VENDITE . $utenza . $dato . $anno));
@@ -79,7 +79,7 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/vendite/andamento-grafico?tipo=' . $dato . '&anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza);
+				->request('GET', '/db-v1/vendite/andamento-grafico?tipo=' . $dato . '&anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForVendite);
 			$item->tag($this->authenticatedCacheTag(self::TAG_VENDITE . $utenza . $mese . $dato . $anno));

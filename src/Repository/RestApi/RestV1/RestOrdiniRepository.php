@@ -34,7 +34,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		}
 
 		foreach($results['data'] as $item){
-			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'] , $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
+			yield new OrdiniViewModel($item['id'], $item['data_ordine'], $item['codice_ordine'], $item['user'], $item['pc'], $item['cv'], $item['totale'], $item['esito'], $item['esito_colore'], $item['visibile'], $item['tipologia_ordine'], $results['metadata']);
 		}
 	}
 
@@ -46,7 +46,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&id_utente=' . $clienti . '&id_esito=' . $esito . '&data_inizio=' . $data_dal . '&data_fine=' . $data_al . '&tipi_ordine=' . $tipolgia_ordine . '&campo_ordine=' . $colonna . '&direzione_ordine=' . $ordinamento . '&items=' . $items . '&pag=' . $pag);
+				->request('GET', '/db-v1/ordini/ordine' . '?sottoposti=' . $sottoposti . '&id_utente=' . $clienti . '&id_esito=' . $esito . '&data_inizio=' . $data_dal . '&data_fine=' . $data_al . '&tipi_ordine=' . $tipolgia_ordine . '&campo_ordine=' . $colonna . '&direzione_ordine=' . $ordinamento . '&items=' . $items . '&pag=' . $pag, ['connect_timeout' => 10.00]);
 			//, [
 			//					'id_utente'   => $clienti,
 			//					'sottoposti'  => $sottoposti,
@@ -93,7 +93,7 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/ordini/dettaglio-ordine/' . $id);
+				->request('GET', '/db-v1/ordini/dettaglio-ordine/' . $id, ['connect_timeout' => 10.00]);
 
 			//	$item->expiresAfter($this->ttlForOrdini);
 			//	$item->tag($this->authenticatedCacheTag(self::TAG_ORDINI));

@@ -46,7 +46,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/qualifiche');
+				->request('GET', '/db-v1/carriere/qualifiche', ['connect_timeout' => 10.00]);
 			//->request('GET', '/db-v1/carriere/qualifiche?locale=' . $_locale);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
@@ -83,7 +83,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice_utente_simulato=' . $codice);
+				->request('GET', '/db-v1/carriere/info-prossimo-rank?locale=' . $locale . '&codice_utente_simulato=' . $codice, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForCarrieraPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE));
@@ -114,7 +114,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
 			->client()
-			->request('POST', '/db-v1/carriere/conferma-qualifica-BU');
+			->request('POST', '/db-v1/carriere/conferma-qualifica-BU', ['connect_timeout' => 10.00]);
 
 		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_CARRIERA_PERSONALE)]);
 

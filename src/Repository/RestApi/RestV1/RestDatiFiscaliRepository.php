@@ -51,7 +51,7 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/dati-fiscali');
+				->request('GET', '/db-v1/utenti/dati-fiscali', ['connect_timeout' => 10.00]);
 
 			if($response->getStatusCode() != 200){
 				return $response->getReasonPhrase();
@@ -89,12 +89,13 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->put('/db-v1/utenti/dati-fiscali', [
-					'form_params' => [
+					'form_params'     => [
 						'codice_fiscale' => $codiceFiscale,
 						'piva'           => $PIVA,
 						'pec'            => $PEC,
 						'codice_univoco' => $codiceUnivoco,
 					],
+					'connect_timeout' => 10.00,
 				]);
 		}catch(Throwable $exception){
 			$message = $exception->getMessage();

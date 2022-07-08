@@ -33,6 +33,7 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 		foreach($results['data'] as $item){
 			$lingue[] = new LingueViewModel($item['ID_lingua'], $item['Sigla'], $item['isAttiva']);
 		}
+
 		return $lingue;
 	}
 
@@ -44,9 +45,8 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 		return function(ItemInterface $item){
 			$response = $this->restApiConnection()
 				->client()
-				->request('GET', '/db-v1/lingue/lingue');
+				->request('GET', '/db-v1/lingue/lingue', ['connect_timeout' => 10.00]);
 
-			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_LINGUE)]);
 			$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_LINGUE)]);
 
 			if($response->getStatusCode() != 200){

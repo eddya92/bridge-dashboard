@@ -66,7 +66,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale);
+				->request('GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$this->logger->info('CHIAMATA GET ACCOUNT ', ['GET', '/db-v1/utenti/account/' . $codice . '?locale=' . $locale, [$response->getBody()]]);
 			$item->expiresAfter($this->ttlForAccount);
@@ -117,16 +117,16 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->put('/db-v1/utenti/dati-account', [
-					'form_params' => [
+					'form_params'     => [
 						'password_old'  => $vecchiaPassword,
 						'password_new'  => $nuovaPassword,
 						'password_new2' => $confermaPassword,
 					],
+					'connect_timeout' => 10.00,
 				]);
-		}catch(Throwable $exception){
-			$message = $exception->getMessage();
-			$message = Error::format($message);
-			throw new Exception($message);
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$this->logger->info('CHIAMATA AGGIORNA ACCOUNT ', ['GET', '/db-v1/utenti/dati-account' . 'form_params' => [
@@ -169,10 +169,11 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request('POST', '/db-v1/utenti/oblio-account', [
-				'form_params' => [
+				'form_params'     => [
 					'ip_address' => '000.000.000.000',
 					'user_agent' => $this->requestStack->getCurrentRequest()->headers->get('User-agent'),
 				],
+				'connect_timeout' => 10.00,
 			]);
 		$this->logger->info('CHIAMATA RICHIESTA OBLIO ', ['GET', 'POST', '/db-v1/utenti/oblio-account', [$response->getBody()]]);
 
@@ -209,7 +210,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		$response = $this->restApiConnection()
 			->client()
 			->request('POST', '/db-v1/utenti/iscrizione', [
-				'form_params' => [
+				'form_params'     => [
 					'codice'     => $codiceSponsor,
 					'nome'       => $nome,
 					'cognome'    => $cognome,
@@ -218,6 +219,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 					'nazione'    => $nazione,
 					'agreements' => implode('|', $agreements),
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		$this->logger->info('CHIAMATA REGISTRAZIONE UTENTE ', ['POST', '/db-v1/utenti/iscrizione' . 'form_params' => [
@@ -263,7 +265,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		$response = $this->restApiConnection()
 			->client()
 			->request('POST', '/db-v1/clienti/iscrizione', [
-				'form_params' => [
+				'form_params'     => [
 					'codice'           => $codiceSponsor,
 					'nome'             => $nome,
 					'cognome'          => $cognome,
@@ -274,6 +276,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 					'nazione'          => $nazione,
 					'agreements'       => implode('|', $agreements),
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		if($response->getStatusCode() != 200){
@@ -313,7 +316,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/residenza' . '?locale=' . $locale);
+				->request('GET', '/db-v1/utenti/residenza' . '?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForAccount);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ACCOUNT_RESIDENZA . '[' . $locale . ']'));
@@ -355,7 +358,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->put('/db-v1/utenti/residenza', [
-					'form_params' => [
+					'form_params'     => [
 						'nome'          => $nome,
 						'cognome'       => $cognome,
 						'indirizzo'     => $indirizzo,
@@ -365,6 +368,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 						'provincia'     => $provincia,
 						'nazione'       => $nazione,
 					],
+					'connect_timeout' => 10.00,
 				]);
 		}catch(Throwable $exception){
 			$message = $exception->getMessage();
@@ -408,9 +412,10 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		$response = $this->restApiConnection()
 			->client()
 			->request('POST', '/db-v1/utenti/recupero-password', [
-				'form_params' => [
+				'form_params'     => [
 					'email' => $email,
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		if($response->getStatusCode() != 200){

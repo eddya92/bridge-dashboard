@@ -51,7 +51,7 @@ final class RestClientiRepository implements ClientiRepository, AuthenticatedRep
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/clienti' . '?ricerca_generica=' . $ricercaGenerica . '&data_dal=' . $dataDal . '&data_al=' . $dataAl);
+				->request('GET', '/db-v1/utenti/clienti' . '?ricerca_generica=' . $ricercaGenerica . '&data_dal=' . $dataDal . '&data_al=' . $dataAl, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForClienti);
 			$item->tag($this->authenticatedCacheTag(self::TAG_CLIENTI));

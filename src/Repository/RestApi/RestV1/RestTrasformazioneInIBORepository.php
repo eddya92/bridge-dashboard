@@ -48,7 +48,8 @@ final class RestTrasformazioneInIBORepository implements TrasformazioneInIBORepo
 
 			);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -59,7 +60,7 @@ final class RestTrasformazioneInIBORepository implements TrasformazioneInIBORepo
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request(('POST'), '/db-v1/utenti/trasformazione-incaricato', [
-				'form_params' => [
+				'form_params'     => [
 					'codice'             => $codice,
 					'codiceFiscale'      => $codice_fiscale,
 					'partitaIva'         => $piva,
@@ -73,6 +74,7 @@ final class RestTrasformazioneInIBORepository implements TrasformazioneInIBORepo
 					'note'               => $telefono,
 					'cellulare'          => $cellulare,
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		if($response->getStatusCode() != 200){

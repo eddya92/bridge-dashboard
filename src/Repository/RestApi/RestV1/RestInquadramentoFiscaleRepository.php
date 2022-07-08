@@ -12,7 +12,6 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Throwable;
 
 final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -47,7 +46,7 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/inquadramento-fiscale');
+				->request('GET', '/db-v1/utenti/inquadramento-fiscale', ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForInquadramentoFiscale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_INQUADRAMENTO_FISCALE . "[" . $_locale . "]"));
@@ -83,6 +82,7 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 					'iban'     => $iban,
 					'bankCode' => $bankCode,
 				],
+				'connect_timeout' => 10.00,
 			]);
 		$this->logger->info('CHIAMATA PUT AGGIORNA PAGAMENTI ', ['PUT', '/db-v1/utenti/dati-pagamento' . 'form_params' => [
 			'iban'     => $iban,

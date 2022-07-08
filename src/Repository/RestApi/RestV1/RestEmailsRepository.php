@@ -56,7 +56,7 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/email/template-disponibili?locale=' . $locale);
+				->request('GET', '/db-v1/email/template-disponibili?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForEmailInviate);
 			$item->tag($this->authenticatedCacheTag(self::TAG_EMAILS . $locale));
@@ -103,11 +103,12 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request('POST', '/db-v1/email/invia-invito', [
-				'form_params' => [
+				'form_params'     => [
 					'nominativo' => $nome,
 					'email'      => $email,
 					'id_email'   => $idEmail,
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		if($response->getStatusCode() != 200){
@@ -144,7 +145,7 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/email/email-inviate');
+				->request('GET', '/db-v1/email/email-inviate', ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForEmailInviate);
 			$item->tag($this->authenticatedCacheTag(self::TAG_EMAILS));

@@ -46,7 +46,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/vista-albero?' . 'locale=' . $locale);
+				->request('GET', '/db-v1/utenti/vista-albero?' . 'locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForRete);
 			$item->tag($this->authenticatedCacheTag(self::TAG_VISTE_ALBERI . "[" . $locale . "]"));
@@ -70,7 +70,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
 			->client()
-			->request('DELETE', '/db-v1/utenti/vista-albero/' . $id);
+			->request('DELETE', '/db-v1/utenti/vista-albero/' . $id, ['connect_timeout' => 10.00]);
 
 		if($response->getStatusCode() != 200){
 			return [false, $response->getReasonPhrase()];
@@ -92,7 +92,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request('POST', '/db-v1/utenti/vista-albero', [
-				'form_params' => [
+				'form_params'     => [
 					'isDefault'        => ($isDefault ? 1 : 0),
 					'ID_vista'         => $ID_vista,
 					'Nome'             => $Nome,
@@ -105,6 +105,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 					'icon'             => $icon,
 					'punti'            => $punti,
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		if($response->getStatusCode() != 200){
@@ -139,7 +140,7 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/albero?gruppo_di=' . $ID_utente . '&mese=' . $Mese . '&punti=' . $punti . '&icon=' . $icon . '&show_disattivi=' . $show_disattivi . '&hide_nulli=' . $hide_nulli . '&locale=' . $locale);
+				->request('GET', '/db-v1/utenti/albero?gruppo_di=' . $ID_utente . '&mese=' . $Mese . '&punti=' . $punti . '&icon=' . $icon . '&show_disattivi=' . $show_disattivi . '&hide_nulli=' . $hide_nulli . '&locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForRete);
 			$item->tag($this->authenticatedCacheTag(self::TAG_ALBERI . $ID_utente . '_' . $Mese . "[" . $locale . "]"));

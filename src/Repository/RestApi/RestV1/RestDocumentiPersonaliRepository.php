@@ -57,7 +57,7 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/documento?locale=' . $locale);
+				->request('GET', '/db-v1/utenti/documento?locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForDocumentiPersonali);
 			$item->tag($this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI));
@@ -100,11 +100,12 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 			->withAuthentication($this->authenticationToken())
 			->client()
 			->request('POST', '/db-v1/utenti/documento', [
-				'form_params' => [
+				'form_params'     => [
 					'idDocumento'     => $iddoc,
 					'base64Documento' => $base64doc,
 					'nomeDocumento'   => $namedoc,
 				],
+				'connect_timeout' => 10.00,
 			]);
 
 		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI)]);
@@ -142,7 +143,7 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		$response = $this->restApiConnection()
 			->withAuthentication($this->authenticationToken())
 			->client()
-			->request('POST', '/db-v1/utenti/genera-tesserino');
+			->request('POST', '/db-v1/utenti/genera-tesserino', ['connect_timeout' => 10.00]);
 
 		$this->cache->invalidateTags([$this->authenticatedCacheTag(self::TAG_DOCUMENTI_PERSONALI)]);
 

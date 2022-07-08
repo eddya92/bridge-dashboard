@@ -48,7 +48,7 @@ final class RestDocumentiRepository implements DocumentiRepository, Authenticate
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/documenti/cartella/' . $id_cartella);
+				->request('GET', '/db-v1/documenti/cartella/' . $id_cartella, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForDocumenti);
 			$item->tag($this->authenticatedCacheTag(self::TAG_DOCUMENTI . "[" . $_locale . "]"));

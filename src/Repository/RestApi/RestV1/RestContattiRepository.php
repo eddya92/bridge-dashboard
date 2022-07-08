@@ -53,7 +53,7 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/contatti');
+				->request('GET', '/db-v1/utenti/contatti', ['connect_timeout' => 10.00]);
 
 			if($response->getStatusCode() != 200){
 				return $response->getReasonPhrase();
@@ -87,15 +87,14 @@ final class RestContattiRepository implements ContattiRepository, AuthenticatedR
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->put('/db-v1/utenti/contatti', [
-					'form_params' => [
+					'form_params'     => [
 						'telefono'   => $telefono,
 						'cellulare ' => $cellulare,
 					],
+					'connect_timeout' => 10.00,
 				]);
-		}catch(Throwable $exception){
-			$message = $exception->getMessage();
-			$message = Error::format($message);
-			throw new Exception($message);
+		}catch(Exception $exception){
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$lingue = explode(',', $this->locales);

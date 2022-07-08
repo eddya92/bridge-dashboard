@@ -46,7 +46,7 @@ final class RestModalitaPagamentoRepository implements ModalitaPagamentoReposito
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/modalita-pagamento/modalita-pagamento?id_spedizione=' . $id_spedizione . '&id_modsped=' . $id_modsped);
+				->request('GET', '/db-v1/modalita-pagamento/modalita-pagamento?id_spedizione=' . $id_spedizione . '&id_modsped=' . $id_modsped, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForMetodoPagamento);
 			$item->tag($this->authenticatedCacheTag(self::TAG_MODALITA_PAGAMENTO));

@@ -7,13 +7,11 @@ use App\Repository\RestApi\AuthenticatedConnectionCapability;
 use App\Repository\RestApi\AuthenticatedRepository;
 use App\Repository\SitoPersonaleRepository;
 use App\Service\CacheKey;
-use App\Service\Error;
 use App\Service\Json;
 use App\ViewModel\SitoPersonaleViewModel;
 use Exception;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Throwable;
 
 final class RestSitoPersonaleRepository implements SitoPersonaleRepository, AuthenticatedRepository{
 	use AuthenticatedConnectionCapability;
@@ -47,7 +45,7 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken($locale))
 				->client()
-				->request('GET', '/db-v1/utenti/sito-personale');
+				->request('GET', '/db-v1/utenti/sito-personale', ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForSitoPersonale);
 			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE . "[" . $locale . "]"));
@@ -80,7 +78,7 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 				->withAuthentication($this->authenticationToken())
 				->client()
 				->request('POST', '/db-v1/utenti/sito-personale', [
-					'form_params' => [
+					'form_params'     => [
 						'nominativo'   => $titolo,
 						'descrizione'  => $descrizione,
 						'cellulare'    => $telefono,
@@ -92,11 +90,11 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 						'immagine'     => $immagine['content'],
 						'nomeImmagine' => $immagine['name'],
 					],
+					'connect_timeout' => 10.00,
 				]);
-		}catch(Throwable $exception){
-			$message = $exception->getMessage();
-			$message = Error::format($message);
-			throw new Exception($message);
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		//per invalidarlo
@@ -133,10 +131,10 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 		return function(ItemInterface $item) use ($locale, $uri){
 			$response = $this->restApiConnection()
 				->client()
-				->request('GET', '/db-v1/utenti/minisito?minisito=' . $uri . '&locale=' . $locale);
+				->request('GET', '/db-v1/utenti/minisito?minisito=' . $uri . '&locale=' . $locale, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForSitoPersonale);
-			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE  . "[" . $locale . "]"));
+			$item->tag($this->authenticatedCacheTag(self::TAG_SITO_PERSONALE . "[" . $locale . "]"));
 
 			if($response->getStatusCode() != 200){
 				throw new Exception($response->getReasonPhrase());

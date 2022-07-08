@@ -55,7 +55,7 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 			$response = $this->restApiConnection()
 				->withAuthentication($this->authenticationToken())
 				->client()
-				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza . '&numero=' . $this->numeroDiTopN);
+				->request('GET', '/db-v1/utenti/top5?anno=' . $anno . '&mese=' . $mese . '&codice_utente_simulato=' . $utenza . '&numero=' . $this->numeroDiTopN, ['connect_timeout' => 10.00]);
 
 			$item->expiresAfter($this->ttlForTop5);
 			$item->tag($this->authenticatedCacheTag(self::TAG_TOP5 . $anno . $mese . $utenza));
