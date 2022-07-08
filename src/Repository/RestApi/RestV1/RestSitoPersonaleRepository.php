@@ -29,8 +29,9 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSitoPersonale($locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -65,8 +66,9 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 	public function aggiornaSitoPersonale(string $titolo, string $descrizione, string $telefono, string $email, string $facebook, string $instagram, string $twitter, string $youtube, $immagine) : array{
 		try{
 			$results = $this->apiCallAggiornaSitoPersonale($titolo, $descrizione, $telefono, $email, $facebook, $instagram, $twitter, $youtube, $immagine);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -114,8 +116,9 @@ final class RestSitoPersonaleRepository implements SitoPersonaleRepository, Auth
 		try{
 			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallMinisito($locale, $uri));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];

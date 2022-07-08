@@ -29,8 +29,9 @@ final class RestModalitaSpedizioneRepository implements ModalitaSpedizioneReposi
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMetodoSpedizione($id_spedizione));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){

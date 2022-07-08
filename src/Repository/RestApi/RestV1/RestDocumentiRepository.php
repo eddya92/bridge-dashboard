@@ -30,8 +30,9 @@ final class RestDocumentiRepository implements DocumentiRepository, Authenticate
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumenti($_locale, $id_cartella));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];

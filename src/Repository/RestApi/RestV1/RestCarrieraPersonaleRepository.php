@@ -30,7 +30,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -72,7 +72,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results['data'];
@@ -104,7 +104,7 @@ final class RestCarrieraPersonaleRepository implements CarrieraPersonaleReposito
 			$results = $this->apiCallConfermaQualificaBU();
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;

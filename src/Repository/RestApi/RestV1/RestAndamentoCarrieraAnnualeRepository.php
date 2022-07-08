@@ -32,8 +32,7 @@ final class RestAndamentoCarrieraAnnualeRepository implements AndamentoAnnualeRe
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
-		}
+			throw new Exception($exception->getMessage(), $exception->getCode());}
 
 		foreach($results['data'] as $item){
 			yield new AndamentoAnnualeCarrieraViewModel($item['id'], $item['mese'], $item['qualifica'], $item['style'], $item['attivo'], $item['condizioni'], $item['punti']);

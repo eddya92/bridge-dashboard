@@ -28,8 +28,9 @@ final class RestPrivacyRepository implements PrivacyRepository, AuthenticatedRep
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallPrivacy());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $key => $item){
@@ -66,8 +67,9 @@ final class RestPrivacyRepository implements PrivacyRepository, AuthenticatedRep
 	public function aggiornaDatiPrivacy(string $campo, string $valore, string $ip) : array{
 		try{
 			$results = $this->apiCallAggiornaDatiPrivacy($campo, $valore, $ip);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;

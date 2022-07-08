@@ -232,6 +232,7 @@ class OrdiniController extends AbstractController{
 	 */
 	#[Route('/ordini-ajax', name: 'ordini-ajax', methods: ['GET'])]
 	public function ordiniAjax(Request $request) : JsonResponse{
+
 		$order = $request->get('order', [['column' => 0, 'dir' => 'asc']]);
 		$sottoposti = $request->query->get('sottoposti', '');
 		$clienti = $request->query->get('ricerca_clienti', '');
@@ -311,7 +312,7 @@ class OrdiniController extends AbstractController{
 		$elencoOrdini = array(
 			'draw'            => time(),
 			'recordsTotal'    => $metadata['items_totali'] ?? 0,
-			'recordsFiltered' => count($datatableorders),
+			'recordsFiltered' =>  $metadata['items_totali'],
 			'data'            => $datatableorders,
 			'metadata'        => $metadata,
 		);

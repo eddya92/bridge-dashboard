@@ -31,8 +31,9 @@ final class RestTop5Repository implements Top5Repository, AuthenticatedRepositor
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallListOfTop5($utenza, $anno, $mese));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$keysRichieste = ['top_ultimi_iscritti', 'top_reclutatori', 'top_vendite'];

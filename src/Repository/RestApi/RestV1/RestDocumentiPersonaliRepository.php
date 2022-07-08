@@ -36,16 +36,17 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	 * @throws InvalidArgumentException
 	 */
 	public function getDocumentiPersonali(string $locale) : Generator{
-		//try{
-		$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumentiPersonali($locale));
-		$results = Json::decode($cached);
+		try{
+			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumentiPersonali($locale));
+			$results = Json::decode($cached);
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
+		}
+
 		foreach($results['data'] as $item){
 			yield new DocumentoPersonaleViewModel($item['nome'], $item['caricato'], $item['data'], $item['link'], $item['obbligatorio'], $item['tesserino'], $item['caricabile'], $item['descrizione'], $item['id']);
 		}
-		//}catch(Throwable $e){
-		//	error_log('ERROREEEEE!: '. $e->getMessage());
-		//	return null;
-		//}
 	}
 
 	/**
@@ -78,8 +79,9 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 	public function caricaDocumentoPersonale(string $iddoc, string $base64doc, string $namedoc) : array{
 		try{
 			$results = $this->apiCallCaricaDocumentoPersonale($iddoc, $base64doc, $namedoc);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -121,7 +123,8 @@ final class RestDocumentiPersonaliRepository implements DocumentiPersonaliReposi
 		try{
 			$results = $this->apiCallCreaTesserino();
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['errors']];
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = Json::decode($results);

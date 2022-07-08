@@ -29,15 +29,17 @@ final class RestVenditeRepository implements VenditeRepository, AuthenticatedRep
 			try{
 				$cached = $this->cache->get($this->authenticatedCacheKey(), $this->callVenditeAnno($utenza, $dato, $anno));
 				$results = Json::decode($cached);
-			}catch(Throwable){
-				return null;
+			}catch(Exception $exception){
+				error_log($exception->getMessage());
+				throw new Exception($exception->getMessage(), $exception->getCode());
 			}
 		}else{
 			try{
 				$cached = $this->cache->get($this->authenticatedCacheKey(), $this->callVenditeMese($utenza, $dato, $anno, $mese));
 				$results = Json::decode($cached);
-			}catch(Throwable){
-				return null;
+			}catch(Exception $exception){
+				error_log($exception->getMessage());
+				throw new Exception($exception->getMessage(), $exception->getCode());
 			}
 		}
 		foreach($results as $item){

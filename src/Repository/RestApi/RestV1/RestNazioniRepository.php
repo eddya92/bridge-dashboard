@@ -28,8 +28,9 @@ final class RestNazioniRepository implements NazioniRepository, AuthenticatedRep
 		try{
 			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallNazioni());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -59,8 +60,9 @@ final class RestNazioniRepository implements NazioniRepository, AuthenticatedRep
 			$this->cache->delete(CacheKey::fromTrace());
 			$cached = $this->cache->get(CacheKey::fromTrace(), $this->apiCallAgreements($idNazione));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -86,7 +88,6 @@ final class RestNazioniRepository implements NazioniRepository, AuthenticatedRep
 	 */
 	public function apiCallAgreements(string $idNazione) : callable{
 		return function(ItemInterface $item) use ($idNazione){
-
 			$response = $this->restApiConnection()
 				->client()
 				->request('GET', '/db-v1/nazioni/agreements?country_code=' . $idNazione);

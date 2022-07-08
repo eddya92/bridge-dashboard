@@ -28,8 +28,9 @@ final class RestSaldoCreditiRepository implements SaldoCreditiRepository, Authen
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSaldoCrediti());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$item = $results['data'];

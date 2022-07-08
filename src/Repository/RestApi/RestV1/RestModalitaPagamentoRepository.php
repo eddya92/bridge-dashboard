@@ -28,8 +28,9 @@ final class RestModalitaPagamentoRepository implements ModalitaPagamentoReposito
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallMetodoPagamento($id_spedizione, $id_modsped));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){

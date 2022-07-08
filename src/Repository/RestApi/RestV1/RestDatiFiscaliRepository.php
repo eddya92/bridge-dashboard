@@ -35,7 +35,7 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -70,8 +70,9 @@ final class RestDatiFiscaliRepository implements DatiFiscaliRepository, Authenti
 	public function aggiornaDatiFiscali(string $codiceFiscale, string $PIVA, string $PEC, string $codiceUnivoco) : array{
 		try{
 			$results = $this->apiCallAggiornaDatiFiscali($codiceFiscale, $PIVA, $PEC, $codiceUnivoco);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;

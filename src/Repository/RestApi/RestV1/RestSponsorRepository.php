@@ -27,8 +27,9 @@ final class RestSponsorRepository implements SponsorRepository, AuthenticatedRep
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallSponsor());
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$item = $results['data'];

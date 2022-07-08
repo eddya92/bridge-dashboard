@@ -33,8 +33,7 @@ final class RestBonusRepository implements BonusRepository, AuthenticatedReposit
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
-		}
+			throw new Exception($exception->getMessage(), $exception->getCode());}
 
 		foreach($results['data'] as $mese){
 			yield new BonusViewModel($mese['mese'], $mese['mese_testo'], $mese['mese_testo_esteso'], $mese['qualifica'], $mese['colore'], $mese['livello'], $mese['qualificato'], $mese['bonus'], $mese['totale'], $mese['importo']);

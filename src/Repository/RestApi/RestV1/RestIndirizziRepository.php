@@ -28,8 +28,9 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallIndirizziSpedizioneSalvati($_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -65,8 +66,9 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallIndirizzo($id, $_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$item = $results['data'];
@@ -117,7 +119,8 @@ final class RestIndirizziRepository implements IndirizziRepository, Authenticate
 		try{
 			$results = $this->apiCallAggiornaDatiSpedizione($id, $nome, $cognome, $indirizzo, $numeroCivico, $cap, $comune, $provincia, $nazione, $email, $numeroTelefono, $note, $isPrincipale, $consegnaSabato);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;

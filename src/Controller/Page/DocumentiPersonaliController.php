@@ -105,7 +105,7 @@ class DocumentiPersonaliController extends AbstractController{
 			$this->repository->creaTesserino();
 			$this->addFlash('success', 'Il tuo tesserino è stato aggiornato correttamente.');
 		}catch(Exception $e){
-			$this->addFlash('error', $e->getMessage());
+			$this->addFlash('error', 'Errore nella creazione del tesserino: Assicurati che i tuoi documenti siano prima stati verificati.');
 		}
 
 		return $this->redirectToRoute('documenti-personali');

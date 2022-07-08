@@ -29,8 +29,9 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallInquadramentoFiscale($_locale));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$item = $results['data'];
@@ -65,8 +66,9 @@ final class RestInquadramentoFiscaleRepository implements InquadramentoFiscaleRe
 	public function aggiornaPagamenti(string $iban, string $bankCode) : array{
 		try{
 			$results = $this->apiCallAggiornaPagamenti($iban, $bankCode);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;

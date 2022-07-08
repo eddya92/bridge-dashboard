@@ -126,8 +126,9 @@ final class RestReteRepository implements ReteRepository, AuthenticatedRepositor
 		try{
 			$results = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallUnilevelTreeOfIdUtente($ID_utente, $Mese, $punti, $icon, $show_disattivi, $hide_nulli, $locale));
 			$results = json_decode($results, true);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return [true, $results['data']];

@@ -34,7 +34,8 @@ final class RestFilesRepository implements FilesRepository, AuthenticatedReposit
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDocumenti($locale));
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());;
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data']['files'] as $item){

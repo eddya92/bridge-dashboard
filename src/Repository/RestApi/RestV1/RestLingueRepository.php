@@ -26,7 +26,7 @@ final class RestLingueRepository implements LingueRepository, AuthenticatedRepos
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$lingue = [];

@@ -28,8 +28,9 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $colonna, $ordinamento, $items, $pag));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){
@@ -74,8 +75,9 @@ final class RestOrdiniRepository implements OrdiniRepository, AuthenticatedRepos
 		try{
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallDettaglioOrdine($id));
 			$results = Json::decode($cached);
-		}catch(Throwable){
-			return null;
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];

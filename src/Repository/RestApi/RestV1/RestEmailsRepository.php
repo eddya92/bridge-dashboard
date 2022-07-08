@@ -38,7 +38,7 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $result){
@@ -82,8 +82,9 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 	public function inviaInvito(string $nome, string $email, int $idEmail) : array{
 		try{
 			$results = $this->apiCallInviaInvito($nome, $email, $idEmail);
-		}catch(Throwable $exception){
-			return [false, $exception->getMessage()];
+		}catch(Exception $exception){
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -126,7 +127,8 @@ final class RestEmailsRepository implements EmailsRepository, AuthenticatedRepos
 			$cached = $this->cache->get($this->authenticatedCacheKey(), $this->apiCallEmails());
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
-			throw new Exception($exception->getMessage());
+			error_log($exception->getMessage());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		foreach($results['data'] as $item){

@@ -48,8 +48,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			echo 'Error: ' . $exception->getCode() . 'Message: ' . $exception->getMessage() . 'File: ' . $exception->getFile() . 'Line: ' . $exception->getLine();
-			//throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -96,7 +95,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
 
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -153,7 +152,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		try{
 			$results = $this->apiCallRichiediOblioAccount();
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -194,7 +193,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		try{
 			$results = $this->apiCallRegistrazioneUtente($codiceSponsor, $nome, $cognome, $email, $password, $nazione, $agreements);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -248,7 +247,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		try{
 			$results = $this->apiCallRegistrazioneCliente($codiceSponsor, $nome, $cognome, $ragioneSociale, $naturaGiuridica, $email, $password, $nazione, $agreements);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -296,7 +295,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage(), 1,);
-			throw new Exception([false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']][1], $exception->getCode());
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		$results = $results['data'];
@@ -339,7 +338,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		try{
 			$results = $this->apiCallAggiornaDatiResidenza($nome, $cognome, $indirizzo, $numeroCivico, $cap, $comune, $provincia, $nazione);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
@@ -394,7 +393,7 @@ final class RestAccountRepository implements AccountRepository, AuthenticatedRep
 		try{
 			$results = $this->apiCallInviaMailRecuperoPassword($email);
 		}catch(Exception $exception){
-			return [false, json_decode($exception->getResponse()->getBody()->getContents(), true)['error_msg']];
+			throw new Exception($exception->getMessage(), $exception->getCode());
 		}
 
 		return $results;
