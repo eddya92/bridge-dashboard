@@ -4,8 +4,6 @@ $(document).ready(function () {
   $.support.cors = true;
 
   remoteHost = 'https://typeahead-js-twitter-api-proxy.herokuapp.com';
-  template = Handlebars.compile($(".result-template").html());
-  empty = Handlebars.compile($(".empty-template").html());
 
   engine = new Bloodhound({
     identify: function (o) { return o.id_str; },
