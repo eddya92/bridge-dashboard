@@ -242,6 +242,7 @@ class OrdiniController extends AbstractController{
 		$tipolgia_ordine = $request->query->get('tipologia_ordine', '');
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
+		$pag = (int)$pag / (int)$items;
 
 		switch($order[0]['column']){
 			case 0:
@@ -282,7 +283,7 @@ class OrdiniController extends AbstractController{
 				$filtroDirezioneOrdinamento = 'asc';
 		}
 
-		$pag = (int)$pag / (int)$items;
+
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
 		$ordini = $this->ordiniRepository->getOrdini($sottoposti, $clienti, $esito, $data_dal, $data_al, $tipolgia_ordine, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $items, (string)$pag);
 		$datatableorders = [];
@@ -314,7 +315,7 @@ class OrdiniController extends AbstractController{
 		$elencoOrdini = array(
 			'draw'            => time(),
 			'recordsTotal'    => $metadata['items_totali'] ?? 0,
-			'recordsFiltered' =>  $metadata['items_totali'] ?? 0,
+			'recordsFiltered' => $metadata['items_totali'] ?? 0,
 			'data'            => $datatableorders,
 			'metadata'        => $metadata,
 		);

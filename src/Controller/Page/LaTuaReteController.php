@@ -292,7 +292,7 @@ class LaTuaReteController extends AbstractController{
 	 *
 	 * @param Request $request
 	 *
-	 * @return JsonResponse
+	 *
 	 */
 	#[Route('/{_locale}/struttura-ajax', name: 'struttura-personale-ajax', methods: ['GET'])]
 	public function strutturaPersonaleAjax(Request $request){
@@ -302,10 +302,11 @@ class LaTuaReteController extends AbstractController{
 		$filtroNominativo = $request->get('filtro_nominativo', '');
 		$filtroEmail = trim($request->get('filtro_email', ''));
 		$filtroCellulare = trim($request->get('filtro_cellulare', ''));
-		$filtroPeriodo = trim($request->get('filtro_periodo', ''));
+		//$filtroPeriodo = $request->get('filtro_periodo', '');
 		$filtroDiretti = ($request->get('filtro_diretti', 'false'));
 		$pag = ($request->get('start', '0'));
 		$items = ($request->get('length', '0'));
+		$pag = (int)$pag / (int)$items;
 
 		switch($order[0]['column']){
 			case 0:
@@ -344,13 +345,18 @@ class LaTuaReteController extends AbstractController{
 		}
 
 		$filtroDirezioneOrdinamento = strtoupper($filtroDirezioneOrdinamento);
-
-		$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, $filtroPeriodo, $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items, $pag);
+		try{
+			$strutturaGenerator = $this->utentiStrutturaRepository->getUtentiStruttura($filtroGruppoDi, $filtroNominativo, $filtroEmail, $filtroCellulare, '', $filtroDiretti, $filtroColonnaOrdinamento, $filtroDirezioneOrdinamento, $tipologiaUtenza, $items, (string)$pag);
+		}catch(Exception $exception){
+			$this->addFlash('error',$exception->getMessage());
+			return $this->redirectToRoute('struttura-unilevel');
+		}
 		$struttura = [];
-
+		$metadata = [];
 		if($strutturaGenerator != null){
 			foreach($strutturaGenerator as $item){
 				$array = [];
+				$metadata = $item->getMetadata();
 
 				$array[] = [$item->getCodice(), $item->getLivello(), $item->getNominativo(), "<span class='" . $item->getColore() . "'>" . $item->getQualifica() . "</span > ", $item->getEmail(), $item->getCellulare(), $item->getSponsor()];
 				$struttura[] = array_values($array[0]);
@@ -359,8 +365,8 @@ class LaTuaReteController extends AbstractController{
 
 		$jsonDatatableStruttura = array(
 			'draw'            => time(),
-			'recordsTotal'    => count($struttura),
-			'recordsFiltered' => count($struttura),
+			'recordsTotal'    => $metadata['items_totali'] ?? 0,
+			'recordsFiltered' => $metadata['items_totali'] ?? 0,
 			'data'            => $struttura,
 		);
 

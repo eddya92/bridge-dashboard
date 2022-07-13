@@ -29,11 +29,11 @@ final class RestUtentiStrutturaRepository implements UtentiStrutturaRepository, 
 			$results = Json::decode($cached);
 		}catch(Exception $exception){
 			error_log($exception->getMessage());
-			throw new Exception($exception->getMessage(), $exception->getCode());
+			throw new Exception($exception->getMessage());
 		}
 
 		foreach($results['data'] as $item){
-			yield new UtenteStrutturaViewModel($item['id'], $item['codice'], $item['nominativo'], $item['email'], $item['cellulare'], $item['livello'], $item['qualifica'], $item['colore'], $item['sponsor']);
+			yield new UtenteStrutturaViewModel($item['id'], $item['codice'], $item['nominativo'], $item['email'], $item['cellulare'], $item['livello'], $item['qualifica'], $item['colore'], $item['sponsor'], $results['metadata']);
 		}
 	}
 

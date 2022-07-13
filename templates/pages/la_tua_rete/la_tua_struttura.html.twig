@@ -288,7 +288,7 @@
 		var filtro_nominativo = $("#filtro_nominativo").val();
 		var filtro_email = $("#filtro_email").val();
 		var filtro_cellulare = $("#filtro_cellulare").val();
-		var filtro_periodo = $("#filtro_anno").val() + "-" + $("#filtro_mese").val();
+		// var filtro_periodo = $("#filtro_anno").val() + "-" + $("#filtro_mese").val();
 		var filtro_diretti = $("#filtro_diretti").hasClass("onSelect");
 		//endregion
 
@@ -342,12 +342,12 @@
 			} else{
 				$("#applied_filters_gruppoDi").addClass("visually-hidden");
 			}
-			if($("#filtro_anno").val() && $("#filtro_mese").val()){
-				$("#applied_filters_periodo").removeClass("visually-hidden");
-				count = count + 1;
-			} else{
-				$("#applied_filters_periodo").addClass("visually-hidden");
-			}
+			// if($("#filtro_anno").val() && $("#filtro_mese").val()){
+			// 	$("#applied_filters_periodo").removeClass("visually-hidden");
+			// 	count = count + 1;
+			// } else{
+			// 	$("#applied_filters_periodo").addClass("visually-hidden");
+			// }
 			if($("#filtro_tipologiaUtenza").val()){
 				$("#applied_filters_tipologiaUtenza").removeClass("visually-hidden");
 				count = count + 1;
@@ -416,7 +416,7 @@
 				"filtro_nominativo": $("#filtro_nominativo").val(),
 				"filtro_email": $("#filtro_email").val(),
 				"filtro_cellulare": $("#filtro_cellulare").val(),
-				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				// "filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
 				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
 				"items": items
 			};
@@ -473,7 +473,7 @@
 				"filtro_nominativo": $("#filtro_nominativo").val(),
 				"filtro_email": $("#filtro_email").val(),
 				"filtro_cellulare": $("#filtro_cellulare").val(),
-				"filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
+				// "filtro_periodo": $("#filtro_anno").val() + "-" + $("#filtro_mese").val(),
 				"filtro_diretti": $("#filtro_diretti").hasClass("onSelect"),
 				"items": items
 			};

@@ -10,12 +10,13 @@ final class UtenteStrutturaViewModel{
 	 * @param string $nominativo
 	 * @param string $email
 	 * @param string $cellulare
-	 * @param int $livello
+	 * @param int    $livello
 	 * @param string $qualifica
 	 * @param string $colore
 	 * @param string $sponsor
+	 * @param array  $metadata
 	 */
-	public function __construct(private int $id, private string $codice, private string $nominativo, private string $email, private string $cellulare, private int $livello, private string $qualifica, private string $colore, private string $sponsor){
+	public function __construct(private int $id, private string $codice, private string $nominativo, private string $email, private string $cellulare, private int $livello, private string $qualifica, private string $colore, private string $sponsor, private array $metadata){
 	}
 
 	/**
@@ -79,5 +80,12 @@ final class UtenteStrutturaViewModel{
 	 */
 	public function getSponsor() : string{
 		return $this->sponsor;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMetadata() : array{
+		return $this->metadata;
 	}
 }
