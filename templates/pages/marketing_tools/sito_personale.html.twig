@@ -24,6 +24,38 @@
 {% endblock css_page %}
 
 {% block page_body %}
+    <style>
+
+		.margin-negative4 {
+			margin-left: -2.7rem !important;
+		}
+
+		.input-icons i {
+			position: absolute;
+		}
+
+		.input-icons {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.icon {
+			padding: 11px;
+			color: red;
+			min-width: 50px;
+			text-align: center;
+		}
+
+		.input-field {
+			width: 100%;
+			padding: 10px;
+			text-align: center;
+		}
+
+		h2 {
+			color: red;
+		}
+    </style>
     <div class="page-body">
         <!-- region titolo e breadcrumb -->
         <div class="container-fluid">
@@ -62,8 +94,8 @@
                                 </div>
                                 <div class="img_circle_centered">
                                     <img class="rounded-circle" src="{{ sito.fotoProfilo != '' ? sito.fotoProfilo : asset('assets/images/foto_profilobase_minisito.jpg') }}" alt="">
-{#                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()">#}
-{#                                        <i class="fa fa-pencil"></i></div>#}
+                                    {#                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()"> #}
+                                    {#                                        <i class="fa fa-pencil"></i></div> #}
                                     <input id="foto_profilo" hidden name="immagine" type="file">
                                 </div>
                                 <div class="blog-details">
@@ -85,12 +117,12 @@
                                             <div class="m-b-20"></div>
                                             <hr>
 
-{#                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</-h6>#}
-{#                                            <div class="input-group">#}
-{#                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}">#}
-{#                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span>#}
-{#                                            </div>#}
-{#                                            <div class="m-b-20"></div>#}
+                                            {#                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</-h6> #}
+                                            {#                                            <div class="input-group"> #}
+                                            {#                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}"> #}
+                                            {#                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span> #}
+                                            {#                                            </div> #}
+                                            {#                                            <div class="m-b-20"></div> #}
                                             <h6>{% trans %}Copia il link dello shop per condividerlo sui social{% endtrans %}.</h6>
                                             <div class="input-group">
                                                 <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="https://www.biokern.com/{{ app.user.locale }}/prodotti?code={{ app.user.codice }}">
@@ -100,7 +132,7 @@
 
                                             <h6>{% trans %}Inserisci il tuo coupon per generare il tuo link{% endtrans %}.</h6>
                                             <div class="input-group">
-                                                <input id="idCodeCoupon" type="text" class="form-control bg-transparent text-muted" value="" placeholder="Inserisci il tuo coupon">
+                                                <input id="idCodeCoupon" type="text" class="form-control bg-transparent text-muted" value="" placeholder="Inserisci il tuo coupon"><i id="iconRefresh" class="fa fa-refresh icon margin-negative4 z-index-9" hidden onclick="svuotaTutto('iconRefresh')"></i>
                                                 <span id="generateLinkCoupon" class="btn btn-light m-l-10" onclick="gereraLink()">genera link</span>
                                                 <span id="buttonCouponCopy" class="btn btn-light m-l-10" onclick="copy('idCodeCoupon')" hidden>copia il link</span>
                                             </div>
@@ -169,7 +201,7 @@
                                     <div class="clearfix"></div>
                                     <div class="m-b-40"></div>
                                     <div class="m-auto w-auto text-center">
-{#                                        <button id="idpo" type="submit" class="btn btn-primary">{% trans %}Aggiorna dati{% endtrans %}</button>#}
+                                        {#                                        <button id="idpo" type="submit" class="btn btn-primary">{% trans %}Aggiorna dati{% endtrans %}</button> #}
                                     </div>
                                     <div class="m-b-40"></div>
                                 </div>
@@ -241,6 +273,7 @@
 			alert('link copiato')
 		}
 
+		//iconRefresh
 		function gereraLink(){
 
 			var inputCoupon = document.getElementById('idCodeCoupon');
@@ -248,12 +281,23 @@
 			var coupon = inputCoupon.value;
 			if(coupon === ''){
 				return null;
-            }
+			}
 			inputCoupon.readOnly = true;
 			inputCoupon.value = link + "&coupon=" + coupon;
-			document.getElementById('generateLinkCoupon').setAttribute("hidden","true");
+			document.getElementById('iconRefresh').removeAttribute("hidden");
+			document.getElementById('generateLinkCoupon').setAttribute("hidden", "true");
 			document.getElementById('buttonCouponCopy').removeAttribute("hidden");
-        }
+
+
+		}
+
+		function svuotaTutto(id){
+			document.getElementById(id).setAttribute("hidden", "true");
+			document.getElementById('buttonCouponCopy').setAttribute("hidden", "true");
+			document.getElementById('generateLinkCoupon').removeAttribute("hidden");
+			document.getElementById('idCodeCoupon').value = "";
+			document.getElementById('idCodeCoupon').removeAttribute("readonly");
+		}
 
     </script>
 {% endblock javascript_page %}
