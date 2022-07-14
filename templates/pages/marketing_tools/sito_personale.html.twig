@@ -58,11 +58,10 @@
                         <div class="blog-box blog-details">
                             <form id="form" method="post" action="{{ path('aggiorna-sito') }}" enctype="multipart/form-data">
                                 <div style="height: 200px; overflow: hidden;">
-                                    <img class="img-fluid w-100" src="{{ sito.fotoSfondo != '' ? sito.fotoSfondo : '/assets/images/foto_sfondo_base_minisito.jpg' }}" alt="landing page">
+                                    <img class="img-fluid w-100" src="{{ sito.fotoSfondo != '' ? sito.fotoSfondo : asset('assets/images/foto_sfondo_base_minisito.jpg') }}" alt="landing page">
                                 </div>
                                 <div class="img_circle_centered">
-                                    <!-- <img class="rounded-circle" src="{{ sito.fotoProfilo }}" alt=""> -->
-                                    <img class="rounded-circle" src="{{ sito.fotoProfilo != '' ? sito.fotoProfilo : '/assets/images/foto_profilobase_minisito.jpg' }}" alt="">
+                                    <img class="rounded-circle" src="{{ sito.fotoProfilo != '' ? sito.fotoProfilo : asset('assets/images/foto_profilobase_minisito.jpg') }}" alt="">
 {#                                    <div class="pencil-wrapper" onclick="modificaFotoProfilo()">#}
 {#                                        <i class="fa fa-pencil"></i></div>#}
                                     <input id="foto_profilo" hidden name="immagine" type="file">
@@ -85,8 +84,7 @@
                                             <textarea class="form-control bg-transparent" placeholder="{% trans %}Descrizione{% endtrans %} . . ." name="descrizione" disabled>{{ sito.descrizione }}</textarea>
                                             <div class="m-b-20"></div>
                                             <hr>
-                                            <br>
-                                            <br>
+
 {#                                            <h6>{% trans %}Copia il link del tuo sito personale per condividerlo{% endtrans %}.</-h6>#}
 {#                                            <div class="input-group">#}
 {#                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="{% if sito.uri != '' %}{{ url('minisito', { uri:sito.uri }) }}{% endif %}">#}
@@ -95,8 +93,16 @@
 {#                                            <div class="m-b-20"></div>#}
                                             <h6>{% trans %}Copia il link dello shop per condividerlo sui social{% endtrans %}.</h6>
                                             <div class="input-group">
-                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="https://www.biokern.com/prodotti?code={{ app.user.codice }}">
-                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy()">copia il link</span>
+                                                <input id="inputCopy" type="text" class="form-control bg-transparent text-muted" readonly disabled value="https://www.biokern.com/{{ app.user.locale }}/prodotti?code={{ app.user.codice }}">
+                                                <span id="buttonCopy" class="btn btn-light m-l-10" onclick="copy('inputCopy')">copia il link</span>
+                                            </div>
+                                            <div class="m-b-20"></div>
+
+                                            <h6>{% trans %}Inserisci il tuo coupon per generare il tuo link{% endtrans %}.</h6>
+                                            <div class="input-group">
+                                                <input id="idCodeCoupon" type="text" class="form-control bg-transparent text-muted" value="" placeholder="Inserisci il tuo coupon">
+                                                <span id="generateLinkCoupon" class="btn btn-light m-l-10" onclick="gereraLink()">genera link</span>
+                                                <span id="buttonCouponCopy" class="btn btn-light m-l-10" onclick="copy('idCodeCoupon')" hidden>copia il link</span>
                                             </div>
                                             <div class="m-b-20"></div>
                                         </div>
@@ -229,10 +235,25 @@
 		}
 
 
-		function copy(){
-			var text = document.getElementById('inputCopy').value;
+		function copy(id){
+			var text = document.getElementById(id).value;
 			copyToClipboard(text);
 			alert('link copiato')
 		}
+
+		function gereraLink(){
+
+			var inputCoupon = document.getElementById('idCodeCoupon');
+			var link = document.getElementById('inputCopy').value;
+			var coupon = inputCoupon.value;
+			if(coupon === ''){
+				return null;
+            }
+			inputCoupon.readOnly = true;
+			inputCoupon.value = link + "&coupon=" + coupon;
+			document.getElementById('generateLinkCoupon').setAttribute("hidden","true");
+			document.getElementById('buttonCouponCopy').removeAttribute("hidden");
+        }
+
     </script>
 {% endblock javascript_page %}
