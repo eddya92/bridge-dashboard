@@ -83,7 +83,6 @@ class MarketingToolsController extends AbstractController{
 		$nome = trim($request->get('nome'));
 		$email = trim($request->get('email'));
 		$idEmail = (int) trim($request->get('id_email'));
-		$linguaEmail = trim($request->get('lang'));
 
 		try{
 			[$result, $error_msg] = $this->emailRepository->inviaInvito($nome, $email, $idEmail);
