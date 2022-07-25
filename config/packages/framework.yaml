@@ -8,7 +8,7 @@ framework:
   # Remove or comment this section to explicitly disable session support.
   session:
     storage_factory_id: session.storage.factory.native
-    handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+
     name: 'DASHBOARD'
     cookie_lifetime: 0
     cookie_path: /

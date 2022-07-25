@@ -51,21 +51,11 @@ services:
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
-  #region Cache & Session
-  Redis:
-    class: Redis
-    calls:
-      - connect:
-          - '%env(REDIS_HOST)%'
-          - '%env(int:REDIS_PORT)%'
-      - setOption:
-          - !php/const Redis::OPT_PREFIX
-          - '%env(REDIS_PREFIX)%'
 
-  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
-    arguments:
-      - '@Redis'
-      - { prefix: ':SESSION:' }
+
+
+
+
   #endregion
 
   #region REST API
